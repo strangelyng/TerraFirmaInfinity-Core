@@ -1,0 +1,12 @@
+{
+  "required": true,
+  "package": "net.strangelyng.tfi.mixin",
+  "compatibilityLevel": "JAVA_21",
+  "mixins": [
+  ],
+  "client": [
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  }
+}
