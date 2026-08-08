@@ -1,4 +1,4 @@
-## [Unreleased]
+## [0.0.2]
 ### Changes
 - Added dependencies
   - GTM + deps
