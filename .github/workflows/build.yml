@@ -177,7 +177,7 @@ jobs:
         with:
           tag_name: ${{ needs.info.outputs.version }}
           name: Release ${{ needs.info.outputs.version }}
-          files: build/libs/${{ needs.info.outputs.full_name }}.jar
+          files: ${{ needs.info.outputs.full_name }}.jar
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
@@ -187,7 +187,7 @@ jobs:
         run: |
           VERSION=${{ needs.info.outputs.version }}
 
-          awk "/## \[$VERSION\]/ {flag=1; next} /## \[/ && flag==1 {flag=0} flag" changelog.md > changelog.txt
+          awk "/## \[$VERSION\]/ {flag=1; next} /## \[/ && flag==1 {flag=0} flag" CHANGELOG.md > changelog.txt
 
           echo "text<<EOF" >> $GITHUB_OUTPUT
           cat changelog.txt >> $GITHUB_OUTPUT
