@@ -34,6 +34,36 @@ sourceSets {
 
 repositories {
     // Add here additional repositories if required by some of the dependencies below.
+    mavenCentral()
+    mavenLocal()
+    maven {
+        url 'https://maven.blamejared.com'
+        content {
+            includeGroup "mezz.jei"
+        }
+    }
+    maven {
+        url 'https://maven.blamejared.com'
+        content {
+            includeGroup "vazkii.patchouli"
+        }
+    }
+    maven {
+        url 'https://www.cursemaven.com'
+        content {
+            includeGroup "curse.maven"
+        }
+    }
+    maven {
+        url 'https://api.modrinth.maven.com'
+        content {
+            includeGroup "maven.modrinth"
+        }
+    }
+    maven { // EMI
+        name = "Sleeping Town"
+        url = "https://repo.sleeping.town/"
+    }
 }
 
 base {
@@ -145,6 +175,27 @@ dependencies {
     // For more info:
     // http://www.gradle.org/docs/current/userguide/artifact_dependencies_tutorial.html
     // http://www.gradle.org/docs/current/userguide/dependency_management.html
+
+
+    // EMI
+    compileOnly("dev.emi:emi-neoforge:${emi_version}:api")
+
+    // JEI
+    compileOnly("mezz.jei:jei-${minecraft_version}-common-api:${jei_version}")
+    compileOnly("mezz.jei:jei-${minecraft_version}-neoforge-api:${jei_version}")
+    runtimeOnly("mezz.jei:jei-${minecraft_version}-neoforge:${jei_version}")
+
+    // Patchouli
+    implementation("vazkii.patchouli:Patchouli:$patchouli_version")
+
+    // TFC
+    implementation("curse.maven:terrafirmacraft-302973:${tfc_version}")
+
+    // Jade
+    implementation("curse.maven:jade-324717:$jade_version")
+
+    // Datagen SourceSet
+    dataImplementation("curse.maven:terrafirmacraft-302973:${tfc_version}")
 }
 
 // This block of code expands all declared replace properties in the specified resource targets.
