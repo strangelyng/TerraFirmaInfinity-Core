@@ -1,0 +1,52 @@
+repositories {
+    mavenCentral()
+    mavenLocal()
+    maven {
+        url 'https://www.cursemaven.com'
+        content {
+            includeGroup "curse.maven"
+        }
+    }
+    maven {
+        url 'https://api.modrinth.maven.com'
+        content {
+            includeGroup "maven.modrinth"
+        }
+    }
+    maven { // Registrate
+        url 'https://mvn.devos.one/snapshots/'
+        content {
+            includeGroup('com.tterrag.registrate')
+        }
+    }
+    maven { // Configuration
+        url 'https://repo.repsy.io/mvn/toma/public'
+        content {
+            includeGroup('dev.toma.configuration')
+        }
+    }
+    maven { // GTCEu
+        name 'GTCEu Maven'
+        url 'https://maven.gtceu.com'
+        content {
+            includeGroup('com.gregtechceu.gtceu')
+            includeGroup('brachy.modularui')
+        }
+    }
+    maven { // JEI
+        url 'https://maven.blamejared.com'
+        content {
+            includeGroup "mezz.jei"
+        }
+    }
+    maven { // Patchouli
+        url 'https://maven.blamejared.com'
+        content {
+            includeGroup "vazkii.patchouli"
+        }
+    }
+    maven { // EMI
+        name 'Sleeping Town'
+        url 'https://repo.sleeping.town/'
+    }
+}

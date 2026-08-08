@@ -1,0 +1,28 @@
+dependencies {
+    // Registrate & Configuration
+    compileOnly("com.tterrag.registrate:Registrate:${registrate_version}")
+    compileOnly("dev.toma.configuration:configuration-${minecraft_version}:${configuration_version}")
+
+    // JEI
+//    compileOnly("mezz.jei:jei-${minecraft_version}-common-api:${jei_version}")
+//    compileOnly("mezz.jei:jei-${minecraft_version}-neoforge-api:${jei_version}")
+//    runtimeOnly("mezz.jei:jei-${minecraft_version}-neoforge:${jei_version}")
+
+    // EMI
+    compileOnly("dev.emi:emi-neoforge:${emi_version}:api")
+    runtimeOnly("dev.emi:emi-neoforge:${emi_version}")
+
+    // TFC, Patchouli
+    implementation("vazkii.patchouli:Patchouli:$patchouli_version")
+    implementation("curse.maven:terrafirmacraft-302973:${tfc_version}")
+
+    // Jade
+    implementation("curse.maven:jade-324717:$jade_version")
+
+    // GTM & MUI
+    implementation "brachy.modularui:modularui-mc1.21.1:${mui_version}"
+    implementation "com.gregtechceu.gtceu:gtceu-${minecraft_version}:${gtm_version}"
+
+    // Datagen SourceSet
+    dataImplementation("curse.maven:terrafirmacraft-302973:${tfc_version}")
+}

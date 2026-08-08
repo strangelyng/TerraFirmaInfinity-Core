@@ -1,6 +1,9 @@
 ## [Unreleased]
 ### Changes
-- N/A
+- Added dependencies
+  - GTM + deps
+- Gradle refactor
+- Packages refactor
 
 ## [0.0.1]
 ### Changes
