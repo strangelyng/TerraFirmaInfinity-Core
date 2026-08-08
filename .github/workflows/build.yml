@@ -180,15 +180,3 @@ jobs:
           files: ${{ needs.info.outputs.full_name }}.jar
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-
-      - name: "Extract changelog section"
-        id: changelog
-        shell: bash
-        run: |
-          VERSION=${{ needs.info.outputs.version }}
-
-          awk "/## \[$VERSION\]/ {flag=1; next} /## \[/ && flag==1 {flag=0} flag" CHANGELOG.md > changelog.txt
-
-          echo "text<<EOF" >> $GITHUB_OUTPUT
-          cat changelog.txt >> $GITHUB_OUTPUT
-          echo "EOF" >> $GITHUB_OUTPUT
