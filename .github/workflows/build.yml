@@ -151,7 +151,7 @@ jobs:
           ls -la build/libs/
 
       - name: "Upload artifact"
-        uses: action/upload-artifact@v7.0.1
+        uses: actions/upload-artifact@v7.0.1
         with:
           name: ${{ needs.info.outputs.full_name }}
           path: build/libs/${{ needs.info.outputs.full_name }}.jar
