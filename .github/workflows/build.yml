@@ -172,11 +172,34 @@ jobs:
       - name: "Download artifact"
         uses: actions/download-artifact@v8
 
-      - name: "Create GitHub Release"
-        uses: softprops/action-gh-release@v2
+      - name: "Release"
+        uses: Xikaro/game-publish@3.4.0
         with:
-          tag_name: ${{ needs.info.outputs.version }}
-          name: Release ${{ needs.info.outputs.version }}
+#          modrinth-id: ${{ vars.MODRINTH_ID }}
+#          modrinth-token: ${{ secrets.MODRINTH_TOKEN }}
+#
+#          curseforge-id: ${{ vars.CURSEFORGE_ID }}
+#          curseforge-token: ${{ secrets.CURSEFORGE_TOKEN }}
+
+          github-name: ${{ needs.info.outputs.version }}
+          github-tag: ${{ needs.info.outputs.version }}
+          github-generate-changelog: true
+          github-draft: false
+          github-prerelease: ${{ needs.info.outputs.version_type != 'release' }}
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+
           files: ${{ needs.info.outputs.full_name }}.jar
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+          name: ${{ needs.info.outputs.full_name }}
+          version: ${{ needs.info.outputs.version }}
+          version-type: ${{ needs.info.outputs.version_type }}
+
+          loaders: ${{ needs.info.outputs.loaders }}
+          game-versions: ${{ needs.info.outputs.game_versions }}
+          game-version-filter: none
+          environment: client | server
+          java: ${{ needs.info.outputs.java_version }}
+
+          retry-attempts: 2
+          retry-delay: 10000
+          fail-mode: fail
