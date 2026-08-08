@@ -179,7 +179,7 @@ jobs:
           name: Release ${{ needs.info.outputs.version }}
           files: build/libs/${{ needs.info.outputs.full_name }}.jar
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }]
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       - name: "Extract changelog section"
         id: changelog
