@@ -33,6 +33,9 @@ repositories {
             includeGroup('brachy.modularui')
         }
     }
+    maven { // Create, Ponder, Flywheel
+        url 'https://maven.createmod.net'
+    }
     maven { // JEI
         url 'https://maven.blamejared.com'
         content {
