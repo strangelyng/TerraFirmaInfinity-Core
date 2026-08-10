@@ -4,13 +4,13 @@ repositories {
     maven {
         url 'https://www.cursemaven.com'
         content {
-            includeGroup "curse.maven"
+            includeGroup("curse.maven")
         }
     }
     maven {
         url 'https://api.modrinth.maven.com'
         content {
-            includeGroup "maven.modrinth"
+            includeGroup("maven.modrinth")
         }
     }
     maven { // Registrate
@@ -36,16 +36,22 @@ repositories {
     maven { // Create, Ponder, Flywheel
         url 'https://maven.createmod.net'
     }
-    maven { // JEI
+    maven { // JEI, Malum, Lodestone
         url 'https://maven.blamejared.com'
         content {
-            includeGroup "mezz.jei"
+            includeGroup("mezz.jei")
+            includeGroup("com.sammy.malum")
+            includeGroup("team.lodestar.lodestone")
         }
+    }
+    maven { // Curios
+        name 'Curios Maven'
+        url 'https://maven.theillusivec4.top/'
     }
     maven { // Patchouli
         url 'https://maven.blamejared.com'
         content {
-            includeGroup "vazkii.patchouli"
+            includeGroup("vazkii.patchouli")
         }
     }
     maven { // EMI

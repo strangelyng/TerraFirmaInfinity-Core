@@ -29,6 +29,11 @@ dependencies {
     compileOnly("dev.engine-room.flywheel:flywheel-neoforge-api-${minecraft_version}:${flywheel_version}")
     runtimeOnly("dev.engine-room.flywheel:flywheel-neoforge-${minecraft_version}:${flywheel_version}")
 
+    // Curios, Malum, Lodestone
+    implementation("top.theillusivec4.curios:curios-neoforge:${curios_version}+${minecraft_version}")
+    implementation("com.sammy.malum:malum:${minecraft_version}-${malum_version}") { transitive = false }
+    implementation("team.lodestar.lodestone:lodestone:${minecraft_version}-${lodestone_version}")
+
     // Datagen SourceSet
     dataImplementation("curse.maven:terrafirmacraft-302973:${tfc_version}")
 }
