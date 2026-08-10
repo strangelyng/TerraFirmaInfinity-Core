@@ -33,6 +33,13 @@ repositories {
             includeGroup('brachy.modularui')
         }
     }
+    maven { // AE2, GuideMe
+        name 'ModMaven'
+        url 'https://modmaven.dev'
+        content {
+            includeGroup("org.appliedenergistics")
+        }
+    }
     maven { // Create, Ponder, Flywheel
         url 'https://maven.createmod.net'
     }
@@ -42,6 +49,20 @@ repositories {
             includeGroup("mezz.jei")
             includeGroup("com.sammy.malum")
             includeGroup("team.lodestar.lodestone")
+        }
+    }
+    maven { // KubeJS, Rhino
+        name 'Latvian Maven'
+        url 'https://maven.latvian.dev/releases'
+        content {
+            includeGroup("dev.latvian.mods")
+            includeGroup("dev.latvian.apps")
+        }
+    }
+    maven { // KubeJS Transitive (animated-gif-lib)
+        url 'https://jitpack.io/'
+        content {
+            includeGroup("com.github.rtyley")
         }
     }
     maven { // Curios

@@ -6,11 +6,15 @@ dependencies {
     // JEI
 //    compileOnly("mezz.jei:jei-${minecraft_version}-common-api:${jei_version}")
 //    compileOnly("mezz.jei:jei-${minecraft_version}-neoforge-api:${jei_version}")
-//    runtimeOnly("mezz.jei:jei-${minecraft_version}-neoforge:${jei_version}")
+    runtimeOnly("mezz.jei:jei-${minecraft_version}-neoforge:${jei_version}")
 
     // EMI
     compileOnly("dev.emi:emi-neoforge:${emi_version}:api")
     runtimeOnly("dev.emi:emi-neoforge:${emi_version}")
+
+    // KubeJS & Rhino
+    implementation("dev.latvian.mods:kubejs-neoforge:${kubejs_version}")
+    implementation("dev.latvian.mods:rhino:${rhino_version}")
 
     // TFC, Patchouli
     implementation("vazkii.patchouli:Patchouli:$patchouli_version")
@@ -23,6 +27,10 @@ dependencies {
     implementation("brachy.modularui:modularui-mc1.21.1:${mui_version}")
     implementation("com.gregtechceu.gtceu:gtceu-${minecraft_version}:${gtm_version}")
 
+    // AE2 & GuideME
+    implementation("org.appliedenergistics:appliedenergistics2:${ae2_version}")
+    implementation("org.appliedenergistics:guideme:${guideme_version}")
+
     // Create, Ponder, Flywheel
     implementation("com.simibubi.create:create-${minecraft_version}:${create_version}:slim") { transitive = false }
     implementation("net.createmod.ponder:ponder-neoforge:${ponder_version}+mc${minecraft_version}")
@@ -33,7 +41,4 @@ dependencies {
     implementation("top.theillusivec4.curios:curios-neoforge:${curios_version}+${minecraft_version}")
     implementation("com.sammy.malum:malum:${minecraft_version}-${malum_version}") { transitive = false }
     implementation("team.lodestar.lodestone:lodestone:${minecraft_version}-${lodestone_version}")
-
-    // Datagen SourceSet
-    dataImplementation("curse.maven:terrafirmacraft-302973:${tfc_version}")
 }

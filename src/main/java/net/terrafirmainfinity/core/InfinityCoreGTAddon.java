@@ -10,7 +10,7 @@ public class InfinityCoreGTAddon implements IGTAddon
     @Override
     public GTRegistrate getRegistrate()
     {
-        return InfinityCore.INFINITY_REGISTRATE;
+        return InfinityCore.REGISTRATE;
     }
 
     @Override

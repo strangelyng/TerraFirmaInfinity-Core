@@ -26,10 +26,6 @@ sourceSets {
             exclude("src/generated/**/.cache")
         }
     }
-    data {
-        compileClasspath += sourceSets.main.output
-        runtimeClasspath += sourceSets.main.output
-    }
 }
 
 apply from: 'gradle/scripts/repositories.gradle'
@@ -45,8 +41,6 @@ java.toolchain.languageVersion = JavaLanguageVersion.of(21)
 neoForge {
     // Specify the version of NeoForge to use.
     version = project.neo_version
-
-    addModdingDependenciesTo(sourceSets.data)
 
     parchment {
         mappingsVersion = project.parchment_mappings_version
@@ -109,7 +103,6 @@ neoForge {
         // multi mod projects should define one per mod
         "${mod_id}" {
             sourceSet(sourceSets.main)
-            sourceSet(sourceSets.data)
         }
     }
 }
