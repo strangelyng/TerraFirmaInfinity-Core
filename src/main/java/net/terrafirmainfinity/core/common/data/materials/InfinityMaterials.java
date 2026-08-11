@@ -17,6 +17,7 @@ import net.dries007.tfc.common.items.TFCItems;
 import net.dries007.tfc.util.Metal;
 import net.terrafirmainfinity.core.InfinityCore;
 
+import static com.gregtechceu.gtceu.api.GTValues.*;
 import static com.gregtechceu.gtceu.api.data.chemical.material.info.MaterialFlags.*;
 import static net.terrafirmainfinity.core.common.data.materials.InfinityMaterialFlags.*;
 import static com.gregtechceu.gtceu.api.data.tag.TagPrefix.*;
@@ -38,6 +39,7 @@ public final class InfinityMaterials {
      * Alloys
      */
     public static Material Pewter;
+    public static Material Manganin;
 
     /**
      * Mod Materials
@@ -51,11 +53,6 @@ public final class InfinityMaterials {
     public static Material Dawnstone;
 
     public static Material Fluix;
-
-    /**
-     * Misc
-     */
-    public static Material Cryolite;
 
     public static void register() {
         Malice = new Material.Builder(InfinityCore.id("malice"))
@@ -86,14 +83,23 @@ public final class InfinityMaterials {
                 .ingot()
                 .liquid(new FluidBuilder().temperature(500))
                 .color(0xD6D6D4).secondaryColor(0xA6A48B).iconSet(MaterialIconSet.METALLIC)
-                .components(Tin, 3, Lead, 2)
                 .hazard(HazardProperty.HazardTrigger.INHALATION, GTMedicalConditions.WEAK_POISON)
+                .components(Tin, 3, Lead, 2)
+                .buildAndRegister();
+
+        Manganin = new Material.Builder(InfinityCore.id("manganin"))
+                .ingot(1)
+                .liquid(new FluidBuilder().temperature(1293))
+                .color(0xedae7b).secondaryColor(0xa22304).iconSet(MaterialIconSet.SHINY)
+                .flags(GENERATE_PLATE, GENERATE_FINE_WIRE, GENERATE_FOIL)
+                .components(Copper, 13, Nickel, 2, Manganese, 1)
+                .cableProperties(V[MV], 1, 1)
                 .buildAndRegister();
 
         AndesiteAlloy = new Material.Builder(InfinityCore.id("andesite_alloy")) // TODO: Consider Removing
                 .ingot()
                 .components(Andesite, 1, Iron, 1)
-                .color(0xC7C8B8).secondaryColor(0x839689).iconSet(MaterialIconSet.DULL)
+                .color(0xd8dcc9).secondaryColor(0x7f9f9c).iconSet(MaterialIconSet.DULL) // 0xC7C8B8, 0x839689
                 .flags(GENERATE_PLATE, GENERATE_GEAR, GENERATE_SMALL_GEAR)
                 .buildAndRegister();
 
@@ -101,7 +107,7 @@ public final class InfinityMaterials {
                 .ingot()
                 .color(0xf2d4ff).secondaryColor(0xba84c6).iconSet(MaterialIconSet.METALLIC) // 0xeccef6, 0xcb6cef
                 .components(Tin, 3, Lead, 2, Malice, 1)
-                .flags(GENERATE_PLATE)
+                .flags(GENERATE_PLATE, DISABLE_DECOMPOSITION)
                 .hazard(HazardProperty.HazardTrigger.INHALATION, GTMedicalConditions.POISON)
                 .buildAndRegister();
 
@@ -109,14 +115,14 @@ public final class InfinityMaterials {
                 .ingot()
                 .color(0xffd659).secondaryColor(0xca0023).iconSet(MaterialIconSet.SHINY) // 0xffe664, 0xff462a, METALLIC
                 .components(Hallow, 1, Gold, 1)
-                .flags(GENERATE_PLATE, GENERATE_ROD, GENERATE_FINE_WIRE, GENERATE_RING)
+                .flags(GENERATE_PLATE, GENERATE_ROD, GENERATE_FINE_WIRE, GENERATE_RING, DISABLE_DECOMPOSITION)
                 .buildAndRegister();
 
         SoulstainedSteel = new Material.Builder(InfinityCore.id("soulstained_steel"))
                 .ingot()
                 .color(0xe98cff).secondaryColor(0x7b3bd3).iconSet(MaterialIconSet.BRIGHT) // 0xf28fff. 0xaa54ff, METALLIC
                 .components(BlackSteel, 1, Soul, 1)
-                .flags(GENERATE_PLATE, GENERATE_ROD, GENERATE_LONG_ROD, GENERATE_ROTOR)
+                .flags(GENERATE_PLATE, GENERATE_ROD, GENERATE_LONG_ROD, GENERATE_ROTOR, DISABLE_DECOMPOSITION)
                 .buildAndRegister();
 
         Dawnstone = new Material.Builder(InfinityCore.id("dawnstone"))
@@ -130,16 +136,9 @@ public final class InfinityMaterials {
                 .gem(1)
                 .dust()
                 .liquid()
-                .color(0xd702f8).secondaryColor(0x8502ee).iconSet(MaterialIconSet.CERTUS)
+                .color(0x7e4aa8).secondaryColor(0x704ca5).iconSet(MaterialIconSet.CERTUS)
                 .flags(NO_SMELTING, CRYSTALLIZABLE, DISABLE_DECOMPOSITION)
                 .components(Unknown, 1, Ruby, 1, CertusQuartz, 1)
-                .buildAndRegister();
-
-        Cryolite = new Material.Builder(InfinityCore.id("cryolite"))
-                .gem()
-                .liquid(new FluidBuilder().temperature(1285))
-                .color(0xDEDCCD).secondaryColor(0xD3CCD1).iconSet(MaterialIconSet.EMERALD)
-                .components(Sodium, 3, Aluminium, 1, Fluorine, 6)
                 .buildAndRegister();
     }
 
