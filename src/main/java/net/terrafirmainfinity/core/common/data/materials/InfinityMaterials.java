@@ -73,7 +73,7 @@ public final class InfinityMaterials {
         Ember = new Material.Builder(InfinityCore.id("ember"))
                 .gem()
                 .gas(1300)
-                .color(0xF76911).secondaryColor(0x960B0B).iconSet(MaterialIconSet.QUARTZ) // TODO: Custom Material Set
+                .color(0xff7327).secondaryColor(0xe60000).iconSet(MaterialIconSet.RUBY) // TODO: Custom Material Set
                 .element(InfinityElements.Ember)
                 .flags(PHOSPHORESCENT)
                 .buildAndRegister();
@@ -85,7 +85,7 @@ public final class InfinityMaterials {
         Pewter = new Material.Builder(InfinityCore.id("pewter"))
                 .ingot()
                 .liquid(new FluidBuilder().temperature(500))
-                .color(0xD8D1B2).secondaryColor(0xC7B59B).iconSet(MaterialIconSet.METALLIC)
+                .color(0xD6D6D4).secondaryColor(0xA6A48B).iconSet(MaterialIconSet.METALLIC)
                 .components(Tin, 3, Lead, 2)
                 .hazard(HazardProperty.HazardTrigger.INHALATION, GTMedicalConditions.WEAK_POISON)
                 .buildAndRegister();
@@ -99,7 +99,7 @@ public final class InfinityMaterials {
 
         MalignantPewter = new Material.Builder(InfinityCore.id("malignant_pewter"))
                 .ingot()
-                .color(0xEBC8FA).secondaryColor(0x6E2361).iconSet(MaterialIconSet.METALLIC)
+                .color(0xf2d4ff).secondaryColor(0xba84c6).iconSet(MaterialIconSet.METALLIC) // 0xeccef6, 0xcb6cef
                 .components(Tin, 3, Lead, 2, Malice, 1)
                 .flags(GENERATE_PLATE)
                 .hazard(HazardProperty.HazardTrigger.INHALATION, GTMedicalConditions.POISON)
@@ -107,30 +107,30 @@ public final class InfinityMaterials {
 
         HallowedGold = new Material.Builder(InfinityCore.id("hallowed_gold"))
                 .ingot()
-                .color(0xFFE475).secondaryColor(0xE03D14).iconSet(MaterialIconSet.BRIGHT)
+                .color(0xffd659).secondaryColor(0xca0023).iconSet(MaterialIconSet.SHINY) // 0xffe664, 0xff462a, METALLIC
                 .components(Hallow, 1, Gold, 1)
                 .flags(GENERATE_PLATE, GENERATE_ROD, GENERATE_FINE_WIRE, GENERATE_RING)
                 .buildAndRegister();
 
         SoulstainedSteel = new Material.Builder(InfinityCore.id("soulstained_steel"))
                 .ingot()
-                .color(0xEE8FFF).secondaryColor(0x593B7C).iconSet(MaterialIconSet.METALLIC)
+                .color(0xe98cff).secondaryColor(0x7b3bd3).iconSet(MaterialIconSet.BRIGHT) // 0xf28fff. 0xaa54ff, METALLIC
                 .components(BlackSteel, 1, Soul, 1)
                 .flags(GENERATE_PLATE, GENERATE_ROD, GENERATE_LONG_ROD, GENERATE_ROTOR)
                 .buildAndRegister();
 
         Dawnstone = new Material.Builder(InfinityCore.id("dawnstone"))
                 .ingot()
-                .color(0xFFCB70).secondaryColor(0xB84E0D).iconSet(MaterialIconSet.BRIGHT)
+                .color(0xffba54).secondaryColor(0xe46d0e).iconSet(MaterialIconSet.BRIGHT) // 0xffb55b, 0xd56909
                 .components(Gold, 1, Copper, 1)
-                .flags(GENERATE_PLATE, GENERATE_ROD, GENERATE_LONG_ROD, GENERATE_GEAR, GENERATE_SMALL_GEAR)
+                .flags(GENERATE_PLATE, GENERATE_ROD, GENERATE_LONG_ROD, GENERATE_GEAR, GENERATE_SMALL_GEAR, GENERATE_RING)
                 .buildAndRegister();
 
         Fluix = new Material.Builder(InfinityCore.id("fluix"))
                 .gem(1)
                 .dust()
                 .liquid()
-                .color(0x8F5CCB).secondaryColor(0x252F5A).iconSet(MaterialIconSet.CERTUS)
+                .color(0xd702f8).secondaryColor(0x8502ee).iconSet(MaterialIconSet.CERTUS)
                 .flags(NO_SMELTING, CRYSTALLIZABLE, DISABLE_DECOMPOSITION)
                 .components(Unknown, 1, Ruby, 1, CertusQuartz, 1)
                 .buildAndRegister();

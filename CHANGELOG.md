@@ -1,3 +1,8 @@
+## [Unreleased]
+### Changes
+- Material colors updates
+- Renamed Embers "Dawnstone" to "Dawnsteel"
+
 ## [0.0.3]
 ### Changes
 - Setup Elements, Materials, MaterialFlags, MaterialIconType, and TagPrefix classes
