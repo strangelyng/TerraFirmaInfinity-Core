@@ -1,5 +1,6 @@
 package net.terrafirmainfinity.core.common.data.materials;
 
+import alexthw.eidolon_repraised.registries.Registry;
 import com.gregtechceu.gtceu.api.data.chemical.material.Material;
 import com.gregtechceu.gtceu.api.data.chemical.material.info.MaterialIconSet;
 import com.gregtechceu.gtceu.api.data.chemical.material.properties.HazardProperty;
@@ -7,6 +8,7 @@ import com.gregtechceu.gtceu.api.data.chemical.material.properties.IngotProperty
 import com.gregtechceu.gtceu.api.data.chemical.material.properties.PropertyKey;
 import com.gregtechceu.gtceu.api.fluids.FluidBuilder;
 import com.gregtechceu.gtceu.common.data.GTMedicalConditions;
+import com.rekindled.embers.RegistryManager;
 import com.sammy.malum.registry.common.block.MalumBlocks;
 import com.sammy.malum.registry.common.item.MalumItems;
 import com.simibubi.create.AllBlocks;
@@ -22,11 +24,15 @@ import static com.gregtechceu.gtceu.common.data.GTMaterials.*;
 
 public final class InfinityMaterials {
     /**
-     * Elements
+     * New Elements
      */
     public static Material Malice;
     public static Material Hallow;
     public static Material Soul;
+
+    public static Material Ember;
+
+    public static Material Unknown;
 
     /**
      * Alloys
@@ -34,16 +40,21 @@ public final class InfinityMaterials {
     public static Material Pewter;
 
     /**
-     * Fantasy Alloys
+     * Mod Materials
      */
+    public static Material AndesiteAlloy; // TODO: To Remove
+
     public static Material MalignantPewter;
     public static Material HallowedGold;
     public static Material SoulstainedSteel;
 
+    public static Material Dawnstone;
+
+    public static Material Fluix;
+
     /**
      * Misc
      */
-    public static Material AndesiteAlloy; // TODO: To Remove
     public static Material Cryolite;
 
     public static void register() {
@@ -59,12 +70,31 @@ public final class InfinityMaterials {
                 .element(InfinityElements.Soul)
                 .buildAndRegister();
 
+        Ember = new Material.Builder(InfinityCore.id("ember"))
+                .gem()
+                .gas(1300)
+                .color(0xF76911).secondaryColor(0x960B0B).iconSet(MaterialIconSet.QUARTZ) // TODO: Custom Material Set
+                .element(InfinityElements.Ember)
+                .flags(PHOSPHORESCENT)
+                .buildAndRegister();
+
+        Unknown = new Material.Builder(InfinityCore.id("unknown"))
+                .element(InfinityElements.Unknown)
+                .buildAndRegister();
+
         Pewter = new Material.Builder(InfinityCore.id("pewter"))
                 .ingot()
                 .liquid(new FluidBuilder().temperature(500))
                 .color(0xD8D1B2).secondaryColor(0xC7B59B).iconSet(MaterialIconSet.METALLIC)
                 .components(Tin, 3, Lead, 2)
                 .hazard(HazardProperty.HazardTrigger.INHALATION, GTMedicalConditions.WEAK_POISON)
+                .buildAndRegister();
+
+        AndesiteAlloy = new Material.Builder(InfinityCore.id("andesite_alloy")) // TODO: Consider Removing
+                .ingot()
+                .components(Andesite, 1, Iron, 1)
+                .color(0xC7C8B8).secondaryColor(0x839689).iconSet(MaterialIconSet.DULL)
+                .flags(GENERATE_PLATE, GENERATE_GEAR, GENERATE_SMALL_GEAR)
                 .buildAndRegister();
 
         MalignantPewter = new Material.Builder(InfinityCore.id("malignant_pewter"))
@@ -78,7 +108,7 @@ public final class InfinityMaterials {
         HallowedGold = new Material.Builder(InfinityCore.id("hallowed_gold"))
                 .ingot()
                 .color(0xFFE475).secondaryColor(0xE03D14).iconSet(MaterialIconSet.BRIGHT)
-                .components(Gold, 1, Hallow, 1)
+                .components(Hallow, 1, Gold, 1)
                 .flags(GENERATE_PLATE, GENERATE_ROD, GENERATE_FINE_WIRE, GENERATE_RING)
                 .buildAndRegister();
 
@@ -89,12 +119,20 @@ public final class InfinityMaterials {
                 .flags(GENERATE_PLATE, GENERATE_ROD, GENERATE_LONG_ROD, GENERATE_ROTOR)
                 .buildAndRegister();
 
-        // TODO: TO REMOVE
-        AndesiteAlloy = new Material.Builder(InfinityCore.id("andesite_alloy"))
+        Dawnstone = new Material.Builder(InfinityCore.id("dawnstone"))
                 .ingot()
-                .components(Andesite, 1, Iron, 1)
-                .color(0xC7C8B8).secondaryColor(0x839689).iconSet(MaterialIconSet.DULL)
-                .flags(GENERATE_PLATE, GENERATE_GEAR, GENERATE_SMALL_GEAR)
+                .color(0xFFCB70).secondaryColor(0xB84E0D).iconSet(MaterialIconSet.BRIGHT)
+                .components(Gold, 1, Copper, 1)
+                .flags(GENERATE_PLATE, GENERATE_ROD, GENERATE_LONG_ROD, GENERATE_GEAR, GENERATE_SMALL_GEAR)
+                .buildAndRegister();
+
+        Fluix = new Material.Builder(InfinityCore.id("fluix"))
+                .gem(1)
+                .dust()
+                .liquid()
+                .color(0x8F5CCB).secondaryColor(0x252F5A).iconSet(MaterialIconSet.CERTUS)
+                .flags(NO_SMELTING, CRYSTALLIZABLE, DISABLE_DECOMPOSITION)
+                .components(Unknown, 1, Ruby, 1, CertusQuartz, 1)
                 .buildAndRegister();
 
         Cryolite = new Material.Builder(InfinityCore.id("cryolite"))
@@ -106,11 +144,11 @@ public final class InfinityMaterials {
     }
 
     public static void modifyExistingMaterials() {
-        // Add Ingots
+        // Add Properties
         Zirconium.setProperty(PropertyKey.INGOT, new IngotProperty());
     }
 
-    public static void setIgnoredComponents() {
+    public static void setIgnoredPrefixes() {
         // TFC Materials
         ingot.setIgnored(BlackSteel,
                 () -> TFCItems.METAL_ITEMS.get(Metal.BLACK_STEEL).get(Metal.ItemType.INGOT).get());
@@ -149,10 +187,23 @@ public final class InfinityMaterials {
         nugget.setIgnored(SoulstainedSteel, MalumItems.SOUL_STAINED_STEEL_NUGGET);
         plate.setIgnored(SoulstainedSteel, MalumItems.SOUL_STAINED_STEEL_PLATING);
         block.setIgnored(SoulstainedSteel, MalumBlocks.BLOCK_OF_SOUL_STAINED_STEEL);
+
+        // Eidolon Materials
+        ingot.setIgnored(Pewter, Registry.PEWTER_INGOT);
+        nugget.setIgnored(Pewter, Registry.PEWTER_NUGGET);
+        block.setIgnored(Pewter, Registry.PEWTER_BLOCK);
+
+        // Embers Materials
+        ingot.setIgnored(Dawnstone, RegistryManager.DAWNSTONE_INGOT);
+        nugget.setIgnored(Dawnstone, RegistryManager.DAWNSTONE_NUGGET);
+        plate.setIgnored(Dawnstone, RegistryManager.DAWNSTONE_PLATE);
+        block.setIgnored(Dawnstone, RegistryManager.DAWNSTONE_BLOCK);
+
+        gem.setIgnored(Ember, RegistryManager.EMBER_CRYSTAL);
     }
 
     public static void postInit() {
         modifyExistingMaterials();
-        setIgnoredComponents();
+        setIgnoredPrefixes();
     }
 }

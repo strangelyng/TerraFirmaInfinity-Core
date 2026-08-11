@@ -17,11 +17,18 @@ dependencies {
     implementation("dev.latvian.mods:rhino:${rhino_version}")
 
     // TFC, Patchouli
-    implementation("vazkii.patchouli:Patchouli:$patchouli_version")
+    implementation("vazkii.patchouli:Patchouli:${patchouli_version}")
     implementation("curse.maven:terrafirmacraft-302973:${tfc_version}")
 
+    // Beneath
+    implementation("curse.maven:beneath-1113980:${beneath_version}")
+
+    // AFC, Firmalife
+    implementation("maven.modrinth:arborfirmacraft-(afc):${afc_version}-1.21")
+    implementation("maven.modrinth:firmalife:${firmalife_version}")
+
     // Jade
-    implementation("curse.maven:jade-324717:$jade_version")
+    implementation("maven.modrinth:jade:${jade_version}+neoforge")
 
     // GTM & MUI
     implementation("brachy.modularui:modularui-mc1.21.1:${mui_version}")
@@ -41,4 +48,10 @@ dependencies {
     implementation("top.theillusivec4.curios:curios-neoforge:${curios_version}+${minecraft_version}")
     implementation("com.sammy.malum:malum:${minecraft_version}-${malum_version}") { transitive = false }
     implementation("team.lodestar.lodestone:lodestone:${minecraft_version}-${lodestone_version}")
+
+    // Eidolon Repraised
+    implementation("com.alexthw.eidolon_repraised:eidolon_repraised-${minecraft_version}:${eidolon_version}") { transitive = false }
+
+    // Embers Re-Ignited
+    implementation("curse.maven:embers-re-ignited-1579725:${embers_version}")
 }

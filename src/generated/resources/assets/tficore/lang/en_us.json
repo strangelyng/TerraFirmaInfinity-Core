@@ -2,6 +2,9 @@
     "itemGroup.tficore.creative_tab": "TerraFirmaInfinity (Coremod)",
     "material.tficore.andesite_alloy": "Andesite Composite",
     "material.tficore.cryolite": "Cryolite",
+    "material.tficore.dawnstone": "Dawnstone",
+    "material.tficore.ember": "Ember",
+    "material.tficore.fluix": "Fluix",
     "material.tficore.hallow": "Hallow",
     "material.tficore.hallowed_gold": "Hallowed Gold",
     "material.tficore.malice": "Malice",
@@ -9,6 +12,7 @@
     "material.tficore.pewter": "Pewter",
     "material.tficore.soul": "Soul",
     "material.tficore.soulstained_steel": "Soulstained Steel",
+    "material.tficore.unknown": "Unknown",
     "tagprefix.poor_raw_ore": "Poor Raw %s",
     "tagprefix.rich_raw_ore": "Rich Raw %s"
 }

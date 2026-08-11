@@ -12,5 +12,11 @@ public class InfinityElements {
     public static final Element Soul = GTElements.createAndRegister(InfinityCore.id("soul"), 1, 0, -1, null,
             "Soul", "So", false);
 
+    public static final Element Ember = GTElements.createAndRegister(InfinityCore.id("ember"), 1, 0, -1, null,
+            "Ember", "Em", false);
+
+    public static final Element Unknown = GTElements.createAndRegister(InfinityCore.id("unknown"), 1, 0, -1, null,
+            "Unknown", "?", false);
+
     public static void init() {}
 }

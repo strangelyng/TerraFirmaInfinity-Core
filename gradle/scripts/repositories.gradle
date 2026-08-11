@@ -8,7 +8,7 @@ repositories {
         }
     }
     maven {
-        url 'https://api.modrinth.maven.com'
+        url 'https://api.modrinth.com/maven'
         content {
             includeGroup("maven.modrinth")
         }
@@ -43,12 +43,14 @@ repositories {
     maven { // Create, Ponder, Flywheel
         url 'https://maven.createmod.net'
     }
-    maven { // JEI, Malum, Lodestone
+    maven { // JEI, Patchouli, Malum, Lodestone, Eidolon
         url 'https://maven.blamejared.com'
         content {
             includeGroup("mezz.jei")
+            includeGroup("vazkii.patchouli")
             includeGroup("com.sammy.malum")
             includeGroup("team.lodestar.lodestone")
+            includeGroup("com.alexthw.eidolon_repraised")
         }
     }
     maven { // KubeJS, Rhino
@@ -68,12 +70,6 @@ repositories {
     maven { // Curios
         name 'Curios Maven'
         url 'https://maven.theillusivec4.top/'
-    }
-    maven { // Patchouli
-        url 'https://maven.blamejared.com'
-        content {
-            includeGroup("vazkii.patchouli")
-        }
     }
     maven { // EMI
         name 'Sleeping Town'
