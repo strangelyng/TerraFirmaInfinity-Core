@@ -48,13 +48,13 @@ public class InfinityCore {
 
     public InfinityCore(IEventBus bus, ModContainer mod) {
         InfinityCore.init();
+        bus.register(this);
+        mod.registerConfig(ModConfig.Type.COMMON, InfinityConfig.SPEC);
+        REGISTRATE.registerEventListeners(bus);
 
         bus.addListener(this::commonSetup);
         bus.addListener(this::clientSetup);
-        bus.register(this);
-        REGISTRATE.registerEventListeners(bus);
 
-        mod.registerConfig(ModConfig.Type.COMMON, InfinityConfig.SPEC);
     }
 
     public static void init() {

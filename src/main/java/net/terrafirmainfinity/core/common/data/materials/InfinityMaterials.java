@@ -54,6 +54,11 @@ public final class InfinityMaterials {
 
     public static Material Fluix;
 
+    /**
+     * Minerals
+     */
+    public static Material Fluorite;
+
     public static void register() {
         Malice = new Material.Builder(InfinityCore.id("malice"))
                 .element(InfinityElements.Malice)
@@ -139,6 +144,14 @@ public final class InfinityMaterials {
                 .color(0x7e4aa8).secondaryColor(0x704ca5).iconSet(MaterialIconSet.CERTUS)
                 .flags(NO_SMELTING, CRYSTALLIZABLE, DISABLE_DECOMPOSITION)
                 .components(Unknown, 1, Ruby, 1, CertusQuartz, 1)
+                .buildAndRegister();
+
+        Fluorite = new Material.Builder(InfinityCore.id("fluorite"))
+                .gem(1).ore(2, 1)
+                .color(0x39ffec).secondaryColor(0xea00de).iconSet(MaterialIconSet.LAPIS)
+                .flags(NO_SMASHING, NO_SMELTING, CRYSTALLIZABLE, DISABLE_DECOMPOSITION)
+//                .addOreByproducts(Calcium, Apatite, Fluorite, Calcium)
+                .components(Calcium, 1, Fluorine, 2)
                 .buildAndRegister();
     }
 
