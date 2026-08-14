@@ -1,0 +1,9 @@
+{
+  "parent": "gtceu:item/material_sets/dull/foil",
+  "textures": {
+    "layer0": "gtceu:item/material_sets/dull/foil",
+    "layer1": "gtceu:item/material_sets/dull/foil_secondary",
+    "layer2": "gtceu:item/material_sets/dull/foil_overlay",
+    "layer3": "gtceu:item/material_sets/dull/foil_hot_overlay"
+  }
+}

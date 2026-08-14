@@ -1,0 +1,7 @@
+{
+  "parent": "gtceu:item/material_sets/metallic/ring",
+  "textures": {
+    "layer2": "gtceu:item/material_sets/shiny/ring_overlay",
+    "layer3": "gtceu:item/material_sets/metallic/ring_hot_overlay"
+  }
+}

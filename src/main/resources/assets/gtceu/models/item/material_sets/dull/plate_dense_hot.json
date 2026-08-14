@@ -1,0 +1,9 @@
+{
+  "parent": "gtceu:item/material_sets/dull/plate_dense",
+  "textures": {
+    "layer0": "gtceu:item/material_sets/dull/plate_dense",
+    "layer1": "gtceu:item/material_sets/dull/plate_dense_secondary",
+    "layer2": "gtceu:item/material_sets/dull/plate_dense_overlay",
+    "layer3": "gtceu:item/material_sets/dull/plate_dense_hot_overlay"
+  }
+}

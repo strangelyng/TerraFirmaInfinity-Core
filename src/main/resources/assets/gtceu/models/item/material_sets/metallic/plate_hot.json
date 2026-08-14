@@ -1,0 +1,9 @@
+{
+    "parent": "gtceu:item/material_sets/metallic/plate",
+    "textures": {
+        "layer0": "gtceu:item/material_sets/metallic/plate",
+        "layer1": "gtceu:item/material_sets/metallic/plate_secondary",
+        "layer2": "gtceu:item/material_sets/metallic/plate_overlay",
+        "layer3": "gtceu:item/material_sets/metallic/plate_hot_overlay"
+    }
+}

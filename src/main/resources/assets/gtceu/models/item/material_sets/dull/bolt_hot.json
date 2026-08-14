@@ -1,0 +1,9 @@
+{
+  "parent": "gtceu:item/material_sets/dull/bolt",
+  "textures": {
+    "layer0": "gtceu:item/material_sets/dull/bolt",
+    "layer1": "gtceu:item/material_sets/dull/bolt_secondary",
+    "layer2": "gtceu:item/material_sets/dull/bolt_overlay",
+    "layer3": "gtceu:item/material_sets/dull/bolt_hot_overlay"
+  }
+}
