@@ -1,0 +1,9 @@
+{
+  "parent": "gtceu:item/material_sets/bright/plate",
+  "textures": {
+    "layer0": "gtceu:item/material_sets/bright/plate",
+    "layer1": "gtceu:item/material_sets/bright/plate_secondary",
+    "layer2": "gtceu:item/material_sets/bright/plate_overlay",
+    "layer3": "gtceu:item/material_sets/bright/plate_hot_overlay"
+  }
+}
