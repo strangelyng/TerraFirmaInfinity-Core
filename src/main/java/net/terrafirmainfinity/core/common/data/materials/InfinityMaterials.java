@@ -2,12 +2,8 @@ package net.terrafirmainfinity.core.common.data.materials;
 
 import alexthw.eidolon_repraised.registries.Registry;
 import com.gregtechceu.gtceu.api.data.chemical.material.Material;
-import com.gregtechceu.gtceu.api.data.chemical.material.info.MaterialIconSet;
-import com.gregtechceu.gtceu.api.data.chemical.material.properties.HazardProperty;
-import com.gregtechceu.gtceu.api.data.chemical.material.properties.IngotProperty;
-import com.gregtechceu.gtceu.api.data.chemical.material.properties.PropertyKey;
-import com.gregtechceu.gtceu.api.fluids.FluidBuilder;
-import com.gregtechceu.gtceu.common.data.GTMedicalConditions;
+import com.gregtechceu.gtceu.api.data.chemical.material.properties.*;
+import com.gregtechceu.gtceu.api.data.chemical.material.stack.MaterialStack;
 import com.rekindled.embers.RegistryManager;
 import com.sammy.malum.registry.common.block.MalumBlocks;
 import com.sammy.malum.registry.common.item.MalumItems;
@@ -15,149 +11,93 @@ import com.simibubi.create.AllBlocks;
 import com.simibubi.create.AllItems;
 import net.dries007.tfc.common.items.TFCItems;
 import net.dries007.tfc.util.Metal;
-import net.terrafirmainfinity.core.InfinityCore;
 
 import static com.gregtechceu.gtceu.api.GTValues.*;
-import static com.gregtechceu.gtceu.api.data.chemical.material.info.MaterialFlags.*;
-import static net.terrafirmainfinity.core.common.data.materials.InfinityMaterialFlags.*;
 import static com.gregtechceu.gtceu.api.data.tag.TagPrefix.*;
 import static com.gregtechceu.gtceu.common.data.GTMaterials.*;
 
 public final class InfinityMaterials {
-    /**
-     * New Elements
-     */
-    public static Material Malice;
-    public static Material Hallow;
-    public static Material Soul;
+     public static Material Acanthite;
+     public static Material Alumina;
+     public static Material Anatase;
+     public static Material AndesiteAlloy; // TODO: To Remove
+     public static Material Arsenopyrite;
+     public static Material Bismuthinite; // TFC
+     public static Material BoricAcid;
+     public static Material BoronCarbide;
+     public static Material BoronTrioxide;
+     public static Material Cryolite;
+     public static Material Dawnstone;
+     public static Material Ember;
+     public static Material Fluix;
+     public static Material Fluorapatite;
+     public static Material Fluorite;
+     public static Material Hafnon;
+     public static Material Hallow;
+     public static Material HallowedGold;
+     public static Material Malice;
+     public static Material MalignantPewter;
+     public static Material Manganin;
+     public static Material Millerite;
+     public static Material Pewter;
+     public static Material Siderite; // ???
+     public static Material SiliconCarbide;
+     public static Material Smithsonite;
+     public static Material Soul;
+     public static Material SoulstainedSteel;
+     public static Material Sylvite; // TFC
+     public static Material Thorianite;
+     public static Material Thorite;
+     public static Material Unknown;
+     public static Material Vanadinite;
+     public static Material Witherite;
+     public static Material Wolframite;
+     public static Material Zircon;
+     public static Material Zirconia;
+     public static Material ZirconiumCarbide;
+     public static Material ZirconiumDiboride;
+     public static Material ZirconiumTetrachloride;
+     public static Material ZirconiumUHTCComposite;
 
-    public static Material Ember;
-
-    public static Material Unknown;
-
-    /**
-     * Alloys
-     */
-    public static Material Pewter;
-    public static Material Manganin;
-
-    /**
-     * Mod Materials
-     */
-    public static Material AndesiteAlloy; // TODO: To Remove
-
-    public static Material MalignantPewter;
-    public static Material HallowedGold;
-    public static Material SoulstainedSteel;
-
-    public static Material Dawnstone;
-
-    public static Material Fluix;
-
-    /**
-     * Minerals
-     */
-    public static Material Fluorite;
-
-    public static void register() {
-        Malice = new Material.Builder(InfinityCore.id("malice"))
-                .element(InfinityElements.Malice)
-                .buildAndRegister();
-
-        Hallow = new Material.Builder(InfinityCore.id("hallow"))
-                .element(InfinityElements.Hallow)
-                .buildAndRegister();
-
-        Soul = new Material.Builder(InfinityCore.id("soul"))
-                .element(InfinityElements.Soul)
-                .buildAndRegister();
-
-        Ember = new Material.Builder(InfinityCore.id("ember"))
-                .gem()
-                .gas(1300)
-                .color(0xff7327).secondaryColor(0xe60000).iconSet(MaterialIconSet.RUBY) // TODO: Custom Material Set
-                .element(InfinityElements.Ember)
-                .flags(PHOSPHORESCENT)
-                .buildAndRegister();
-
-        Unknown = new Material.Builder(InfinityCore.id("unknown"))
-                .element(InfinityElements.Unknown)
-                .buildAndRegister();
-
-        Pewter = new Material.Builder(InfinityCore.id("pewter"))
-                .ingot()
-                .liquid(new FluidBuilder().temperature(500))
-                .color(0xD6D6D4).secondaryColor(0xA6A48B).iconSet(MaterialIconSet.METALLIC)
-                .hazard(HazardProperty.HazardTrigger.INHALATION, GTMedicalConditions.WEAK_POISON)
-                .components(Tin, 3, Lead, 2)
-                .buildAndRegister();
-
-        Manganin = new Material.Builder(InfinityCore.id("manganin"))
-                .ingot(1)
-                .liquid(new FluidBuilder().temperature(1293))
-                .color(0xedae7b).secondaryColor(0xa22304).iconSet(MaterialIconSet.SHINY)
-                .flags(GENERATE_PLATE, GENERATE_FINE_WIRE, GENERATE_FOIL)
-                .components(Copper, 13, Nickel, 2, Manganese, 1)
-                .cableProperties(V[MV], 1, 1)
-                .buildAndRegister();
-
-        AndesiteAlloy = new Material.Builder(InfinityCore.id("andesite_alloy")) // TODO: Consider Removing
-                .ingot()
-                .components(Andesite, 1, Iron, 1)
-                .color(0xd8dcc9).secondaryColor(0x7f9f9c).iconSet(MaterialIconSet.DULL) // 0xC7C8B8, 0x839689
-                .flags(GENERATE_PLATE, GENERATE_GEAR, GENERATE_SMALL_GEAR)
-                .buildAndRegister();
-
-        MalignantPewter = new Material.Builder(InfinityCore.id("malignant_pewter"))
-                .ingot()
-                .color(0xf2d4ff).secondaryColor(0xba84c6).iconSet(MaterialIconSet.METALLIC) // 0xeccef6, 0xcb6cef
-                .components(Tin, 3, Lead, 2, Malice, 1)
-                .flags(GENERATE_PLATE, DISABLE_DECOMPOSITION)
-                .hazard(HazardProperty.HazardTrigger.INHALATION, GTMedicalConditions.POISON)
-                .buildAndRegister();
-
-        HallowedGold = new Material.Builder(InfinityCore.id("hallowed_gold"))
-                .ingot()
-                .color(0xffd659).secondaryColor(0xca0023).iconSet(MaterialIconSet.SHINY) // 0xffe664, 0xff462a, METALLIC
-                .components(Hallow, 1, Gold, 1)
-                .flags(GENERATE_PLATE, GENERATE_ROD, GENERATE_FINE_WIRE, GENERATE_RING, DISABLE_DECOMPOSITION)
-                .buildAndRegister();
-
-        SoulstainedSteel = new Material.Builder(InfinityCore.id("soulstained_steel"))
-                .ingot()
-                .color(0xe98cff).secondaryColor(0x7b3bd3).iconSet(MaterialIconSet.BRIGHT) // 0xf28fff. 0xaa54ff, METALLIC
-                .components(BlackSteel, 1, Soul, 1)
-                .flags(GENERATE_PLATE, GENERATE_ROD, GENERATE_LONG_ROD, GENERATE_ROTOR, DISABLE_DECOMPOSITION)
-                .buildAndRegister();
-
-        Dawnstone = new Material.Builder(InfinityCore.id("dawnstone"))
-                .ingot()
-                .color(0xffba54).secondaryColor(0xe46d0e).iconSet(MaterialIconSet.BRIGHT) // 0xffb55b, 0xd56909
-                .components(Gold, 1, Copper, 1)
-                .flags(GENERATE_PLATE, GENERATE_ROD, GENERATE_LONG_ROD, GENERATE_GEAR, GENERATE_SMALL_GEAR, GENERATE_RING)
-                .buildAndRegister();
-
-        Fluix = new Material.Builder(InfinityCore.id("fluix"))
-                .gem(1)
-                .dust()
-                .liquid()
-                .color(0x7e4aa8).secondaryColor(0x704ca5).iconSet(MaterialIconSet.CERTUS)
-                .flags(NO_SMELTING, CRYSTALLIZABLE, DISABLE_DECOMPOSITION)
-                .components(Unknown, 1, Ruby, 1, CertusQuartz, 1)
-                .buildAndRegister();
-
-        Fluorite = new Material.Builder(InfinityCore.id("fluorite"))
-                .gem(1).ore(2, 1)
-                .color(0x39ffec).secondaryColor(0xea00de).iconSet(MaterialIconSet.LAPIS)
-                .flags(NO_SMASHING, NO_SMELTING, CRYSTALLIZABLE, DISABLE_DECOMPOSITION)
-//                .addOreByproducts(Calcium, Apatite, Fluorite, Calcium)
-                .components(Calcium, 1, Fluorine, 2)
-                .buildAndRegister();
+    public static void init() {
+        InfinityElementMaterials.register();
+        InfinityFirstDegreeMaterials.register();
+        InfinitySecondDegreeMaterials.register();
+        InfinityThirdDegreeMaterials.register();
     }
 
     public static void modifyExistingMaterials() {
         // Add Properties
+        Hafnium.setProperty(PropertyKey.INGOT, new IngotProperty());
         Zirconium.setProperty(PropertyKey.INGOT, new IngotProperty());
+
+        BlastProperty blastProp = new BlastProperty();
+        blastProp.setBlastTemperature(2125);
+        blastProp.setGasTier(BlastProperty.GasTier.MID);
+        blastProp.setEUtOverride(VA[HV]);
+        blastProp.setDurationOverride(1500);
+        blastProp.setVacuumEUtOverride(VA[HV]);
+
+        Zirconium.setProperty(PropertyKey.BLAST, blastProp);
+
+        Borax.setProperty(PropertyKey.ORE, new OreProperty());
+
+//        TungstenCarbide.addFlags(InfinityMaterialFlags.GENERATE_POWDER_COMPACTS);
+
+        // Modify Components
+        Ruby.setComponents(new MaterialStack(Chromium, 1), new MaterialStack(Alumina, 1));
+        Sapphire.setComponents(new MaterialStack(Alumina, 1));
+        GreenSapphire.setComponents(new MaterialStack(Alumina, 1));
+
+        // Restrict Native Metals
+        Aluminium.removeProperty(PropertyKey.ORE);
+        Cobalt.removeProperty(PropertyKey.ORE);
+        Lithium.removeProperty(PropertyKey.ORE);
+        Molybdenum.removeProperty(PropertyKey.ORE);
+        Neodymium.removeProperty(PropertyKey.ORE);
+        Nickel.removeProperty(PropertyKey.ORE);
+        Plutonium239.removeProperty(PropertyKey.ORE);
+        Thorium.removeProperty(PropertyKey.ORE);
     }
 
     public static void setIgnoredPrefixes() {

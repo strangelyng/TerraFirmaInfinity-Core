@@ -1,0 +1,1 @@
+net.terrafirmainfinity.core.integration.kubejs.InfinityCoreKubeJSPlugin

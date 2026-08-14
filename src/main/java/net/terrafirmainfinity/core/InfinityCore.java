@@ -10,11 +10,10 @@ import net.minecraft.world.item.Items;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.event.lifecycle.FMLClientSetupEvent;
 import net.neoforged.neoforge.registries.RegisterEvent;
+import net.terrafirmainfinity.core.common.data.InfinityMachines;
+import net.terrafirmainfinity.core.common.data.InfinityRecipeTypes;
 import net.terrafirmainfinity.core.common.data.InfinityTagPrefix;
-import net.terrafirmainfinity.core.common.data.materials.InfinityElements;
-import net.terrafirmainfinity.core.common.data.materials.InfinityMaterialFlags;
-import net.terrafirmainfinity.core.common.data.materials.InfinityMaterialIconType;
-import net.terrafirmainfinity.core.common.data.materials.InfinityMaterials;
+import net.terrafirmainfinity.core.common.data.materials.*;
 import net.terrafirmainfinity.core.datagen.InfinityCoreDataGen;
 import org.slf4j.Logger;
 
@@ -30,7 +29,7 @@ import net.neoforged.fml.event.lifecycle.FMLCommonSetupEvent;
 public class InfinityCore {
     private static boolean didRunRegistration = false;
 
-    public static final String MOD_ID = "tficore";
+    public static final String MOD_ID = "tfi";
     public static final Logger LOGGER = LogUtils.getLogger();
     public static GTRegistrate REGISTRATE = GTRegistrate.create(MOD_ID);
 
@@ -74,11 +73,14 @@ public class InfinityCore {
         if (didRunRegistration) return;
         didRunRegistration = true;
         InfinityElements.init();
-        InfinityMaterials.register();
+        InfinityMaterials.init();
 
         InfinityMaterialFlags.init();
         InfinityMaterialIconType.init();
         InfinityTagPrefix.init();
+
+        InfinityRecipeTypes.init();
+        InfinityMachines.init();
     }
 
     @SubscribeEvent
