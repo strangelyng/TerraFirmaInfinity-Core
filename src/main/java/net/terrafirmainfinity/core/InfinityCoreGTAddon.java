@@ -25,6 +25,7 @@ public class InfinityCoreGTAddon implements IGTAddon
 
     @Override
     public void addRecipes(RecipeOutput provider) {
+
     }
 
     @Override

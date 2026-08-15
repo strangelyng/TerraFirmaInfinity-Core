@@ -8,8 +8,11 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.Items;
 import net.neoforged.bus.api.SubscribeEvent;
-import net.neoforged.fml.event.lifecycle.FMLClientSetupEvent;
+import net.neoforged.fml.event.lifecycle.FMLLoadCompleteEvent;
+import net.neoforged.fml.loading.FMLEnvironment;
+import net.neoforged.neoforge.capabilities.RegisterCapabilitiesEvent;
 import net.neoforged.neoforge.registries.RegisterEvent;
+import net.terrafirmainfinity.core.client.InfinityCoreClient;
 import org.slf4j.Logger;
 
 import com.mojang.logging.LogUtils;
@@ -24,7 +27,7 @@ import net.neoforged.fml.event.lifecycle.FMLCommonSetupEvent;
 public class InfinityCore {
     private static boolean didRunRegistration = false;
 
-    public static final String MOD_ID = "tfi";
+    public static final String MOD_ID = "tfinfinity";
     public static final Logger LOGGER = LogUtils.getLogger();
     public static GTRegistrate REGISTRATE = GTRegistrate.create(MOD_ID);
 
@@ -40,28 +43,52 @@ public class InfinityCore {
                             .build())
             .register();
 
-    public InfinityCore(IEventBus bus, ModContainer mod) {
-        bus.register(this);
-        mod.registerConfig(ModConfig.Type.COMMON, InfinityConfig.SPEC);
-        REGISTRATE.registerEventListeners(bus);
+    public InfinityCore(IEventBus modBus, ModContainer modContainer) {
+        modBus.register(this);
+        modContainer.registerConfig(ModConfig.Type.COMMON, InfinityConfig.SPEC);
+        REGISTRATE.registerEventListeners(modBus);
 
-        bus.addListener(this::commonSetup);
-        bus.addListener(this::clientSetup);
-
+        if (FMLEnvironment.dist.isClient()) {
+            InfinityCoreClient.init(modBus);
+        }
     }
 
-    private void commonSetup(FMLCommonSetupEvent event) {
-
-    }
-
-    private void clientSetup(FMLClientSetupEvent event) {
-
-    }
-
+    /**
+     * GT Registration order: (elements -> material icon sets -> material icon types -> materials -> tag prefixes
+     * -> sound entries -> blocks, fluids -> recipe capabilitiess, conditions, types -> tools, data components,
+     * -> items -> machines -> ingredient types).
+     * See {@link com.gregtechceu.gtceu.common.CommonProxy}
+     */
     @SubscribeEvent
     public void onRegisterEvent(RegisterEvent event) {
         if (didRunRegistration) return;
         didRunRegistration = true;
+
+    }
+
+    /**
+     * For modifying existing materials
+     */
+    @SubscribeEvent
+    public void onPostMaterialEvent(PostMaterialEvent event) {
+
+    }
+
+    @SubscribeEvent
+    private void commonSetup(FMLCommonSetupEvent event) {
+        event.enqueueWork(() -> {
+
+        });
+    }
+
+    @SubscribeEvent
+    public void onLoadComplete(FMLLoadCompleteEvent event) {
+
+    }
+
+    @SubscribeEvent
+    public void registerCapabilities(RegisterCapabilitiesEvent event) {
+
     }
 
     public static ResourceLocation id(String path) {
