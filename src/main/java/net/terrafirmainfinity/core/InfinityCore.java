@@ -10,11 +10,6 @@ import net.minecraft.world.item.Items;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.event.lifecycle.FMLClientSetupEvent;
 import net.neoforged.neoforge.registries.RegisterEvent;
-import net.terrafirmainfinity.core.common.data.InfinityMachines;
-import net.terrafirmainfinity.core.common.data.InfinityRecipeTypes;
-import net.terrafirmainfinity.core.common.data.InfinityTagPrefix;
-import net.terrafirmainfinity.core.common.data.materials.*;
-import net.terrafirmainfinity.core.datagen.InfinityCoreDataGen;
 import org.slf4j.Logger;
 
 import com.mojang.logging.LogUtils;
@@ -46,7 +41,6 @@ public class InfinityCore {
             .register();
 
     public InfinityCore(IEventBus bus, ModContainer mod) {
-        InfinityCore.init();
         bus.register(this);
         mod.registerConfig(ModConfig.Type.COMMON, InfinityConfig.SPEC);
         REGISTRATE.registerEventListeners(bus);
@@ -54,10 +48,6 @@ public class InfinityCore {
         bus.addListener(this::commonSetup);
         bus.addListener(this::clientSetup);
 
-    }
-
-    public static void init() {
-        InfinityCoreDataGen.init();
     }
 
     private void commonSetup(FMLCommonSetupEvent event) {
@@ -72,20 +62,6 @@ public class InfinityCore {
     public void onRegisterEvent(RegisterEvent event) {
         if (didRunRegistration) return;
         didRunRegistration = true;
-        InfinityElements.init();
-        InfinityMaterials.init();
-
-        InfinityMaterialFlags.init();
-        InfinityMaterialIconType.init();
-        InfinityTagPrefix.init();
-
-        InfinityRecipeTypes.init();
-        InfinityMachines.init();
-    }
-
-    @SubscribeEvent
-    public void onPostMaterialEvent(PostMaterialEvent event) {
-        InfinityMaterials.postInit();
     }
 
     public static ResourceLocation id(String path) {
