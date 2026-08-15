@@ -195,7 +195,7 @@ public class InfinityTagPrefix {
                 .generationCondition(hasDustProperty.and(hotTagCondition).and(material ->
                         material.hasFlag(MaterialFlags.GENERATE_BOLT_SCREW)));
 
-        ringHot = new TagPrefix("ringHot")
+        ringHot = new TagPrefix("ring_hot")
                 .idPattern("hot_%s_ring")
                 .defaultTagPath("hot_rings/%s")
                 .unformattedTagPath("hot_rings")
@@ -207,7 +207,7 @@ public class InfinityTagPrefix {
                 .generationCondition(hasDustProperty.and(hotTagCondition).and(material ->
                         material.hasFlag(MaterialFlags.GENERATE_RING)));
 
-        gearSmallHot = new TagPrefix("gearSmallHot")
+        gearSmallHot = new TagPrefix("gear_small_hot")
                 .idPattern("hot_small_%s_gear")
                 .defaultTagPath("hot_small_gears/%s")
                 .unformattedTagPath("hot_small_gears")
@@ -219,7 +219,7 @@ public class InfinityTagPrefix {
                 .generationCondition(hasDustProperty.and(hotTagCondition).and(material ->
                         material.hasFlag(MaterialFlags.GENERATE_SMALL_GEAR)));
 
-        gearHot = new TagPrefix("gearHot")
+        gearHot = new TagPrefix("gear_hot")
                 .idPattern("hot_%s_gear")
                 .defaultTagPath("hot_gears/%s")
                 .unformattedTagPath("hot_gears")
@@ -456,5 +456,14 @@ public class InfinityTagPrefix {
                 .generationCondition(hasDustProperty.and(hasToolProperty.and(
                         material -> material.hasFlag(InfinityMaterialFlags.GENERATE_POWDER_COMPACTS)).and(
                                 material -> material.getProperty(PropertyKey.TOOL).hasType(GTToolType.WIRE_CUTTER_LV))));
+
+        // Modify existing for tool heads
+        // Special thanks to TFG for this workaround (prevents crash on startup due to missing inputs)
+        TagPrefix.toolHeadBuzzSaw.generationCondition(TagPrefix.toolHeadBuzzSaw.generationCondition().or(mat -> mat.hasFlag(InfinityMaterialFlags.GENERATE_BUZZSAW_BLADE)));
+        TagPrefix.toolHeadChainsaw.generationCondition(TagPrefix.toolHeadChainsaw.generationCondition().or(mat -> mat.hasFlag(InfinityMaterialFlags.GENERATE_CHAINSAW_HEAD)));
+        TagPrefix.toolHeadDrill.generationCondition(TagPrefix.toolHeadDrill.generationCondition().or(mat -> mat.hasFlag(InfinityMaterialFlags.GENERATE_DRILL_HEAD)));
+        TagPrefix.toolHeadScrewdriver.generationCondition(TagPrefix.toolHeadScrewdriver.generationCondition().or(mat -> mat.hasFlag(InfinityMaterialFlags.GENERATE_SCREWDRIVER_HEAD)));
+        TagPrefix.toolHeadWrench.generationCondition(TagPrefix.toolHeadWrench.generationCondition().or(mat -> mat.hasFlag(InfinityMaterialFlags.GENERATE_WRENCH_HEAD)));
+        TagPrefix.toolHeadWireCutter.generationCondition(TagPrefix.toolHeadWireCutter.generationCondition().or(mat -> mat.hasFlag(InfinityMaterialFlags.GENERATE_WIRE_CUTTER_HEAD)));
     }
 }

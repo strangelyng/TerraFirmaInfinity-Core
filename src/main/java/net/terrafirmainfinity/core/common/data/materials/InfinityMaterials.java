@@ -2,6 +2,7 @@ package net.terrafirmainfinity.core.common.data.materials;
 
 import alexthw.eidolon_repraised.registries.Registry;
 import com.gregtechceu.gtceu.api.data.chemical.material.Material;
+import com.gregtechceu.gtceu.api.data.chemical.material.info.MaterialFlags;
 import com.gregtechceu.gtceu.api.data.chemical.material.properties.*;
 import com.gregtechceu.gtceu.api.data.chemical.material.stack.MaterialStack;
 import com.rekindled.embers.RegistryManager;
@@ -33,6 +34,7 @@ public final class InfinityMaterials {
      public static Material Fluorapatite;
      public static Material Fluorite;
      public static Material Hafnon;
+     public static Material HafniumCarbonitride;
      public static Material Hallow;
      public static Material HallowedGold;
      public static Material Malice;
@@ -82,7 +84,9 @@ public final class InfinityMaterials {
 
         Borax.setProperty(PropertyKey.ORE, new OreProperty());
 
-//        TungstenCarbide.addFlags(InfinityMaterialFlags.GENERATE_POWDER_COMPACTS);
+        BlackSteel.addFlags(MaterialFlags.GENERATE_BOLT_SCREW);
+
+        TungstenCarbide.addFlags(InfinityMaterialFlags.GENERATE_POWDER_COMPACTS, MaterialFlags.NO_WORKING);
 
         // Modify Components
         Ruby.setComponents(new MaterialStack(Chromium, 1), new MaterialStack(Alumina, 1));
@@ -102,6 +106,9 @@ public final class InfinityMaterials {
 
     public static void setIgnoredPrefixes() {
         // TFC Materials
+        ingot.setIgnored(Iron, // Iron to Cast Iron
+                () -> TFCItems.METAL_ITEMS.get(Metal.CAST_IRON).get(Metal.ItemType.INGOT).get());
+
         ingot.setIgnored(BlackSteel,
                 () -> TFCItems.METAL_ITEMS.get(Metal.BLACK_STEEL).get(Metal.ItemType.INGOT).get());
         ingot.setIgnored(BlueSteel,

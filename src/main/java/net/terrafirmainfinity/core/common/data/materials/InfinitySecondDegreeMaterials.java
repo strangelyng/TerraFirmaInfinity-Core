@@ -10,6 +10,7 @@ import net.terrafirmainfinity.core.InfinityCore;
 import static com.gregtechceu.gtceu.api.GTValues.*;
 import static com.gregtechceu.gtceu.api.data.chemical.material.info.MaterialFlags.*;
 import static com.gregtechceu.gtceu.common.data.GTMaterials.*;
+import static net.terrafirmainfinity.core.common.data.materials.InfinityMaterialFlags.*;
 import static net.terrafirmainfinity.core.common.data.materials.InfinityMaterials.*;
 
 public class InfinitySecondDegreeMaterials {
@@ -34,7 +35,7 @@ public class InfinitySecondDegreeMaterials {
         ZirconiumUHTCComposite = new Material.Builder(InfinityCore.id("zirconium_uhtc_composite"))
                 .ingot()
                 .color(0x383e2f).secondaryColor(0x2d2b2b).iconSet(MaterialIconSet.ROUGH)
-                .flags(GENERATE_PLATE)
+                .flags(GENERATE_PLATE, GENERATE_ROD, GENERATE_DENSE)
                 .components(ZirconiumCarbide, 1, ZirconiumDiboride, 1)
                 .blast(b -> b.temp(3473, BlastProperty.GasTier.HIGH)
                         .blastStats(VA[EV], 1600)

@@ -76,6 +76,14 @@ public class InfinityMaterialRecipeHandlers {
             processPowderCompactRecipes(material, plateDouble, provider);
         }
 
+        if (material.shouldGenerateRecipesFor(plate) && material.hasFlag(GENERATE_DENSE)) {
+            processPowderCompactRecipes(material, foil, provider);
+        }
+
+        if (material.shouldGenerateRecipesFor(foil) && material.hasFlag(GENERATE_FOIL)) {
+            processPowderCompactRecipes(material, foil, provider);
+        }
+
         if (material.shouldGenerateRecipesFor(rod) && material.hasFlag(GENERATE_ROD)) {
             processPowderCompactRecipes(material, rod, provider);
         }
@@ -130,8 +138,22 @@ public class InfinityMaterialRecipeHandlers {
 
         formingPressBuilder
                 .inputItems(dust, material, inputCount)
-                .outputItems(powderCompactType, material, outputCount)
-                .duration(Math.max(1, (int) (material.getMass() * (tagPrefix.materialAmount() / M))))
+                .outputItems(powderCompactType, material, outputCount);
+
+        if (tagPrefix == rod || tagPrefix == plate) {
+            formingPressBuilder.circuitMeta(1);
+        } else if (tagPrefix == rodLong || tagPrefix == plateDouble) {
+            formingPressBuilder.circuitMeta(2);
+        } else if (tagPrefix == foil) {
+            formingPressBuilder.circuitMeta(4);
+        } else if (tagPrefix == plateDense) {
+            formingPressBuilder.circuitMeta(9);
+        }
+
+        int duration = Math.max(1, (int) (material.getMass()));
+
+        formingPressBuilder
+                .duration(modifyDurationByTag(duration, tagPrefix))
                 .EUt(4L * getVoltageMultiplier(material))
                 .save(provider);
     }
@@ -139,12 +161,18 @@ public class InfinityMaterialRecipeHandlers {
     private static void processEBFRecipe(Material material, TagPrefix tagPrefix, boolean hasHotMaterial, RecipeOutput provider) {
         BlastProperty blastProp = material.getProperty(PropertyKey.BLAST);
 
+        if (blastProp == null) {
+            return;
+        }
+
         int blastTemp = blastProp.getBlastTemperature();
         BlastProperty.GasTier gasTier = blastProp.getGasTier();
-        int duration = blastProp.getDurationOverride();
-        if (duration <= 0) {
-            duration = Math.max(1, (int) ((material.getMass()) * blastTemp / 50L));    // TODO: Better durations for gears, rods, etc.
-        }
+
+        int duration = blastProp.getDurationOverride() != -1 ? blastProp.getDurationOverride() :
+               Math.max(1, (int) ((material.getMass()) * blastTemp / 50L));
+
+        duration = modifyDurationByTag(duration, tagPrefix);
+
         int EUt = blastProp.getEUtOverride();
         if (EUt <= 0) EUt = VA[MV];
 
@@ -181,10 +209,10 @@ public class InfinityMaterialRecipeHandlers {
         if (hasHotMaterial && tagPrefix != ingot) {
             int vacuumEUt = blastProp.getVacuumEUtOverride() != -1 ? blastProp.getVacuumEUtOverride() : VA[MV];
 
-            int vacuumDuration = blastProp.getVacuumDurationOverride();
-            if (vacuumDuration != -1) {
-                vacuumDuration = Math.max(1, (int) ((material.getMass()) * blastTemp * 3 ));    // TODO: Better durations for gears, rods, etc.
-            }
+            int vacuumDuration = blastProp.getVacuumDurationOverride() != -1 ? blastProp.getVacuumDurationOverride() :
+                    (int) material.getMass() * 3;
+
+            vacuumDuration = modifyDurationByTag(vacuumDuration, tagPrefix);
 
             if (blastTemp < 5000) {
                 VACUUM_RECIPES.recipeBuilder(InfinityCore.id("cool_hot_" + material.getName() + "_" + tagPrefix.name()))
@@ -213,7 +241,7 @@ public class InfinityMaterialRecipeHandlers {
             extruderShape = GTItems.SHAPE_EXTRUDER_INGOT.get();
         } else if (tagPrefix == nugget) {
             extruderShape = GTItems.SHAPE_MOLD_NUGGET.get();
-        } else if (tagPrefix == plateDense || tagPrefix == plateDouble || tagPrefix == plate) {
+        } else if (tagPrefix == plateDense || tagPrefix == plateDouble || tagPrefix == plate || tagPrefix == foil) {
             extruderShape = GTItems.SHAPE_EXTRUDER_PLATE.get();
         } else if (tagPrefix == rodLong || tagPrefix == rod) {
             extruderShape = GTItems.SHAPE_EXTRUDER_ROD.get();
@@ -229,7 +257,12 @@ public class InfinityMaterialRecipeHandlers {
 
         if (extruderShape != null) {
             return extruderShape;
-        } else throw new IllegalArgumentException();
+        } else throw new IllegalArgumentException("Missing extruder shape for TagPrefix: " + tagPrefix.name());
+    }
+
+    private static int modifyDurationByTag(int duration, TagPrefix tagPrefix) {
+        float materialRatio = (float) tagPrefix.materialAmount() / M;
+        return Math.min(duration * 2, (int) (duration * materialRatio));
     }
 
     private static int getVoltageMultiplier(Material material) {

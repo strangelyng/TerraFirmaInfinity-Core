@@ -27,7 +27,7 @@ public class InfinityFirstDegreeMaterials {
                 .dust()
                 .color(0xffffff).iconSet(MaterialIconSet.ROUGH)
                 .components(Aluminium, 2, Oxygen, 3)
-                .flags(DISABLE_DECOMPOSITION, EXCLUDE_PLATE_COMPRESSOR_RECIPE, GENERATE_PLATE)
+                .flags(DISABLE_DECOMPOSITION, GENERATE_PLATE)
                 .blast(b -> b.temp(1873))
                 .buildAndRegister();
 
@@ -104,6 +104,14 @@ public class InfinityFirstDegreeMaterials {
                 .components(Hafnium, 1, Silicon, 1, Oxygen, 4)
                 .buildAndRegister();
 
+        HafniumCarbonitride = new Material.Builder(InfinityCore.id("hafnium_carbonitride"))
+                .ingot()
+                .color(0xffffff)
+                .flags(GENERATE_PLATE, GENERATE_FOIL, DISABLE_DECOMPOSITION)
+                .components(Hafnium, 1, Carbon, 1, Nitrogen, 1)
+                .blast(b -> b.temp(4270))
+                .buildAndRegister();
+
         HallowedGold = new Material.Builder(InfinityCore.id("hallowed_gold"))
                 .ingot()
                 .color(0xffd659).secondaryColor(0xca0023).iconSet(MaterialIconSet.SHINY)
@@ -133,6 +141,14 @@ public class InfinityFirstDegreeMaterials {
                 .color(0xD6D6D4).secondaryColor(0xA6A48B).iconSet(MaterialIconSet.METALLIC)
                 .components(Tin, 3, Lead, 2)
                 .hazard(HazardProperty.HazardTrigger.INHALATION, GTMedicalConditions.WEAK_POISON)
+                .buildAndRegister();
+
+        SiliconCarbide = new Material.Builder(InfinityCore.id("silicon_carbide"))
+                .ingot()
+                .color(0x474749).secondaryColor(0x191d20).iconSet(MaterialIconSet.METALLIC)
+                .flags(GENERATE_PLATE, GENERATE_FOIL, GENERATE_RING, GENERATE_ROD, NO_WORKING, GENERATE_POWDER_COMPACTS)
+                .components(Silicon, 1, Carbon, 1)
+                .blast(b -> b.temp(2818))
                 .buildAndRegister();
 
         Sylvite = new Material.Builder(InfinityCore.id("sylvite"))
