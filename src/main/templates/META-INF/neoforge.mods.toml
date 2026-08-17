@@ -87,6 +87,13 @@ config="${mod_id}.mixins.json"
     side="BOTH"
 
 [[dependencies.${mod_id}]]
+    modId="tfc"
+    type="required"
+    versionRange = "[0,)"
+    ordering="AFTER"
+    side="BOTH"
+
+[[dependencies.${mod_id}]]
     modId="gtceu"
     type="required"
     versionRange = "[8.0.0-SNAPSHOT,)"

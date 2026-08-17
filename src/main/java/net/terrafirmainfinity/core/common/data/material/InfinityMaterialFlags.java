@@ -1,21 +1,12 @@
-package net.terrafirmainfinity.core.common.data.materials;
+package net.terrafirmainfinity.core.common.data.material;
 
 import com.gregtechceu.gtceu.api.data.chemical.material.info.MaterialFlag;
-import com.gregtechceu.gtceu.api.data.chemical.material.properties.PropertyKey;
 
 public class InfinityMaterialFlags {
     public static final MaterialFlag GENERATE_DOUBLE_INGOT = new MaterialFlag.Builder("generate_double_ingot")
             .build();
 
-    public static final MaterialFlag GENERATE_CRYSTAL = new MaterialFlag.Builder("generate_crystal")
-            .requireProps(PropertyKey.INGOT)
-            .build();
-
-    public static final MaterialFlag GENERATE_POWDER_COMPACTS = new MaterialFlag.Builder("generate_powder_compacts")
-            .requireProps(PropertyKey.DUST)
-            .build();
-
-    /* Thanks to TFG for this workaround */
+    /* Allow Generation of Electric Tool Heads without requiring the material to have the related ToolProperty */
     public static final MaterialFlag GENERATE_BUZZSAW_BLADE = new MaterialFlag.Builder("generate_buzzsaw_blade")
             .build();
     public static final MaterialFlag GENERATE_SCREWDRIVER_HEAD = new MaterialFlag.Builder("generate_screwdriver_head")
