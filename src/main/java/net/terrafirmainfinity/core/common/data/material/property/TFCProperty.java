@@ -55,24 +55,6 @@ public class TFCProperty implements IMaterialProperty {
     @Nullable
     private Material outputMaterial;
 
-    public TFCProperty(Material outputMaterial, float baseHeatCapacity, int anvilTier) {
-        setOutputMaterial(outputMaterial);
-
-        if (outputMaterial.getFluid(FluidStorageKeys.LIQUID) != null) {
-            int fluidTemp = outputMaterial.getFluid(FluidStorageKeys.LIQUID).getFluidType().getTemperature();
-
-            int normalizedTemp = fluidTemp - 273;
-
-            setMeltTemp(normalizedTemp);
-            setWeldingTemp((int) (normalizedTemp * 0.8));
-            setForgingTemp((int) (normalizedTemp * 0.6));
-            setAnvilTier(anvilTier);
-        } else throw new IllegalArgumentException("Could not create TFC Property from Material: Missing fluid!");
-
-        setBaseHeatCapacity(baseHeatCapacity);
-        setAnvilTier(anvilTier);
-    }
-
     public TFCProperty(int meltTemp, float baseHeatCapacity, int anvilTier) {
         this((int) (meltTemp * 0.6), (int) (meltTemp * 0.8), meltTemp, baseHeatCapacity, null, anvilTier);
     }
@@ -127,7 +109,6 @@ public class TFCProperty implements IMaterialProperty {
     }
 
     /**
-     *
      * @param units Represents the amount of material, 1 Ingot = 100
      */
     public float getHeatCapacity(int units) {
