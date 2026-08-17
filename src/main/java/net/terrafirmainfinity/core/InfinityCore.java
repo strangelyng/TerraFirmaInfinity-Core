@@ -13,6 +13,12 @@ import net.neoforged.fml.loading.FMLEnvironment;
 import net.neoforged.neoforge.capabilities.RegisterCapabilitiesEvent;
 import net.neoforged.neoforge.registries.RegisterEvent;
 import net.terrafirmainfinity.core.client.InfinityCoreClient;
+import net.terrafirmainfinity.core.common.data.InfinityMaterialIconType;
+import net.terrafirmainfinity.core.common.data.InfinityTagPrefix;
+import net.terrafirmainfinity.core.common.data.InfinityToolBehaviors;
+import net.terrafirmainfinity.core.common.data.material.InfinityMaterialFlags;
+import net.terrafirmainfinity.core.common.data.material.InfinityMaterials;
+import net.terrafirmainfinity.core.common.datagen.InfinityCoreDatagen;
 import org.slf4j.Logger;
 
 import com.mojang.logging.LogUtils;
@@ -44,6 +50,7 @@ public class InfinityCore {
             .register();
 
     public InfinityCore(IEventBus modBus, ModContainer modContainer) {
+        InfinityCoreDatagen.init();
         modBus.register(this);
         modContainer.registerConfig(ModConfig.Type.COMMON, InfinityConfig.SPEC);
         REGISTRATE.registerEventListeners(modBus);
@@ -64,14 +71,20 @@ public class InfinityCore {
         if (didRunRegistration) return;
         didRunRegistration = true;
 
+        InfinityMaterialIconType.init();
+        InfinityMaterialFlags.init();
+        InfinityMaterials.init();
+        InfinityTagPrefix.init();
+
+        InfinityToolBehaviors.init();
     }
 
     /**
      * For modifying existing materials
      */
     @SubscribeEvent
-    public void onPostMaterialEvent(PostMaterialEvent event) {
-
+    public void modifyExistingMaterials(PostMaterialEvent event) {
+        InfinityMaterials.modifyMaterials();
     }
 
     @SubscribeEvent

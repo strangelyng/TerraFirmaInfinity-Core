@@ -20,12 +20,14 @@ dependencies {
     implementation("vazkii.patchouli:Patchouli:${patchouli_version}")
     implementation("curse.maven:terrafirmacraft-302973:${tfc_version}")
 
+    runtimeOnly("maven.modrinth:kubejs-tfc:${kubejs_tfc_version}")
+
     // Beneath
-    implementation("curse.maven:beneath-1113980:${beneath_version}")
+//    implementation("curse.maven:beneath-1113980:${beneath_version}")
 
     // AFC, Firmalife
     implementation("maven.modrinth:arborfirmacraft-(afc):${afc_version}-1.21")
-    implementation("maven.modrinth:firmalife:${firmalife_version}")
+//    implementation("maven.modrinth:firmalife:${firmalife_version}")
 
     // Jade
     implementation("maven.modrinth:jade:${jade_version}+neoforge")
