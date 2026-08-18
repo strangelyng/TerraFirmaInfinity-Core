@@ -13,6 +13,7 @@ import static com.gregtechceu.gtceu.common.data.GTMaterials.*;
 
 public class InfinityIntegrationMaterials {
     public static void register() {
+        // Embers
         Dawnstone = new Material.Builder(InfinityCore.id("dawnstone"))
                 .ingot()
                 .liquid(new FluidBuilder().temperature(1100))
@@ -21,6 +22,7 @@ public class InfinityIntegrationMaterials {
                 .components(Gold, 1, Copper, 1)
                 .buildAndRegister();
 
+        // Eidolon Repraised
         Pewter = new Material.Builder(InfinityCore.id("pewter"))
                 .ingot()
                 .liquid(new FluidBuilder().temperature(500))
@@ -28,5 +30,15 @@ public class InfinityIntegrationMaterials {
                 .components(Tin, 3, Lead, 2)
                 .hazard(HazardProperty.HazardTrigger.INHALATION, GTMedicalConditions.WEAK_POISON)
                 .buildAndRegister();
+
+        // Fluix
+        Fluix = new Material.Builder(InfinityCore.id("fluix"))
+                .gem()
+                .dust()
+                .liquid()
+                .color(0x7e4aa8).secondaryColor(0x704ca5).iconSet(MaterialIconSet.CERTUS)
+                .flags(NO_SMELTING, CRYSTALLIZABLE, DISABLE_DECOMPOSITION)
+                .components(Ruby, 1, CertusQuartz, 1)
+                .buildAndRegister().setFormula("?(Cr(Al2O3))(SiO2)", true);
     }
 }

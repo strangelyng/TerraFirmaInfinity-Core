@@ -7,6 +7,20 @@ import net.terrafirmainfinity.core.InfinityCore;
 import net.terrafirmainfinity.core.common.data.InfinityTagPrefix;
 
 public class InfinityLangHandler extends LangHandler {
+    private static final String[] INFINITY_RECIPE_TYPE_IDS = {
+            "roaster"
+    };
+
+    private static String toTitle(String snakeCase) {
+        StringBuilder out = new StringBuilder();
+        for (String part : snakeCase.split("_")) {
+            if (part.isEmpty()) continue;
+            if (out.length() > 0) out.append(' ');
+            out.append(Character.toUpperCase(part.charAt(0))).append(part.substring(1));
+        }
+        return out.toString();
+    }
+
     public static void init(RegistrateLangProvider provider) {
         // Materials
 //        replaceMaterialLang(provider, "dawnstone", "Aurichalcum");
@@ -46,9 +60,21 @@ public class InfinityLangHandler extends LangHandler {
         addTagPrefixLang(provider, InfinityTagPrefix.oreShale);
         addTagPrefixLang(provider, InfinityTagPrefix.oreSlate);
 
+
         // Items
         replace(provider, "item.gtceu.tool.chisel", "%s Chisel");
         replace(provider, "item.gtceu.tool.mace", "%s Mace");
+
+        // Machines & Recipe Types
+        provider.add("tfinfinity.machine.roaster.tooltip", "§7Sulfide roast, anyone?");
+
+        for (String id : INFINITY_RECIPE_TYPE_IDS) {
+            String name = switch (id) {
+                case "roaster" -> "Ore Roasting";
+                default -> toTitle(id);
+            };
+            provider.add("recipe.type." + InfinityCore.MOD_ID + "." + id, name);
+        }
     }
 
     public static void addTagPrefixLang(RegistrateLangProvider provider, TagPrefix prefix) {

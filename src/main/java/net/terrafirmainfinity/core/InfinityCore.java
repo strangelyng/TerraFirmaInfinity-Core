@@ -13,9 +13,7 @@ import net.neoforged.fml.loading.FMLEnvironment;
 import net.neoforged.neoforge.capabilities.RegisterCapabilitiesEvent;
 import net.neoforged.neoforge.registries.RegisterEvent;
 import net.terrafirmainfinity.core.client.InfinityCoreClient;
-import net.terrafirmainfinity.core.common.data.InfinityMaterialIconType;
-import net.terrafirmainfinity.core.common.data.InfinityTagPrefix;
-import net.terrafirmainfinity.core.common.data.InfinityToolBehaviors;
+import net.terrafirmainfinity.core.common.data.*;
 import net.terrafirmainfinity.core.common.data.material.InfinityMaterialFlags;
 import net.terrafirmainfinity.core.common.data.material.InfinityMaterials;
 import net.terrafirmainfinity.core.common.datagen.InfinityCoreDatagen;
@@ -76,7 +74,11 @@ public class InfinityCore {
         InfinityMaterials.init();
         InfinityTagPrefix.init();
 
+        InfinityRecipeTypes.init();
+
         InfinityToolBehaviors.init();
+
+        InfinityMachines.init();
     }
 
     /**

@@ -1,0 +1,19 @@
+{
+  "variants": {
+    "facing=east": {
+      "model": "tfinfinity:block/machine/mv_roaster",
+      "y": 90
+    },
+    "facing=north": {
+      "model": "tfinfinity:block/machine/mv_roaster"
+    },
+    "facing=south": {
+      "model": "tfinfinity:block/machine/mv_roaster",
+      "y": 180
+    },
+    "facing=west": {
+      "model": "tfinfinity:block/machine/mv_roaster",
+      "y": 270
+    }
+  }
+}

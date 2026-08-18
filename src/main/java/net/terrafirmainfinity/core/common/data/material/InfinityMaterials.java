@@ -1,6 +1,7 @@
 package net.terrafirmainfinity.core.common.data.material;
 
 import alexthw.eidolon_repraised.registries.Registry;
+import appeng.core.definitions.AEItems;
 import com.gregtechceu.gtceu.api.GTValues;
 import com.gregtechceu.gtceu.api.data.chemical.material.Material;
 import com.gregtechceu.gtceu.api.data.chemical.material.info.MaterialFlags;
@@ -25,7 +26,7 @@ public class InfinityMaterials {
     // Integration Materials
     public static Material Dawnstone; // Embers
     public static Material Pewter; // Eidolon Repraised
-
+    public static Material Fluix; // Applied Energistics 2
 
 
     public static void init() {
@@ -35,8 +36,9 @@ public class InfinityMaterials {
     public static void modifyMaterials() {
         // Add Properties
         Hafnium.setProperty(PropertyKey.INGOT, new IngotProperty());
-        Zirconium.setProperty(PropertyKey.DUST, new DustProperty());
         Zirconium.setProperty(PropertyKey.INGOT, new IngotProperty());
+
+        Hafnium.setProperty(PropertyKey.BLAST, new BlastProperty(2506, BlastProperty.GasTier.MID, GTValues.VA[EV], 1500, GTValues.VA[HV], 360));
         Zirconium.setProperty(PropertyKey.BLAST, new BlastProperty(2125, BlastProperty.GasTier.MID, GTValues.VA[EV], 1300, GTValues.VA[HV], 300));
 
         // Add Ores
@@ -63,6 +65,9 @@ public class InfinityMaterials {
         BlueSteel.addFlags(InfinityMaterialFlags.GENERATE_DOUBLE_INGOT);
         RedSteel.addFlags(InfinityMaterialFlags.GENERATE_DOUBLE_INGOT);
 
+        Carbon.addFlags(MaterialFlags.GENERATE_ROD, MaterialFlags.GENERATE_LONG_ROD);
+        Graphite.addFlags(MaterialFlags.GENERATE_ROD, MaterialFlags.GENERATE_LONG_ROD);
+
         // Modify Properties
         BismuthBronze.removeProperty(PropertyKey.BLAST);
         BlackBronze.removeProperty(PropertyKey.BLAST);
@@ -73,6 +78,17 @@ public class InfinityMaterials {
         BlackSteel.getProperty(PropertyKey.BLAST).setBlastTemperature(1700);
         BlueSteel.getProperty(PropertyKey.BLAST).setBlastTemperature(1700);
         RedSteel.getProperty(PropertyKey.BLAST).setBlastTemperature(1700);
+
+        // Restrict Native Metals
+        Aluminium.removeProperty(PropertyKey.ORE);
+        Beryllium.removeProperty(PropertyKey.ORE);
+        Cobalt.removeProperty(PropertyKey.ORE);
+        Lithium.removeProperty(PropertyKey.ORE);
+        Molybdenum.removeProperty(PropertyKey.ORE);
+        Neodymium.removeProperty(PropertyKey.ORE);
+        Nickel.removeProperty(PropertyKey.ORE);
+        Plutonium239.removeProperty(PropertyKey.ORE);
+        Thorium.removeProperty(PropertyKey.ORE);
 
 //        addFluidToExisting(FluidStorageKeys.LIQUID, SodiumHydroxide);
 
@@ -88,7 +104,7 @@ public class InfinityMaterials {
         nugget.setIgnored(Copper, () -> AllItems.COPPER_NUGGET);
 
         ingot.setIgnored(Zinc, () -> AllItems.ZINC_INGOT);
-        plate.setIgnored(Zinc, () -> AllItems.ZINC_NUGGET);
+        nugget.setIgnored(Zinc, () -> AllItems.ZINC_NUGGET);
         block.setIgnored(Zinc, () -> AllBlocks.ZINC_BLOCK);
 
         // TFC Materials
@@ -159,6 +175,15 @@ public class InfinityMaterials {
         nugget.setIgnored(Dawnstone, RegistryManager.DAWNSTONE_NUGGET);
         block.setIgnored(Dawnstone, RegistryManager.DAWNSTONE_BLOCK);
         GTFluids.handleNonMaterialFluids(Dawnstone, RegistryManager.MOLTEN_DAWNSTONE.FLUID::get);
+
+        // AE2 Materials
+        dust.setIgnored(CertusQuartz, () -> AEItems.CERTUS_QUARTZ_DUST);
+        gem.setIgnored(CertusQuartz, () -> AEItems.CERTUS_QUARTZ_CRYSTAL);
+
+        dust.setIgnored(Fluix, () -> AEItems.FLUIX_DUST);
+        gem.setIgnored(Fluix, () -> AEItems.FLUIX_CRYSTAL);
+
+        dust.setIgnored(EnderPearl, () -> AEItems.ENDER_DUST);
     }
 
     public static void addFluidToExisting(FluidStorageKey key, Material mat) {
