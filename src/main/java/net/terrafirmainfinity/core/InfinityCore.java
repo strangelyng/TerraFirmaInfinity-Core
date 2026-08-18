@@ -17,6 +17,7 @@ import net.terrafirmainfinity.core.common.data.*;
 import net.terrafirmainfinity.core.common.data.material.InfinityMaterialFlags;
 import net.terrafirmainfinity.core.common.data.material.InfinityMaterials;
 import net.terrafirmainfinity.core.common.datagen.InfinityCoreDatagen;
+import net.terrafirmainfinity.core.common.machine.InfinityMulti;
 import org.slf4j.Logger;
 
 import com.mojang.logging.LogUtils;
@@ -78,6 +79,7 @@ public class InfinityCore {
 
         InfinityToolBehaviors.init();
 
+        InfinityMulti.init();
         InfinityMachines.init();
     }
 

@@ -8,10 +8,13 @@ import com.gregtechceu.gtceu.api.data.chemical.material.info.MaterialFlags;
 import com.gregtechceu.gtceu.api.data.chemical.material.properties.*;
 import com.gregtechceu.gtceu.api.fluids.FluidBuilder;
 import com.gregtechceu.gtceu.api.fluids.store.FluidStorageKey;
+import com.gregtechceu.gtceu.api.fluids.store.FluidStorageKeys;
 import com.gregtechceu.gtceu.common.data.GTFluids;
 import com.rekindled.embers.RegistryManager;
 import com.simibubi.create.AllBlocks;
 import com.simibubi.create.AllItems;
+import net.dries007.tfc.common.fluids.SimpleFluid;
+import net.dries007.tfc.common.fluids.TFCFluids;
 import net.dries007.tfc.common.items.TFCItems;
 import net.dries007.tfc.util.Metal;
 
@@ -90,7 +93,7 @@ public class InfinityMaterials {
         Plutonium239.removeProperty(PropertyKey.ORE);
         Thorium.removeProperty(PropertyKey.ORE);
 
-//        addFluidToExisting(FluidStorageKeys.LIQUID, SodiumHydroxide);
+        addFluidToExisting(FluidStorageKeys.LIQUID, SodiumHydroxide);
 
         /// SET IGNORED ///
 
@@ -108,6 +111,8 @@ public class InfinityMaterials {
         block.setIgnored(Zinc, () -> AllBlocks.ZINC_BLOCK);
 
         // TFC Materials
+        GTFluids.handleNonMaterialFluids(SodiumHydroxide, () -> TFCFluids.SIMPLE_FLUIDS.get(SimpleFluid.LYE).source().get());
+
         ingot.setIgnored(Iron, // Iron to Cast Iron
                 () -> TFCItems.METAL_ITEMS.get(Metal.CAST_IRON).get(Metal.ItemType.INGOT));
 

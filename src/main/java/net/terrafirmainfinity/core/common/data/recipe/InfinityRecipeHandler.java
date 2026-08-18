@@ -1,0 +1,43 @@
+package net.terrafirmainfinity.core.common.data.recipe;
+
+import com.gregtechceu.gtceu.common.data.GTRecipeTypes;
+import net.dries007.tfc.common.items.TFCItems;
+import net.dries007.tfc.util.Metal;
+import net.minecraft.data.recipes.RecipeOutput;
+import net.terrafirmainfinity.core.InfinityCore;
+
+import static net.terrafirmainfinity.core.common.data.InfinityRecipeTypes.*;
+import static com.gregtechceu.gtceu.api.data.tag.TagPrefix.*;
+import static com.gregtechceu.gtceu.common.data.GTMaterials.*;
+import static com.gregtechceu.gtceu.api.GTValues.*;
+
+public class InfinityRecipeHandler {
+    public static void testRecipes(RecipeOutput provider) {
+        ROASTER_RECIPE.recipeBuilder(InfinityCore.id("chalcocite"))
+                .inputItems(dust, Chalcocite, 2)
+                .outputItems(dust, CupricOxide, 2) // Should be CuprousOxide
+                .outputFluids(SulfurDioxide.getFluid(1000))
+                .save(provider);
+
+        GTRecipeTypes.ELECTROLYZER_RECIPES.recipeBuilder(InfinityCore.id("water_electrolysis"))
+                .notConsumable(rod, Nickel)
+                .notConsumable(rod, Iron)
+                .inputFluids(Water.getFluid(1000))
+                .outputFluids(Hydrogen.getFluid(2000))
+                .outputFluids(Oxygen.getFluid(1000))
+                .EUt(VA[LV])
+                .duration(1500)
+                .save(provider);
+
+        ELECTROLYTIC_CELL_RECIPE.recipeBuilder(InfinityCore.id("water_electrolysis"))
+                .notConsumable(rod, Nickel)
+                .notConsumable(rod, Iron)
+                .notConsumableFluid(SodiumHydroxide.getFluid(50))
+                .inputFluids(Water.getFluid(1000))
+                .outputFluids(Hydrogen.getFluid(2000))
+                .outputFluids(Oxygen.getFluid(1000))
+                .EUt(VA[LV])
+                .duration(400)
+                .save(provider);
+    }
+}

@@ -1,4 +1,5 @@
 {
+  "block.tfinfinity.electrolytic_cell": "ןןǝƆ ɔıʇʎןoɹʇɔǝןƎ",
   "block.tfinfinity.ev_roaster": "ɹ§III ɹǝʇsɐoᴚ pǝɔuɐʌpⱯϛ§",
   "block.tfinfinity.hp_steam_roaster": "ɹǝʇsɐoᴚ ɯɐǝʇS ǝɹnssǝɹԀ ɥbıH",
   "block.tfinfinity.hv_roaster": "ɹ§II ɹǝʇsɐoᴚ pǝɔuɐʌpⱯ9§",
@@ -20,7 +21,8 @@
   "material.tfinfinity.dawnstone": "ǝuoʇsuʍɐᗡ",
   "material.tfinfinity.fluix": "xınןℲ",
   "material.tfinfinity.pewter": "ɹǝʇʍǝԀ",
-  "recipe.type.tfinfinity.roaster": "buıʇsɐoᴚ ǝɹO",
+  "recipe_type.tfinfinity.electrolytic_cell": "ןןǝƆ ɔıʇʎןoɹʇɔǝןƎ",
+  "recipe_type.tfinfinity.roaster": "buıʇsɐoᴚ ǝɹO",
   "tagprefix.axe_head": "pɐǝH ǝxⱯ %s",
   "tagprefix.butchery_knife_blade": "ǝpɐןᗺ ǝɟıuʞ ʎɹǝɥɔʇnᗺ %s",
   "tagprefix.chalk": "ǝɹO %s ʞןɐɥƆ",

@@ -2,6 +2,7 @@ package net.terrafirmainfinity.core.common.data;
 
 import com.gregtechceu.gtceu.api.GTValues;
 import com.gregtechceu.gtceu.api.capability.recipe.FluidRecipeCapability;
+import com.gregtechceu.gtceu.api.capability.recipe.ItemRecipeCapability;
 import com.gregtechceu.gtceu.api.data.RotationState;
 import com.gregtechceu.gtceu.api.machine.MachineDefinition;
 import com.gregtechceu.gtceu.api.machine.SimpleTieredMachine;
@@ -24,20 +25,20 @@ public class InfinityMachines {
             SimpleSteamMachine::new, (pressure, builder) -> builder
                     .rotationState(RotationState.NON_Y_AXIS)
                     .recipeType(InfinityRecipeTypes.ROASTER_RECIPE)
-                    .recipeModifier(SimpleSteamMachine::recipeModifier)
-                    .addOutputLimit(FluidRecipeCapability.CAP, 0)
-                    .themeId((i) -> i > 0 ? GTGuiTheme.STEEL.getId() : GTGuiTheme.BRONZE.getId())
                     .ui(GTSingleblockMachinePanels.GENERAL_MACHINE)
+                    .themeId(i -> i > 0 ? GTGuiTheme.STEEL.getId() : GTGuiTheme.BRONZE.getId())
+                    .recipeModifier(SimpleSteamMachine::recipeModifier)
+                    .addOutputLimit(ItemRecipeCapability.CAP, 1)
+                    .addOutputLimit(FluidRecipeCapability.CAP, 0)
                     .modelProperty(GTMachineModelProperties.VENT_DIRECTION, RelativeDirection.BACK)
                     .workableSteamHullModel(pressure, InfinityCore.id("block/machines/roaster"))
-                    .tooltipBuilder((stack, list) -> {
-                        list.add(Component.translatable("tfinfinity.machine.roaster.tooltip"));
-                    })
+                    .tooltips()
                     .register());
 
     public static final MachineDefinition[] ROASTER = registerTieredMachines(REGISTRATE, "roaster",
             SimpleTieredMachine::new, (tier, builder) -> builder
                     .langValue("%s Roaster %s".formatted(VLVH[tier], VLVT[tier]))
+                    .rotationState(RotationState.NON_Y_AXIS)
                     .recipeType(InfinityRecipeTypes.ROASTER_RECIPE)
                     .ui(GTSingleblockMachinePanels.GENERAL_MACHINE)
                     .workableTieredHullModel(InfinityCore.id("block/machines/roaster"))

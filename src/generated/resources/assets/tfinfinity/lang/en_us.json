@@ -1,4 +1,5 @@
 {
+  "block.tfinfinity.electrolytic_cell": "Electrolytic Cell",
   "block.tfinfinity.ev_roaster": "§5Advanced Roaster III§r",
   "block.tfinfinity.hp_steam_roaster": "High Pressure Steam Roaster",
   "block.tfinfinity.hv_roaster": "§6Advanced Roaster II§r",
@@ -20,7 +21,8 @@
   "material.tfinfinity.dawnstone": "Dawnstone",
   "material.tfinfinity.fluix": "Fluix",
   "material.tfinfinity.pewter": "Pewter",
-  "recipe.type.tfinfinity.roaster": "Ore Roasting",
+  "recipe_type.tfinfinity.electrolytic_cell": "Electrolytic Cell",
+  "recipe_type.tfinfinity.roaster": "Ore Roasting",
   "tagprefix.axe_head": "%s Axe Head",
   "tagprefix.butchery_knife_blade": "%s Butchery Knife Blade",
   "tagprefix.chalk": "Chalk %s Ore",
