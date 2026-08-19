@@ -39,5 +39,15 @@ public class InfinityRecipeHandler {
                 .EUt(VA[LV])
                 .duration(400)
                 .save(provider);
+
+        GRAVITY_SEPARATOR_RECIPE.recipeBuilder(InfinityCore.id("crushed_hematite_ore"))
+                .inputItems(crushed, Hematite)
+                .inputFluids(Water.getFluid(100))
+                .outputItems(crushedPurified, Hematite)
+                .chancedOutput(dust, Magnetite, 3333)
+                .chancedOutput(dust, Stone, 5000)
+                .outputFluids(Water.getFluid(75))
+                .duration(100)
+                .save(provider);
     }
 }

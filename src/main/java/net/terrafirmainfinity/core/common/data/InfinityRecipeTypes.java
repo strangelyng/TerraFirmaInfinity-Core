@@ -17,6 +17,7 @@ import net.terrafirmainfinity.core.InfinityCore;
 import net.terrafirmainfinity.core.common.ui.InfinityGuiTextures;
 
 import static com.gregtechceu.gtceu.common.data.GTRecipeTypes.ELECTRIC;
+import static com.gregtechceu.gtceu.common.data.GTRecipeTypes.MULTIBLOCK;
 
 public class InfinityRecipeTypes {
     public static final GTRecipeType ROASTER_RECIPE = GTRecipeTypes.register(InfinityCore.id("roaster"), ELECTRIC)
@@ -78,9 +79,14 @@ public class InfinityRecipeTypes {
                     .setFluidSlotOverlay(IO.OUT, 0, GTGuiTextures.VIAL_OVERLAY_2))
             .setSound(GTSoundEntries.ELECTROLYZER);
 
+    public static final GTRecipeType GRAVITY_SEPARATOR_RECIPE = GTRecipeTypes.register(InfinityCore.id("gravity_separator"), MULTIBLOCK)
+            .setMaxIOSize(1, 6, 1, 3)
+            .UI(builder -> builder.setProgressBar(GTGuiTextures.PROGRESS_ARROW))
+            .setSound(GTSoundEntries.BATH);
+
     public static void init() {
         for (GTRecipeType type : new GTRecipeType[] {
-                ROASTER_RECIPE, ELECTROLYTIC_CELL_RECIPE
+                ROASTER_RECIPE, ELECTROLYTIC_CELL_RECIPE, GRAVITY_SEPARATOR_RECIPE
         }) {
             type.setEUIO(IO.IN);
         }

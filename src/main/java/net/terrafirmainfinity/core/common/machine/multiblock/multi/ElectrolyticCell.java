@@ -1,10 +1,9 @@
-package net.terrafirmainfinity.core.common.machine.multiblock;
+package net.terrafirmainfinity.core.common.machine.multiblock.multi;
 
 import com.gregtechceu.gtceu.GTCEu;
 import com.gregtechceu.gtceu.api.data.RotationState;
 import com.gregtechceu.gtceu.api.machine.MultiblockMachineDefinition;
 import com.gregtechceu.gtceu.api.machine.multiblock.WorkableElectricMultiblockMachine;
-import com.gregtechceu.gtceu.api.multiblock.Predicates;
 import com.gregtechceu.gtceu.api.multiblock.pattern.MultiblockPatternBuilder;
 import com.gregtechceu.gtceu.api.multiblock.util.RelativeDirection;
 import com.gregtechceu.gtceu.common.data.GTBlocks;
@@ -29,7 +28,7 @@ public class ElectrolyticCell {
                     .where('S', controller(blocks(definition.get())))
                     .where('C', blocks(GTBlocks.CASING_STEEL_SOLID.get()).setMinGlobalLimited(33)
                             .and(autoAbilities(definition.getRecipeTypes()))
-                            .and(Predicates.autoAbilities(true, false, false)))
+                            .and(autoAbilities(true, false, false)))
                     .where('P', blocks(GTBlocks.CASING_STEEL_PIPE.get()))
                     .build())
             .workableCasingModel(GTCEu.id("block/casings/solid/machine_casing_solid_steel"),

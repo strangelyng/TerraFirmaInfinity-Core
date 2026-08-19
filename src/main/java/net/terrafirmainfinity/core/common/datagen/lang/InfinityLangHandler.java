@@ -8,7 +8,7 @@ import net.terrafirmainfinity.core.common.data.InfinityTagPrefix;
 
 public class InfinityLangHandler extends LangHandler {
     private static final String[] INFINITY_RECIPE_TYPE_IDS = {
-            "roaster", "electrolytic_cell"
+            "roaster", "electrolytic_cell", "gravity_separator"
     };
 
     private static String toTitle(String snakeCase) {
@@ -71,6 +71,7 @@ public class InfinityLangHandler extends LangHandler {
         for (String id : INFINITY_RECIPE_TYPE_IDS) {
             String name = switch (id) {
                 case "roaster" -> "Ore Roasting";
+                case "gravity_separator" -> "Gravity Separation";
                 default -> toTitle(id);
             };
             provider.add("recipe_type." + InfinityCore.MOD_ID + "." + id, name);
