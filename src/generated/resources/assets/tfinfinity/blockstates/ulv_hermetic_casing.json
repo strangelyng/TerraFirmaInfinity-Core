@@ -1,0 +1,7 @@
+{
+  "variants": {
+    "": {
+      "model": "tfinfinity:block/ulv_hermetic_casing"
+    }
+  }
+}

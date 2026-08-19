@@ -1,8 +1,6 @@
 package net.terrafirmainfinity.core.common.data.recipe;
 
 import com.gregtechceu.gtceu.common.data.GTRecipeTypes;
-import net.dries007.tfc.common.items.TFCItems;
-import net.dries007.tfc.util.Metal;
 import net.minecraft.data.recipes.RecipeOutput;
 import net.terrafirmainfinity.core.InfinityCore;
 
