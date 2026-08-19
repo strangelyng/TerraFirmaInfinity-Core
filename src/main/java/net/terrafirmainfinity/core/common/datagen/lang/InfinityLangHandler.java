@@ -72,6 +72,7 @@ public class InfinityLangHandler extends LangHandler {
             String name = switch (id) {
                 case "roaster" -> "Ore Roasting";
                 case "gravity_separator" -> "Gravity Separation";
+                case "electrolytic_cell" -> "Advanced Electrolysis";
                 default -> toTitle(id);
             };
             provider.add("recipe_type." + InfinityCore.MOD_ID + "." + id, name);

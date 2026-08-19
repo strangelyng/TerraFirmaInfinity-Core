@@ -40,5 +40,32 @@ public class InfinityIntegrationMaterials {
                 .flags(NO_SMELTING, CRYSTALLIZABLE, DISABLE_DECOMPOSITION)
                 .components(Ruby, 1, CertusQuartz, 1)
                 .buildAndRegister().setFormula("?(Cr(Al2O3))(SiO2)", true);
+
+        // TFC
+        WeakSteel = new Material.Builder(InfinityCore.id("weak_steel"))
+                .ingot()
+                .liquid(1485)
+                .components(Nickel, 1, BlackBronze, 1, Steel, 2)
+                .color(0x8a8a8a).secondaryColor(0x5c5c5c).iconSet(MaterialIconSet.METALLIC)
+                .flags(NO_SMELTING, DISABLE_DECOMPOSITION, DISABLE_ALLOY_BLAST)
+                .buildAndRegister();
+
+        WeakBlueSteel = new Material.Builder(InfinityCore.id("weak_blue_steel"))
+                .dust()
+                .ingot()
+                .liquid(1540)
+                .components(SterlingSilver, 1, BismuthBronze, 1, Steel, 2, BlackSteel, 4)
+                .color(0x697fbd).secondaryColor(0x384b82).iconSet(MaterialIconSet.METALLIC)
+                .flags(NO_SMELTING, DISABLE_DECOMPOSITION, DISABLE_ALLOY_BLAST)
+                .buildAndRegister();
+
+        WeakRedSteel = new Material.Builder(InfinityCore.id("weak_red_steel"))
+                .dust()
+                .ingot()
+                .liquid(1540)
+                .components(Brass, 1, RoseGold, 1, Steel, 2, BlackSteel, 4)
+                .color(0xb55c5c).secondaryColor(0x7d3232).iconSet(MaterialIconSet.METALLIC)
+                .flags(NO_SMELTING, DISABLE_DECOMPOSITION, DISABLE_ALLOY_BLAST)
+                .buildAndRegister();
     }
 }

@@ -4,6 +4,7 @@ import dev.latvian.mods.kubejs.plugin.ClassFilter;
 import dev.latvian.mods.kubejs.plugin.KubeJSPlugin;
 import dev.latvian.mods.kubejs.script.BindingRegistry;
 import net.terrafirmainfinity.core.common.data.*;
+import net.terrafirmainfinity.core.common.data.item.InfinityToolTypes;
 import net.terrafirmainfinity.core.common.data.material.InfinityMaterialFlags;
 import net.terrafirmainfinity.core.common.data.material.InfinityMaterials;
 
@@ -23,5 +24,6 @@ public class InfinityCoreKubeJSPlugin implements KubeJSPlugin {
         bindings.add("InfinityMaterialFlags", InfinityMaterialFlags.class);
         bindings.add("InfinityMaterialIconType", InfinityMaterialIconType.class);
         bindings.add("InfinityTagPrefix", InfinityTagPrefix.class);
+        bindings.add("InfinityToolType", InfinityToolTypes.class);
     }
 }

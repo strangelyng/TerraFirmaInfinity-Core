@@ -49,7 +49,7 @@ public class InfinityTagPrefix {
             .unificationEnabled(true)
             .enableRecycling()
             .generateItem(true)
-            .generationCondition(hasNoCraftingToolProperty.and(
+            .generationCondition(hasToolProperty.and(
                     mat -> mat.getProperty(PropertyKey.TOOL).hasType(GTToolType.PICKAXE)));
 
     // TODO: Propick
@@ -62,7 +62,7 @@ public class InfinityTagPrefix {
             .unificationEnabled(true)
             .enableRecycling()
             .generateItem(true)
-            .generationCondition(hasNoCraftingToolProperty.and(
+            .generationCondition(hasToolProperty.and(
                     mat -> mat.getProperty(PropertyKey.TOOL).hasType(GTToolType.AXE)));
 
     public static final TagPrefix toolHeadShovel = new TagPrefix(GTCEu.id("shovel_head"))
@@ -73,7 +73,7 @@ public class InfinityTagPrefix {
             .unificationEnabled(true)
             .enableRecycling()
             .generateItem(true)
-            .generationCondition(hasNoCraftingToolProperty.and(
+            .generationCondition(hasToolProperty.and(
                     mat -> mat.getProperty(PropertyKey.TOOL).hasType(GTToolType.SHOVEL)));
 
     public static final TagPrefix toolHeadHoe = new TagPrefix(GTCEu.id("hoe_head"))
@@ -84,7 +84,7 @@ public class InfinityTagPrefix {
             .unificationEnabled(true)
             .enableRecycling()
             .generateItem(true)
-            .generationCondition(hasNoCraftingToolProperty.and(
+            .generationCondition(hasToolProperty.and(
                     mat -> mat.getProperty(PropertyKey.TOOL).hasType(GTToolType.HOE)));
 
     public static final TagPrefix toolHeadChisel = new TagPrefix(GTCEu.id("chisel_head"))
@@ -95,7 +95,7 @@ public class InfinityTagPrefix {
             .unificationEnabled(true)
             .enableRecycling()
             .generateItem(true)
-            .generationCondition(hasNoCraftingToolProperty.and(
+            .generationCondition(hasToolProperty.and(
                     mat -> mat.getProperty(PropertyKey.TOOL).hasType(InfinityToolTypes.CHISEL)));
 
     public static final TagPrefix toolHeadHammer = new TagPrefix(GTCEu.id("hammer_head"))
@@ -106,7 +106,7 @@ public class InfinityTagPrefix {
             .unificationEnabled(true)
             .enableRecycling()
             .generateItem(true)
-            .generationCondition(hasNoCraftingToolProperty.and(
+            .generationCondition(hasToolProperty.and(
                     mat -> mat.getProperty(PropertyKey.TOOL).hasType(GTToolType.HARD_HAMMER)));
 
     public static final TagPrefix toolHeadSaw = new TagPrefix(GTCEu.id("saw_blade"))
@@ -128,7 +128,7 @@ public class InfinityTagPrefix {
             .unificationEnabled(true)
             .enableRecycling()
             .generateItem(true)
-            .generationCondition(hasNoCraftingToolProperty.and(
+            .generationCondition(hasToolProperty.and(
                     mat -> mat.getProperty(PropertyKey.TOOL).hasType(GTToolType.KNIFE)));
 
     public static final TagPrefix toolHeadScythe = new TagPrefix(GTCEu.id("scythe_blade"))
@@ -139,7 +139,7 @@ public class InfinityTagPrefix {
             .unificationEnabled(true)
             .enableRecycling()
             .generateItem(true)
-            .generationCondition(hasNoCraftingToolProperty.and(
+            .generationCondition(hasToolProperty.and(
                     mat -> mat.getProperty(PropertyKey.TOOL).hasType(GTToolType.SCYTHE)));
 
     // TODO: Javelin
@@ -152,7 +152,7 @@ public class InfinityTagPrefix {
             .unificationEnabled(true)
             .enableRecycling()
             .generateItem(true)
-            .generationCondition(hasNoCraftingToolProperty.and(
+            .generationCondition(hasToolProperty.and(
                     mat -> mat.getProperty(PropertyKey.TOOL).hasType(GTToolType.SWORD)));
 
     public static final TagPrefix toolHeadMace = new TagPrefix(GTCEu.id("mace_head"))
@@ -163,7 +163,7 @@ public class InfinityTagPrefix {
             .unificationEnabled(true)
             .enableRecycling()
             .generateItem(true)
-            .generationCondition(hasNoCraftingToolProperty.and(
+            .generationCondition(hasToolProperty.and(
                     mat -> mat.getProperty(PropertyKey.TOOL).hasType(InfinityToolTypes.MACE)));
 
     // TODO: Fish Hook
@@ -188,7 +188,7 @@ public class InfinityTagPrefix {
             .unificationEnabled(true)
             .enableRecycling()
             .generateItem(true)
-            .generationCondition(hasNoCraftingToolProperty.and(
+            .generationCondition(hasToolProperty.and(
                     mat -> mat.getProperty(PropertyKey.TOOL).hasType(GTToolType.MINING_HAMMER)));
 
     public static final TagPrefix toolHeadSpade = new TagPrefix(GTCEu.id("spade_head"))
@@ -199,7 +199,7 @@ public class InfinityTagPrefix {
             .unificationEnabled(true)
             .enableRecycling()
             .generateItem(true)
-            .generationCondition(hasNoCraftingToolProperty.and(
+            .generationCondition(hasToolProperty.and(
                     mat -> mat.getProperty(PropertyKey.TOOL).hasType(GTToolType.SPADE)));
 
     public static final TagPrefix toolHeadButcheryKnife = new TagPrefix(GTCEu.id("butchery_knife_blade"))
@@ -210,7 +210,7 @@ public class InfinityTagPrefix {
             .unificationEnabled(true)
             .enableRecycling()
             .generateItem(true)
-            .generationCondition(hasNoCraftingToolProperty.and(
+            .generationCondition(hasToolProperty.and(
                     mat -> mat.getProperty(PropertyKey.TOOL).hasType(GTToolType.BUTCHERY_KNIFE)));
 
     public static void modifyExistingToolHeadPrefixes() {

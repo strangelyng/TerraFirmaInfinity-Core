@@ -11,6 +11,7 @@ import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
+import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.TamableAnimal;
@@ -19,6 +20,7 @@ import net.minecraft.world.entity.decoration.ArmorStand;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.MaceItem;
+import net.minecraft.world.item.enchantment.EnchantmentHelper;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.Vec3;
 import net.terrafirmainfinity.core.common.data.InfinityToolBehaviors;
@@ -27,16 +29,17 @@ import org.jetbrains.annotations.NotNull;
 import java.util.function.Predicate;
 
 public class MaceBehavior implements IToolBehavior<MaceBehavior> {
-
     public static final MaceBehavior INSTANCE = new MaceBehavior();
     public static final Codec<MaceBehavior> CODEC = Codec.unit(INSTANCE);
     public static final StreamCodec<ByteBuf, MaceBehavior> STREAM_CODEC = StreamCodec.unit(INSTANCE);
 
-    /** Coped from vanilla MaceItem class with readability adjustments */
+    /** Copied from vanilla MaceItem class with readability adjustments */
     @Override
     public void hitEntity(@NotNull ItemStack stack, @NotNull LivingEntity target, @NotNull LivingEntity attacker) {
         if (attacker instanceof ServerPlayer serverPlayer && MaceItem.canSmashAttack(serverPlayer)) {
-            ServerLevel serverlevel = (ServerLevel)attacker.level();
+            ServerLevel serverlevel = (ServerLevel) attacker.level();
+            DamageSource damageSource = serverPlayer.damageSources().playerAttack(serverPlayer); // ADDITION
+
             if (serverPlayer.isIgnoringFallDamageFromCurrentImpulse() && serverPlayer.currentImpulseImpactPos != null) {
                 if (serverPlayer.currentImpulseImpactPos.y > serverPlayer.position().y) {
                     serverPlayer.currentImpulseImpactPos = serverPlayer.position();
@@ -60,7 +63,34 @@ public class MaceBehavior implements IToolBehavior<MaceBehavior> {
                 );
             }
 
+            target.hurt(damageSource, getSmashAttackBonus(target, damageSource)); // ADDITION
+
             knockback(serverlevel, serverPlayer, target);
+        }
+    }
+
+    // Doesn't seem to quite match vanilla, but does have an effect
+    private float getSmashAttackBonus(Entity target, DamageSource damageSource) {
+        if (damageSource.getDirectEntity() instanceof LivingEntity livingEntity) {
+            if (!MaceItem.canSmashAttack(livingEntity)) {
+                return 0.0F;
+            } else {
+                float fallDistance = livingEntity.fallDistance;
+                float smashDamage;
+                if (fallDistance <= 3.0F) {
+                    smashDamage = 4.0F * fallDistance;
+                } else if (fallDistance <= 8.0F) {
+                    smashDamage = 12.0F + 2.0F * (fallDistance - 3.0F);
+                } else {
+                    smashDamage = 22.0F + fallDistance - 8.0F;
+                }
+
+                return livingEntity.level() instanceof ServerLevel serverlevel
+                        ? smashDamage + EnchantmentHelper.modifyFallBasedDamage(serverlevel, livingEntity.getWeaponItem(), target, damageSource, 0.0F) * fallDistance
+                        : smashDamage;
+            }
+        } else {
+            return 0.0F;
         }
     }
 
@@ -86,7 +116,7 @@ public class MaceBehavior implements IToolBehavior<MaceBehavior> {
                 return false;
             }
 
-            if (target != player && target != entity) {
+            if (target == player || target == entity) {
                 return false;
             }
 
@@ -110,7 +140,7 @@ public class MaceBehavior implements IToolBehavior<MaceBehavior> {
     private static double getKnockbackPower(Player player, LivingEntity entity, Vec3 entityPos) {
         return (3.5 - entityPos.length())
                 * 0.7F
-                * (double)(player.fallDistance > 5.0F ? 2 : 1)
+                * (double) (player.fallDistance > 5.0F ? 2 : 1)
                 * (1.0 - entity.getAttributeValue(Attributes.KNOCKBACK_RESISTANCE));
     }
 

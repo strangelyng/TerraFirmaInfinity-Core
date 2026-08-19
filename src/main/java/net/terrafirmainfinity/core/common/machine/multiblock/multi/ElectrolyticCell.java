@@ -13,6 +13,7 @@ import net.terrafirmainfinity.core.common.data.InfinityRecipeTypes;
 import static com.gregtechceu.gtceu.api.multiblock.Predicates.*;
 import static net.terrafirmainfinity.core.InfinityCore.REGISTRATE;
 
+// TODO: Disable GCYM LARGE_ELECTROLYZER
 public class ElectrolyticCell {
     public static final MultiblockMachineDefinition ELECTROLYTIC_CELL = REGISTRATE
             .multiblock("electrolytic_cell", WorkableElectricMultiblockMachine::new)

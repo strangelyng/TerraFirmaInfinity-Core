@@ -31,6 +31,10 @@ public class InfinityMaterials {
     public static Material Pewter; // Eidolon Repraised
     public static Material Fluix; // Applied Energistics 2
 
+    public static Material WeakSteel; // TFC
+    public static Material WeakBlueSteel; // TFC
+    public static Material WeakRedSteel; // TFC
+
 
     public static void init() {
         InfinityIntegrationMaterials.register();
@@ -78,9 +82,9 @@ public class InfinityMaterials {
         RoseGold.removeProperty(PropertyKey.BLAST);
         SterlingSilver.removeProperty(PropertyKey.BLAST);
 
-        BlackSteel.getProperty(PropertyKey.BLAST).setBlastTemperature(1700);
-        BlueSteel.getProperty(PropertyKey.BLAST).setBlastTemperature(1700);
-        RedSteel.getProperty(PropertyKey.BLAST).setBlastTemperature(1700);
+        BlackSteel.getProperty(PropertyKey.BLAST).setBlastTemperature(1485);
+        BlueSteel.getProperty(PropertyKey.BLAST).setBlastTemperature(1540);
+        RedSteel.getProperty(PropertyKey.BLAST).setBlastTemperature(1540);
 
         // Restrict Native Metals
         Aluminium.removeProperty(PropertyKey.ORE);
@@ -116,12 +120,18 @@ public class InfinityMaterials {
         ingot.setIgnored(Iron, // Iron to Cast Iron
                 () -> TFCItems.METAL_ITEMS.get(Metal.CAST_IRON).get(Metal.ItemType.INGOT));
 
+        ingot.setIgnored(WeakSteel,
+                () -> TFCItems.METAL_ITEMS.get(Metal.WEAK_STEEL).get(Metal.ItemType.INGOT));
         ingot.setIgnored(BlackSteel,
                 () -> TFCItems.METAL_ITEMS.get(Metal.BLACK_STEEL).get(Metal.ItemType.INGOT));
 
         ingot.setIgnored(BlueSteel,
+                () -> TFCItems.METAL_ITEMS.get(Metal.WEAK_BLUE_STEEL).get(Metal.ItemType.INGOT));
+        ingot.setIgnored(BlueSteel,
                 () -> TFCItems.METAL_ITEMS.get(Metal.BLUE_STEEL).get(Metal.ItemType.INGOT));
 
+        ingot.setIgnored(WeakRedSteel,
+                () -> TFCItems.METAL_ITEMS.get(Metal.WEAK_RED_STEEL).get(Metal.ItemType.INGOT));
         ingot.setIgnored(RedSteel,
                 () -> TFCItems.METAL_ITEMS.get(Metal.RED_STEEL).get(Metal.ItemType.INGOT));
 
