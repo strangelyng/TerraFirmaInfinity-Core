@@ -6,6 +6,8 @@ import com.tterrag.registrate.providers.RegistrateLangProvider;
 import net.terrafirmainfinity.core.InfinityCore;
 import net.terrafirmainfinity.core.common.data.InfinityTagPrefix;
 
+import java.util.Locale;
+
 public class InfinityLangHandler extends LangHandler {
     private static final String[] INFINITY_RECIPE_TYPE_IDS = {
             "roaster", "electrolytic_cell", "gravity_separator"
@@ -60,6 +62,8 @@ public class InfinityLangHandler extends LangHandler {
         addTagPrefixLang(provider, InfinityTagPrefix.oreShale);
         addTagPrefixLang(provider, InfinityTagPrefix.oreSlate);
 
+        addToolClassLang(provider, "Chisel");
+        addToolClassLang(provider, "Mace");
 
         // Items
         replace(provider, "item.gtceu.tool.chisel", "%s Chisel");
@@ -77,6 +81,10 @@ public class InfinityLangHandler extends LangHandler {
             };
             provider.add("recipe_type." + InfinityCore.MOD_ID + "." + id, name);
         }
+    }
+
+    public static void addToolClassLang(RegistrateLangProvider provider, String toolClass) {
+        provider.add("gtceu.tool.class." + toolClass.toLowerCase(Locale.ROOT).replace(' ', '_'), toolClass);
     }
 
     public static void addTagPrefixLang(RegistrateLangProvider provider, TagPrefix prefix) {

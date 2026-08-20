@@ -23,6 +23,8 @@
   "block.tfinfinity.uv_roaster": "§3Ultimate Roaster §r",
   "block.tfinfinity.uxv_roaster": "§eEpic Roaster IV§r",
   "block.tfinfinity.zpm_roaster": "§cElite Roaster III§r",
+  "gtceu.tool.class.chisel": "Chisel",
+  "gtceu.tool.class.mace": "Mace",
   "item.gtceu.tool.chisel": "%s Chisel",
   "item.gtceu.tool.mace": "%s Mace",
   "itemGroup.tfinfinity.creative_tab": "TerraFirmaInfinity (Coremod)",

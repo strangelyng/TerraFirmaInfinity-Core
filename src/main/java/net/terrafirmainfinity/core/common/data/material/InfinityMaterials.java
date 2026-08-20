@@ -35,6 +35,15 @@ public class InfinityMaterials {
     public static Material WeakBlueSteel; // TFC
     public static Material WeakRedSteel; // TFC
 
+    // Rock Materials
+    public static Material FelsicIgneous; // Granite, Rhyolite
+    public static Material IntermediateIgneous; // Diorite, Tuff, Andesite, Dacite
+    public static Material MaficIgneous; // Gabbro, Basalt
+    public static Material ClasticSedimentary; // Shale, Claystone, Conglomerate
+    public static Material CarbonateSedimentary; // Limestone, Dolomite, Chalk
+    public static Material SiliceousSedimentary; // Chert
+    public static Material Metamorphic; // Quartzite, Slate, Phyllite, Schist, Gneiss, Marble
+
 
     public static void init() {
         InfinityIntegrationMaterials.register();
