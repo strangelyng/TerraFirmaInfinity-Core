@@ -5,7 +5,6 @@ import com.gregtechceu.gtceu.api.data.chemical.material.Material;
 import com.gregtechceu.gtceu.api.data.chemical.material.properties.IMaterialProperty;
 import com.gregtechceu.gtceu.api.data.chemical.material.properties.MaterialProperties;
 import com.gregtechceu.gtceu.api.data.tag.TagPrefix;
-import com.gregtechceu.gtceu.api.fluids.store.FluidStorageKeys;
 import net.minecraft.world.level.material.Fluid;
 import org.jetbrains.annotations.Nullable;
 
@@ -145,10 +144,14 @@ public class TFCProperty implements IMaterialProperty {
         }
     }
 
-    public int getWeldingTier(int anvilTier) {
-        if (anvilTier <= 0) {
+    public int getAnvilTier() {
+        return this.anvilTier;
+    }
+
+    public int getWeldingTier() {
+        if (this.anvilTier <= 0) {
             return 0;
-        } else return this.anvilTier--;
+        } else return this.anvilTier - 1;
     }
 
     @Override
