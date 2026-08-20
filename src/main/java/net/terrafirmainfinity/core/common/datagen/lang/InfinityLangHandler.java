@@ -66,8 +66,23 @@ public class InfinityLangHandler extends LangHandler {
         addToolClassLang(provider, "Mace");
 
         // Items
-        replace(provider, "item.gtceu.tool.chisel", "%s Chisel");
-        replace(provider, "item.gtceu.tool.mace", "%s Mace");
+        replaceToolLang(provider, "chisel", "%s Chisel");
+        replaceToolLang(provider, "mace", "%s Mace");
+
+        replaceToolLang(provider, "mv_chainsaw", "%s Chainsaw (MV)");
+        replaceToolLang(provider, "ev_chainsaw", "%s Chainsaw (EV)");
+        replaceToolLang(provider, "mv_wrench", "%s Wrench (MV)");
+        replaceToolLang(provider, "ev_wrench", "%s Wrench (EV)");
+        replaceToolLang(provider, "mv_wirecutter", "%s Wire Cutter (MV)");
+        replaceToolLang(provider, "ev_wirecutter", "%s Wire Cutter (EV)");
+        replaceToolLang(provider, "lv_buzzsaw", "%s Buzzsaw (LV)");
+        replaceToolLang(provider, "mv_buzzsaw", "%s Buzzsaw (MV)");
+        replaceToolLang(provider, "hv_buzzsaw", "%s Buzzsaw (HV)");
+        replaceToolLang(provider, "ev_buzzsaw", "%s Buzzsaw (EV)");
+        replaceToolLang(provider, "iv_buzzsaw", "%s Buzzsaw (IV)");
+        replaceToolLang(provider, "mv_screwdriver", "%s Screwdriver (MV)");
+        replaceToolLang(provider, "ev_screwdriver", "%s Screwdriver (EV)");
+
 
         // Machines & Recipe Types
         provider.add("tfinfinity.machine.roaster.tooltip", "§7Sulfide roast, anyone?");
@@ -81,6 +96,10 @@ public class InfinityLangHandler extends LangHandler {
             };
             provider.add("recipe_type." + InfinityCore.MOD_ID + "." + id, name);
         }
+    }
+
+    public static void replaceToolLang(RegistrateLangProvider provider, String id, String name) {
+        replace(provider, "item.gtceu.tool." + id, name);
     }
 
     public static void addToolClassLang(RegistrateLangProvider provider, String toolClass) {

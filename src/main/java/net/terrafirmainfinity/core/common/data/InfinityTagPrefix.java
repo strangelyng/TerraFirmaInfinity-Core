@@ -31,7 +31,7 @@ public class InfinityTagPrefix {
             .unformattedTagPath("double_ingots")
             .itemTable(() -> GTMaterialItems.MATERIAL_ITEMS)
             .langValue("%s Double Ingot")
-            .materialAmount(GTValues.M * 2)
+            .materialAmount(GTValues.M*2)
             .materialIconType(MaterialIconType.ingotDouble)
             .unificationEnabled(true)
             .enableRecycling()
@@ -205,7 +205,7 @@ public class InfinityTagPrefix {
     public static final TagPrefix toolHeadButcheryKnife = new TagPrefix(GTCEu.id("butchery_knife_blade"))
             .itemTable(() -> GTMaterialItems.MATERIAL_ITEMS)
             .langValue("%s Butchery Knife Blade")
-            .materialAmount(GTValues.M*2)
+            .materialAmount(GTValues.M)
             .materialIconType(InfinityMaterialIconType.toolHeadButcheryKnife)
             .unificationEnabled(true)
             .enableRecycling()
@@ -214,6 +214,11 @@ public class InfinityTagPrefix {
                     mat -> mat.getProperty(PropertyKey.TOOL).hasType(GTToolType.BUTCHERY_KNIFE)));
 
     public static void modifyExistingToolHeadPrefixes() {
+        TagPrefix.toolHeadBuzzSaw.materialAmount(GTValues.M*2);
+        TagPrefix.toolHeadScrewdriver.materialAmount(GTValues.M*2);
+        TagPrefix.toolHeadWrench.materialAmount(GTValues.M*2);
+        TagPrefix.toolHeadWireCutter.materialAmount(GTValues.M*2);
+
         TagPrefix.toolHeadBuzzSaw.generationCondition(TagPrefix.toolHeadBuzzSaw.generationCondition().or(mat -> mat.hasFlag(InfinityMaterialFlags.GENERATE_BUZZSAW_BLADE)));
         TagPrefix.toolHeadChainsaw.generationCondition(TagPrefix.toolHeadChainsaw.generationCondition().or(mat -> mat.hasFlag(InfinityMaterialFlags.GENERATE_CHAINSAW_HEAD)));
         TagPrefix.toolHeadDrill.generationCondition(TagPrefix.toolHeadDrill.generationCondition().or(mat -> mat.hasFlag(InfinityMaterialFlags.GENERATE_DRILL_HEAD)));
