@@ -54,25 +54,37 @@ public class TFCProperty implements IMaterialProperty {
     @Nullable
     private Material outputMaterial;
 
+    /**
+     * What percent of the material is made up of the outputMaterial
+     * Used to calculate ore melting amounts
+     * Range: 1 ~ 100
+     */
+    private int percentOfMaterial;
+
     public TFCProperty(int meltTemp, float baseHeatCapacity, int anvilTier) {
-        this((int) (meltTemp * 0.6), (int) (meltTemp * 0.8), meltTemp, baseHeatCapacity, null, anvilTier);
+        this((int) (meltTemp * 0.6), (int) (meltTemp * 0.8), meltTemp, baseHeatCapacity, null, anvilTier, 100);
+    }
+
+    public TFCProperty(int meltTemp, float baseHeatCapacity, int anvilTier, int percentOfMaterial) {
+        this((int) (meltTemp * 0.6), (int) (meltTemp * 0.8), meltTemp, baseHeatCapacity, null, anvilTier, percentOfMaterial);
     }
 
     public TFCProperty(int meltTemp, float baseHeatCapacity, @Nullable Material outputMaterial, int anvilTier) {
-        this((int) (meltTemp * 0.6), (int) (meltTemp * 0.8), meltTemp, baseHeatCapacity, outputMaterial, anvilTier);
+        this((int) (meltTemp * 0.6), (int) (meltTemp * 0.8), meltTemp, baseHeatCapacity, outputMaterial, anvilTier, 100);
     }
 
-    public TFCProperty(int forgingTemp, int weldingTemp, int meltTemp, float baseHeatCapacity, int anvilTier) {
-        this(forgingTemp, weldingTemp, meltTemp,  baseHeatCapacity, null, anvilTier);
+    public TFCProperty(int meltTemp, float baseHeatCapacity, @Nullable Material outputMaterial, int anvilTier, int percentOfMaterial) {
+        this((int) (meltTemp * 0.6), (int) (meltTemp * 0.8), meltTemp, baseHeatCapacity, outputMaterial, anvilTier, percentOfMaterial);
     }
 
-    public TFCProperty(int forgingTemp, int weldingTemp, int meltTemp, float baseHeatCapacity, @Nullable Material outputMaterial, int anvilTier) {
+    public TFCProperty(int forgingTemp, int weldingTemp, int meltTemp, float baseHeatCapacity, @Nullable Material outputMaterial, int anvilTier, int percentOfMaterial) {
         setForgingTemp(forgingTemp);
         setWeldingTemp(weldingTemp);
         setMeltTemp(meltTemp);
         setBaseHeatCapacity(baseHeatCapacity);
         setOutputMaterial(outputMaterial);
         setAnvilTier(anvilTier);
+        setPercentOfMaterial(percentOfMaterial);
     }
 
     public void setForgingTemp(int forgingTemp) {
@@ -148,6 +160,18 @@ public class TFCProperty implements IMaterialProperty {
 
     public int getAnvilTier() {
         return this.anvilTier;
+    }
+
+    public void setPercentOfMaterial(int percentOfMaterial) {
+        this.percentOfMaterial = 100;
+
+        if (percentOfMaterial > 0 && percentOfMaterial < 100) {
+            this.percentOfMaterial = percentOfMaterial;
+        }
+    }
+
+    public int getPercentOfMaterial() {
+        return this.percentOfMaterial;
     }
 
     public int getWeldingTier() {

@@ -14,6 +14,7 @@ import com.rekindled.embers.RegistryManager;
 import com.simibubi.create.AllBlocks;
 import com.simibubi.create.AllItems;
 import net.dries007.tfc.common.blocks.TFCBlocks;
+import net.dries007.tfc.common.blocks.rock.Ore;
 import net.dries007.tfc.common.fluids.SimpleFluid;
 import net.dries007.tfc.common.fluids.TFCFluids;
 import net.dries007.tfc.common.items.TFCItems;
@@ -221,6 +222,52 @@ public class InfinityMaterials {
             blockPlated.setIgnored(material, () -> metalBlocks.get(Metal.BlockType.BLOCK));
             slabPlated.setIgnored(material, () -> metalBlocks.get(Metal.BlockType.BLOCK_SLAB));
             stairsPlated.setIgnored(material, () -> metalBlocks.get(Metal.BlockType.BLOCK_STAIRS));
+        });
+
+        // TFC Graded Ores
+        var tfcGradedOres = new HashMap<Material, Ore>();
+//        tfcOres.put(Bismuthinite, Ore.BISMUTHINITE);
+        tfcGradedOres.put(Cassiterite, Ore.CASSITERITE);
+        tfcGradedOres.put(Garnierite, Ore.GARNIERITE);
+        tfcGradedOres.put(Hematite, Ore.HEMATITE);
+        tfcGradedOres.put(YellowLimonite, Ore.LIMONITE);
+        tfcGradedOres.put(Magnetite, Ore.MAGNETITE);
+        tfcGradedOres.put(Malachite, Ore.MALACHITE);
+        tfcGradedOres.put(Copper, Ore.NATIVE_COPPER);
+        tfcGradedOres.put(Gold, Ore.NATIVE_GOLD);
+        tfcGradedOres.put(Silver, Ore.NATIVE_SILVER);
+        tfcGradedOres.put(Sphalerite, Ore.SPHALERITE);
+        tfcGradedOres.put(Tetrahedrite, Ore.TETRAHEDRITE);
+
+        tfcGradedOres.forEach((material, ore) -> {
+            var oreItems = TFCItems.GRADED_ORES.get(ore);
+            rawOre.setIgnored(material, () -> oreItems.get(Ore.Grade.NORMAL));
+        });
+
+        // TFC Ungraded Ores
+        var tfcOres = new HashMap<Material, Ore>();
+        tfcOres.put(Amethyst, Ore.AMETHYST);
+        tfcOres.put(Borax, Ore.BORAX);
+        tfcOres.put(Cinnabar, Ore.CINNABAR);
+//        tfcOres.put(Cryolite, Ore.CRYOLITE);
+        tfcOres.put(Diamond, Ore.DIAMOND);
+        tfcOres.put(Emerald, Ore.EMERALD);
+        tfcOres.put(Graphite, Ore.GRAPHITE);
+        tfcOres.put(Gypsum, Ore.GYPSUM);
+        tfcOres.put(RockSalt, Ore.HALITE);
+        tfcOres.put(Lapis, Ore.LAPIS_LAZULI);
+//        tfcOres.put(Lignite, Ore.LIGNITE);
+        tfcOres.put(Opal, Ore.OPAL);
+        tfcOres.put(Pyrite, Ore.PYRITE);
+        tfcOres.put(Ruby, Ore.RUBY);
+        tfcOres.put(Saltpeter, Ore.SALTPETER);
+        tfcOres.put(Sapphire, Ore.SAPPHIRE);
+        tfcOres.put(Sulfur, Ore.SULFUR);
+//        tfcOres.put(Sylvite, Ore.SYLVITE);
+        tfcOres.put(Topaz, Ore.TOPAZ);
+
+        tfcOres.forEach((material, ore) -> {
+            rawOre.setIgnored(material, () -> TFCItems.ORES.get(ore));
         });
 
         // Eidolon Materials
