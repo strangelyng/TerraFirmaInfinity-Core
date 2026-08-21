@@ -75,7 +75,6 @@ public class InfinityLangHandler extends LangHandler {
         replaceToolLang(provider, "ev_wrench", "%s Wrench (EV)");
         replaceToolLang(provider, "mv_wirecutter", "%s Wire Cutter (MV)");
         replaceToolLang(provider, "ev_wirecutter", "%s Wire Cutter (EV)");
-        replaceToolLang(provider, "lv_buzzsaw", "%s Buzzsaw (LV)");
         replaceToolLang(provider, "mv_buzzsaw", "%s Buzzsaw (MV)");
         replaceToolLang(provider, "hv_buzzsaw", "%s Buzzsaw (HV)");
         replaceToolLang(provider, "ev_buzzsaw", "%s Buzzsaw (EV)");

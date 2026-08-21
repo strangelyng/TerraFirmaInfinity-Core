@@ -134,7 +134,7 @@ public class InfinityMaterials {
         ingot.setIgnored(BlackSteel,
                 () -> TFCItems.METAL_ITEMS.get(Metal.BLACK_STEEL).get(Metal.ItemType.INGOT));
 
-        ingot.setIgnored(BlueSteel,
+        ingot.setIgnored(WeakBlueSteel,
                 () -> TFCItems.METAL_ITEMS.get(Metal.WEAK_BLUE_STEEL).get(Metal.ItemType.INGOT));
         ingot.setIgnored(BlueSteel,
                 () -> TFCItems.METAL_ITEMS.get(Metal.BLUE_STEEL).get(Metal.ItemType.INGOT));
