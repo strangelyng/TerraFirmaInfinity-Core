@@ -13,6 +13,7 @@ import com.gregtechceu.gtceu.common.data.GTFluids;
 import com.rekindled.embers.RegistryManager;
 import com.simibubi.create.AllBlocks;
 import com.simibubi.create.AllItems;
+import net.dries007.tfc.common.blocks.TFCBlocks;
 import net.dries007.tfc.common.fluids.SimpleFluid;
 import net.dries007.tfc.common.fluids.TFCFluids;
 import net.dries007.tfc.common.items.TFCItems;
@@ -91,9 +92,28 @@ public class InfinityMaterials {
         RoseGold.removeProperty(PropertyKey.BLAST);
         SterlingSilver.removeProperty(PropertyKey.BLAST);
 
-        BlackSteel.getProperty(PropertyKey.BLAST).setBlastTemperature(1485);
-        BlueSteel.getProperty(PropertyKey.BLAST).setBlastTemperature(1540);
-        RedSteel.getProperty(PropertyKey.BLAST).setBlastTemperature(1540);
+        // Adjust Fluid Temperature of Steels
+        Steel.removeProperty(PropertyKey.FLUID);
+        BlackSteel.removeProperty(PropertyKey.FLUID);
+        BlueSteel.removeProperty(PropertyKey.FLUID);
+        RedSteel.removeProperty(PropertyKey.FLUID);
+
+        addFluidToExisting(FluidStorageKeys.LIQUID, 1800, Steel);
+        addFluidToExisting(FluidStorageKeys.LIQUID, 1800, BlueSteel);
+        addFluidToExisting(FluidStorageKeys.LIQUID, 1800, RedSteel);
+        addFluidToExisting(FluidStorageKeys.LIQUID, 1750, BlackSteel);
+
+        // Set Steels Blast Temperature to Match Steel
+        BlastProperty blackSteelProp = BlackSteel.getProperty(PropertyKey.BLAST);
+        blackSteelProp.setBlastTemperature(1000);
+        blackSteelProp.setEUtOverride(VA[MV]);
+        blackSteelProp.setDurationOverride(1000);
+        BlastProperty blueSteelProp = BlueSteel.getProperty(PropertyKey.BLAST);
+        blueSteelProp.setBlastTemperature(1000);
+        blueSteelProp.setEUtOverride(VA[MV]);
+        BlastProperty redSteelProp = RedSteel.getProperty(PropertyKey.BLAST);
+        redSteelProp.setBlastTemperature(1000);
+        redSteelProp.setEUtOverride(VA[MV]);
 
         // Restrict Native Metals
         Aluminium.removeProperty(PropertyKey.ORE);
@@ -169,6 +189,16 @@ public class InfinityMaterials {
             toolHeadScythe.setIgnored(material, () -> metalItems.get(Metal.ItemType.SCYTHE_BLADE));
             toolHeadSword.setIgnored(material, () -> metalItems.get(Metal.ItemType.SWORD_BLADE));
             toolHeadMace.setIgnored(material, () -> metalItems.get(Metal.ItemType.MACE_HEAD));
+
+            lampUnfinished.setIgnored(material, () -> metalItems.get(Metal.ItemType.UNFINISHED_LAMP));
+
+            var metalBlocks = TFCBlocks.METALS.get(metal);
+            anvil.setIgnored(material, () -> metalBlocks.get(Metal.BlockType.ANVIL));
+            bars.setIgnored(material, () -> metalBlocks.get(Metal.BlockType.BARS));
+            chain.setIgnored(material, () -> metalBlocks.get(Metal.BlockType.CHAIN));
+            grate.setIgnored(material, () -> metalBlocks.get(Metal.BlockType.GRATE));
+            lamp.setIgnored(material, () -> metalBlocks.get(Metal.BlockType.LAMP));
+            trapdoor.setIgnored(material, () -> metalBlocks.get(Metal.BlockType.TRAPDOOR));
         });
 
         // TFC All Materials
@@ -186,6 +216,11 @@ public class InfinityMaterials {
         tfcMetals.forEach((material, metal) -> {
             var metalItems = TFCItems.METAL_ITEMS.get(metal);
             ingotDouble.setIgnored(material, () -> metalItems.get(Metal.ItemType.DOUBLE_INGOT));
+
+            var metalBlocks = TFCBlocks.METALS.get(metal);
+            blockPlated.setIgnored(material, () -> metalBlocks.get(Metal.BlockType.BLOCK));
+            slabPlated.setIgnored(material, () -> metalBlocks.get(Metal.BlockType.BLOCK_SLAB));
+            stairsPlated.setIgnored(material, () -> metalBlocks.get(Metal.BlockType.BLOCK_STAIRS));
         });
 
         // Eidolon Materials
@@ -213,6 +248,12 @@ public class InfinityMaterials {
     public static void addFluidToExisting(FluidStorageKey key, Material mat) {
         FluidProperty fluidProp = new FluidProperty();
         fluidProp.getStorage().enqueueRegistration(key, new FluidBuilder());
+        mat.setProperty(PropertyKey.FLUID, fluidProp);
+    }
+
+    public static void addFluidToExisting(FluidStorageKey key, int temp, Material mat) {
+        FluidProperty fluidProp = new FluidProperty();
+        fluidProp.getStorage().enqueueRegistration(key, new FluidBuilder().temperature(temp));
         mat.setProperty(PropertyKey.FLUID, fluidProp);
     }
 }

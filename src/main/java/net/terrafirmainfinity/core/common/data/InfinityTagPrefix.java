@@ -213,6 +213,54 @@ public class InfinityTagPrefix {
             .generationCondition(hasToolProperty.and(
                     mat -> mat.getProperty(PropertyKey.TOOL).hasType(GTToolType.BUTCHERY_KNIFE)));
 
+    // Additional TFC Items
+
+    public static final TagPrefix anvil = new TagPrefix(GTCEu.id("anvil"))
+            .materialAmount(GTValues.M * 14)
+            .unificationEnabled(true);
+
+    public static final TagPrefix bars = new TagPrefix(GTCEu.id("bars"))
+            .materialAmount(GTValues.M / 4)
+            .unificationEnabled(true);
+
+    public static final TagPrefix bell = new TagPrefix(GTCEu.id("bell"))
+            .materialAmount(GTValues.M)
+            .unificationEnabled(true);
+
+    public static final TagPrefix chain = new TagPrefix(GTCEu.id("chain"))
+            .defaultTagPath("chains/%s")
+            .unformattedTagPath("chains")
+            .materialAmount(GTValues.M / 16)
+            .unificationEnabled(true);
+
+    public static final TagPrefix lamp = new TagPrefix(GTCEu.id("lamp"))
+            .materialAmount(GTValues.M)
+            .unificationEnabled(true);
+
+    public static final TagPrefix lampUnfinished = new TagPrefix(GTCEu.id("lamp_unfinished"))
+            .materialAmount(GTValues.M)
+            .unificationEnabled(true);
+
+    public static final TagPrefix trapdoor = new TagPrefix(GTCEu.id("trapdoor"))
+            .materialAmount(GTValues.M)
+            .unificationEnabled(true);
+
+    public static final TagPrefix grate = new TagPrefix(GTCEu.id("grate"))
+            .materialAmount(GTValues.M)
+            .unificationEnabled(true);
+
+    public static final TagPrefix blockPlated = new TagPrefix(GTCEu.id("plated_block"))
+            .materialAmount(GTValues.M)
+            .unificationEnabled(true);
+
+    public static final TagPrefix slabPlated = new TagPrefix(GTCEu.id("plated_slab"))
+            .materialAmount(GTValues.M / 2)
+            .unificationEnabled(true);
+
+    public static final TagPrefix stairsPlated = new TagPrefix(GTCEu.id("plated_stairs"))
+            .materialAmount((GTValues.M * 3) / 4)
+            .unificationEnabled(true);
+
     public static void modifyExistingToolHeadPrefixes() {
         TagPrefix.toolHeadBuzzSaw.materialAmount(GTValues.M*2);
         TagPrefix.toolHeadScrewdriver.materialAmount(GTValues.M*2);

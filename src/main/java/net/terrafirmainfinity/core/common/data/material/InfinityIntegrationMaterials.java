@@ -19,7 +19,7 @@ public class InfinityIntegrationMaterials {
                 .liquid(new FluidBuilder().temperature(1100))
                 .color(0xffba54).secondaryColor(0xe46d0e).iconSet(MaterialIconSet.BRIGHT)
                 .flags(GENERATE_PLATE, GENERATE_ROD, GENERATE_LONG_ROD, GENERATE_GEAR, GENERATE_SMALL_GEAR, GENERATE_RING)
-                .components(Gold, 1, Copper, 1)
+                .components(Gold, 1, Copper, 4)
                 .buildAndRegister();
 
         // Eidolon Repraised
@@ -44,7 +44,7 @@ public class InfinityIntegrationMaterials {
         // TFC
         WeakSteel = new Material.Builder(InfinityCore.id("weak_steel"))
                 .ingot()
-                .liquid(1485)
+                .liquid(1750)
                 .components(Nickel, 1, BlackBronze, 1, Steel, 2)
                 .color(0x8a8a8a).secondaryColor(0x5c5c5c).iconSet(MaterialIconSet.METALLIC)
                 .flags(NO_SMELTING, DISABLE_DECOMPOSITION, DISABLE_ALLOY_BLAST)
@@ -53,7 +53,7 @@ public class InfinityIntegrationMaterials {
         WeakBlueSteel = new Material.Builder(InfinityCore.id("weak_blue_steel"))
                 .dust()
                 .ingot()
-                .liquid(1540)
+                .liquid(1800)
                 .components(SterlingSilver, 1, BismuthBronze, 1, Steel, 2, BlackSteel, 4)
                 .color(0x697fbd).secondaryColor(0x384b82).iconSet(MaterialIconSet.METALLIC)
                 .flags(NO_SMELTING, DISABLE_DECOMPOSITION, DISABLE_ALLOY_BLAST)
@@ -62,7 +62,7 @@ public class InfinityIntegrationMaterials {
         WeakRedSteel = new Material.Builder(InfinityCore.id("weak_red_steel"))
                 .dust()
                 .ingot()
-                .liquid(1540)
+                .liquid(1800)
                 .components(Brass, 1, RoseGold, 1, Steel, 2, BlackSteel, 4)
                 .color(0xb55c5c).secondaryColor(0x7d3232).iconSet(MaterialIconSet.METALLIC)
                 .flags(NO_SMELTING, DISABLE_DECOMPOSITION, DISABLE_ALLOY_BLAST)

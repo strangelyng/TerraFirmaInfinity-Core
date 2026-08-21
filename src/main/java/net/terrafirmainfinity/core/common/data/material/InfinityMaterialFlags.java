@@ -3,6 +3,7 @@ package net.terrafirmainfinity.core.common.data.material;
 import com.gregtechceu.gtceu.api.data.chemical.material.info.MaterialFlag;
 
 public class InfinityMaterialFlags {
+    // For Materials that can be cast into tools (does not affect ingot casting, all metals with a TFCProperty can be cast into ingots)
     public static final MaterialFlag TFC_CASTABLE = new MaterialFlag.Builder("tfc_castable")
             .build();
 
