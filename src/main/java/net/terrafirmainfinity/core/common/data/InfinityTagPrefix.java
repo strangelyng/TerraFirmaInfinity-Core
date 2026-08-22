@@ -40,6 +40,32 @@ public class InfinityTagPrefix {
                     mat -> mat.hasFlag(InfinityMaterialFlags.GENERATE_DOUBLE_INGOT)
             ));
 
+    public static final TagPrefix oreSmall = new TagPrefix(GTCEu.id("small_ore"))
+            .materialAmount(GTValues.M / 9)
+            .unificationEnabled(true);
+
+    public static final TagPrefix poorRawOre = new TagPrefix(GTCEu.id("poor_raw_ore"))
+            .idPattern("poor_raw_%s")
+            .defaultTagPath("poor_raw_materials/%s")
+            .unformattedTagPath("poor_raw_materials")
+            .itemTable(() -> GTMaterialItems.MATERIAL_ITEMS)
+            .langValue("Poor Raw %s")
+            .materialIconType(InfinityMaterialIconType.poorRawOre)
+            .unificationEnabled(true)
+            .generateItem(true)
+            .generationCondition(hasOreProperty);
+
+    public static final TagPrefix richRawOre = new TagPrefix(GTCEu.id("rich_raw_ore"))
+            .idPattern("rich_raw_%s")
+            .defaultTagPath("rich_raw_materials/%s")
+            .unformattedTagPath("rich_raw_materials")
+            .itemTable(() -> GTMaterialItems.MATERIAL_ITEMS)
+            .langValue("Rich Raw %s")
+            .materialIconType(InfinityMaterialIconType.richRawOre)
+            .unificationEnabled(true)
+            .generateItem(true)
+            .generationCondition(hasOreProperty);
+
     /** TFC Tool Heads */
     public static final TagPrefix toolHeadPickaxe = new TagPrefix(GTCEu.id("pickaxe_head"))
             .itemTable(() -> GTMaterialItems.MATERIAL_ITEMS)

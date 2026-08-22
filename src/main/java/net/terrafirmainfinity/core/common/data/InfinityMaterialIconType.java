@@ -11,5 +11,8 @@ public class InfinityMaterialIconType {
     public static final MaterialIconType toolHeadSpade = new MaterialIconType("toolHeadSpade");
     public static final MaterialIconType toolHeadButcheryKnife = new MaterialIconType("toolHeadButcheryKnife");
 
+    public static final MaterialIconType poorRawOre = new MaterialIconType("poorRawOre");
+    public static final MaterialIconType richRawOre = new MaterialIconType("richRawOre");
+
     public static void init() {}
 }

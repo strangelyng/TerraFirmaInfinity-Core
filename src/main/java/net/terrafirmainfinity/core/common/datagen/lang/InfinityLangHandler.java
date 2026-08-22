@@ -46,6 +46,9 @@ public class InfinityLangHandler extends LangHandler {
         addTagPrefixLang(provider, InfinityTagPrefix.toolHeadSpade);
         addTagPrefixLang(provider, InfinityTagPrefix.toolHeadButcheryKnife);
 
+        addTagPrefixLang(provider, InfinityTagPrefix.poorRawOre);
+        addTagPrefixLang(provider, InfinityTagPrefix.richRawOre);
+
         addTagPrefixLang(provider, InfinityTagPrefix.oreChalk);
         addTagPrefixLang(provider, InfinityTagPrefix.oreChert);
         addTagPrefixLang(provider, InfinityTagPrefix.oreConglomerate);

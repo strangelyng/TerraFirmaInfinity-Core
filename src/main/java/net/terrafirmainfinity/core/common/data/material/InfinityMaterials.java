@@ -37,6 +37,10 @@ public class InfinityMaterials {
     public static Material WeakBlueSteel; // TFC
     public static Material WeakRedSteel; // TFC
 
+    // Ore Materials
+    public static Material Bismuthinite; // TFC
+    public static Material Cryolite; // TFC
+
     // Rock Materials
     public static Material FelsicIgneous; // Granite, Rhyolite
     public static Material IntermediateIgneous; // Diorite, Tuff, Andesite, Dacite
@@ -49,6 +53,7 @@ public class InfinityMaterials {
 
     public static void init() {
         InfinityIntegrationMaterials.register();
+        InfinityOreMaterials.register();
     }
 
     public static void modifyMaterials() {
@@ -120,12 +125,18 @@ public class InfinityMaterials {
         Aluminium.removeProperty(PropertyKey.ORE);
         Beryllium.removeProperty(PropertyKey.ORE);
         Cobalt.removeProperty(PropertyKey.ORE);
+        Iron.removeProperty(PropertyKey.ORE);
+//        Lead.removeProperty(PropertyKey.ORE);
         Lithium.removeProperty(PropertyKey.ORE);
         Molybdenum.removeProperty(PropertyKey.ORE);
         Neodymium.removeProperty(PropertyKey.ORE);
         Nickel.removeProperty(PropertyKey.ORE);
         Plutonium239.removeProperty(PropertyKey.ORE);
         Thorium.removeProperty(PropertyKey.ORE);
+        Tin.removeProperty(PropertyKey.ORE);
+
+        // Remove Other Ores
+        Electrotine.removeProperty(PropertyKey.ORE);
 
         addFluidToExisting(FluidStorageKeys.LIQUID, SodiumHydroxide);
 
@@ -226,7 +237,7 @@ public class InfinityMaterials {
 
         // TFC Graded Ores
         var tfcGradedOres = new HashMap<Material, Ore>();
-//        tfcOres.put(Bismuthinite, Ore.BISMUTHINITE);
+        tfcGradedOres.put(Bismuthinite, Ore.BISMUTHINITE);
         tfcGradedOres.put(Cassiterite, Ore.CASSITERITE);
         tfcGradedOres.put(Garnierite, Ore.GARNIERITE);
         tfcGradedOres.put(Hematite, Ore.HEMATITE);
@@ -240,8 +251,12 @@ public class InfinityMaterials {
         tfcGradedOres.put(Tetrahedrite, Ore.TETRAHEDRITE);
 
         tfcGradedOres.forEach((material, ore) -> {
+            oreSmall.setIgnored(material, () -> TFCBlocks.SMALL_ORES.get(ore));
+
             var oreItems = TFCItems.GRADED_ORES.get(ore);
+            poorRawOre.setIgnored(material, () -> oreItems.get(Ore.Grade.POOR));
             rawOre.setIgnored(material, () -> oreItems.get(Ore.Grade.NORMAL));
+            richRawOre.setIgnored(material, () -> oreItems.get(Ore.Grade.RICH));
         });
 
         // TFC Ungraded Ores
@@ -249,12 +264,12 @@ public class InfinityMaterials {
         tfcOres.put(Amethyst, Ore.AMETHYST);
         tfcOres.put(Borax, Ore.BORAX);
         tfcOres.put(Cinnabar, Ore.CINNABAR);
-//        tfcOres.put(Cryolite, Ore.CRYOLITE);
+        tfcOres.put(Cryolite, Ore.CRYOLITE);
         tfcOres.put(Diamond, Ore.DIAMOND);
         tfcOres.put(Emerald, Ore.EMERALD);
         tfcOres.put(Graphite, Ore.GRAPHITE);
         tfcOres.put(Gypsum, Ore.GYPSUM);
-        tfcOres.put(RockSalt, Ore.HALITE);
+        tfcOres.put(Salt, Ore.HALITE); // Halite = NaCl
         tfcOres.put(Lapis, Ore.LAPIS_LAZULI);
 //        tfcOres.put(Lignite, Ore.LIGNITE);
         tfcOres.put(Opal, Ore.OPAL);
@@ -263,7 +278,7 @@ public class InfinityMaterials {
         tfcOres.put(Saltpeter, Ore.SALTPETER);
         tfcOres.put(Sapphire, Ore.SAPPHIRE);
         tfcOres.put(Sulfur, Ore.SULFUR);
-//        tfcOres.put(Sylvite, Ore.SYLVITE);
+        tfcOres.put(RockSalt, Ore.SYLVITE); // Sylvite = KCl
         tfcOres.put(Topaz, Ore.TOPAZ);
 
         tfcOres.forEach((material, ore) -> {
