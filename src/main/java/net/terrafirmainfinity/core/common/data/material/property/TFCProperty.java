@@ -127,7 +127,7 @@ public class TFCProperty implements IMaterialProperty {
     }
 
     public float getHeatCapacity(TagPrefix tagPrefix) {
-        float materialAmount = (float) tagPrefix.materialAmount() / GTValues.M;
+        float materialAmount = tagPrefix.materialAmount() == -1 ? 1.0f : (float) tagPrefix.materialAmount() / GTValues.M;
 
         return (this.getSpecificHeatCapacity() / HEAT_CAPACITY) * materialAmount;
     }
