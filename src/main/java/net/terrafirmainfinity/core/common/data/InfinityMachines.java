@@ -61,7 +61,7 @@ public class InfinityMachines {
     public static final MachineDefinition ULV_SUPER_TANK = registerULVSuperTank();
 
     private static MachineDefinition registerULVSuperTank() {
-        long maxAmount = 1000 * FluidType.BUCKET_VOLUME;
+        long maxAmount = 500 * FluidType.BUCKET_VOLUME;
         MachineDefinition definition = REGISTRATE.machine("ulv_super_tank",
                         MachineDefinition::new, MetaMachineBlock::new, QuantumTankMachineItem::new, holder -> new QuantumTankMachine(holder, GTValues.ULV, maxAmount))
                 .langValue("Basic Super Tank")
@@ -94,7 +94,9 @@ public class InfinityMachines {
                     .addOutputLimit(FluidRecipeCapability.CAP, 0)
                     .modelProperty(GTMachineModelProperties.VENT_DIRECTION, RelativeDirection.BACK)
                     .workableSteamHullModel(pressure, InfinityCore.id("block/machines/roaster"))
-                    .tooltips()
+                    .tooltipBuilder((stack, list) -> {
+                        list.add(Component.translatable("tfinfinity.machine.roaster.tooltip"));
+                    })
                     .register());
 
     public static final MachineDefinition[] ROASTER = registerTieredMachines(REGISTRATE, "roaster",

@@ -149,6 +149,12 @@ public class InfinityMaterials {
 
         addFluidToExisting(FluidStorageKeys.LIQUID, SodiumHydroxide);
 
+        /// Remove Ignored ///
+
+        // Vanilla Materials
+        nugget.removeIgnored(Iron);
+        block.removeIgnored(Iron);
+
         /// SET IGNORED ///
 
         // Create Materials

@@ -341,6 +341,9 @@ public class InfinityTagPrefix {
         TagPrefix.toolHeadWrench.materialAmount(GTValues.M*2);
         TagPrefix.toolHeadWireCutter.materialAmount(GTValues.M*2);
 
+        TagPrefix.toolHeadWrench.secondaryMaterials().clear();
+        TagPrefix.toolHeadWireCutter.secondaryMaterials().clear();
+
         TagPrefix.toolHeadBuzzSaw.generationCondition(TagPrefix.toolHeadBuzzSaw.generationCondition().or(mat -> mat.hasFlag(InfinityMaterialFlags.GENERATE_BUZZSAW_BLADE)));
         TagPrefix.toolHeadChainsaw.generationCondition(TagPrefix.toolHeadChainsaw.generationCondition().or(mat -> mat.hasFlag(InfinityMaterialFlags.GENERATE_CHAINSAW_HEAD)));
         TagPrefix.toolHeadDrill.generationCondition(TagPrefix.toolHeadDrill.generationCondition().or(mat -> mat.hasFlag(InfinityMaterialFlags.GENERATE_DRILL_HEAD)));
