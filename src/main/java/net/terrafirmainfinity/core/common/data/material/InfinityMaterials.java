@@ -33,6 +33,7 @@ public class InfinityMaterials {
     public static Material Pewter; // Eidolon Repraised
     public static Material Fluix; // Applied Energistics 2
 
+    public static Material PigIron; // TFC
     public static Material WeakSteel; // TFC
     public static Material WeakBlueSteel; // TFC
     public static Material WeakRedSteel; // TFC
@@ -92,6 +93,14 @@ public class InfinityMaterials {
         Graphite.addFlags(MaterialFlags.GENERATE_ROD, MaterialFlags.GENERATE_LONG_ROD);
 
         // Modify Properties
+        IngotProperty ingotProp = WroughtIron.getProperty(PropertyKey.INGOT);
+        ingotProp.setMacerateInto(Iron);
+        WroughtIron.removeProperty(PropertyKey.FLUID);
+
+        ingotProp = AnnealedCopper.getProperty(PropertyKey.INGOT);
+        ingotProp.setMacerateInto(Copper);
+        AnnealedCopper.removeProperty(PropertyKey.FLUID);
+
         BismuthBronze.removeProperty(PropertyKey.BLAST);
         BlackBronze.removeProperty(PropertyKey.BLAST);
 
@@ -160,6 +169,9 @@ public class InfinityMaterials {
 
         ingot.setIgnored(Iron, // Iron to Cast Iron
                 () -> TFCItems.METAL_ITEMS.get(Metal.CAST_IRON).get(Metal.ItemType.INGOT));
+
+        ingot.setIgnored(PigIron,
+                () -> TFCItems.METAL_ITEMS.get(Metal.PIG_IRON).get(Metal.ItemType.INGOT));
 
         ingot.setIgnored(WeakSteel,
                 () -> TFCItems.METAL_ITEMS.get(Metal.WEAK_STEEL).get(Metal.ItemType.INGOT));
@@ -233,6 +245,39 @@ public class InfinityMaterials {
             blockPlated.setIgnored(material, () -> metalBlocks.get(Metal.BlockType.BLOCK));
             slabPlated.setIgnored(material, () -> metalBlocks.get(Metal.BlockType.BLOCK_SLAB));
             stairsPlated.setIgnored(material, () -> metalBlocks.get(Metal.BlockType.BLOCK_STAIRS));
+        });
+
+        var oxidizableMetals = new HashMap<Material, Metal>();
+        oxidizableMetals.put(Bronze, Metal.BRONZE);
+        oxidizableMetals.put(Copper, Metal.COPPER);
+        oxidizableMetals.put(Steel, Metal.STEEL);
+        oxidizableMetals.put(WroughtIron, Metal.WROUGHT_IRON);
+        oxidizableMetals.forEach((material, metal) -> {
+            var metalBlocks = TFCBlocks.METALS.get(metal);
+
+            grateExposed.setIgnored(material, () -> metalBlocks.get(Metal.BlockType.EXPOSED_GRATE));
+            grateWeathered.setIgnored(material, () -> metalBlocks.get(Metal.BlockType.WEATHERED_GRATE));
+            grateOxidized.setIgnored(material, () -> metalBlocks.get(Metal.BlockType.OXIDIZED_GRATE));
+        });
+
+        oxidizableMetals.put(Brass, Metal.BRASS);
+        oxidizableMetals.put(Silver, Metal.SILVER);
+        oxidizableMetals.put(SterlingSilver, Metal.STERLING_SILVER);
+
+        oxidizableMetals.forEach((material, metal) -> {
+            var metalBlocks = TFCBlocks.METALS.get(metal);
+
+            blockPlatedExposed.setIgnored(material, () -> metalBlocks.get(Metal.BlockType.EXPOSED_BLOCK));
+            slabPlatedExposed.setIgnored(material, () -> metalBlocks.get(Metal.BlockType.EXPOSED_BLOCK_SLAB));
+            stairsPlatedExposed.setIgnored(material, () -> metalBlocks.get(Metal.BlockType.EXPOSED_BLOCK_STAIRS));
+
+            blockPlatedWeathered.setIgnored(material, () -> metalBlocks.get(Metal.BlockType.WEATHERED_BLOCK));
+            slabPlatedWeathered.setIgnored(material, () -> metalBlocks.get(Metal.BlockType.WEATHERED_BLOCK_SLAB));
+            stairsPlatedWeathered.setIgnored(material, () -> metalBlocks.get(Metal.BlockType.WEATHERED_BLOCK_STAIRS));
+
+            blockPlatedOxidized.setIgnored(material, () -> metalBlocks.get(Metal.BlockType.OXIDIZED_BLOCK));
+            slabPlatedOxidized.setIgnored(material, () -> metalBlocks.get(Metal.BlockType.OXIDIZED_BLOCK_SLAB));
+            stairsPlatedOxidized.setIgnored(material, () -> metalBlocks.get(Metal.BlockType.OXIDIZED_BLOCK_STAIRS));
         });
 
         // TFC Graded Ores

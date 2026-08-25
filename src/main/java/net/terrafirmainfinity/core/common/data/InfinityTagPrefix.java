@@ -275,7 +275,31 @@ public class InfinityTagPrefix {
             .materialAmount(GTValues.M)
             .unificationEnabled(true);
 
+    public static final TagPrefix grateExposed = new TagPrefix(GTCEu.id("exposed_grate"))
+            .materialAmount(GTValues.M)
+            .unificationEnabled(true);
+
+    public static final TagPrefix grateWeathered = new TagPrefix(GTCEu.id("weathered_grate"))
+            .materialAmount(GTValues.M)
+            .unificationEnabled(true);
+
+    public static final TagPrefix grateOxidized = new TagPrefix(GTCEu.id("oxidized_grate"))
+            .materialAmount(GTValues.M)
+            .unificationEnabled(true);
+
     public static final TagPrefix blockPlated = new TagPrefix(GTCEu.id("plated_block"))
+            .materialAmount(GTValues.M)
+            .unificationEnabled(true);
+
+    public static final TagPrefix blockPlatedExposed = new TagPrefix(GTCEu.id("exposed_plated_block"))
+            .materialAmount(GTValues.M)
+            .unificationEnabled(true);
+
+    public static final TagPrefix blockPlatedWeathered = new TagPrefix(GTCEu.id("weathered_plated_block"))
+            .materialAmount(GTValues.M)
+            .unificationEnabled(true);
+
+    public static final TagPrefix blockPlatedOxidized = new TagPrefix(GTCEu.id("oxidized_plated_block"))
             .materialAmount(GTValues.M)
             .unificationEnabled(true);
 
@@ -283,13 +307,37 @@ public class InfinityTagPrefix {
             .materialAmount(GTValues.M / 2)
             .unificationEnabled(true);
 
+    public static final TagPrefix slabPlatedExposed = new TagPrefix(GTCEu.id("exposed_plated_slab"))
+            .materialAmount(GTValues.M / 2)
+            .unificationEnabled(true);
+
+    public static final TagPrefix slabPlatedWeathered = new TagPrefix(GTCEu.id("weathered_plated_slab"))
+            .materialAmount(GTValues.M / 2)
+            .unificationEnabled(true);
+
+    public static final TagPrefix slabPlatedOxidized = new TagPrefix(GTCEu.id("oxidized_plated_slab"))
+            .materialAmount(GTValues.M / 2)
+            .unificationEnabled(true);
+
     public static final TagPrefix stairsPlated = new TagPrefix(GTCEu.id("plated_stairs"))
+            .materialAmount((GTValues.M * 3) / 4)
+            .unificationEnabled(true);
+
+    public static final TagPrefix stairsPlatedExposed = new TagPrefix(GTCEu.id("exposed_plated_stairs"))
+            .materialAmount((GTValues.M * 3) / 4)
+            .unificationEnabled(true);
+
+    public static final TagPrefix stairsPlatedWeathered = new TagPrefix(GTCEu.id("weathered_plated_stairs"))
+            .materialAmount((GTValues.M * 3) / 4)
+            .unificationEnabled(true);
+
+    public static final TagPrefix stairsPlatedOxidized = new TagPrefix(GTCEu.id("oxidized_plated_stairs"))
             .materialAmount((GTValues.M * 3) / 4)
             .unificationEnabled(true);
 
     public static void modifyExistingToolHeadPrefixes() {
         TagPrefix.toolHeadBuzzSaw.materialAmount(GTValues.M*2);
-        TagPrefix.toolHeadScrewdriver.materialAmount(GTValues.M*2);
+        TagPrefix.toolHeadScrewdriver.materialAmount(GTValues.M);
         TagPrefix.toolHeadWrench.materialAmount(GTValues.M*2);
         TagPrefix.toolHeadWireCutter.materialAmount(GTValues.M*2);
 

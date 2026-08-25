@@ -7,6 +7,9 @@ public class InfinityMaterialFlags {
     public static final MaterialFlag TFC_CASTABLE = new MaterialFlag.Builder("tfc_castable")
             .build();
 
+    public static final MaterialFlag HAS_TFC_OXIDATION = new MaterialFlag.Builder("has_tfc_oxidation")
+            .build();
+
     public static final MaterialFlag GENERATE_DOUBLE_INGOT = new MaterialFlag.Builder("generate_double_ingot")
             .build();
 

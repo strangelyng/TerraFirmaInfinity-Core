@@ -31,7 +31,7 @@ public class InfinityIntegrationMaterials {
                 .hazard(HazardProperty.HazardTrigger.INHALATION, GTMedicalConditions.WEAK_POISON)
                 .buildAndRegister();
 
-        // Fluix
+        // AE2
         Fluix = new Material.Builder(InfinityCore.id("fluix"))
                 .gem()
                 .dust()
@@ -42,6 +42,15 @@ public class InfinityIntegrationMaterials {
                 .buildAndRegister().setFormula("?(Cr(Al2O3))(SiO2)", true);
 
         // TFC
+        PigIron = new Material.Builder(InfinityCore.id("pig_iron"))
+                .dust()
+                .ingot()
+                .liquid(1775)
+                .components(Iron, 1, Carbon, 1)
+                .color(0xb5adae).secondaryColor(0x625457).iconSet(MaterialIconSet.DULL)
+                .flags(NO_SMELTING, DISABLE_DECOMPOSITION, DISABLE_ALLOY_BLAST)
+                .buildAndRegister();
+
         WeakSteel = new Material.Builder(InfinityCore.id("weak_steel"))
                 .ingot()
                 .liquid(1750)
