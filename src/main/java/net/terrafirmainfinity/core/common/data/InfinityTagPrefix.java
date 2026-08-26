@@ -40,6 +40,18 @@ public class InfinityTagPrefix {
                     mat -> mat.hasFlag(InfinityMaterialFlags.GENERATE_DOUBLE_INGOT)
             ));
 
+    public static final TagPrefix powder = new TagPrefix(GTCEu.id("powder"))
+            .idPattern("%s_powder")
+            .defaultTagPath("powders/%s")
+            .unformattedTagPath("powders")
+            .itemTable(() -> GTMaterialItems.MATERIAL_ITEMS)
+            .langValue("%s Powder")
+            .materialAmount(GTValues.M / 4)
+            .materialIconType(InfinityMaterialIconType.powder)
+            .unificationEnabled(true)
+            .generateItem(true)
+            .generationCondition(hasOreProperty);
+
     public static final TagPrefix oreSmall = new TagPrefix(GTCEu.id("small_ore"))
             .materialAmount(GTValues.M / 9)
             .unificationEnabled(true);

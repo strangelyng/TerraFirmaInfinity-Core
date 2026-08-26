@@ -175,9 +175,7 @@ public class TFCProperty implements IMaterialProperty {
     }
 
     public int getWeldingTier() {
-        if (this.anvilTier <= 0) {
-            return 0;
-        } else return this.anvilTier - 1;
+        return Math.max(0, this.anvilTier - 1);
     }
 
     @Override

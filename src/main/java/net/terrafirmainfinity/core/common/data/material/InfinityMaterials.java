@@ -1,6 +1,7 @@
 package net.terrafirmainfinity.core.common.data.material;
 
 import alexthw.eidolon_repraised.registries.Registry;
+import appeng.core.definitions.AEBlocks;
 import appeng.core.definitions.AEItems;
 import com.gregtechceu.gtceu.api.GTValues;
 import com.gregtechceu.gtceu.api.data.chemical.material.Material;
@@ -17,6 +18,7 @@ import net.dries007.tfc.common.blocks.TFCBlocks;
 import net.dries007.tfc.common.blocks.rock.Ore;
 import net.dries007.tfc.common.fluids.SimpleFluid;
 import net.dries007.tfc.common.fluids.TFCFluids;
+import net.dries007.tfc.common.items.Powder;
 import net.dries007.tfc.common.items.TFCItems;
 import net.dries007.tfc.util.Metal;
 
@@ -33,6 +35,7 @@ public class InfinityMaterials {
     public static Material Pewter; // Eidolon Repraised
     public static Material Fluix; // Applied Energistics 2
 
+    public static Material Kaolinite; // TFC
     public static Material PigIron; // TFC
     public static Material WeakSteel; // TFC
     public static Material WeakBlueSteel; // TFC
@@ -148,6 +151,7 @@ public class InfinityMaterials {
         Electrotine.removeProperty(PropertyKey.ORE);
 
         addFluidToExisting(FluidStorageKeys.LIQUID, SodiumHydroxide);
+        addFluidToExisting(FluidStorageKeys.LIQUID, CalciumHydroxide);
 
         /// Remove Ignored ///
 
@@ -171,7 +175,26 @@ public class InfinityMaterials {
         block.setIgnored(Zinc, () -> AllBlocks.ZINC_BLOCK);
 
         // TFC Materials
+
+//        ingot.setIgnored(Kaolinite, () -> TFCItems.KAOLIN_CLAY);
+        block.setIgnored(Kaolinite, () -> TFCBlocks.RED_KAOLIN_CLAY);
+        block.setIgnored(Kaolinite, () -> TFCBlocks.PINK_KAOLIN_CLAY);
+        block.setIgnored(Kaolinite, () -> TFCBlocks.WHITE_KAOLIN_CLAY);
+        powder.setIgnored(Kaolinite, () -> TFCItems.POWDERS.get(Powder.KAOLINITE));
+
+        block.modifyMaterialAmount(Kaolinite, 4);
+
+        powder.setIgnored(CalciumCarbonate, () -> TFCItems.POWDERS.get(Powder.FLUX));
+        powder.setIgnored(Quicklime, () -> TFCItems.POWDERS.get(Powder.LIME));
+        powder.setIgnored(PotassiumCarbonate, () -> TFCItems.POWDERS.get(Powder.WOOD_ASH));
+        powder.setIgnored(SodaAsh, () -> TFCItems.POWDERS.get(Powder.SODA_ASH));
+
+        powder.setIgnored(Charcoal, () -> TFCItems.POWDERS.get(Powder.CHARCOAL));
+        powder.setIgnored(Coke, () -> TFCItems.POWDERS.get(Powder.COKE));
+        powder.setIgnored(Salt, () -> TFCItems.POWDERS.get(Powder.SALT));
+
         GTFluids.handleNonMaterialFluids(SodiumHydroxide, () -> TFCFluids.SIMPLE_FLUIDS.get(SimpleFluid.LYE).source().get());
+        GTFluids.handleNonMaterialFluids(CalciumHydroxide, () -> TFCFluids.SIMPLE_FLUIDS.get(SimpleFluid.LIMEWATER).source().get());
 
         ingot.setIgnored(Iron, // Iron to Cast Iron
                 () -> TFCItems.METAL_ITEMS.get(Metal.CAST_IRON).get(Metal.ItemType.INGOT));
@@ -308,6 +331,10 @@ public class InfinityMaterials {
             poorRawOre.setIgnored(material, () -> oreItems.get(Ore.Grade.POOR));
             rawOre.setIgnored(material, () -> oreItems.get(Ore.Grade.NORMAL));
             richRawOre.setIgnored(material, () -> oreItems.get(Ore.Grade.RICH));
+
+            if (ore.hasPowder()) {
+                powder.setIgnored(material, () -> TFCItems.ORE_POWDERS.get(ore));
+            }
         });
 
         // TFC Ungraded Ores
@@ -334,6 +361,10 @@ public class InfinityMaterials {
 
         tfcOres.forEach((material, ore) -> {
             rawOre.setIgnored(material, () -> TFCItems.ORES.get(ore));
+
+            if (ore.hasPowder()) {
+                powder.setIgnored(material, () -> TFCItems.ORE_POWDERS.get(ore));
+            }
         });
 
         // Eidolon Materials
@@ -349,9 +380,13 @@ public class InfinityMaterials {
         GTFluids.handleNonMaterialFluids(Dawnstone, RegistryManager.MOLTEN_DAWNSTONE.FLUID::get);
 
         // AE2 Materials
+        block.setIgnored(CertusQuartz, () -> AEBlocks.QUARTZ_BLOCK);
+        block.modifyMaterialAmount(CertusQuartz, 4);
         dust.setIgnored(CertusQuartz, () -> AEItems.CERTUS_QUARTZ_DUST);
         gem.setIgnored(CertusQuartz, () -> AEItems.CERTUS_QUARTZ_CRYSTAL);
 
+        block.setIgnored(Fluix, () -> AEBlocks.FLUIX_BLOCK);
+        block.modifyMaterialAmount(Fluix, 4);
         dust.setIgnored(Fluix, () -> AEItems.FLUIX_DUST);
         gem.setIgnored(Fluix, () -> AEItems.FLUIX_CRYSTAL);
 

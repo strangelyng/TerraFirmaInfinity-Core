@@ -42,6 +42,13 @@ public class InfinityIntegrationMaterials {
                 .buildAndRegister().setFormula("?(Cr(Al2O3))(SiO2)", true);
 
         // TFC
+        Kaolinite = new Material.Builder(InfinityCore.id("kaolinite"))
+                .dust()
+                .components(Aluminium, 2, Hydrogen, 4, Oxygen, 9, Silicon, 2)
+                .color(0xffe9e9).secondaryColor(0xffa887).iconSet(MaterialIconSet.ROUGH)
+                .flags(NO_SMASHING, NO_SMELTING, DISABLE_DECOMPOSITION, EXCLUDE_BLOCK_CRAFTING_BY_HAND_RECIPES)
+                .buildAndRegister().setFormula("Al2Si2O5(OH)4", true);
+
         PigIron = new Material.Builder(InfinityCore.id("pig_iron"))
                 .dust()
                 .ingot()

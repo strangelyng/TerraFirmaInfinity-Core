@@ -14,5 +14,7 @@ public class InfinityMaterialIconType {
     public static final MaterialIconType poorRawOre = new MaterialIconType("poorRawOre");
     public static final MaterialIconType richRawOre = new MaterialIconType("richRawOre");
 
+    public static final MaterialIconType powder = new MaterialIconType("powder");
+
     public static void init() {}
 }
