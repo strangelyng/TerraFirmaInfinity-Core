@@ -21,6 +21,7 @@ import net.dries007.tfc.common.fluids.TFCFluids;
 import net.dries007.tfc.common.items.Powder;
 import net.dries007.tfc.common.items.TFCItems;
 import net.dries007.tfc.util.Metal;
+import net.minecraft.world.level.block.Blocks;
 
 import java.util.HashMap;
 
@@ -150,7 +151,8 @@ public class InfinityMaterials {
         // Remove Other Ores
         Electrotine.removeProperty(PropertyKey.ORE);
 
-        addFluidToExisting(FluidStorageKeys.LIQUID, SodiumHydroxide);
+        addFluidToExisting(FluidStorageKeys.LIQUID, SodiumHydroxide); // for Soda Lye
+        addFluidToExisting(FluidStorageKeys.LIQUID, PotassiumHydroxide);
         addFluidToExisting(FluidStorageKeys.LIQUID, CalciumHydroxide);
 
         /// Remove Ignored ///
@@ -175,8 +177,6 @@ public class InfinityMaterials {
         block.setIgnored(Zinc, () -> AllBlocks.ZINC_BLOCK);
 
         // TFC Materials
-
-//        ingot.setIgnored(Kaolinite, () -> TFCItems.KAOLIN_CLAY);
         block.setIgnored(Kaolinite, () -> TFCBlocks.RED_KAOLIN_CLAY);
         block.setIgnored(Kaolinite, () -> TFCBlocks.PINK_KAOLIN_CLAY);
         block.setIgnored(Kaolinite, () -> TFCBlocks.WHITE_KAOLIN_CLAY);
@@ -186,14 +186,14 @@ public class InfinityMaterials {
 
         powder.setIgnored(CalciumCarbonate, () -> TFCItems.POWDERS.get(Powder.FLUX));
         powder.setIgnored(Quicklime, () -> TFCItems.POWDERS.get(Powder.LIME));
-        powder.setIgnored(PotassiumCarbonate, () -> TFCItems.POWDERS.get(Powder.WOOD_ASH));
         powder.setIgnored(SodaAsh, () -> TFCItems.POWDERS.get(Powder.SODA_ASH));
+        powder.setIgnored(PotassiumCarbonate, () -> TFCItems.POWDERS.get(Powder.WOOD_ASH));
 
         powder.setIgnored(Charcoal, () -> TFCItems.POWDERS.get(Powder.CHARCOAL));
         powder.setIgnored(Coke, () -> TFCItems.POWDERS.get(Powder.COKE));
         powder.setIgnored(Salt, () -> TFCItems.POWDERS.get(Powder.SALT));
 
-        GTFluids.handleNonMaterialFluids(SodiumHydroxide, () -> TFCFluids.SIMPLE_FLUIDS.get(SimpleFluid.LYE).source().get());
+        GTFluids.handleNonMaterialFluids(PotassiumHydroxide, () -> TFCFluids.SIMPLE_FLUIDS.get(SimpleFluid.LYE).source().get());
         GTFluids.handleNonMaterialFluids(CalciumHydroxide, () -> TFCFluids.SIMPLE_FLUIDS.get(SimpleFluid.LIMEWATER).source().get());
 
         ingot.setIgnored(Iron, // Iron to Cast Iron
@@ -308,6 +308,10 @@ public class InfinityMaterials {
             slabPlatedOxidized.setIgnored(material, () -> metalBlocks.get(Metal.BlockType.OXIDIZED_BLOCK_SLAB));
             stairsPlatedOxidized.setIgnored(material, () -> metalBlocks.get(Metal.BlockType.OXIDIZED_BLOCK_STAIRS));
         });
+
+        bell.setIgnored(Brass, () -> TFCBlocks.BRASS_BELL);
+        bell.setIgnored(Bronze, () -> TFCBlocks.BRONZE_BELL);
+        bell.setIgnored(Gold, () -> Blocks.BELL);
 
         // TFC Graded Ores
         var tfcGradedOres = new HashMap<Material, Ore>();

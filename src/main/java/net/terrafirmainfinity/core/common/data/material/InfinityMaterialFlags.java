@@ -2,12 +2,16 @@ package net.terrafirmainfinity.core.common.data.material;
 
 import com.gregtechceu.gtceu.api.data.chemical.material.info.MaterialFlag;
 
+@SuppressWarnings("unused")
 public class InfinityMaterialFlags {
     // For Materials that can be cast into tools (does not affect ingot casting, all metals with a TFCProperty can be cast into ingots)
     public static final MaterialFlag TFC_CASTABLE = new MaterialFlag.Builder("tfc_castable")
             .build();
 
     public static final MaterialFlag HAS_TFC_OXIDATION = new MaterialFlag.Builder("has_tfc_oxidation")
+            .build();
+
+    public static final MaterialFlag HAS_TFC_ARMOR = new MaterialFlag.Builder("has_tfc_armor")
             .build();
 
     public static final MaterialFlag GENERATE_DOUBLE_INGOT = new MaterialFlag.Builder("generate_double_ingot")

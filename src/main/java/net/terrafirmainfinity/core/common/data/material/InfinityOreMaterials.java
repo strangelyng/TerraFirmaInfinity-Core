@@ -13,7 +13,7 @@ public class InfinityOreMaterials {
     public static void register() {
         Bismuthinite = new Material.Builder(InfinityCore.id("bismuthinite"))
                 .dust().ore()
-                .color(0x44583b).secondaryColor(0x1c3d32).iconSet(MaterialIconSet.METALLIC)
+                .color(0x32c880).secondaryColor(0x344028).iconSet(MaterialIconSet.METALLIC)
                 .components(Bismuth, 2, Sulfur, 3)
                 .addOreByproducts(Sulfur, Pyrite, Bismuth)
                 .oreSmeltInto(Bismuth)
