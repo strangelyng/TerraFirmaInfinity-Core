@@ -12,6 +12,7 @@ import net.minecraft.client.renderer.RenderType;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
+import net.terrafirmainfinity.core.InfinityCore;
 import net.terrafirmainfinity.core.common.data.InfinityTagPrefix;
 
 import java.util.Locale;
@@ -30,6 +31,17 @@ public class InfinityBlocks {
             .item(BlockItem::new)
             .build()
             .register();
+
+    // Machine Casing Blocks
+    public static final BlockEntry<Block> CASING_LEAD_BRICKS = REGISTRATE
+            .block("dwarven_machine_casing", Block::new)
+            .initialProperties(() -> Blocks.IRON_BLOCK)
+            .properties(p -> p.isValidSpawn((state, level, pos, ent) -> false))
+            .addLayer(() -> RenderType::solid)
+            .exBlockstate(GTModels.cubeAllModel(InfinityCore.id("block/casings/solid/machine_casing_lead_plated_bricks")))
+            .tag(CustomTags.MINEABLE_WITH_CONFIG_VALID_PICKAXE_WRENCH)
+            .item(BlockItem::new)
+            .build().register();
 
     public static void init() {
         reinitializeCobbleReplacements();

@@ -182,7 +182,7 @@ public class InfinityMaterials {
         nugget.setIgnored(Brass, () -> AllItems.BRASS_NUGGET);
         block.setIgnored(Brass, () -> AllBlocks.BRASS_BLOCK);
 
-        plate.setIgnored(Copper, () -> AllItems.COPPER_SHEET);
+//        plate.setIgnored(Copper, () -> AllItems.COPPER_SHEET);
         nugget.setIgnored(Copper, () -> AllItems.COPPER_NUGGET);
 
         ingot.setIgnored(Zinc, () -> AllItems.ZINC_INGOT);
@@ -224,6 +224,7 @@ public class InfinityMaterials {
         GTFluids.handleNonMaterialFluids(PotassiumHydroxide, () -> TFCFluids.SIMPLE_FLUIDS.get(SimpleFluid.LYE).source().get());
         GTFluids.handleNonMaterialFluids(CalciumHydroxide, () -> TFCFluids.SIMPLE_FLUIDS.get(SimpleFluid.LIMEWATER).source().get());
 
+        ingot.removeIgnored(Iron);
         ingot.setIgnored(Iron, // Iron to Cast Iron
                 () -> TFCItems.METAL_ITEMS.get(Metal.CAST_IRON).get(Metal.ItemType.INGOT));
 
