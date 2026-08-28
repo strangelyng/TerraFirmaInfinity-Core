@@ -15,6 +15,8 @@ import net.neoforged.neoforge.registries.RegisterEvent;
 import net.terrafirmainfinity.core.client.InfinityCoreClient;
 import net.terrafirmainfinity.core.common.InfinityBlocks;
 import net.terrafirmainfinity.core.common.data.*;
+import net.terrafirmainfinity.core.common.data.material.InfinityElements;
+import net.terrafirmainfinity.core.common.data.material.InfinityMaterialIconSet;
 import net.terrafirmainfinity.core.common.data.material.InfinityMaterialFlags;
 import net.terrafirmainfinity.core.common.data.material.InfinityMaterials;
 import net.terrafirmainfinity.core.common.datagen.InfinityCoreDatagen;
@@ -71,6 +73,8 @@ public class InfinityCore {
         if (didRunRegistration) return;
         didRunRegistration = true;
 
+        InfinityElements.init();
+        InfinityMaterialIconSet.init();
         InfinityMaterialIconType.init();
         InfinityMaterialFlags.init();
         InfinityMaterials.init();

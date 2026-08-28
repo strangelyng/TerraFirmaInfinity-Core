@@ -22,6 +22,14 @@ public class InfinityIntegrationMaterials {
                 .components(Gold, 1, Copper, 4)
                 .buildAndRegister();
 
+        Ember = new Material.Builder(InfinityCore.id("ember"))
+                .gem().ore(1, 1, true)
+                .gas(1300)
+                .color(0xff7327).secondaryColor(0xe60000).iconSet(MaterialIconSet.DIAMOND) // TODO: Custom Material Set
+                .flags(PHOSPHORESCENT, NO_ORE_SMELTING)
+                .element(InfinityElements.Ember)
+                .buildAndRegister();
+
         // Eidolon Repraised
         Pewter = new Material.Builder(InfinityCore.id("pewter"))
                 .ingot()
@@ -40,6 +48,26 @@ public class InfinityIntegrationMaterials {
                 .flags(NO_SMELTING, CRYSTALLIZABLE, DISABLE_DECOMPOSITION)
                 .components(Ruby, 1, CertusQuartz, 1)
                 .buildAndRegister().setFormula("?(Cr(Al2O3))(SiO2)", true);
+
+        // Malum
+        HallowedGold = new Material.Builder(InfinityCore.id("hallowed_gold"))
+                .ingot()
+                .color(0xffd659).secondaryColor(0xca0023).iconSet(InfinityMaterialIconSet.HALLOWED)
+                .flags(GENERATE_PLATE, GENERATE_ROD, GENERATE_FINE_WIRE, GENERATE_RING, DISABLE_DECOMPOSITION)
+                .buildAndRegister();
+
+        MalignantPewter = new Material.Builder(InfinityCore.id("malignant_pewter"))
+                .ingot()
+                .color(0xf2d4ff).secondaryColor(0xba84c6).iconSet(InfinityMaterialIconSet.MALIGNANT)
+                .flags(GENERATE_PLATE, DISABLE_DECOMPOSITION)
+                .hazard(HazardProperty.HazardTrigger.INHALATION, GTMedicalConditions.POISON)
+                .buildAndRegister();
+
+        SoulstainedSteel = new Material.Builder(InfinityCore.id("soulstained_steel"))
+                .ingot()
+                .color(0xe98cff).secondaryColor(0x7b3bd3).iconSet(InfinityMaterialIconSet.SOULSTAINED)
+                .flags(GENERATE_PLATE, GENERATE_ROD, GENERATE_LONG_ROD, GENERATE_ROTOR, DISABLE_DECOMPOSITION)
+                .buildAndRegister();
 
         // TFC
         Kaolinite = new Material.Builder(InfinityCore.id("kaolinite"))

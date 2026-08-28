@@ -12,6 +12,8 @@ import com.gregtechceu.gtceu.api.fluids.store.FluidStorageKey;
 import com.gregtechceu.gtceu.api.fluids.store.FluidStorageKeys;
 import com.gregtechceu.gtceu.common.data.GTFluids;
 import com.rekindled.embers.RegistryManager;
+import com.sammy.malum.registry.common.block.MalumBlocks;
+import com.sammy.malum.registry.common.item.MalumItems;
 import com.simibubi.create.AllBlocks;
 import com.simibubi.create.AllItems;
 import net.dries007.tfc.common.blocks.TFCBlocks;
@@ -33,8 +35,15 @@ import static net.terrafirmainfinity.core.common.data.InfinityTagPrefix.*;
 public class InfinityMaterials {
     // Integration Materials
     public static Material Dawnstone; // Embers
+    public static Material Ember; // Embers
+
     public static Material Pewter; // Eidolon Repraised
+
     public static Material Fluix; // Applied Energistics 2
+
+    public static Material HallowedGold; // Malum
+    public static Material MalignantPewter; // Malum
+    public static Material SoulstainedSteel; // Malum
 
     public static Material Kaolinite; // TFC
     public static Material PigIron; // TFC
@@ -111,6 +120,10 @@ public class InfinityMaterials {
         RoseGold.removeProperty(PropertyKey.BLAST);
         SterlingSilver.removeProperty(PropertyKey.BLAST);
 
+        OreProperty oreProp = Ember.getProperty(PropertyKey.ORE);
+        oreProp.setWashedIn(Mercury);
+        oreProp.setOreByProducts(Sulfur, Sulfur, Ember, Gold);
+
         // Adjust Fluid Temperature of Steels
         Steel.removeProperty(PropertyKey.FLUID);
         BlackSteel.removeProperty(PropertyKey.FLUID);
@@ -175,6 +188,21 @@ public class InfinityMaterials {
         ingot.setIgnored(Zinc, () -> AllItems.ZINC_INGOT);
         nugget.setIgnored(Zinc, () -> AllItems.ZINC_NUGGET);
         block.setIgnored(Zinc, () -> AllBlocks.ZINC_BLOCK);
+
+        // Malum Materials
+        ingot.setIgnored(HallowedGold, MalumItems.HALLOWED_GOLD_INGOT::get);
+        nugget.setIgnored(HallowedGold, MalumItems.HALLOWED_GOLD_NUGGET::get);
+        block.setIgnored(HallowedGold, MalumBlocks.BLOCK_OF_HALLOWED_GOLD::get);
+
+        ingot.setIgnored(MalignantPewter, MalumItems.MALIGNANT_PEWTER_INGOT::get);
+        plate.setIgnored(MalignantPewter, MalumItems.MALIGNANT_PEWTER_PLATING::get);
+        nugget.setIgnored(MalignantPewter, MalumItems.MALIGNANT_PEWTER_NUGGET::get);
+        block.setIgnored(MalignantPewter, MalumBlocks.BLOCK_OF_MALIGNANT_PEWTER::get);
+
+        ingot.setIgnored(SoulstainedSteel, MalumItems.SOUL_STAINED_STEEL_INGOT::get);
+        plate.setIgnored(SoulstainedSteel, MalumItems.SOUL_STAINED_STEEL_PLATING::get);
+        nugget.setIgnored(SoulstainedSteel, MalumItems.SOUL_STAINED_STEEL_NUGGET::get);
+        block.setIgnored(SoulstainedSteel, MalumBlocks.BLOCK_OF_SOUL_STAINED_STEEL::get);
 
         // TFC Materials
         block.setIgnored(Kaolinite, () -> TFCBlocks.RED_KAOLIN_CLAY);
@@ -382,6 +410,9 @@ public class InfinityMaterials {
         nugget.setIgnored(Dawnstone, RegistryManager.DAWNSTONE_NUGGET);
         block.setIgnored(Dawnstone, RegistryManager.DAWNSTONE_BLOCK);
         GTFluids.handleNonMaterialFluids(Dawnstone, RegistryManager.MOLTEN_DAWNSTONE.FLUID::get);
+
+        gem.setIgnored(Ember, RegistryManager.EMBER_CRYSTAL);
+        dust.setIgnored(Ember, RegistryManager.EMBER_GRIT);
 
         // AE2 Materials
         block.setIgnored(CertusQuartz, () -> AEBlocks.QUARTZ_BLOCK);
