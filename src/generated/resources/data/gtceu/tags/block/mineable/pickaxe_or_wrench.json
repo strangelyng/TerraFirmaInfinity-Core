@@ -1,6 +1,8 @@
 {
   "values": [
     "tfinfinity:ulv_hermetic_casing",
-    "tfinfinity:dwarven_machine_casing"
+    "tfinfinity:dwarven_machine_casing",
+    "tfinfinity:lead_brick_casing",
+    "tfinfinity:lead_machine_casing"
   ]
 }

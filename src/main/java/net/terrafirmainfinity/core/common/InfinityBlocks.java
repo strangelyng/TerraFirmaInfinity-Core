@@ -14,6 +14,7 @@ import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.terrafirmainfinity.core.InfinityCore;
 import net.terrafirmainfinity.core.common.data.InfinityTagPrefix;
+import net.terrafirmainfinity.core.common.data.models.InfinityModels;
 
 import java.util.Locale;
 
@@ -42,6 +43,25 @@ public class InfinityBlocks {
             .tag(CustomTags.MINEABLE_WITH_CONFIG_VALID_PICKAXE_WRENCH)
             .item(BlockItem::new)
             .build().register();
+
+    public static final BlockEntry<Block> LEAD_BRICKS_HULL = REGISTRATE
+            .block("lead_brick_casing", Block::new)
+            .lang("Bricked Lead Casing")
+            .initialProperties(() -> Blocks.IRON_BLOCK)
+            .blockstate(InfinityModels.createDwarvenCasingModel("bricked_lead"))
+            .tag(CustomTags.MINEABLE_WITH_CONFIG_VALID_PICKAXE_WRENCH)
+            .item(BlockItem::new)
+            .build()
+            .register();
+
+    public static final BlockEntry<Block> LEAD_HULL = REGISTRATE
+            .block("lead_machine_casing", Block::new)
+            .initialProperties(() -> Blocks.IRON_BLOCK)
+            .blockstate(InfinityModels.createDwarvenCasingModel("lead"))
+            .tag(CustomTags.MINEABLE_WITH_CONFIG_VALID_PICKAXE_WRENCH)
+            .item(BlockItem::new)
+            .build()
+            .register();
 
     public static void init() {
         reinitializeCobbleReplacements();
