@@ -34,6 +34,17 @@ public class InfinityBlocks {
             .register();
 
     // Machine Casing Blocks
+    public static final BlockEntry<Block> CASING_STEEL_BRICKS = REGISTRATE
+            .block("high_pressure_steam_machine_casing", Block::new)
+            .initialProperties(() -> Blocks.IRON_BLOCK)
+            .properties(p -> p.isValidSpawn((state, level, pos, ent) -> false))
+            .addLayer(() -> RenderType::solid)
+            .exBlockstate(GTModels.cubeAllModel(InfinityCore.id("block/casings/solid/machine_casing_steel_plated_bricks")))
+            .tag(CustomTags.MINEABLE_WITH_CONFIG_VALID_PICKAXE_WRENCH)
+            .item(BlockItem::new)
+            .build()
+            .register();
+
     public static final BlockEntry<Block> CASING_LEAD_BRICKS = REGISTRATE
             .block("dwarven_machine_casing", Block::new)
             .initialProperties(() -> Blocks.IRON_BLOCK)
@@ -42,7 +53,8 @@ public class InfinityBlocks {
             .exBlockstate(GTModels.cubeAllModel(InfinityCore.id("block/casings/solid/machine_casing_lead_plated_bricks")))
             .tag(CustomTags.MINEABLE_WITH_CONFIG_VALID_PICKAXE_WRENCH)
             .item(BlockItem::new)
-            .build().register();
+            .build()
+            .register();
 
     public static final BlockEntry<Block> LEAD_BRICKS_HULL = REGISTRATE
             .block("lead_brick_casing", Block::new)
@@ -58,6 +70,17 @@ public class InfinityBlocks {
             .block("lead_machine_casing", Block::new)
             .initialProperties(() -> Blocks.IRON_BLOCK)
             .blockstate(InfinityModels.createDwarvenCasingModel("lead"))
+            .tag(CustomTags.MINEABLE_WITH_CONFIG_VALID_PICKAXE_WRENCH)
+            .item(BlockItem::new)
+            .build()
+            .register();
+
+    public static final BlockEntry<Block> CASING_LEAD_PIPE = REGISTRATE
+            .block("lead_pipe_casing", Block::new)
+            .initialProperties(() -> Blocks.IRON_BLOCK)
+            .properties(p -> p.isValidSpawn((state, level, pos, ent) -> false))
+            .addLayer(() -> RenderType::solid)
+            .exBlockstate(GTModels.cubeAllModel(InfinityCore.id("block/casings/pipe/machine_casing_pipe_lead")))
             .tag(CustomTags.MINEABLE_WITH_CONFIG_VALID_PICKAXE_WRENCH)
             .item(BlockItem::new)
             .build()

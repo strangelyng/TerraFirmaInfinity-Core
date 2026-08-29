@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:block/cube_all",
+  "textures": {
+    "all": "tfinfinity:block/casings/pipe/machine_casing_pipe_lead"
+  }
+}

@@ -1,0 +1,7 @@
+{
+  "variants": {
+    "": {
+      "model": "tfinfinity:block/high_pressure_steam_machine_casing"
+    }
+  }
+}

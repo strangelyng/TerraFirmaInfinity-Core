@@ -3,6 +3,7 @@ package net.terrafirmainfinity.core.common.data.recipe;
 import com.gregtechceu.gtceu.common.data.GTRecipeTypes;
 import net.minecraft.data.recipes.RecipeOutput;
 import net.terrafirmainfinity.core.InfinityCore;
+import net.terrafirmainfinity.core.common.data.material.InfinityMaterials;
 
 import static net.terrafirmainfinity.core.common.data.InfinityRecipeTypes.*;
 import static com.gregtechceu.gtceu.api.data.tag.TagPrefix.*;
@@ -45,7 +46,23 @@ public class InfinityRecipeHandler {
                 .chancedOutput(dust, Magnetite, 3333)
                 .chancedOutput(dust, Stone, 5000)
                 .outputFluids(Water.getFluid(75))
-                .duration(100)
+                .duration(200)
+                .save(provider);
+
+        METALLURGICAL_CONVERTER_RECIPE.recipeBuilder(InfinityCore.id("pig_iron_to_steel_air"))
+                .inputItems(ingot, InfinityMaterials.PigIron)
+                .inputFluids(Air.getFluid(200))
+                .outputItems(ingot, Steel)
+                .EUt(VA[MV])
+                .duration(600)
+                .save(provider);
+
+        METALLURGICAL_CONVERTER_RECIPE.recipeBuilder(InfinityCore.id("pig_iron_to_steel"))
+                .inputItems(ingot, InfinityMaterials.PigIron)
+                .inputFluids(Oxygen.getFluid(200))
+                .outputItems(ingot, Steel)
+                .EUt(VA[MV])
+                .duration(400)
                 .save(provider);
     }
 }

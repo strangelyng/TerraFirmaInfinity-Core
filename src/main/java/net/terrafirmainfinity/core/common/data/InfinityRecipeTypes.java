@@ -84,9 +84,15 @@ public class InfinityRecipeTypes {
             .UI(builder -> builder.setProgressBar(GTGuiTextures.PROGRESS_ARROW))
             .setSound(GTSoundEntries.BATH);
 
+    public static final GTRecipeType METALLURGICAL_CONVERTER_RECIPE = GTRecipeTypes.register(InfinityCore.id("metallurgical_converter"), MULTIBLOCK)
+            .setMaxIOSize(3, 2, 3, 2)
+            .prepareBuilder(recipeBuilder -> recipeBuilder.EUt(GTValues.VA[GTValues.LV]))
+            .UI(builder -> builder.setProgressBar(GTGuiTextures.PROGRESS_ARROW))
+            .setSound(GTSoundEntries.FURNACE);
+
     public static void init() {
         for (GTRecipeType type : new GTRecipeType[] {
-                ROASTER_RECIPE, ELECTROLYTIC_CELL_RECIPE, GRAVITY_SEPARATOR_RECIPE
+                ROASTER_RECIPE, ELECTROLYTIC_CELL_RECIPE, GRAVITY_SEPARATOR_RECIPE, METALLURGICAL_CONVERTER_RECIPE
         }) {
             type.setEUIO(IO.IN);
         }

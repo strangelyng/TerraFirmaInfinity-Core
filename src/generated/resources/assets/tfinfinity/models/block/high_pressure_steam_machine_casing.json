@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:block/cube_all",
+  "textures": {
+    "all": "tfinfinity:block/casings/solid/machine_casing_steel_plated_bricks"
+  }
+}

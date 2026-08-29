@@ -10,7 +10,7 @@ import java.util.Locale;
 
 public class InfinityLangHandler extends LangHandler {
     private static final String[] INFINITY_RECIPE_TYPE_IDS = {
-            "roaster", "electrolytic_cell", "gravity_separator"
+            "roaster", "electrolytic_cell", "gravity_separator", "metallurgical_converter"
     };
 
     private static String toTitle(String snakeCase) {
@@ -95,6 +95,7 @@ public class InfinityLangHandler extends LangHandler {
                 case "roaster" -> "Ore Roasting";
                 case "gravity_separator" -> "Gravity Separation";
                 case "electrolytic_cell" -> "Advanced Electrolysis";
+                case "metallurgical_converter" -> "Metallurgical Conversion";
                 default -> toTitle(id);
             };
             provider.add("recipe_type." + InfinityCore.MOD_ID + "." + id, name);
