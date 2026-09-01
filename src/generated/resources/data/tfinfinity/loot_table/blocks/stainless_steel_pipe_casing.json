@@ -11,11 +11,11 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "name": "tfinfinity:high_pressure_steam_machine_casing"
+          "name": "tfinfinity:stainless_steel_pipe_casing"
         }
       ],
       "rolls": 1.0
     }
   ],
-  "random_sequence": "tfinfinity:blocks/high_pressure_steam_machine_casing"
+  "random_sequence": "tfinfinity:blocks/stainless_steel_pipe_casing"
 }

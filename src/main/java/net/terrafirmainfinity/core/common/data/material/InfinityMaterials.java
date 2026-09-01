@@ -105,6 +105,8 @@ public class InfinityMaterials {
         Carbon.addFlags(MaterialFlags.GENERATE_ROD, MaterialFlags.GENERATE_LONG_ROD);
         Graphite.addFlags(MaterialFlags.GENERATE_ROD, MaterialFlags.GENERATE_LONG_ROD);
 
+        Lead.addFlags(MaterialFlags.GENERATE_FRAME);
+
         // Modify Properties
         IngotProperty ingotProp = WroughtIron.getProperty(PropertyKey.INGOT);
         ingotProp.setMacerateInto(Iron);

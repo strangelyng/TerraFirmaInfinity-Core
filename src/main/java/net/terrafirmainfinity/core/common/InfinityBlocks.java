@@ -35,7 +35,8 @@ public class InfinityBlocks {
 
     // Machine Casing Blocks
     public static final BlockEntry<Block> CASING_STEEL_BRICKS = REGISTRATE
-            .block("high_pressure_steam_machine_casing", Block::new)
+            .block("hp_steam_machine_casing", Block::new)
+            .lang("High Pressure Steam Machine Casing")
             .initialProperties(() -> Blocks.IRON_BLOCK)
             .properties(p -> p.isValidSpawn((state, level, pos, ent) -> false))
             .addLayer(() -> RenderType::solid)
@@ -81,6 +82,17 @@ public class InfinityBlocks {
             .properties(p -> p.isValidSpawn((state, level, pos, ent) -> false))
             .addLayer(() -> RenderType::solid)
             .exBlockstate(GTModels.cubeAllModel(InfinityCore.id("block/casings/pipe/machine_casing_pipe_lead")))
+            .tag(CustomTags.MINEABLE_WITH_CONFIG_VALID_PICKAXE_WRENCH)
+            .item(BlockItem::new)
+            .build()
+            .register();
+
+    public static final BlockEntry<Block> CASING_STAINLESS_STEEL_PIPE = REGISTRATE
+            .block("stainless_steel_pipe_casing", Block::new)
+            .initialProperties(() -> Blocks.IRON_BLOCK)
+            .properties(p -> p.isValidSpawn((state, level, pos, ent) -> false))
+            .addLayer(() -> RenderType::solid)
+            .exBlockstate(GTModels.cubeAllModel(InfinityCore.id("block/casings/pipe/machine_casing_pipe_stainless_steel")))
             .tag(CustomTags.MINEABLE_WITH_CONFIG_VALID_PICKAXE_WRENCH)
             .item(BlockItem::new)
             .build()
