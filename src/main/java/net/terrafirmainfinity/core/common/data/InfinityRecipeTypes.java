@@ -79,7 +79,7 @@ public class InfinityRecipeTypes {
                     .setFluidSlotOverlay(IO.OUT, 0, GTGuiTextures.VIAL_OVERLAY_2))
             .setSound(GTSoundEntries.ELECTROLYZER);
 
-    public static final GTRecipeType GRAVITY_SEPARATOR_RECIPE = GTRecipeTypes.register(InfinityCore.id("gravity_separator"), MULTIBLOCK)
+    public static final GTRecipeType SPIRAL_SEPARATOR_RECIPE = GTRecipeTypes.register(InfinityCore.id("spiral_separator"), MULTIBLOCK)
             .setMaxIOSize(1, 6, 1, 3)
             .UI(builder -> builder.setProgressBar(GTGuiTextures.PROGRESS_ARROW))
             .setSound(GTSoundEntries.BATH);
@@ -92,7 +92,7 @@ public class InfinityRecipeTypes {
 
     public static void init() {
         for (GTRecipeType type : new GTRecipeType[] {
-                ROASTER_RECIPE, ELECTROLYTIC_CELL_RECIPE, GRAVITY_SEPARATOR_RECIPE, METALLURGICAL_CONVERTER_RECIPE
+                ROASTER_RECIPE, ELECTROLYTIC_CELL_RECIPE, SPIRAL_SEPARATOR_RECIPE, METALLURGICAL_CONVERTER_RECIPE
         }) {
             type.setEUIO(IO.IN);
         }

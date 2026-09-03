@@ -10,7 +10,7 @@ import java.util.Locale;
 
 public class InfinityLangHandler extends LangHandler {
     private static final String[] INFINITY_RECIPE_TYPE_IDS = {
-            "roaster", "electrolytic_cell", "gravity_separator", "metallurgical_converter"
+            "roaster", "electrolytic_cell", "spiral_separator", "metallurgical_converter"
     };
 
     private static String toTitle(String snakeCase) {
@@ -93,7 +93,7 @@ public class InfinityLangHandler extends LangHandler {
         for (String id : INFINITY_RECIPE_TYPE_IDS) {
             String name = switch (id) {
                 case "roaster" -> "Ore Roasting";
-                case "gravity_separator" -> "Gravity Separation";
+                case "spiral_separator" -> "Spiral Separation";
                 case "electrolytic_cell" -> "Advanced Electrolysis";
                 case "metallurgical_converter" -> "Metallurgical Conversion";
                 default -> toTitle(id);

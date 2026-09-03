@@ -23,14 +23,14 @@ import net.terrafirmainfinity.core.common.machine.multiblock.BasicWorkableMachin
 import static net.terrafirmainfinity.core.InfinityCore.REGISTRATE;
 import static com.gregtechceu.gtceu.api.multiblock.Predicates.*;
 
-public class BasicGravitySeparator {
-    public static final MultiblockMachineDefinition BASIC_GRAVITY_SEPARATOR = REGISTRATE
-            .multiblock("basic_gravity_separator", BasicWorkableMachine::new)
+public class SpiralSeparator {
+    public static final MultiblockMachineDefinition SPIRAL_SEPARATOR = REGISTRATE
+            .multiblock("spiral_separator", BasicWorkableMachine::new)
             .rotationState(RotationState.NON_Y_AXIS)
-            .recipeType(InfinityRecipeTypes.GRAVITY_SEPARATOR_RECIPE)
+            .recipeType(InfinityRecipeTypes.SPIRAL_SEPARATOR_RECIPE)
             .addOutputLimit(ItemRecipeCapability.CAP, 3)
             .addOutputLimit(FluidRecipeCapability.CAP, 2)
-            .recipeModifiers(BasicGravitySeparator::recipeModifier)
+            .recipeModifiers(SpiralSeparator::recipeModifier)
             .appearanceBlock(GTBlocks.CASING_STEEL_SOLID)
             .pattern(definition -> MultiblockPatternBuilder.start(RelativeDirection.FRONT, RelativeDirection.UP, RelativeDirection.RIGHT)
                     .slice("CCC", "GFG", "GFG", "GFG", "G#G", "XXX")

@@ -39,7 +39,7 @@ public class InfinityRecipeHandler {
                 .duration(400)
                 .save(provider);
 
-        GRAVITY_SEPARATOR_RECIPE.recipeBuilder(InfinityCore.id("crushed_hematite_ore"))
+        SPIRAL_SEPARATOR_RECIPE.recipeBuilder(InfinityCore.id("crushed_hematite_ore"))
                 .inputItems(crushed, Hematite)
                 .inputFluids(Water.getFluid(100))
                 .outputItems(crushedPurified, Hematite)
