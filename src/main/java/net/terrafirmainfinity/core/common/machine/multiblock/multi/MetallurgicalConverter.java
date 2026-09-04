@@ -10,21 +10,19 @@ import com.gregtechceu.gtceu.api.multiblock.MultiPredicate;
 import com.gregtechceu.gtceu.api.multiblock.pattern.MultiblockPatternBuilder;
 import com.gregtechceu.gtceu.api.multiblock.util.RelativeDirection;
 import com.gregtechceu.gtceu.api.recipe.GTRecipe;
-import com.gregtechceu.gtceu.api.recipe.RecipeHelper;
 import com.gregtechceu.gtceu.api.recipe.content.ContentModifier;
 import com.gregtechceu.gtceu.api.recipe.modifier.ModifierFunction;
 import com.gregtechceu.gtceu.api.recipe.modifier.ParallelLogic;
 import com.gregtechceu.gtceu.common.data.GTBlocks;
 import com.gregtechceu.gtceu.common.data.GTMaterials;
 import com.gregtechceu.gtceu.common.data.GTRecipeModifiers;
-import com.gregtechceu.gtceu.utils.GTUtil;
 import net.terrafirmainfinity.core.common.data.InfinityRecipeTypes;
 
 import static com.gregtechceu.gtceu.api.multiblock.Predicates.*;
-import static net.terrafirmainfinity.core.InfinityCore.REGISTRATE;
+import static net.terrafirmainfinity.core.InfinityCore.InfinityRegistrate;
 
 public class MetallurgicalConverter {
-    public static final MultiblockMachineDefinition METALLURGICAL_CONVERTER = REGISTRATE
+    public static final MultiblockMachineDefinition METALLURGICAL_CONVERTER = InfinityRegistrate
             .multiblock("metallurgical_converter", WorkableElectricMultiblockMachine::new)
             .rotationState(RotationState.NON_Y_AXIS)
             .recipeType(InfinityRecipeTypes.METALLURGICAL_CONVERTER_RECIPE)

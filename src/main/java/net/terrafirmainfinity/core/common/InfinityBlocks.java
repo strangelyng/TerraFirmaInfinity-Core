@@ -18,10 +18,14 @@ import net.terrafirmainfinity.core.common.data.models.InfinityModels;
 
 import java.util.Locale;
 
-import static net.terrafirmainfinity.core.InfinityCore.REGISTRATE;
+import static net.terrafirmainfinity.core.InfinityCore.InfinityRegistrate;
 
 public class InfinityBlocks {
-    public static final BlockEntry<Block> HERMETIC_CASING_ULV = REGISTRATE
+    static {
+        InfinityRegistrate.creativeModeTab(() -> InfinityCore.INFINITY_CREATIVE_TAB);
+    }
+
+    public static final BlockEntry<Block> HERMETIC_CASING_ULV = InfinityRegistrate
             .block("ulv_hermetic_casing", Block::new)
             .lang("Hermetic Casing")
             .initialProperties(() -> Blocks.IRON_BLOCK)
@@ -34,7 +38,7 @@ public class InfinityBlocks {
             .register();
 
     // Machine Casing Blocks
-    public static final BlockEntry<Block> CASING_STEEL_BRICKS = REGISTRATE
+    public static final BlockEntry<Block> CASING_STEEL_BRICKS = InfinityRegistrate
             .block("hp_steam_machine_casing", Block::new)
             .lang("High Pressure Steam Machine Casing")
             .initialProperties(() -> Blocks.IRON_BLOCK)
@@ -46,7 +50,7 @@ public class InfinityBlocks {
             .build()
             .register();
 
-    public static final BlockEntry<Block> CASING_LEAD_BRICKS = REGISTRATE
+    public static final BlockEntry<Block> CASING_LEAD_BRICKS = InfinityRegistrate
             .block("dwarven_machine_casing", Block::new)
             .initialProperties(() -> Blocks.IRON_BLOCK)
             .properties(p -> p.isValidSpawn((state, level, pos, ent) -> false))
@@ -57,7 +61,7 @@ public class InfinityBlocks {
             .build()
             .register();
 
-    public static final BlockEntry<Block> LEAD_BRICKS_HULL = REGISTRATE
+    public static final BlockEntry<Block> LEAD_BRICKS_HULL = InfinityRegistrate
             .block("lead_brick_casing", Block::new)
             .lang("Bricked Lead Casing")
             .initialProperties(() -> Blocks.IRON_BLOCK)
@@ -67,7 +71,7 @@ public class InfinityBlocks {
             .build()
             .register();
 
-    public static final BlockEntry<Block> LEAD_HULL = REGISTRATE
+    public static final BlockEntry<Block> LEAD_HULL = InfinityRegistrate
             .block("lead_machine_casing", Block::new)
             .initialProperties(() -> Blocks.IRON_BLOCK)
             .blockstate(InfinityModels.createDwarvenCasingModel("lead"))
@@ -76,7 +80,7 @@ public class InfinityBlocks {
             .build()
             .register();
 
-    public static final BlockEntry<Block> CASING_LEAD_PIPE = REGISTRATE
+    public static final BlockEntry<Block> CASING_LEAD_PIPE = InfinityRegistrate
             .block("lead_pipe_casing", Block::new)
             .initialProperties(() -> Blocks.IRON_BLOCK)
             .properties(p -> p.isValidSpawn((state, level, pos, ent) -> false))
@@ -87,7 +91,7 @@ public class InfinityBlocks {
             .build()
             .register();
 
-    public static final BlockEntry<Block> CASING_STAINLESS_STEEL_PIPE = REGISTRATE
+    public static final BlockEntry<Block> CASING_STAINLESS_STEEL_PIPE = InfinityRegistrate
             .block("stainless_steel_pipe_casing", Block::new)
             .initialProperties(() -> Blocks.IRON_BLOCK)
             .properties(p -> p.isValidSpawn((state, level, pos, ent) -> false))

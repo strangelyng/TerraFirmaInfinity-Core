@@ -7,7 +7,6 @@ import com.gregtechceu.gtceu.api.data.chemical.material.Material;
 import com.gregtechceu.gtceu.api.data.chemical.material.info.MaterialFlags;
 import com.gregtechceu.gtceu.api.registry.GTRegistries;
 import com.gregtechceu.gtceu.api.registry.registrate.GTRegistrate;
-import com.gregtechceu.gtceu.data.recipe.generated.*;
 import net.dries007.tfc.common.items.TFCItems;
 import net.minecraft.data.recipes.RecipeOutput;
 import net.minecraft.resources.ResourceLocation;
@@ -26,7 +25,7 @@ public class InfinityCoreGTAddon implements IGTAddon
     @Override
     public GTRegistrate getRegistrate()
     {
-        return InfinityCore.REGISTRATE;
+        return InfinityCore.InfinityRegistrate;
     }
 
     @Override

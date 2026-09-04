@@ -20,11 +20,11 @@ import com.simibubi.create.AllBlocks;
 import net.terrafirmainfinity.core.common.data.InfinityRecipeTypes;
 import net.terrafirmainfinity.core.common.machine.multiblock.BasicWorkableMachine;
 
-import static net.terrafirmainfinity.core.InfinityCore.REGISTRATE;
+import static net.terrafirmainfinity.core.InfinityCore.InfinityRegistrate;
 import static com.gregtechceu.gtceu.api.multiblock.Predicates.*;
 
 public class SpiralSeparator {
-    public static final MultiblockMachineDefinition SPIRAL_SEPARATOR = REGISTRATE
+    public static final MultiblockMachineDefinition SPIRAL_SEPARATOR = InfinityRegistrate
             .multiblock("spiral_separator", BasicWorkableMachine::new)
             .rotationState(RotationState.NON_Y_AXIS)
             .recipeType(InfinityRecipeTypes.SPIRAL_SEPARATOR_RECIPE)

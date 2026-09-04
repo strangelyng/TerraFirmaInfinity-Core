@@ -83,7 +83,7 @@ public class InfinityIntegrationMaterials {
                 .liquid(1775)
                 .components(Iron, 1, Carbon, 1)
                 .color(0xb5adae).secondaryColor(0x625457).iconSet(MaterialIconSet.DULL)
-                .flags(NO_SMELTING, DISABLE_DECOMPOSITION, DISABLE_ALLOY_BLAST)
+                .flags(NO_SMELTING, DISABLE_DECOMPOSITION)
                 .buildAndRegister();
 
         WeakSteel = new Material.Builder(InfinityCore.id("weak_steel"))
@@ -91,7 +91,7 @@ public class InfinityIntegrationMaterials {
                 .liquid(1750)
                 .components(Nickel, 1, BlackBronze, 1, Steel, 2)
                 .color(0x8a8a8a).secondaryColor(0x5c5c5c).iconSet(MaterialIconSet.METALLIC)
-                .flags(NO_SMELTING, DISABLE_DECOMPOSITION, DISABLE_ALLOY_BLAST)
+                .flags(NO_SMELTING, DECOMPOSITION_BY_CENTRIFUGING)
                 .buildAndRegister();
 
         WeakBlueSteel = new Material.Builder(InfinityCore.id("weak_blue_steel"))
@@ -100,7 +100,7 @@ public class InfinityIntegrationMaterials {
                 .liquid(1800)
                 .components(SterlingSilver, 1, BismuthBronze, 1, Steel, 2, BlackSteel, 4)
                 .color(0x697fbd).secondaryColor(0x384b82).iconSet(MaterialIconSet.METALLIC)
-                .flags(NO_SMELTING, DISABLE_DECOMPOSITION, DISABLE_ALLOY_BLAST)
+                .flags(NO_SMELTING, DECOMPOSITION_BY_CENTRIFUGING)
                 .buildAndRegister();
 
         WeakRedSteel = new Material.Builder(InfinityCore.id("weak_red_steel"))
@@ -109,7 +109,7 @@ public class InfinityIntegrationMaterials {
                 .liquid(1800)
                 .components(Brass, 1, RoseGold, 1, Steel, 2, BlackSteel, 4)
                 .color(0xb55c5c).secondaryColor(0x7d3232).iconSet(MaterialIconSet.METALLIC)
-                .flags(NO_SMELTING, DISABLE_DECOMPOSITION, DISABLE_ALLOY_BLAST)
+                .flags(NO_SMELTING, DECOMPOSITION_BY_CENTRIFUGING)
                 .buildAndRegister();
     }
 }

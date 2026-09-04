@@ -11,11 +11,11 @@ import com.gregtechceu.gtceu.common.data.GTRecipeModifiers;
 import net.terrafirmainfinity.core.common.data.InfinityRecipeTypes;
 
 import static com.gregtechceu.gtceu.api.multiblock.Predicates.*;
-import static net.terrafirmainfinity.core.InfinityCore.REGISTRATE;
+import static net.terrafirmainfinity.core.InfinityCore.InfinityRegistrate;
 
 // TODO: Disable GCYM LARGE_ELECTROLYZER
 public class ElectrolyticCell {
-    public static final MultiblockMachineDefinition ELECTROLYTIC_CELL = REGISTRATE
+    public static final MultiblockMachineDefinition ELECTROLYTIC_CELL = InfinityRegistrate
             .multiblock("electrolytic_cell", WorkableElectricMultiblockMachine::new)
             .rotationState(RotationState.ALL)
             .recipeType(InfinityRecipeTypes.ELECTROLYTIC_CELL_RECIPE)

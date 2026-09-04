@@ -38,25 +38,23 @@ public class InfinityCore {
 
     public static final String MOD_ID = "tfinfinity";
     public static final Logger LOGGER = LogUtils.getLogger();
-    public static GTRegistrate REGISTRATE = GTRegistrate.create(MOD_ID);
+    public static GTRegistrate InfinityRegistrate = GTRegistrate.create(MOD_ID);
 
-    public static RegistryEntry<CreativeModeTab, ? extends CreativeModeTab> INFINITY_CREATIVE_TAB = REGISTRATE
-            .defaultCreativeTab(InfinityCore.MOD_ID,
-                    builder -> builder
-                            .displayItems(new GTCreativeModeTabs.RegistrateDisplayItemsGenerator(
-                                    InfinityCore.MOD_ID, REGISTRATE))
-                            .title(REGISTRATE
-                                    .addLang("itemGroup", InfinityCore.id("creative_tab"),
-                                            "TerraFirmaInfinity (Coremod)"))
-                            .icon(Items.NETHERITE_INGOT::getDefaultInstance)
-                            .build())
+    public static RegistryEntry<CreativeModeTab, CreativeModeTab> INFINITY_CREATIVE_TAB = InfinityRegistrate.defaultCreativeTab(
+            InfinityCore.MOD_ID,
+            builder -> builder
+                    .title(InfinityRegistrate
+                            .addLang("itemGroup", InfinityCore.id("creative_tab"),
+                                    "TerraFirmaInfinity (Coremod)"))
+                    .icon(InfinityItems.STEAM_MOTOR::asStack)
+                    .build())
             .register();
 
     public InfinityCore(IEventBus modBus, ModContainer modContainer) {
         InfinityCoreDatagen.init();
         modBus.register(this);
         modContainer.registerConfig(ModConfig.Type.COMMON, InfinityConfig.SPEC);
-        REGISTRATE.registerEventListeners(modBus);
+        InfinityRegistrate.registerEventListeners(modBus);
 
         if (FMLEnvironment.dist.isClient()) {
             InfinityCoreClient.init(modBus);

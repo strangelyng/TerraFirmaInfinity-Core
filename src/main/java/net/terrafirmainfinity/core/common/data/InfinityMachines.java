@@ -27,22 +27,24 @@ import net.minecraft.world.level.block.Block;
 import net.neoforged.neoforge.fluids.FluidType;
 import net.terrafirmainfinity.core.InfinityCore;
 
-import static com.gregtechceu.gtceu.api.GTValues.VLVH;
-import static com.gregtechceu.gtceu.api.GTValues.VLVT;
+import static com.gregtechceu.gtceu.api.GTValues.*;
 import static com.gregtechceu.gtceu.common.data.machines.GTMachineUtils.*;
-import static net.terrafirmainfinity.core.InfinityCore.REGISTRATE;
+import static net.terrafirmainfinity.core.InfinityCore.InfinityRegistrate;
 
 public class InfinityMachines {
+    static {
+        InfinityRegistrate.creativeModeTab(() -> InfinityCore.INFINITY_CREATIVE_TAB);
+    }
 
     // Additional Bronze Containers
-    public static final MachineDefinition BISMUTH_BRONZE_CRATE = GTMachineUtils.registerCrate(REGISTRATE, GTMaterials.BismuthBronze, 54, 9, "Bismuth Bronze Crate");
-    public static final MachineDefinition BLACK_BRONZE_CRATE = GTMachineUtils.registerCrate(REGISTRATE, GTMaterials.BlackBronze, 54, 9, "Black Bronze Crate");
+    public static final MachineDefinition BISMUTH_BRONZE_CRATE = GTMachineUtils.registerCrate(InfinityRegistrate, GTMaterials.BismuthBronze, 54, 9, "Bismuth Bronze Crate");
+    public static final MachineDefinition BLACK_BRONZE_CRATE = GTMachineUtils.registerCrate(InfinityRegistrate, GTMaterials.BlackBronze, 54, 9, "Black Bronze Crate");
 
-    public static final MachineDefinition BISMUTH_BRONZE_DRUM = GTMachineUtils.registerDrum(REGISTRATE, GTMaterials.BismuthBronze, (32 * FluidType.BUCKET_VOLUME), "Bismuth Bronze Drum");
-    public static final MachineDefinition BLACK_BRONZE_DRUM = GTMachineUtils.registerDrum(REGISTRATE, GTMaterials.BlackBronze, (32 * FluidType.BUCKET_VOLUME), "Black Bronze Drum");
+    public static final MachineDefinition BISMUTH_BRONZE_DRUM = GTMachineUtils.registerDrum(InfinityRegistrate, GTMaterials.BismuthBronze, (32 * FluidType.BUCKET_VOLUME), "Bismuth Bronze Drum");
+    public static final MachineDefinition BLACK_BRONZE_DRUM = GTMachineUtils.registerDrum(InfinityRegistrate, GTMaterials.BlackBronze, (32 * FluidType.BUCKET_VOLUME), "Black Bronze Drum");
 
     // ULV Quantum Containers
-    public static final MachineDefinition ULV_SUPER_CHEST = REGISTRATE.machine("ulv_super_chest",
+    public static final MachineDefinition ULV_SUPER_CHEST = InfinityRegistrate.machine("ulv_super_chest",
             (holder) -> new QuantumChestMachine(holder, GTValues.ULV, 10000L))
             .langValue("Basic Super Chest")
             .blockProp(Block.Properties::dynamicShape)
@@ -62,7 +64,7 @@ public class InfinityMachines {
 
     private static MachineDefinition registerULVSuperTank() {
         long maxAmount = 500 * FluidType.BUCKET_VOLUME;
-        MachineDefinition definition = REGISTRATE.machine("ulv_super_tank",
+        MachineDefinition definition = InfinityRegistrate.machine("ulv_super_tank",
                         MachineDefinition::new, MetaMachineBlock::new, QuantumTankMachineItem::new, holder -> new QuantumTankMachine(holder, GTValues.ULV, maxAmount))
                 .langValue("Basic Super Tank")
                 .blockProp(Block.Properties::dynamicShape)
@@ -83,7 +85,7 @@ public class InfinityMachines {
     }
 
     // Custom Machines
-    public static final Pair<MachineDefinition, MachineDefinition> STEAM_ROASTER = registerSteamMachines(REGISTRATE, "steam_roaster",
+    public static final Pair<MachineDefinition, MachineDefinition> STEAM_ROASTER = registerSteamMachines(InfinityRegistrate, "steam_roaster",
             SimpleSteamMachine::new, (pressure, builder) -> builder
                     .rotationState(RotationState.NON_Y_AXIS)
                     .recipeType(InfinityRecipeTypes.ROASTER_RECIPE)
@@ -99,7 +101,7 @@ public class InfinityMachines {
                     })
                     .register());
 
-    public static final MachineDefinition[] ROASTER = registerTieredMachines(REGISTRATE, "roaster",
+    public static final MachineDefinition[] ROASTER = registerTieredMachines(InfinityRegistrate, "roaster",
             SimpleTieredMachine::new, (tier, builder) -> builder
                     .langValue("%s Roaster %s".formatted(VLVH[tier], VLVT[tier]))
                     .rotationState(RotationState.NON_Y_AXIS)
