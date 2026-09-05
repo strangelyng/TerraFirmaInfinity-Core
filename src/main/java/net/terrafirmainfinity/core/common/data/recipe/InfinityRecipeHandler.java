@@ -12,11 +12,15 @@ import static com.gregtechceu.gtceu.api.GTValues.*;
 
 public class InfinityRecipeHandler {
     public static void testRecipes(RecipeOutput provider) {
+        /*
         ROASTER_RECIPE.recipeBuilder(InfinityCore.id("chalcocite"))
                 .inputItems(dust, Chalcocite, 2)
                 .outputItems(dust, CupricOxide, 2) // Should be CuprousOxide
                 .outputFluids(SulfurDioxide.getFluid(1000))
+                .EUt(VA[LV])
+                .duration(100)
                 .save(provider);
+         */
 
         GTRecipeTypes.ELECTROLYZER_RECIPES.recipeBuilder(InfinityCore.id("water_electrolysis"))
                 .notConsumable(rod, Nickel)

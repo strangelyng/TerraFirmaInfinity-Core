@@ -347,6 +347,12 @@ public class InfinityTagPrefix {
             .materialAmount((GTValues.M * 3) / 4)
             .unificationEnabled(true);
 
+
+    /** Embers Items */
+    public static final TagPrefix aspectus = new TagPrefix(GTCEu.id("aspectus"))
+            .materialAmount(GTValues.M)
+            .unificationEnabled(true);
+
     public static void modifyExistingToolHeadPrefixes() {
         TagPrefix.toolHeadBuzzSaw.materialAmount(GTValues.M*2);
         TagPrefix.toolHeadScrewdriver.materialAmount(GTValues.M);

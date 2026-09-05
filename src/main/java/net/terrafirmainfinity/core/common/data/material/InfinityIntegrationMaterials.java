@@ -35,6 +35,7 @@ public class InfinityIntegrationMaterials {
                 .ingot()
                 .liquid(new FluidBuilder().temperature(500))
                 .color(0xD6D6D4).secondaryColor(0xA6A48B).iconSet(MaterialIconSet.METALLIC)
+                .flags(GENERATE_PLATE, GENERATE_RING)
                 .components(Tin, 3, Lead, 2)
                 .hazard(HazardProperty.HazardTrigger.INHALATION, GTMedicalConditions.WEAK_POISON)
                 .buildAndRegister();

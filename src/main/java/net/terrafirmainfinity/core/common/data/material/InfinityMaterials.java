@@ -149,6 +149,10 @@ public class InfinityMaterials {
         redSteelProp.setBlastTemperature(1000);
         redSteelProp.setEUtOverride(VA[MV]);
 
+        // Fluid Property
+        FluidProperty fluidProp = Mercury.getProperty(PropertyKey.FLUID);
+        fluidProp.getStorage().enqueueRegistration(FluidStorageKeys.GAS, new FluidBuilder().temperature(630));
+
         // Restrict Native Metals
         Aluminium.removeProperty(PropertyKey.ORE);
         Beryllium.removeProperty(PropertyKey.ORE);
@@ -416,6 +420,12 @@ public class InfinityMaterials {
 
         gem.setIgnored(Ember, RegistryManager.EMBER_CRYSTAL);
         dust.setIgnored(Ember, RegistryManager.EMBER_GRIT);
+
+        aspectus.setIgnored(Iron, RegistryManager.IRON_ASPECTUS);
+        aspectus.setIgnored(Copper, RegistryManager.COPPER_ASPECTUS);
+        aspectus.setIgnored(Lead, RegistryManager.LEAD_ASPECTUS);
+        aspectus.setIgnored(Silver, RegistryManager.SILVER_ASPECTUS);
+        aspectus.setIgnored(Dawnstone, RegistryManager.DAWNSTONE_ASPECTUS);
 
         // AE2 Materials
         block.setIgnored(CertusQuartz, () -> AEBlocks.QUARTZ_BLOCK);
