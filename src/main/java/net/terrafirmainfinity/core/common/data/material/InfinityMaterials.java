@@ -55,6 +55,18 @@ public class InfinityMaterials {
     public static Material Bismuthinite; // TFC
     public static Material Cryolite; // TFC
 
+    public static Material Acanthite; // Silver Sulfide
+    public static Material Arsenopyrite; // Iron Arsenic Sulfide
+    public static Material Columbite; // Niobium Oxide
+    public static Material Fluorite; // Calcium Fluoride
+    public static Material Hafnon; // Hafnium Silicate
+    public static Material Millerite; // Nickel Sulfide
+    public static Material Petalite; // Lithium-Aluminium Silicate
+    public static Material Thorianite; // Thorium Oxide
+    public static Material Thorite; // Thorium Silicate
+    public static Material Wolframite; // Tungsten Oxide
+    public static Material Zircon; // Zirconium Silicate
+
     // Rock Materials
     public static Material FelsicIgneous; // Granite, Rhyolite
     public static Material IntermediateIgneous; // Diorite, Tuff, Andesite, Dacite
@@ -122,9 +134,83 @@ public class InfinityMaterials {
         RoseGold.removeProperty(PropertyKey.BLAST);
         SterlingSilver.removeProperty(PropertyKey.BLAST);
 
-        OreProperty oreProp = Ember.getProperty(PropertyKey.ORE);
+        OreProperty oreProp = Quartzite.getProperty(PropertyKey.ORE);
+        oreProp.setOreByProducts(NetherQuartz, Barite); // CertusQuartz to NetherQuartz
+
+        oreProp = Molybdenite.getProperty(PropertyKey.ORE);
+        oreProp.setOreByProducts(Molybdenite, Sulfur, Quartzite); // Molybdenum to Molybdenite
+
+        oreProp = Scheelite.getProperty(PropertyKey.ORE);
+        oreProp.setOreByProducts(Manganese, Molybdenite, Calcium); // Molybdenum to Molybdenite
+
+        oreProp = Chromite.getProperty(PropertyKey.ORE);
+        oreProp.setOreByProducts(Iron, Magnesium, Chromite); // Chromium to Chromite
+
+        oreProp = Ruby.getProperty(PropertyKey.ORE);
+        oreProp.setOreByProducts(Chromite, GarnetRed, Chromite); // Chromium to Chromite
+
+        oreProp = Coal.getProperty(PropertyKey.ORE);
+        oreProp.setOreByProducts(Coal, Coal, Coal); // Remove Thorium
+
+        oreProp = Uraninite.getProperty(PropertyKey.ORE);
+        oreProp.setOreByProducts(Uraninite, Thorite, Silver); // Thorium to Thorite
+
+        oreProp = Pitchblende.getProperty(PropertyKey.ORE);
+        oreProp.setOreByProducts(Thorianite, Uraninite, Lead); // Thorium to Thorianite
+
+        oreProp = Monazite.getProperty(PropertyKey.ORE);
+        oreProp.setOreByProducts(Thorianite, Neodymium, RareEarth); // Thorium to Thorianite
+
+        oreProp = Tantalite.getProperty(PropertyKey.ORE);
+        oreProp.setOreByProducts(Manganese, Columbite, Tantalite); // Niobium to Columbite, Tantalum to Tantalite
+
+        oreProp = Pyrolusite.getProperty(PropertyKey.ORE);
+        oreProp.setOreByProducts(Manganese, Tantalite, Columbite); // Niobium to Columbite
+
+        oreProp = Pyrochlore.getProperty(PropertyKey.ORE);
+        oreProp.setOreByProducts(Apatite, Calcium, Columbite); // Niobium to Columbite
+
+        // TerraFirmaInfinity Ores Byproducts
+        oreProp = Ember.getProperty(PropertyKey.ORE);
         oreProp.setWashedIn(Mercury);
         oreProp.setOreByProducts(Sulfur, Sulfur, Ember, Gold);
+
+        oreProp = Acanthite.getProperty(PropertyKey.ORE);
+        oreProp.setOreByProducts(Sulfur, Galena, Silver);
+
+        oreProp = Arsenopyrite.getProperty(PropertyKey.ORE);
+        oreProp.setOreByProducts(Sulfur, Pyrite, Arsenic);
+
+        oreProp = Cryolite.getProperty(PropertyKey.ORE);
+        oreProp.setOreByProducts(Cryolite, Sodium, Pyrite);
+
+        oreProp = Columbite.getProperty(PropertyKey.ORE);
+        oreProp.setOreByProducts(Manganese, Tantalite, Thorite);
+
+        oreProp = Fluorite.getProperty(PropertyKey.ORE);
+        oreProp.setOreByProducts(Fluorite, Calcium, Apatite);
+
+        oreProp = Hafnon.getProperty(PropertyKey.ORE);
+        oreProp.setOreByProducts(Zircon, Uraninite, RareEarth);
+
+        oreProp = Millerite.getProperty(PropertyKey.ORE);
+        oreProp.setOreByProducts(Pentlandite, Nickel, Sulfur);
+
+        oreProp = Petalite.getProperty(PropertyKey.ORE);
+        oreProp.setOreByProducts(Silicon, Petalite, Spodumene);
+
+        oreProp = Thorianite.getProperty(PropertyKey.ORE);
+        oreProp.setOreByProducts(Thorianite, Neodymium, RareEarth);
+        oreProp.setSeparatedInto(Neodymium);
+
+        oreProp = Thorite.getProperty(PropertyKey.ORE);
+        oreProp.setOreByProducts(Uraninite, Zircon, RareEarth);
+
+        oreProp = Wolframite.getProperty(PropertyKey.ORE);
+        oreProp.setOreByProducts(Iron, Manganese, Wolframite);
+
+        oreProp = Zircon.getProperty(PropertyKey.ORE);
+        oreProp.setOreByProducts(Zircon, Hafnon, Thorite);
 
         // Adjust Fluid Temperature of Steels
         Steel.removeProperty(PropertyKey.FLUID);
@@ -169,6 +255,7 @@ public class InfinityMaterials {
 
         // Remove Other Ores
         Electrotine.removeProperty(PropertyKey.ORE);
+        Tungstate.removeProperty(PropertyKey.ORE);
 
         addFluidToExisting(FluidStorageKeys.LIQUID, SodiumHydroxide); // for Soda Lye
         addFluidToExisting(FluidStorageKeys.LIQUID, PotassiumHydroxide);
@@ -177,8 +264,14 @@ public class InfinityMaterials {
         /// Remove Ignored ///
 
         // Vanilla Materials
-        nugget.removeIgnored(Iron);
         block.removeIgnored(Iron);
+        rawOre.removeIgnored(Iron);
+        nugget.removeIgnored(Iron);
+        ingot.removeIgnored(Iron);
+
+        rawOre.removeIgnored(Copper);
+
+        rawOre.removeIgnored(Gold);
 
         /// SET IGNORED ///
 

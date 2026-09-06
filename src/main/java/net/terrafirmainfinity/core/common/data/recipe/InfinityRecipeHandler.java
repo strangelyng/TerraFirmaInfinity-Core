@@ -1,5 +1,6 @@
 package net.terrafirmainfinity.core.common.data.recipe;
 
+import com.gregtechceu.gtceu.common.data.GTMaterials;
 import com.gregtechceu.gtceu.common.data.GTRecipeTypes;
 import net.minecraft.data.recipes.RecipeOutput;
 import net.terrafirmainfinity.core.InfinityCore;
@@ -12,7 +13,6 @@ import static com.gregtechceu.gtceu.api.GTValues.*;
 
 public class InfinityRecipeHandler {
     public static void testRecipes(RecipeOutput provider) {
-        /*
         ROASTER_RECIPE.recipeBuilder(InfinityCore.id("chalcocite"))
                 .inputItems(dust, Chalcocite, 2)
                 .outputItems(dust, CupricOxide, 2) // Should be CuprousOxide
@@ -20,7 +20,6 @@ public class InfinityRecipeHandler {
                 .EUt(VA[LV])
                 .duration(100)
                 .save(provider);
-         */
 
         GTRecipeTypes.ELECTROLYZER_RECIPES.recipeBuilder(InfinityCore.id("water_electrolysis"))
                 .notConsumable(rod, Nickel)
@@ -67,6 +66,16 @@ public class InfinityRecipeHandler {
                 .outputItems(ingot, Steel)
                 .EUt(VA[MV])
                 .duration(400)
+                .save(provider);
+
+        FLASH_SMELTING_RECIPE.recipeBuilder(InfinityCore.id("crushed_chalcopyrite"))
+                .inputItems(crushed, Chalcopyrite)
+                .inputFluids(Oxygen.getFluid(200))
+                .outputFluids(Copper.getFluid(144)) // Copper Matte
+                .outputFluids(Lava.getFluid(100)) // Slag
+                .outputFluids(SulfurDioxide.getFluid(100)) // Flue Gas
+                .EUt(VA[MV])
+                .duration(200)
                 .save(provider);
     }
 }

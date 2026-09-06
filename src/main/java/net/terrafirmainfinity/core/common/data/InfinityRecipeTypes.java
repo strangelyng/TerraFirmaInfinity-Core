@@ -90,9 +90,15 @@ public class InfinityRecipeTypes {
             .UI(builder -> builder.setProgressBar(GTGuiTextures.PROGRESS_ARROW))
             .setSound(GTSoundEntries.FURNACE);
 
+    public static final GTRecipeType FLASH_SMELTING_RECIPE = GTRecipeTypes.register(InfinityCore.id("flash_smelting"), MULTIBLOCK)
+            .setMaxIOSize(2, 0, 2, 3)
+            .prepareBuilder(recipeBuilder -> recipeBuilder.EUt(GTValues.VA[GTValues.MV]))
+            .UI(builder -> builder.setProgressBar(GTGuiTextures.PROGRESS_ARROW_MULTIPLE))
+            .setSound(GTSoundEntries.FURNACE);
+
     public static void init() {
         for (GTRecipeType type : new GTRecipeType[] {
-                ROASTER_RECIPE, ELECTROLYTIC_CELL_RECIPE, SPIRAL_SEPARATOR_RECIPE, METALLURGICAL_CONVERTER_RECIPE
+                ROASTER_RECIPE, ELECTROLYTIC_CELL_RECIPE, SPIRAL_SEPARATOR_RECIPE, METALLURGICAL_CONVERTER_RECIPE, FLASH_SMELTING_RECIPE
         }) {
             type.setEUIO(IO.IN);
         }

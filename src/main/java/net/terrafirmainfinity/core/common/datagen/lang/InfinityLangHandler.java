@@ -10,7 +10,7 @@ import java.util.Locale;
 
 public class InfinityLangHandler extends LangHandler {
     private static final String[] INFINITY_RECIPE_TYPE_IDS = {
-            "roaster", "electrolytic_cell", "spiral_separator", "metallurgical_converter"
+            "roaster", "electrolytic_cell", "spiral_separator", "metallurgical_converter", "flash_smelting"
     };
 
     private static String toTitle(String snakeCase) {

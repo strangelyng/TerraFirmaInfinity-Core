@@ -3,7 +3,8 @@
   "package": "net.terrafirmainfinity.core.mixin",
   "compatibilityLevel": "JAVA_21",
   "mixins": [
-    "gtceu.GTMachineUtilsMixin"
+    "gtceu.GTMachineUtilsMixin",
+    "gtceu.OreRecipeHandlerMixin"
   ],
   "client": [
   ],
