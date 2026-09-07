@@ -1,9 +1,9 @@
 package net.terrafirmainfinity.core.common.data.recipe;
 
-import com.gregtechceu.gtceu.common.data.GTMaterials;
 import com.gregtechceu.gtceu.common.data.GTRecipeTypes;
 import net.minecraft.data.recipes.RecipeOutput;
 import net.terrafirmainfinity.core.InfinityCore;
+import net.terrafirmainfinity.core.common.data.InfinityTagPrefix;
 import net.terrafirmainfinity.core.common.data.material.InfinityMaterials;
 
 import static net.terrafirmainfinity.core.common.data.InfinityRecipeTypes.*;
@@ -70,10 +70,11 @@ public class InfinityRecipeHandler {
 
         FLASH_SMELTING_RECIPE.recipeBuilder(InfinityCore.id("crushed_chalcopyrite"))
                 .inputItems(crushed, Chalcopyrite)
+                .inputItems(InfinityTagPrefix.powder, CalciumCarbonate) // Flux (use tag?)
                 .inputFluids(Oxygen.getFluid(200))
                 .outputFluids(Copper.getFluid(144)) // Copper Matte
                 .outputFluids(Lava.getFluid(100)) // Slag
-                .outputFluids(SulfurDioxide.getFluid(100)) // Flue Gas
+                .outputFluids(SulfurDioxide.getFluid(100)) // Off-Gas
                 .EUt(VA[MV])
                 .duration(200)
                 .save(provider);

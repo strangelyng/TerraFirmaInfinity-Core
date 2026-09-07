@@ -4,12 +4,13 @@ import com.gregtechceu.gtceu.GTCEu;
 import com.gregtechceu.gtceu.api.data.RotationState;
 import com.gregtechceu.gtceu.api.machine.MultiblockMachineDefinition;
 import com.gregtechceu.gtceu.api.machine.multiblock.PartAbility;
-import com.gregtechceu.gtceu.api.machine.multiblock.WorkableElectricMultiblockMachine;
 import com.gregtechceu.gtceu.api.multiblock.MultiPredicate;
 import com.gregtechceu.gtceu.api.multiblock.pattern.MultiblockPatternBuilder;
 import com.gregtechceu.gtceu.api.multiblock.util.RelativeDirection;
 import com.gregtechceu.gtceu.common.data.GTBlocks;
+import com.gregtechceu.gtceu.common.data.GTMaterials;
 import net.terrafirmainfinity.core.common.data.InfinityRecipeTypes;
+import net.terrafirmainfinity.core.common.machine.multiblock.FlashFurnaceMachine;
 
 import java.util.Comparator;
 
@@ -25,17 +26,15 @@ public class FlashFurnace {
      *      .slice(" BBBBB", " ICCCC", " I CSC", " I MMM", " I    ")
      */
 
-    // TODO: Distillation Tower Style Recipe Logic for fluid output layers
-
     public static final MultiblockMachineDefinition FLASH_FURNACE = InfinityRegistrate
-            .multiblock("flash_furnace", WorkableElectricMultiblockMachine::new)
+            .multiblock("flash_furnace", FlashFurnaceMachine::new)
             .rotationState(RotationState.NON_Y_AXIS)
             .recipeType(InfinityRecipeTypes.FLASH_SMELTING_RECIPE)
             .appearanceBlock(GTBlocks.CASING_INVAR_HEATPROOF)
             .pattern(definition -> {
                 MultiPredicate casingPredicate = blocks(GTBlocks.CASING_INVAR_HEATPROOF.get());
                 MultiPredicate exportPredicate = abilities(PartAbility.EXPORT_FLUIDS_1X);
-                exportPredicate = exportPredicate.setMaxLayerLimited(1).setMinGlobalLimited(2);
+                exportPredicate = exportPredicate.setLayerMinMax(1, 1);
                 MultiPredicate maintenance = autoAbilities(true, false, false)
                         .setMaxGlobalLimited(1);
                 MultiPredicate muffler = autoAbilities(false, true, false)
@@ -43,7 +42,7 @@ public class FlashFurnace {
                 MultiPredicate energyPredicate = abilities(PartAbility.INPUT_ENERGY);
                 energyPredicate = energyPredicate.setMinGlobalLimited(1).setMaxGlobalLimited(2);
                 return MultiblockPatternBuilder.start(RelativeDirection.UP, RelativeDirection.BACK, RelativeDirection.RIGHT)
-                        .slice(" BBBBB", "BBBBBB", " BBBBB")
+                        .slice(" FBBBF", "FBBBB ", " FBBBF")
                         .slice(" ICCCC", "IPPPPC", " ICCCC")
                         .slice(" I CSC", "IPICPC", " I CCC")
                         .slice(" I MMM", "IPIMMM", " I MMM")
@@ -60,10 +59,11 @@ public class FlashFurnace {
                         .where('M', casingPredicate.and(
                                 maintenance.and(
                                     muffler.xor(
-                                            exportPredicate
-                                    ).setMinLayerLimited(1)
+                                            abilities(PartAbility.EXPORT_FLUIDS_1X)
+                                    ).setExactLimit(1)
                                 )))
                         .where('P', blocks(GTBlocks.CASING_STEEL_PIPE.get()))
+                        .where('F', frames(GTMaterials.Steel))
                         .where(' ', MultiPredicate.ANY)
                         .build();
             })
