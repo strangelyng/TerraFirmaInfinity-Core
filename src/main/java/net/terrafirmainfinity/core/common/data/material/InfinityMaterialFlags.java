@@ -1,6 +1,7 @@
 package net.terrafirmainfinity.core.common.data.material;
 
 import com.gregtechceu.gtceu.api.data.chemical.material.info.MaterialFlag;
+import com.gregtechceu.gtceu.api.data.chemical.material.properties.PropertyKey;
 
 @SuppressWarnings("unused")
 public class InfinityMaterialFlags {
@@ -15,6 +16,12 @@ public class InfinityMaterialFlags {
             .build();
 
     public static final MaterialFlag GENERATE_DOUBLE_INGOT = new MaterialFlag.Builder("generate_double_ingot")
+            .requireProps(PropertyKey.INGOT)
+            .build();
+
+    // Sand Ores
+    public static final MaterialFlag GENERATE_SAND_ORES = new MaterialFlag.Builder("generate_sand_ores")
+            .requireProps(PropertyKey.ORE)
             .build();
 
     /* Allow Generation of Electric Tool Heads without requiring the material to have the related ToolProperty */

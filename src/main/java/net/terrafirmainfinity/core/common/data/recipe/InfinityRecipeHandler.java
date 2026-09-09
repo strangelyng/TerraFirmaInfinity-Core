@@ -13,12 +13,15 @@ import static com.gregtechceu.gtceu.api.GTValues.*;
 
 public class InfinityRecipeHandler {
     public static void testRecipes(RecipeOutput provider) {
-        ROASTER_RECIPE.recipeBuilder(InfinityCore.id("chalcocite"))
-                .inputItems(dust, Chalcocite, 2)
-                .outputItems(dust, CupricOxide, 2) // Should be CuprousOxide
-                .outputFluids(SulfurDioxide.getFluid(1000))
+        ROASTER_RECIPE.recipeBuilder(InfinityCore.id("purified_chalcopyrite"))
+                .inputItems(crushedPurified, Chalcopyrite)
+                .inputItems(dust, SiliconDioxide)
+                .inputFluids(Oxygen.getFluid(3000))
+                .outputItems(dust, CupricOxide)
+                .outputItems(dust, Ferrosilite)
+                .outputFluids(SulfurDioxide.getFluid(2000))
                 .EUt(VA[LV])
-                .duration(100)
+                .duration(200)
                 .save(provider);
 
         GTRecipeTypes.ELECTROLYZER_RECIPES.recipeBuilder(InfinityCore.id("water_electrolysis"))
@@ -68,8 +71,8 @@ public class InfinityRecipeHandler {
                 .duration(400)
                 .save(provider);
 
-        FLASH_SMELTING_RECIPE.recipeBuilder(InfinityCore.id("crushed_chalcopyrite"))
-                .inputItems(crushed, Chalcopyrite)
+        FLASH_SMELTING_RECIPE.recipeBuilder(InfinityCore.id("purified_chalcopyrite"))
+                .inputItems(crushedPurified, Chalcopyrite)
                 .inputItems(InfinityTagPrefix.powder, CalciumCarbonate) // Flux (use tag?)
                 .inputFluids(Oxygen.getFluid(200))
                 .outputFluids(Copper.getFluid(144)) // Copper Matte

@@ -66,6 +66,14 @@ public class InfinityLangHandler extends LangHandler {
         addTagPrefixLang(provider, InfinityTagPrefix.oreShale);
         addTagPrefixLang(provider, InfinityTagPrefix.oreSlate);
 
+        addTagPrefixLang(provider, InfinityTagPrefix.oreSandBrown);
+        addTagPrefixLang(provider, InfinityTagPrefix.oreSandBlack);
+        addTagPrefixLang(provider, InfinityTagPrefix.oreSandWhite);
+        addTagPrefixLang(provider, InfinityTagPrefix.oreSandRed);
+        addTagPrefixLang(provider, InfinityTagPrefix.oreSandGreen);
+        addTagPrefixLang(provider, InfinityTagPrefix.oreSandYellow);
+        addTagPrefixLang(provider, InfinityTagPrefix.oreSandPink);
+
         addToolClassLang(provider, "Chisel");
         addToolClassLang(provider, "Mace");
 

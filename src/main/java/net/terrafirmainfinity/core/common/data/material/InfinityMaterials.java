@@ -261,6 +261,16 @@ public class InfinityMaterials {
         addFluidToExisting(FluidStorageKeys.LIQUID, PotassiumHydroxide);
         addFluidToExisting(FluidStorageKeys.LIQUID, CalciumHydroxide);
 
+        CassiteriteSand.addFlags(InfinityMaterialFlags.GENERATE_SAND_ORES);
+        GlauconiteSand.addFlags(InfinityMaterialFlags.GENERATE_SAND_ORES);
+        Oilsands.addFlags(InfinityMaterialFlags.GENERATE_SAND_ORES);
+        GraniticMineralSand.addFlags(InfinityMaterialFlags.GENERATE_SAND_ORES);
+        GarnetSand.addFlags(InfinityMaterialFlags.GENERATE_SAND_ORES);
+        BasalticMineralSand.addFlags(InfinityMaterialFlags.GENERATE_SAND_ORES);
+
+        // Modify Hazards
+        HazardProperty.HazardTrigger.INHALATION.affectedTagPrefixes().add(powder);
+
         /// Remove Ignored ///
 
         // Vanilla Materials
