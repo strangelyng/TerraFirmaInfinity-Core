@@ -55,5 +55,5 @@ dependencies {
     implementation("com.alexthw.eidolon_repraised:eidolon_repraised-${minecraft_version}:${eidolon_version}") { transitive = false }
 
     // Embers Re-Ignited
-    implementation("curse.maven:embers-re-ignited-1579725:${embers_version}")
+    implementation("maven.modrinth:embers-re-ignited:1.21.1-${embers_version}")
 }

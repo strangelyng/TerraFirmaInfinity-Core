@@ -3,6 +3,9 @@ package net.terrafirmainfinity.core.common.data.material;
 import alexthw.eidolon_repraised.registries.Registry;
 import appeng.core.definitions.AEBlocks;
 import appeng.core.definitions.AEItems;
+import com.eerussianguy.firmalife.common.blocks.FLBlocks;
+import com.eerussianguy.firmalife.common.items.FLItems;
+import com.eerussianguy.firmalife.common.util.FLMetal;
 import com.gregtechceu.gtceu.api.GTValues;
 import com.gregtechceu.gtceu.api.data.chemical.material.Material;
 import com.gregtechceu.gtceu.api.data.chemical.material.info.MaterialFlags;
@@ -508,6 +511,21 @@ public class InfinityMaterials {
                 powder.setIgnored(material, () -> TFCItems.ORE_POWDERS.get(ore));
             }
         });
+
+        // Firmalife
+        oreSmall.setIgnored(Chromite, () -> FLBlocks.SMALL_CHROMITE);
+        rawOre.setIgnored(Chromite, () -> FLItems.CHROMIUM_ORES.get(Ore.Grade.NORMAL));
+        poorRawOre.setIgnored(Chromite, () -> FLItems.CHROMIUM_ORES.get(Ore.Grade.POOR));
+        richRawOre.setIgnored(Chromite, () -> FLItems.CHROMIUM_ORES.get(Ore.Grade.RICH));
+
+        blockPlated.setIgnored(Chromium, () -> FLBlocks.METALS.get(FLMetal.CHROMIUM).get(Metal.BlockType.BLOCK));
+        slabPlated.setIgnored(Chromium, () -> FLBlocks.METALS.get(FLMetal.CHROMIUM).get(Metal.BlockType.BLOCK_SLAB));
+        stairsPlated.setIgnored(Chromium, () -> FLBlocks.METALS.get(FLMetal.CHROMIUM).get(Metal.BlockType.BLOCK_STAIRS));
+
+        blockPlated.setIgnored(StainlessSteel, () -> FLBlocks.METALS.get(FLMetal.STAINLESS_STEEL).get(Metal.BlockType.BLOCK));
+        slabPlated.setIgnored(StainlessSteel, () -> FLBlocks.METALS.get(FLMetal.STAINLESS_STEEL).get(Metal.BlockType.BLOCK_SLAB));
+        stairsPlated.setIgnored(StainlessSteel, () -> FLBlocks.METALS.get(FLMetal.STAINLESS_STEEL).get(Metal.BlockType.BLOCK_STAIRS));
+
 
         // Eidolon Materials
         ingot.setIgnored(Pewter, Registry.PEWTER_INGOT);
