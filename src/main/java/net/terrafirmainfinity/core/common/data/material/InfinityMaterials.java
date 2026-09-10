@@ -10,6 +10,7 @@ import com.gregtechceu.gtceu.api.GTValues;
 import com.gregtechceu.gtceu.api.data.chemical.material.Material;
 import com.gregtechceu.gtceu.api.data.chemical.material.info.MaterialFlags;
 import com.gregtechceu.gtceu.api.data.chemical.material.properties.*;
+import com.gregtechceu.gtceu.api.data.chemical.material.stack.MaterialStack;
 import com.gregtechceu.gtceu.api.fluids.FluidBuilder;
 import com.gregtechceu.gtceu.api.fluids.store.FluidStorageKey;
 import com.gregtechceu.gtceu.api.fluids.store.FluidStorageKeys;
@@ -121,6 +122,31 @@ public class InfinityMaterials {
         Graphite.addFlags(MaterialFlags.GENERATE_ROD, MaterialFlags.GENERATE_LONG_ROD);
 
         Lead.addFlags(MaterialFlags.GENERATE_FRAME);
+
+        // Modify Components
+        Alunite.setComponents(
+                new MaterialStack(Potassium, 1),
+                new MaterialStack(Aluminium, 3),
+                new MaterialStack(Sulfur, 2),
+                new MaterialStack(Hydrogen, 6),
+                new MaterialStack(Oxygen, 14)
+        ).setFormula("KAl3S2H6O14", true);
+
+        Sodalite.setComponents(
+                new MaterialStack(Sodium, 4),
+                new MaterialStack(Aluminium, 3),
+                new MaterialStack(Silicon, 3),
+                new MaterialStack(Oxygen, 12),
+                new MaterialStack(Chlorine, 1)
+        ).setFormula("Na4(Al3Si3O12)Cl", true);
+
+        Lazurite.setComponents(
+                new MaterialStack(Sodium, 2),
+                new MaterialStack(Calcium, 2),
+                new MaterialStack(Aluminium, 3),
+                new MaterialStack(Silicon, 3),
+                new MaterialStack(Oxygen, 12)
+        ).setFormula("(Na2Ca2)Al3Si3O12", true);
 
         // Modify Properties
         IngotProperty ingotProp = WroughtIron.getProperty(PropertyKey.INGOT);

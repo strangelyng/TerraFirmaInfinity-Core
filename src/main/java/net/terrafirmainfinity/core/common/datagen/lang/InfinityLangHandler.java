@@ -1,5 +1,6 @@
 package net.terrafirmainfinity.core.common.datagen.lang;
 
+import com.gregtechceu.gtceu.GTCEu;
 import com.gregtechceu.gtceu.api.data.tag.TagPrefix;
 import com.gregtechceu.gtceu.data.lang.LangHandler;
 import com.tterrag.registrate.providers.RegistrateLangProvider;
@@ -25,6 +26,19 @@ public class InfinityLangHandler extends LangHandler {
 
     public static void init(RegistrateLangProvider provider) {
         // Materials
+        addGTMaterialLang(provider, "acanthite");
+        addGTMaterialLang(provider, "arsenopyrite");
+        addGTMaterialLang(provider, "bismuthinite");
+        addGTMaterialLang(provider, "columbite");
+        addGTMaterialLang(provider, "cryolite");
+        addGTMaterialLang(provider, "fluorite");
+        addGTMaterialLang(provider, "hafnon");
+        addGTMaterialLang(provider, "millerite");
+        addGTMaterialLang(provider, "petalite");
+        addGTMaterialLang(provider, "thorianite");
+        addGTMaterialLang(provider, "thorite");
+        addGTMaterialLang(provider, "wolframite");
+        addGTMaterialLang(provider, "zircon");
 //        replaceMaterialLang(provider, "dawnstone", "Aurichalcum");
 
         // Tag Prefixes
@@ -124,5 +138,11 @@ public class InfinityLangHandler extends LangHandler {
 
     public static void replaceMaterialLang(RegistrateLangProvider provider, String id, String name) {
         replace(provider, "material." + InfinityCore.MOD_ID + "." + id, name);
+    }
+
+    public static void addGTMaterialLang(RegistrateLangProvider provider, String id) {
+        String formattedName = RegistrateLangProvider.toEnglishName(id);
+
+        provider.add("material." + GTCEu.MOD_ID + "." + id, formattedName);
     }
 }
