@@ -29,9 +29,11 @@ import net.dries007.tfc.common.items.TFCItems;
 import net.dries007.tfc.util.Metal;
 import net.minecraft.world.level.block.Blocks;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 
 import static com.gregtechceu.gtceu.api.GTValues.*;
+import static com.gregtechceu.gtceu.api.data.chemical.material.info.MaterialFlags.*;
 import static com.gregtechceu.gtceu.api.data.tag.TagPrefix.*;
 import static com.gregtechceu.gtceu.common.data.GTMaterials.*;
 import static net.terrafirmainfinity.core.common.data.InfinityTagPrefix.*;
@@ -71,6 +73,10 @@ public class InfinityMaterials {
     public static Material Wolframite; // Tungsten Oxide
     public static Material Zircon; // Zirconium Silicate
 
+    // Compounds
+    public static Material Alumina; // Al2O3
+    public static Material ChromiumOxide; // Cr2O3
+
     // Rock Materials
     public static Material FelsicIgneous; // Granite, Rhyolite
     public static Material IntermediateIgneous; // Diorite, Tuff, Andesite, Dacite
@@ -84,6 +90,7 @@ public class InfinityMaterials {
     public static void init() {
         InfinityIntegrationMaterials.register();
         InfinityOreMaterials.register();
+        InfinityCompoundMaterials.register();
     }
 
     public static void modifyMaterials() {
@@ -157,6 +164,19 @@ public class InfinityMaterials {
                 new MaterialStack(Oxygen, 10),
                 new MaterialStack(Fluorine, 2)
         ).setFormula("KLi2Al(Si4O10)F2", true);
+
+        Ruby.setComponents(
+                new MaterialStack(Alumina, 1),
+                new MaterialStack(ChromiumOxide, 1)
+        ).setFormula("(Al2O3)(Cr2O3)", true);
+
+        Sapphire.setComponents(
+                new MaterialStack(Alumina, 1)
+        ).setFormula("(Al2O3)", true);
+
+        GreenSapphire.setComponents(
+                new MaterialStack(Alumina, 1)
+        ).setFormula("(Al2O3)", true);
 
         // Modify Properties
         IngotProperty ingotProp = WroughtIron.getProperty(PropertyKey.INGOT);
@@ -305,6 +325,33 @@ public class InfinityMaterials {
         GraniticMineralSand.addFlags(InfinityMaterialFlags.GENERATE_SAND_ORES);
         GarnetSand.addFlags(InfinityMaterialFlags.GENERATE_SAND_ORES);
         BasalticMineralSand.addFlags(InfinityMaterialFlags.GENERATE_SAND_ORES);
+
+        // Decomposition Routes
+        var uniqueDecompMats = new ArrayList<Material>();
+        uniqueDecompMats.add(Alunite);
+
+        uniqueDecompMats.add(Almandine);
+        uniqueDecompMats.add(Andradite);
+        uniqueDecompMats.add(Grossular);
+        uniqueDecompMats.add(Pyrope);
+        uniqueDecompMats.add(Spessartine);
+        uniqueDecompMats.add(Uvarovite);
+
+        uniqueDecompMats.add(Lazurite);
+        uniqueDecompMats.add(Sodalite);
+
+        uniqueDecompMats.add(BlueTopaz);
+        uniqueDecompMats.add(Topaz);
+
+        uniqueDecompMats.add(Ruby);
+        uniqueDecompMats.add(Sapphire);
+        uniqueDecompMats.add(GreenSapphire);
+
+        uniqueDecompMats.add(Emerald);
+
+        uniqueDecompMats.forEach((material) -> {
+            material.addFlags(DISABLE_DECOMPOSITION);
+        });
 
         // Modify Hazards
         HazardProperty.HazardTrigger.INHALATION.affectedTagPrefixes().add(powder);

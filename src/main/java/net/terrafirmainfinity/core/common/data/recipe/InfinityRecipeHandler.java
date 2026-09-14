@@ -14,11 +14,11 @@ import static com.gregtechceu.gtceu.api.GTValues.*;
 public class InfinityRecipeHandler {
     public static void testRecipes(RecipeOutput provider) {
         ROASTER_RECIPE.recipeBuilder(InfinityCore.id("purified_chalcopyrite"))
-                .inputItems(crushedPurified, Chalcopyrite)
-                .inputItems(dust, SiliconDioxide)
+                .inputItems(crushedPurified, Chalcopyrite, 4)
+                .inputItems(dust, SiliconDioxide, 3)
                 .inputFluids(Oxygen.getFluid(3000))
-                .outputItems(dust, CupricOxide)
-                .outputItems(dust, Ferrosilite)
+                .outputItems(dust, CupricOxide, 2)
+                .outputItems(dust, Ferrosilite, 5)
                 .outputFluids(SulfurDioxide.getFluid(2000))
                 .EUt(VA[LV])
                 .duration(200)
@@ -34,16 +34,16 @@ public class InfinityRecipeHandler {
                 .duration(1500)
                 .save(provider);
 
-        ELECTROLYTIC_CELL_RECIPE.recipeBuilder(InfinityCore.id("water_electrolysis"))
-                .notConsumable(rod, Nickel)
-                .notConsumable(rod, Iron)
-                .notConsumableFluid(SodiumHydroxide.getFluid(50))
-                .inputFluids(Water.getFluid(1000))
-                .outputFluids(Hydrogen.getFluid(2000))
-                .outputFluids(Oxygen.getFluid(1000))
-                .EUt(VA[LV])
-                .duration(400)
-                .save(provider);
+//        ELECTROLYTIC_CELL_RECIPE.recipeBuilder(InfinityCore.id("water_electrolysis"))
+//                .notConsumable(rod, Nickel)
+//                .notConsumable(rod, Iron)
+//                .notConsumableFluid(SodiumHydroxide.getFluid(50))
+//                .inputFluids(Water.getFluid(1000))
+//                .outputFluids(Hydrogen.getFluid(2000))
+//                .outputFluids(Oxygen.getFluid(1000))
+//                .EUt(VA[LV])
+//                .duration(400)
+//                .save(provider);
 
         SPIRAL_SEPARATOR_RECIPE.recipeBuilder(InfinityCore.id("crushed_hematite_ore"))
                 .inputItems(crushed, Hematite)

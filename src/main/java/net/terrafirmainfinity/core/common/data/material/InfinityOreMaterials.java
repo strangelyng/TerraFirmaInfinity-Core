@@ -44,7 +44,7 @@ public class InfinityOreMaterials {
                 .gem().ore()
                 .liquid(new FluidBuilder().temperature(1285))
                 .color(0xdedccd).secondaryColor(0xd3ccd1).iconSet(MaterialIconSet.EMERALD)
-                .flags(NO_SMELTING)
+                .flags(NO_SMELTING, DISABLE_DECOMPOSITION)
                 .components(Sodium, 3, Aluminium, 1, Fluorine, 6)
                 .buildAndRegister();
 
