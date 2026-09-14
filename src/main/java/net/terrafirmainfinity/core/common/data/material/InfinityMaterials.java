@@ -141,12 +141,22 @@ public class InfinityMaterials {
         ).setFormula("Na4(Al3Si3O12)Cl", true);
 
         Lazurite.setComponents(
-                new MaterialStack(Sodium, 2),
-                new MaterialStack(Calcium, 2),
+                new MaterialStack(Sodium, 3),
+                new MaterialStack(Calcium, 1),
                 new MaterialStack(Aluminium, 3),
                 new MaterialStack(Silicon, 3),
-                new MaterialStack(Oxygen, 12)
-        ).setFormula("(Na2Ca2)Al3Si3O12", true);
+                new MaterialStack(Oxygen, 12),
+                new MaterialStack(Sulfur, 1)
+        ).setFormula("(Na3Ca)Al3Si3O12S", true);
+
+        Lepidolite.setComponents(
+                new MaterialStack(Potassium, 1),
+                new MaterialStack(Lithium, 2),
+                new MaterialStack(Aluminium, 1),
+                new MaterialStack(Silicon, 4),
+                new MaterialStack(Oxygen, 10),
+                new MaterialStack(Fluorine, 2)
+        ).setFormula("KLi2Al(Si4O10)F2", true);
 
         // Modify Properties
         IngotProperty ingotProp = WroughtIron.getProperty(PropertyKey.INGOT);
@@ -286,9 +296,8 @@ public class InfinityMaterials {
         Electrotine.removeProperty(PropertyKey.ORE);
         Tungstate.removeProperty(PropertyKey.ORE);
 
-        addFluidToExisting(FluidStorageKeys.LIQUID, SodiumHydroxide); // for Soda Lye
-        addFluidToExisting(FluidStorageKeys.LIQUID, PotassiumHydroxide);
-        addFluidToExisting(FluidStorageKeys.LIQUID, CalciumHydroxide);
+//        addFluidToExisting(FluidStorageKeys.LIQUID, PotassiumHydroxide);
+//        addFluidToExisting(FluidStorageKeys.LIQUID, CalciumHydroxide);
 
         CassiteriteSand.addFlags(InfinityMaterialFlags.GENERATE_SAND_ORES);
         GlauconiteSand.addFlags(InfinityMaterialFlags.GENERATE_SAND_ORES);
@@ -359,8 +368,8 @@ public class InfinityMaterials {
         powder.setIgnored(Coke, () -> TFCItems.POWDERS.get(Powder.COKE));
         powder.setIgnored(Salt, () -> TFCItems.POWDERS.get(Powder.SALT));
 
-        GTFluids.handleNonMaterialFluids(PotassiumHydroxide, () -> TFCFluids.SIMPLE_FLUIDS.get(SimpleFluid.LYE).source().get());
-        GTFluids.handleNonMaterialFluids(CalciumHydroxide, () -> TFCFluids.SIMPLE_FLUIDS.get(SimpleFluid.LIMEWATER).source().get());
+//        GTFluids.handleNonMaterialFluids(PotassiumHydroxide, () -> TFCFluids.SIMPLE_FLUIDS.get(SimpleFluid.LYE).source().get());
+//        GTFluids.handleNonMaterialFluids(CalciumHydroxide, () -> TFCFluids.SIMPLE_FLUIDS.get(SimpleFluid.LIMEWATER).source().get());
 
         ingot.removeIgnored(Iron);
         ingot.setIgnored(Iron, // Iron to Cast Iron

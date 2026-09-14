@@ -1,28 +1,33 @@
 package net.terrafirmainfinity.core.common.data;
 
+import com.gregtechceu.gtceu.GTCEu;
 import com.gregtechceu.gtceu.api.GTValues;
 import com.gregtechceu.gtceu.api.cover.CoverDefinition;
-import com.gregtechceu.gtceu.client.renderer.cover.SimpleCoverRenderer;
+import com.gregtechceu.gtceu.client.renderer.cover.IOCoverRenderer;
 import com.gregtechceu.gtceu.common.cover.ConveyorCover;
 import com.gregtechceu.gtceu.common.cover.PumpCover;
-import com.gregtechceu.gtceu.common.data.GTCovers;
-import net.terrafirmainfinity.core.InfinityCore;
+import net.minecraft.core.Holder;
 import net.terrafirmainfinity.core.common.cover.AirVentCover;
 
-public class InfinityCovers {
-    public final static CoverDefinition AIR_VENT = GTCovers.register(InfinityCore.id("air_vent"),
-            AirVentCover::new, () ->
-                    () -> new SimpleCoverRenderer(InfinityCore.id("block/cover/air_vent")));
+import static net.terrafirmainfinity.core.InfinityCore.InfinityRegistrate;
 
-    public final static CoverDefinition STEAM_CONVEYOR = GTCovers.register(InfinityCore.id("steam_conveyor"),
+public class InfinityCovers {
+    public final static Holder<CoverDefinition> AIR_VENT = InfinityRegistrate.cover("air_vent", AirVentCover::new);
+
+    public final static Holder<CoverDefinition> STEAM_CONVEYOR = InfinityRegistrate.cover("steam_conveyor",
             ((definition, coverable, side) ->
                     new ConveyorCover(definition, coverable, side, GTValues.ULV, 4)),
-            () -> GTCovers.CONVEYORS[0].getCoverRenderer());
+            () -> () -> new IOCoverRenderer(
+                    GTCEu.id("block/cover/conveyor"),
+                    null,
+                    GTCEu.id("block/cover/conveyor_emissive"),
+                    GTCEu.id("block/cover/conveyor_inverted_emissive")
+            ));
 
-    public final static CoverDefinition STEAM_PUMP = GTCovers.register(InfinityCore.id("steam_pump"),
+    public final static Holder<CoverDefinition> STEAM_PUMP = InfinityRegistrate.cover("steam_pump",
             ((definition, coverable, side) ->
                     new PumpCover(definition, coverable, side, GTValues.ULV, 32)),
-            () -> GTCovers.PUMPS[0].getCoverRenderer());
+            () -> () -> IOCoverRenderer.PUMP_LIKE_COVER_RENDERER);
 
     public static void init() {}
 }
