@@ -34,16 +34,16 @@ public class InfinityRecipeHandler {
                 .duration(1500)
                 .save(provider);
 
-        ELECTROLYTIC_CELL_RECIPE.recipeBuilder(InfinityCore.id("water_electrolysis"))
-                .notConsumable(rod, Nickel)
-                .notConsumable(rod, Iron)
-                .notConsumableFluid(SodiumHydroxide.getFluid(50))
-                .inputFluids(Water.getFluid(1000))
-                .outputFluids(Hydrogen.getFluid(2000))
-                .outputFluids(Oxygen.getFluid(1000))
-                .EUt(VA[LV])
-                .duration(400)
-                .save(provider);
+//        ELECTROLYTIC_CELL_RECIPE.recipeBuilder(InfinityCore.id("water_electrolysis"))
+//                .notConsumable(rod, Nickel)
+//                .notConsumable(rod, Iron)
+//                .notConsumableFluid(SodiumHydroxide.getFluid(50))
+//                .inputFluids(Water.getFluid(1000))
+//                .outputFluids(Hydrogen.getFluid(2000))
+//                .outputFluids(Oxygen.getFluid(1000))
+//                .EUt(VA[LV])
+//                .duration(400)
+//                .save(provider);
 
         SPIRAL_SEPARATOR_RECIPE.recipeBuilder(InfinityCore.id("crushed_hematite_ore"))
                 .inputItems(crushed, Hematite)
@@ -71,7 +71,7 @@ public class InfinityRecipeHandler {
                 .duration(400)
                 .save(provider);
 
-        FLASH_SMELTING_RECIPE.recipeBuilder(InfinityCore.id("purified_chalcopyrite"))
+        FLASH_FURNACE_RECIPE.recipeBuilder(InfinityCore.id("purified_chalcopyrite"))
                 .inputItems(crushedPurified, Chalcopyrite)
                 .inputItems(InfinityTagPrefix.powder, CalciumCarbonate) // Flux (use tag?)
                 .inputFluids(Oxygen.getFluid(200))
@@ -79,6 +79,33 @@ public class InfinityRecipeHandler {
                 .outputFluids(Lava.getFluid(100)) // Slag
                 .outputFluids(SulfurDioxide.getFluid(100)) // Off-Gas
                 .EUt(VA[MV])
+                .duration(200)
+                .save(provider);
+
+        ADVANCED_ARC_FURNACE_RECIPE.recipeBuilder(InfinityCore.id("silicon_dust"))
+                .inputItems(dust, SiliconDioxide, 3)
+                .inputItems(dust, Carbon, 2)
+                .outputItems(dust, Silicon, 1)
+                .outputFluids(CarbonMonoxide.getFluid(2000))
+                .EUt(VA[MV])
+                .duration(200)
+                .save(provider);
+
+        INDUCTION_FURNACE_RECIPE.recipeBuilder(InfinityCore.id("ultimet"))
+                .inputFluids(Cobalt.getFluid(5*144))
+                .inputItems(dust, Chromium, 2)
+                .inputItems(dust, Nickel, 1)
+                .inputItems(dust, Molybdenum, 1)
+                .outputFluids(Ultimet.getFluid(144*9))
+                .EUt(VA[MV])
+                .duration(200)
+                .save(provider);
+
+        ROTARY_KILN_RECIPE.recipeBuilder(InfinityCore.id("quicklime"))
+                .inputItems(dust, Calcite, 5)
+                .outputItems(dust, Quicklime, 2)
+                .outputFluids(CarbonDioxide.getFluid(1000))
+                .EUt(VA[LV])
                 .duration(200)
                 .save(provider);
     }

@@ -1,9 +1,6 @@
 package net.terrafirmainfinity.core.common.machine;
 
-import net.terrafirmainfinity.core.common.machine.multiblock.multi.ElectrolyticCell;
-import net.terrafirmainfinity.core.common.machine.multiblock.multi.FlashFurnace;
-import net.terrafirmainfinity.core.common.machine.multiblock.multi.SpiralSeparator;
-import net.terrafirmainfinity.core.common.machine.multiblock.multi.MetallurgicalConverter;
+import net.terrafirmainfinity.core.common.machine.multiblock.multi.*;
 
 public class InfinityMulti {
     public static void init() {
@@ -11,5 +8,8 @@ public class InfinityMulti {
         SpiralSeparator.init();
         MetallurgicalConverter.init();
         FlashFurnace.init();
+        AdvancedArcFurnace.init();
+        InductionFurnace.init();
+        RotaryKiln.init();
     }
 }

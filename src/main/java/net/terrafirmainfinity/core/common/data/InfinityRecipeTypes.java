@@ -90,18 +90,39 @@ public class InfinityRecipeTypes {
             .UI(builder -> builder.setProgressBar(GTGuiTextures.PROGRESS_ARROW))
             .setSound(GTSoundEntries.FURNACE);
 
-    public static final GTRecipeType FLASH_SMELTING_RECIPE = GTRecipeTypes.register(InfinityCore.id("flash_smelting"), MULTIBLOCK)
+    public static final GTRecipeType FLASH_FURNACE_RECIPE = GTRecipeTypes.register(InfinityCore.id("flash_furnace"), MULTIBLOCK)
             .setMaxIOSize(2, 0, 2, 3)
             .prepareBuilder(recipeBuilder -> recipeBuilder.EUt(GTValues.VA[GTValues.MV]))
             .UI(builder -> builder.setProgressBar(GTGuiTextures.PROGRESS_ARROW_MULTIPLE))
             .setSound(GTSoundEntries.FURNACE);
 
+    public static final GTRecipeType ADVANCED_ARC_FURNACE_RECIPE = GTRecipeTypes.register(InfinityCore.id("advanced_arc_furnace"), MULTIBLOCK)
+            .setMaxIOSize(9, 2, 4, 1)
+            .prepareBuilder(recipeBuilder -> recipeBuilder.EUt(GTValues.VA[GTValues.LV]))
+            .UI(builder -> builder.setProgressBar(GTGuiTextures.PROGRESS_ARROW_MULTIPLE))
+            .setSound(GTSoundEntries.ARC);
+
+    public static final GTRecipeType INDUCTION_FURNACE_RECIPE = GTRecipeTypes.register(InfinityCore.id("induction_furnace"), MULTIBLOCK)
+            .setMaxIOSize(9, 3, 3, 3)
+            .prepareBuilder(recipeBuilder -> recipeBuilder.EUt(GTValues.VA[GTValues.MV]))
+            .UI(builder -> builder.setProgressBar(GTGuiTextures.PROGRESS_ARROW_MULTIPLE))
+            .setSound(GTSoundEntries.ARC);
+
+    public static final GTRecipeType ROTARY_KILN_RECIPE = GTRecipeTypes.register(InfinityCore.id("rotary_kiln"), MULTIBLOCK)
+            .setMaxIOSize(3, 2, 3, 3)
+            .UI(builder -> builder.setProgressBar(GTGuiTextures.PROGRESS_ARROW))
+            .setSound(GTSoundEntries.FURNACE);
+
     public static void init() {
         for (GTRecipeType type : new GTRecipeType[] {
-                ROASTER_RECIPE, ELECTROLYTIC_CELL_RECIPE, SPIRAL_SEPARATOR_RECIPE, METALLURGICAL_CONVERTER_RECIPE, FLASH_SMELTING_RECIPE
+                ROASTER_RECIPE, ELECTROLYTIC_CELL_RECIPE, SPIRAL_SEPARATOR_RECIPE, METALLURGICAL_CONVERTER_RECIPE, FLASH_FURNACE_RECIPE,
+                ADVANCED_ARC_FURNACE_RECIPE, INDUCTION_FURNACE_RECIPE, ROTARY_KILN_RECIPE
         }) {
             type.setEUIO(IO.IN);
         }
+
+        // Add Item Output to Fluid Heater
+        GTRecipeTypes.FLUID_HEATER_RECIPES.setMaxIOSize(1, 1, 1, 1);
 
         // TODO: Arc Furnace Overhaul
         GTRecipeTypes.ARC_FURNACE_RECIPES.setMaxIOSize(4, 9, 1, 1);
