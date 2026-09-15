@@ -13,6 +13,7 @@ import com.gregtechceu.gtceu.api.recipe.GTRecipe;
 import com.gregtechceu.gtceu.api.recipe.content.ContentModifier;
 import com.gregtechceu.gtceu.api.recipe.modifier.ModifierFunction;
 import com.gregtechceu.gtceu.api.recipe.modifier.ParallelLogic;
+import com.gregtechceu.gtceu.api.registry.registrate.entry.MachineEntry;
 import com.gregtechceu.gtceu.common.data.GTBlocks;
 import com.gregtechceu.gtceu.common.data.GTMaterials;
 import com.gregtechceu.gtceu.common.data.GTRecipeModifiers;
@@ -22,7 +23,7 @@ import static com.gregtechceu.gtceu.api.multiblock.Predicates.*;
 import static net.terrafirmainfinity.core.InfinityCore.InfinityRegistrate;
 
 public class MetallurgicalConverter {
-    public static final MultiblockMachineDefinition METALLURGICAL_CONVERTER = InfinityRegistrate
+    public static final MachineEntry<MultiblockMachineDefinition> METALLURGICAL_CONVERTER = InfinityRegistrate
             .multiblock("metallurgical_converter", WorkableElectricMultiblockMachine::new)
             .rotationState(RotationState.NON_Y_AXIS)
             .recipeType(InfinityRecipeTypes.METALLURGICAL_CONVERTER_RECIPE)
@@ -34,7 +35,7 @@ public class MetallurgicalConverter {
                     .slice(" CCC ", " FPF ", "  P  ", "CC#CC", "GB#BG", " C#C ", "  M  ")
                     .slice("FCCCF", "FFFFF", "F   F", "FCCCF", " BBB ", " CCC ", "     ")
                     .slice(" CSC ", " CCC ", "     ", "     ", "     ", "     ", "     ")
-                    .where('S', controller(blocks(definition.get())))
+                    .where('S', controller(definition))
                     .where('C', blocks(GTBlocks.CASING_STEEL_SOLID.get())
                             .and(autoAbilities(definition.getRecipeTypes()))
                             .and(autoAbilities(true, false, false)))

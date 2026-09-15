@@ -6,6 +6,7 @@ import com.gregtechceu.gtceu.api.machine.MultiblockMachineDefinition;
 import com.gregtechceu.gtceu.api.machine.multiblock.WorkableElectricMultiblockMachine;
 import com.gregtechceu.gtceu.api.multiblock.pattern.MultiblockPatternBuilder;
 import com.gregtechceu.gtceu.api.multiblock.util.RelativeDirection;
+import com.gregtechceu.gtceu.api.registry.registrate.entry.MachineEntry;
 import com.gregtechceu.gtceu.common.data.GTBlocks;
 import com.gregtechceu.gtceu.common.data.GTRecipeModifiers;
 import net.terrafirmainfinity.core.common.data.InfinityRecipeTypes;
@@ -15,7 +16,7 @@ import static net.terrafirmainfinity.core.InfinityCore.InfinityRegistrate;
 
 // TODO: Disable GCYM LARGE_ELECTROLYZER
 public class ElectrolyticCell {
-    public static final MultiblockMachineDefinition ELECTROLYTIC_CELL = InfinityRegistrate
+    public static final MachineEntry<MultiblockMachineDefinition> ELECTROLYTIC_CELL = InfinityRegistrate
             .multiblock("electrolytic_cell", WorkableElectricMultiblockMachine::new)
             .rotationState(RotationState.ALL)
             .recipeType(InfinityRecipeTypes.ELECTROLYTIC_CELL_RECIPE)
@@ -26,7 +27,7 @@ public class ElectrolyticCell {
                     .slice("CCCCC", "CPPPC", "CPPPC")
                     .slice("CCCCC", "CPPPC", "CPPPC")
                     .slice("CCCCC", "CCSCC", "CCCCC")
-                    .where('S', controller(blocks(definition.get())))
+                    .where('S', controller(definition))
                     .where('C', blocks(GTBlocks.CASING_STEEL_SOLID.get()).setMinGlobalLimited(33)
                             .and(autoAbilities(definition.getRecipeTypes()))
                             .and(autoAbilities(true, false, false)))

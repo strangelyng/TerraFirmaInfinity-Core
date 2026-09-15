@@ -8,6 +8,9 @@ import com.gregtechceu.gtceu.api.machine.feature.ITieredMachine;
 import com.gregtechceu.gtceu.api.machine.steam.SimpleSteamMachine;
 import com.gregtechceu.gtceu.api.recipe.GTRecipeType;
 import com.gregtechceu.gtceu.api.recipe.gui.GTRecipeTypeUILayout;
+import com.gregtechceu.gtceu.api.registry.GTRegistries;
+import com.gregtechceu.gtceu.api.registry.registrate.builder.GTRecipeTypeBuilder;
+import com.gregtechceu.gtceu.api.registry.registrate.entry.GTRecipeTypeEntry;
 import com.gregtechceu.gtceu.common.data.GTRecipeTypes;
 import com.gregtechceu.gtceu.common.data.GTSoundEntries;
 import com.gregtechceu.gtceu.common.mui.GTGuiTextures;
@@ -18,9 +21,10 @@ import net.terrafirmainfinity.core.common.ui.InfinityGuiTextures;
 
 import static com.gregtechceu.gtceu.common.data.GTRecipeTypes.ELECTRIC;
 import static com.gregtechceu.gtceu.common.data.GTRecipeTypes.MULTIBLOCK;
+import static net.terrafirmainfinity.core.InfinityCore.InfinityRegistrate;
 
 public class InfinityRecipeTypes {
-    public static final GTRecipeType ROASTER_RECIPE = GTRecipeTypes.register(InfinityCore.id("roaster"), ELECTRIC)
+    public static final GTRecipeTypeEntry ROASTER_RECIPE = InfinityRegistrate.recipeType("roaster", ELECTRIC)
             .setMaxIOSize(3, 2, 2, 3)
             .UI(builder -> builder.setProgressBar(GTGuiTextures.PROGRESS_ARROW)
                     .setMachineLayoutGridBuilder(ItemRecipeCapability.CAP, IO.IN, ((machine, layout) -> {
@@ -62,9 +66,11 @@ public class InfinityRecipeTypes {
                     .setItemSlotOverlay(IO.IN, 0, GTGuiTextures.FURNACE_OVERLAY_1)
                     .setFluidSlotOverlay(IO.OUT, 0, GTGuiTextures.VIAL_OVERLAY_2))
             .setIconSupplier(() -> InfinityMachines.ROASTER[GTValues.LV].asStack())
-            .setSound(GTSoundEntries.FURNACE);
+            .setSound(GTSoundEntries.FURNACE)
+            .setEUIO(IO.IN)
+            .register();
 
-    public static final GTRecipeType ELECTROLYTIC_CELL_RECIPE = GTRecipeTypes.register(InfinityCore.id("electrolytic_cell"), ELECTRIC)
+    public static final GTRecipeTypeEntry ELECTROLYTIC_CELL_RECIPE = InfinityRegistrate.recipeType("electrolytic_cell", ELECTRIC)
             .setMaxIOSize(4, 3, 3, 4)
             .prepareBuilder(recipeBuilder -> recipeBuilder.EUt(GTValues.VA[GTValues.LV]))
             .UI(builder -> builder.setProgressBar(GTGuiTextures.PROGRESS_EXTRACT)
@@ -77,35 +83,44 @@ public class InfinityRecipeTypes {
                     .setFluidSlotOverlay(IO.IN, 0, GTGuiTextures.LIGHTNING_OVERLAY_2)
                     .setItemSlotOverlay(IO.OUT, 0, GTGuiTextures.VIAL_OVERLAY_1)
                     .setFluidSlotOverlay(IO.OUT, 0, GTGuiTextures.VIAL_OVERLAY_2))
-            .setSound(GTSoundEntries.ELECTROLYZER);
+            .setSound(GTSoundEntries.ELECTROLYZER)
+            .setEUIO(IO.IN)
+            .register();
 
-    public static final GTRecipeType SPIRAL_SEPARATOR_RECIPE = GTRecipeTypes.register(InfinityCore.id("spiral_separator"), MULTIBLOCK)
+    public static final GTRecipeTypeEntry SPIRAL_SEPARATOR_RECIPE = InfinityRegistrate.recipeType("spiral_separator", MULTIBLOCK)
             .setMaxIOSize(1, 6, 1, 3)
             .UI(builder -> builder.setProgressBar(GTGuiTextures.PROGRESS_ARROW))
-            .setSound(GTSoundEntries.BATH);
+            .setSound(GTSoundEntries.BATH)
+            .setEUIO(IO.IN)
+            .register();
 
-    public static final GTRecipeType METALLURGICAL_CONVERTER_RECIPE = GTRecipeTypes.register(InfinityCore.id("metallurgical_converter"), MULTIBLOCK)
+    public static final GTRecipeTypeEntry METALLURGICAL_CONVERTER_RECIPE = InfinityRegistrate.recipeType("metallurgical_converter", MULTIBLOCK)
             .setMaxIOSize(3, 2, 3, 2)
             .prepareBuilder(recipeBuilder -> recipeBuilder.EUt(GTValues.VA[GTValues.LV]))
             .UI(builder -> builder.setProgressBar(GTGuiTextures.PROGRESS_ARROW))
-            .setSound(GTSoundEntries.FURNACE);
+            .setSound(GTSoundEntries.FURNACE)
+            .setEUIO(IO.IN)
+            .register();
 
-    public static final GTRecipeType FLASH_SMELTING_RECIPE = GTRecipeTypes.register(InfinityCore.id("flash_smelting"), MULTIBLOCK)
+    public static final GTRecipeTypeEntry FLASH_SMELTING_RECIPE = InfinityRegistrate.recipeType("flash_smelting", MULTIBLOCK)
             .setMaxIOSize(2, 0, 2, 3)
             .prepareBuilder(recipeBuilder -> recipeBuilder.EUt(GTValues.VA[GTValues.MV]))
             .UI(builder -> builder.setProgressBar(GTGuiTextures.PROGRESS_ARROW_MULTIPLE))
-            .setSound(GTSoundEntries.FURNACE);
+            .setSound(GTSoundEntries.FURNACE)
+            .setEUIO(IO.IN)
+            .register();
 
     public static void init() {
-        for (GTRecipeType type : new GTRecipeType[] {
+        /*
+        for (GTRecipeTypeEntry recipeTypeEntry : new GTRecipeTypeEntry[] {
                 ROASTER_RECIPE, ELECTROLYTIC_CELL_RECIPE, SPIRAL_SEPARATOR_RECIPE, METALLURGICAL_CONVERTER_RECIPE, FLASH_SMELTING_RECIPE
         }) {
-            type.setEUIO(IO.IN);
+            recipeTypeEntry.setEUIO(IO.IN);
         }
 
         // TODO: Arc Furnace Overhaul
         GTRecipeTypes.ARC_FURNACE_RECIPES.setMaxIOSize(4, 9, 1, 1);
-        var type = GTRecipeTypes.ARC_FURNACE_RECIPES;
+        var type = GTRecipeTypes.ARC_FURNACE_RECIPES.get();
         var builder = new GTRecipeTypeUILayout.Builder(type);
         builder.setProgressBar(GTGuiTextures.PROGRESS_ARROW)
                 .setMachineLayoutGridBuilder(ItemRecipeCapability.CAP, IO.OUT,
@@ -130,7 +145,7 @@ public class InfinityRecipeTypes {
 
         // TODO: Electrolyzer Overhaul
         GTRecipeTypes.ELECTROLYZER_RECIPES.setMaxIOSize(4, 3, 1, 3);
-        type = GTRecipeTypes.ELECTROLYZER_RECIPES;
+        type = GTRecipeTypes.ELECTROLYZER_RECIPES.get();
         builder = new GTRecipeTypeUILayout.Builder(type);
         builder.setProgressBar(GTGuiTextures.PROGRESS_EXTRACT)
                 .setMachineLayoutGridBuilder(ItemRecipeCapability.CAP, IO.IN, ((machine, layout) -> {
@@ -145,5 +160,6 @@ public class InfinityRecipeTypes {
                 .setItemSlotsOverlay(IO.IN, 2, 3, GTGuiTextures.CANISTER_OVERLAY)
                 .setFluidSlotOverlay(IO.IN, 0, GTGuiTextures.LIGHTNING_OVERLAY_2);
         GTRecipeTypes.ELECTROLYZER_RECIPES.setUiLayout(builder.build());
+         */
     }
 }

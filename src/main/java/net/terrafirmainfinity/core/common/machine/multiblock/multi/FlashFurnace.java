@@ -7,6 +7,7 @@ import com.gregtechceu.gtceu.api.machine.multiblock.PartAbility;
 import com.gregtechceu.gtceu.api.multiblock.MultiPredicate;
 import com.gregtechceu.gtceu.api.multiblock.pattern.MultiblockPatternBuilder;
 import com.gregtechceu.gtceu.api.multiblock.util.RelativeDirection;
+import com.gregtechceu.gtceu.api.registry.registrate.entry.MachineEntry;
 import com.gregtechceu.gtceu.common.data.GTBlocks;
 import com.gregtechceu.gtceu.common.data.GTMaterials;
 import net.terrafirmainfinity.core.common.data.InfinityRecipeTypes;
@@ -26,7 +27,7 @@ public class FlashFurnace {
      *      .slice(" BBBBB", " ICCCC", " I CSC", " I MMM", " I    ")
      */
 
-    public static final MultiblockMachineDefinition FLASH_FURNACE = InfinityRegistrate
+    public static final MachineEntry<MultiblockMachineDefinition> FLASH_FURNACE = InfinityRegistrate
             .multiblock("flash_furnace", FlashFurnaceMachine::new)
             .rotationState(RotationState.NON_Y_AXIS)
             .recipeType(InfinityRecipeTypes.FLASH_SMELTING_RECIPE)
@@ -47,7 +48,7 @@ public class FlashFurnace {
                         .slice(" I CSC", "IPICPC", " I CCC")
                         .slice(" I MMM", "IPIMMM", " I MMM")
                         .slice(" I    ", "IPI   ", " I    ")
-                        .where('S', controller(blocks(definition.get())))
+                        .where('S', controller(definition))
                         .where('B', blocks(GTBlocks.FIREBOX_STEEL.get()))
                         .where('I', casingPredicate
                                 .and(abilities(PartAbility.IMPORT_FLUIDS).setMaxGlobalLimited(2))

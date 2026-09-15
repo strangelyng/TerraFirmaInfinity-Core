@@ -14,6 +14,7 @@ import com.gregtechceu.gtceu.api.recipe.GTRecipe;
 import com.gregtechceu.gtceu.api.recipe.content.ContentModifier;
 import com.gregtechceu.gtceu.api.recipe.modifier.ModifierFunction;
 import com.gregtechceu.gtceu.api.recipe.modifier.ParallelLogic;
+import com.gregtechceu.gtceu.api.registry.registrate.entry.MachineEntry;
 import com.gregtechceu.gtceu.common.data.GTBlocks;
 import com.gregtechceu.gtceu.common.data.GTMaterials;
 import com.simibubi.create.AllBlocks;
@@ -24,7 +25,7 @@ import static net.terrafirmainfinity.core.InfinityCore.InfinityRegistrate;
 import static com.gregtechceu.gtceu.api.multiblock.Predicates.*;
 
 public class SpiralSeparator {
-    public static final MultiblockMachineDefinition SPIRAL_SEPARATOR = InfinityRegistrate
+    public static final MachineEntry<MultiblockMachineDefinition> SPIRAL_SEPARATOR = InfinityRegistrate
             .multiblock("spiral_separator", BasicWorkableMachine::new)
             .rotationState(RotationState.NON_Y_AXIS)
             .recipeType(InfinityRecipeTypes.SPIRAL_SEPARATOR_RECIPE)
@@ -36,7 +37,7 @@ public class SpiralSeparator {
                     .slice("CCC", "GFG", "GFG", "GFG", "G#G", "XXX")
                     .slice("CCC", "FPF", "FPF", "FPF", "#P#", "XXX")
                     .slice("CSC", "GFG", "GFG", "GFG", "G#G", "XXX")
-                    .where('S', controller(blocks(definition.get())))
+                    .where('S', controller(definition))
                     .where('C', blocks(GTBlocks.CASING_STEEL_SOLID.get())
                             .or(abilities(PartAbility.EXPORT_ITEMS, PartAbility.EXPORT_FLUIDS)))
                     .where('X', blocks(GTBlocks.CASING_STEEL_SOLID.get())
