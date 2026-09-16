@@ -76,6 +76,8 @@ public class InfinityMaterials {
     // Compounds
     public static Material Alumina; // Al2O3
     public static Material ChromiumOxide; // Cr2O3
+    public static Material HydrogenChloride; // HCl
+    public static Material HydrogenFluoride; // HF
 
     // Rock Materials
     public static Material FelsicIgneous; // Granite, Rhyolite
@@ -329,6 +331,7 @@ public class InfinityMaterials {
         // Decomposition Routes
         var uniqueDecompMats = new ArrayList<Material>();
         uniqueDecompMats.add(Alunite);
+        uniqueDecompMats.add(Kyanite);
 
         uniqueDecompMats.add(Almandine);
         uniqueDecompMats.add(Andradite);
@@ -348,6 +351,19 @@ public class InfinityMaterials {
         uniqueDecompMats.add(GreenSapphire);
 
         uniqueDecompMats.add(Emerald);
+
+        uniqueDecompMats.add(Spodumene);
+
+        uniqueDecompMats.add(GlauconiteSand);
+        uniqueDecompMats.add(Lepidolite);
+        uniqueDecompMats.add(Mica);
+
+        uniqueDecompMats.add(Pollucite);
+        uniqueDecompMats.add(Zeolite);
+
+        uniqueDecompMats.add(PotassiumFeldspar);
+
+        uniqueDecompMats.add(FullersEarth);
 
         uniqueDecompMats.forEach((material) -> {
             material.addFlags(DISABLE_DECOMPOSITION);

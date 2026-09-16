@@ -25,5 +25,20 @@ public class InfinityCompoundMaterials {
                 .components(Chromium, 2, Oxygen, 3)
                 .flags(DISABLE_DECOMPOSITION)
                 .buildAndRegister();
+
+        HydrogenChloride = new Material.Builder(InfinityCore.id("hydrogen_chloride")) // TODO: Is this stupid?
+                .gas()
+                .components(Hydrogen, 1, Chlorine, 1)
+                .colorAverage()
+                // TODO Hazard?
+                .colorAverage()
+                .buildAndRegister();
+
+        HydrogenFluoride = new Material.Builder(InfinityCore.id("hydrogen_fluoride")) // TODO: Is this stupid?
+                .gas()
+                .components(Hydrogen, 1, Fluorine, 1)
+                .colorAverage()
+                // TODO Hazard?
+                .buildAndRegister();
     }
 }
