@@ -15,6 +15,7 @@ import com.gregtechceu.gtceu.common.data.GTRecipeTypes;
 import com.gregtechceu.gtceu.common.data.GTSoundEntries;
 import com.gregtechceu.gtceu.common.mui.GTGuiTextures;
 import com.gregtechceu.gtceu.common.mui.GTMuiWidgets;
+import com.tterrag.registrate.providers.ProviderType;
 import net.minecraft.util.Mth;
 import net.terrafirmainfinity.core.InfinityCore;
 import net.terrafirmainfinity.core.common.ui.InfinityGuiTextures;
@@ -22,9 +23,13 @@ import net.terrafirmainfinity.core.common.ui.InfinityGuiTextures;
 import static com.gregtechceu.gtceu.common.data.GTRecipeTypes.ELECTRIC;
 import static com.gregtechceu.gtceu.common.data.GTRecipeTypes.MULTIBLOCK;
 import static net.terrafirmainfinity.core.InfinityCore.InfinityRegistrate;
+import static net.terrafirmainfinity.core.InfinityCore.MOD_ID;
 
 public class InfinityRecipeTypes {
     public static final GTRecipeTypeEntry ROASTER_RECIPE = InfinityRegistrate.recipeType("roaster", ELECTRIC)
+            .setData(ProviderType.LANG, (ctx, prov) -> {
+                prov.add("recipe_type." + MOD_ID + "." + ctx.getName(), "Ore Roasting");
+            })
             .setMaxIOSize(3, 2, 2, 3)
             .UI(builder -> builder.setProgressBar(GTGuiTextures.PROGRESS_ARROW)
                     .setMachineLayoutGridBuilder(ItemRecipeCapability.CAP, IO.IN, ((machine, layout) -> {
@@ -71,6 +76,9 @@ public class InfinityRecipeTypes {
             .register();
 
     public static final GTRecipeTypeEntry ELECTROLYTIC_CELL_RECIPE = InfinityRegistrate.recipeType("electrolytic_cell", ELECTRIC)
+            .setData(ProviderType.LANG, (ctx, prov) -> {
+                prov.add("recipe_type." + MOD_ID + "." + ctx.getName(), "Advanced Electrolysis");
+            })
             .setMaxIOSize(4, 3, 3, 4)
             .prepareBuilder(recipeBuilder -> recipeBuilder.EUt(GTValues.VA[GTValues.LV]))
             .UI(builder -> builder.setProgressBar(GTGuiTextures.PROGRESS_EXTRACT)
@@ -88,6 +96,9 @@ public class InfinityRecipeTypes {
             .register();
 
     public static final GTRecipeTypeEntry SPIRAL_SEPARATOR_RECIPE = InfinityRegistrate.recipeType("spiral_separator", MULTIBLOCK)
+            .setData(ProviderType.LANG, (ctx, prov) -> {
+                prov.add("recipe_type." + MOD_ID + "." + ctx.getName(), "Spiral Separation");
+            })
             .setMaxIOSize(1, 6, 1, 3)
             .UI(builder -> builder.setProgressBar(GTGuiTextures.PROGRESS_ARROW))
             .setSound(GTSoundEntries.BATH)
@@ -95,6 +106,9 @@ public class InfinityRecipeTypes {
             .register();
 
     public static final GTRecipeTypeEntry METALLURGICAL_CONVERTER_RECIPE = InfinityRegistrate.recipeType("metallurgical_converter", MULTIBLOCK)
+            .setData(ProviderType.LANG, (ctx, prov) -> {
+                prov.add("recipe_type." + MOD_ID + "." + ctx.getName(), "Metallurgical Conversion");
+            })
             .setMaxIOSize(3, 2, 3, 2)
             .prepareBuilder(recipeBuilder -> recipeBuilder.EUt(GTValues.VA[GTValues.LV]))
             .UI(builder -> builder.setProgressBar(GTGuiTextures.PROGRESS_ARROW))

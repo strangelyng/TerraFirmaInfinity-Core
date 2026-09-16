@@ -112,16 +112,16 @@ public class InfinityLangHandler extends LangHandler {
         // Machines & Recipe Types
         provider.add("tfinfinity.machine.roaster.tooltip", "§7Sulfide roast, anyone?");
 
-        for (String id : INFINITY_RECIPE_TYPE_IDS) {
-            String name = switch (id) {
-                case "roaster" -> "Ore Roasting";
-                case "spiral_separator" -> "Spiral Separation";
-                case "electrolytic_cell" -> "Advanced Electrolysis";
-                case "metallurgical_converter" -> "Metallurgical Conversion";
-                default -> toTitle(id);
-            };
-            provider.add("recipe_type." + InfinityCore.MOD_ID + "." + id, name);
-        }
+//        for (String id : INFINITY_RECIPE_TYPE_IDS) {
+//            String name = switch (id) {
+//                case "roaster" -> "Ore Roasting";
+//                case "spiral_separator" -> "Spiral Separation";
+//                case "electrolytic_cell" -> "Advanced Electrolysis";
+//                case "metallurgical_converter" -> "Metallurgical Conversion";
+//                default -> toTitle(id);
+//            };
+//            replace(provider, "recipe_type." + InfinityCore.MOD_ID + "." + id, name);
+//        }
     }
 
     public static void replaceToolLang(RegistrateLangProvider provider, String id, String name) {
