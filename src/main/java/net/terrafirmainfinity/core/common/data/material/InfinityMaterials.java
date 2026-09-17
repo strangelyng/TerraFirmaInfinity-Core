@@ -318,56 +318,12 @@ public class InfinityMaterials {
         Electrotine.removeProperty(PropertyKey.ORE);
         Tungstate.removeProperty(PropertyKey.ORE);
 
-//        addFluidToExisting(FluidStorageKeys.LIQUID, PotassiumHydroxide);
-//        addFluidToExisting(FluidStorageKeys.LIQUID, CalciumHydroxide);
-
         CassiteriteSand.addFlags(InfinityMaterialFlags.GENERATE_SAND_ORES);
         GlauconiteSand.addFlags(InfinityMaterialFlags.GENERATE_SAND_ORES);
         Oilsands.addFlags(InfinityMaterialFlags.GENERATE_SAND_ORES);
         GraniticMineralSand.addFlags(InfinityMaterialFlags.GENERATE_SAND_ORES);
         GarnetSand.addFlags(InfinityMaterialFlags.GENERATE_SAND_ORES);
         BasalticMineralSand.addFlags(InfinityMaterialFlags.GENERATE_SAND_ORES);
-
-        // Decomposition Routes
-        var uniqueDecompMats = new ArrayList<Material>();
-        uniqueDecompMats.add(Alunite);
-        uniqueDecompMats.add(Kyanite);
-
-        uniqueDecompMats.add(Almandine);
-        uniqueDecompMats.add(Andradite);
-        uniqueDecompMats.add(Grossular);
-        uniqueDecompMats.add(Pyrope);
-        uniqueDecompMats.add(Spessartine);
-        uniqueDecompMats.add(Uvarovite);
-
-        uniqueDecompMats.add(Lazurite);
-        uniqueDecompMats.add(Sodalite);
-
-        uniqueDecompMats.add(BlueTopaz);
-        uniqueDecompMats.add(Topaz);
-
-        uniqueDecompMats.add(Ruby);
-        uniqueDecompMats.add(Sapphire);
-        uniqueDecompMats.add(GreenSapphire);
-
-        uniqueDecompMats.add(Emerald);
-
-        uniqueDecompMats.add(Spodumene);
-
-        uniqueDecompMats.add(GlauconiteSand);
-        uniqueDecompMats.add(Lepidolite);
-        uniqueDecompMats.add(Mica);
-
-        uniqueDecompMats.add(Pollucite);
-        uniqueDecompMats.add(Zeolite);
-
-        uniqueDecompMats.add(PotassiumFeldspar);
-
-        uniqueDecompMats.add(FullersEarth);
-
-        uniqueDecompMats.forEach((material) -> {
-            material.addFlags(DISABLE_DECOMPOSITION);
-        });
 
         // Modify Hazards
         HazardProperty.HazardTrigger.INHALATION.affectedTagPrefixes().add(powder);
