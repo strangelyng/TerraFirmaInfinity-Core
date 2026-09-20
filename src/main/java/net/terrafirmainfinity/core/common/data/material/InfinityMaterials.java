@@ -75,6 +75,7 @@ public class InfinityMaterials {
 
     // Compounds
     public static Material Alumina; // Al2O3
+    public static Material Beryllia; // BeO
     public static Material ChromiumOxide; // Cr2O3
     public static Material HydrogenChloride; // HCl
     public static Material HydrogenFluoride; // HF
@@ -107,14 +108,14 @@ public class InfinityMaterials {
         Borax.setProperty(PropertyKey.ORE, new OreProperty());
 
         // Add Flags
-        Bismuth.addFlags(InfinityMaterialFlags.GENERATE_DOUBLE_INGOT);
+        Bismuth.addFlags(InfinityMaterialFlags.GENERATE_DOUBLE_INGOT, MaterialFlags.GENERATE_PLATE, MaterialFlags.GENERATE_ROD);
         BismuthBronze.addFlags(InfinityMaterialFlags.GENERATE_DOUBLE_INGOT);
         BlackBronze.addFlags(InfinityMaterialFlags.GENERATE_DOUBLE_INGOT);
         Bronze.addFlags(InfinityMaterialFlags.GENERATE_DOUBLE_INGOT);
         Brass.addFlags(InfinityMaterialFlags.GENERATE_DOUBLE_INGOT);
         Copper.addFlags(InfinityMaterialFlags.GENERATE_DOUBLE_INGOT);
         Gold.addFlags(InfinityMaterialFlags.GENERATE_DOUBLE_INGOT);
-        Nickel.addFlags(InfinityMaterialFlags.GENERATE_DOUBLE_INGOT);
+        Nickel.addFlags(InfinityMaterialFlags.GENERATE_DOUBLE_INGOT, MaterialFlags.GENERATE_ROD);
         RoseGold.addFlags(InfinityMaterialFlags.GENERATE_DOUBLE_INGOT);
         Silver.addFlags(InfinityMaterialFlags.GENERATE_DOUBLE_INGOT);
         Tin.addFlags(InfinityMaterialFlags.GENERATE_DOUBLE_INGOT);
@@ -283,6 +284,8 @@ public class InfinityMaterials {
         addFluidToExisting(FluidStorageKeys.LIQUID, 1800, BlueSteel);
         addFluidToExisting(FluidStorageKeys.LIQUID, 1800, RedSteel);
         addFluidToExisting(FluidStorageKeys.LIQUID, 1750, BlackSteel);
+
+        addFluidToExisting(FluidStorageKeys.LIQUID, 1074, Salt);
 
         // Set Steels Blast Temperature to Match Steel
         BlastProperty blackSteelProp = BlackSteel.getProperty(PropertyKey.BLAST);

@@ -17,6 +17,14 @@ public class InfinityCompoundMaterials {
                 .flags(DISABLE_DECOMPOSITION)
                 .buildAndRegister();
 
+        Beryllia = new Material.Builder(InfinityCore.id("beryllia")) // Beryllium Oxide
+                .dust()
+                .color(0x4cba56)
+                .secondaryColor(0x5e8562)
+                .components(Beryllium, 1, Oxygen, 1)
+                .flags(DISABLE_DECOMPOSITION)
+                .buildAndRegister();
+
         ChromiumOxide = new Material.Builder(InfinityCore.id("chromium_oxide"))
                 .dust()
 //                .color(0x5F853B)
