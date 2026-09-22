@@ -35,6 +35,7 @@ public class InfinityLangHandler extends LangHandler {
         addGTMaterialLang(provider, "hafnon");
         addGTMaterialLang(provider, "millerite");
         addGTMaterialLang(provider, "petalite");
+        addGTMaterialLang(provider, "sperrylite");
         addGTMaterialLang(provider, "thorianite");
         addGTMaterialLang(provider, "thorite");
         addGTMaterialLang(provider, "wolframite");
@@ -88,6 +89,14 @@ public class InfinityLangHandler extends LangHandler {
         addTagPrefixLang(provider, InfinityTagPrefix.oreSandYellow);
         addTagPrefixLang(provider, InfinityTagPrefix.oreSandPink);
 
+        addTagPrefixLang(provider, InfinityTagPrefix.oreSandstoneBrown);
+        addTagPrefixLang(provider, InfinityTagPrefix.oreSandstoneBlack);
+        addTagPrefixLang(provider, InfinityTagPrefix.oreSandstoneWhite);
+        addTagPrefixLang(provider, InfinityTagPrefix.oreSandstoneRed);
+        addTagPrefixLang(provider, InfinityTagPrefix.oreSandstoneGreen);
+        addTagPrefixLang(provider, InfinityTagPrefix.oreSandstoneYellow);
+        addTagPrefixLang(provider, InfinityTagPrefix.oreSandstonePink);
+
         addToolClassLang(provider, "Chisel");
         addToolClassLang(provider, "Mace");
 
@@ -111,6 +120,8 @@ public class InfinityLangHandler extends LangHandler {
 
         // Machines & Recipe Types
         provider.add("tfinfinity.machine.roaster.tooltip", "§7Sulfide roast, anyone?");
+
+        provider.add("fluid.gtceu.salt", "Molten Salt");
 
 //        for (String id : INFINITY_RECIPE_TYPE_IDS) {
 //            String name = switch (id) {

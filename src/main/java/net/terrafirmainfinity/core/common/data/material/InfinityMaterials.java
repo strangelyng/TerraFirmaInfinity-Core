@@ -73,6 +73,8 @@ public class InfinityMaterials {
     public static Material Wolframite; // Tungsten Oxide
     public static Material Zircon; // Zirconium Silicate
 
+    public static Material Sperrylite; // Platinum Arsenide
+
     // Compounds
     public static Material Alumina; // Al2O3
     public static Material Beryllia; // BeO
@@ -105,7 +107,9 @@ public class InfinityMaterials {
         Zirconium.setProperty(PropertyKey.BLAST, new BlastProperty(2125, BlastProperty.GasTier.MID, GTValues.VA[EV], 1300, GTValues.VA[HV], 300));
 
         // Add Ores
+        Andradite.setProperty(PropertyKey.ORE, new OreProperty());
         Borax.setProperty(PropertyKey.ORE, new OreProperty());
+        Uvarovite.setProperty(PropertyKey.ORE, new OreProperty());
 
         // Add Flags
         Bismuth.addFlags(InfinityMaterialFlags.GENERATE_DOUBLE_INGOT, MaterialFlags.GENERATE_PLATE, MaterialFlags.GENERATE_ROD);
@@ -191,10 +195,14 @@ public class InfinityMaterials {
         AnnealedCopper.removeProperty(PropertyKey.FLUID);
 
         BismuthBronze.removeProperty(PropertyKey.BLAST);
+        BismuthBronze.removeProperty(PropertyKey.ALLOY_BLAST);
         BlackBronze.removeProperty(PropertyKey.BLAST);
+        BlackBronze.removeProperty(PropertyKey.ALLOY_BLAST);
 
         RoseGold.removeProperty(PropertyKey.BLAST);
+        RoseGold.removeProperty(PropertyKey.ALLOY_BLAST);
         SterlingSilver.removeProperty(PropertyKey.BLAST);
+        SterlingSilver.removeProperty(PropertyKey.ALLOY_BLAST);
 
         OreProperty oreProp = Quartzite.getProperty(PropertyKey.ORE);
         oreProp.setOreByProducts(NetherQuartz, Barite); // CertusQuartz to NetherQuartz
@@ -232,6 +240,12 @@ public class InfinityMaterials {
         oreProp = Pyrochlore.getProperty(PropertyKey.ORE);
         oreProp.setOreByProducts(Apatite, Calcium, Columbite); // Niobium to Columbite
 
+        oreProp = Andradite.getProperty(PropertyKey.ORE);
+        oreProp.setOreByProducts(GarnetYellow, Calcium);
+
+        oreProp = Uvarovite.getProperty(PropertyKey.ORE);
+        oreProp.setOreByProducts(GarnetYellow, Calcium);
+
         // TerraFirmaInfinity Ores Byproducts
         oreProp = Ember.getProperty(PropertyKey.ORE);
         oreProp.setWashedIn(Mercury);
@@ -261,6 +275,10 @@ public class InfinityMaterials {
         oreProp = Petalite.getProperty(PropertyKey.ORE);
         oreProp.setOreByProducts(Silicon, Petalite, Spodumene);
 
+        oreProp = Sperrylite.getProperty(PropertyKey.ORE);
+        oreProp.setOreByProducts(Nickel, Nickel, Pyrite, Platinum);
+        oreProp.setWashedIn(Mercury);
+
         oreProp = Thorianite.getProperty(PropertyKey.ORE);
         oreProp.setOreByProducts(Thorianite, Neodymium, RareEarth);
         oreProp.setSeparatedInto(Neodymium);
@@ -285,7 +303,7 @@ public class InfinityMaterials {
         addFluidToExisting(FluidStorageKeys.LIQUID, 1800, RedSteel);
         addFluidToExisting(FluidStorageKeys.LIQUID, 1750, BlackSteel);
 
-        addFluidToExisting(FluidStorageKeys.LIQUID, 1074, Salt);
+        addFluidToExisting(FluidStorageKeys.LIQUID, 1074, Salt, "fluid.gtceu.salt");
 
         // Set Steels Blast Temperature to Match Steel
         BlastProperty blackSteelProp = BlackSteel.getProperty(PropertyKey.BLAST);
@@ -319,6 +337,7 @@ public class InfinityMaterials {
 
         // Remove Other Ores
         Electrotine.removeProperty(PropertyKey.ORE);
+        Soapstone.removeProperty(PropertyKey.ORE); // A Metamorphic Rock Largely Composed of Talc... Just Use Talc
         Tungstate.removeProperty(PropertyKey.ORE);
 
         CassiteriteSand.addFlags(InfinityMaterialFlags.GENERATE_SAND_ORES);
@@ -359,19 +378,19 @@ public class InfinityMaterials {
         block.setIgnored(Zinc, () -> AllBlocks.ZINC_BLOCK);
 
         // Malum Materials
-        ingot.setIgnored(HallowedGold, MalumItems.HALLOWED_GOLD_INGOT::get);
-        nugget.setIgnored(HallowedGold, MalumItems.HALLOWED_GOLD_NUGGET::get);
-        block.setIgnored(HallowedGold, MalumBlocks.BLOCK_OF_HALLOWED_GOLD::get);
+        ingot.setIgnored(HallowedGold, MalumItems.HALLOWED_GOLD_INGOT);
+        nugget.setIgnored(HallowedGold, MalumItems.HALLOWED_GOLD_NUGGET);
+        block.setIgnored(HallowedGold, MalumBlocks.BLOCK_OF_HALLOWED_GOLD);
 
-        ingot.setIgnored(MalignantPewter, MalumItems.MALIGNANT_PEWTER_INGOT::get);
-        plate.setIgnored(MalignantPewter, MalumItems.MALIGNANT_PEWTER_PLATING::get);
-        nugget.setIgnored(MalignantPewter, MalumItems.MALIGNANT_PEWTER_NUGGET::get);
-        block.setIgnored(MalignantPewter, MalumBlocks.BLOCK_OF_MALIGNANT_PEWTER::get);
+        ingot.setIgnored(MalignantPewter, MalumItems.MALIGNANT_PEWTER_INGOT);
+        plate.setIgnored(MalignantPewter, MalumItems.MALIGNANT_PEWTER_PLATING);
+        nugget.setIgnored(MalignantPewter, MalumItems.MALIGNANT_PEWTER_NUGGET);
+        block.setIgnored(MalignantPewter, MalumBlocks.BLOCK_OF_MALIGNANT_PEWTER);
 
-        ingot.setIgnored(SoulstainedSteel, MalumItems.SOUL_STAINED_STEEL_INGOT::get);
-        plate.setIgnored(SoulstainedSteel, MalumItems.SOUL_STAINED_STEEL_PLATING::get);
-        nugget.setIgnored(SoulstainedSteel, MalumItems.SOUL_STAINED_STEEL_NUGGET::get);
-        block.setIgnored(SoulstainedSteel, MalumBlocks.BLOCK_OF_SOUL_STAINED_STEEL::get);
+        ingot.setIgnored(SoulstainedSteel, MalumItems.SOUL_STAINED_STEEL_INGOT);
+        plate.setIgnored(SoulstainedSteel, MalumItems.SOUL_STAINED_STEEL_PLATING);
+        nugget.setIgnored(SoulstainedSteel, MalumItems.SOUL_STAINED_STEEL_NUGGET);
+        block.setIgnored(SoulstainedSteel, MalumBlocks.BLOCK_OF_SOUL_STAINED_STEEL);
 
         // TFC Materials
         block.setIgnored(Kaolinite, () -> TFCBlocks.RED_KAOLIN_CLAY);
@@ -628,6 +647,12 @@ public class InfinityMaterials {
     public static void addFluidToExisting(FluidStorageKey key, int temp, Material mat) {
         FluidProperty fluidProp = new FluidProperty();
         fluidProp.getStorage().enqueueRegistration(key, new FluidBuilder().temperature(temp));
+        mat.setProperty(PropertyKey.FLUID, fluidProp);
+    }
+
+    public static void addFluidToExisting(FluidStorageKey key, int temp, Material mat, String translationKey) {
+        FluidProperty fluidProp = new FluidProperty();
+        fluidProp.getStorage().enqueueRegistration(key, new FluidBuilder().temperature(temp).translation(translationKey));
         mat.setProperty(PropertyKey.FLUID, fluidProp);
     }
 }

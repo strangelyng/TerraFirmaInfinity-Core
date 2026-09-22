@@ -76,6 +76,13 @@ public class InfinityOreMaterials {
                 .components(Lithium, 1, Aluminium, 1, Silicon, 4, Oxygen, 10)
                 .buildAndRegister();
 
+        Sperrylite = new Material.Builder(GTCEu.id("sperrylite"))
+                .dust().ore()
+                .color(0xBBB7EF).secondaryColor(0x7F7DA3).iconSet(MaterialIconSet.METALLIC)
+                .flags(DISABLE_DECOMPOSITION)
+                .components(Platinum, 1, Arsenic, 2)
+                .buildAndRegister();
+
         Thorianite = new Material.Builder(GTCEu.id("thorianite"))
                 .dust().ore()
                 .color(0x2e2823)

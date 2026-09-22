@@ -400,6 +400,14 @@ public class InfinityTagPrefix {
     public static TagPrefix oreSandGreen;
     public static TagPrefix oreSandPink;
 
+    public static TagPrefix oreSandstoneBrown;
+    public static TagPrefix oreSandstoneWhite;
+    public static TagPrefix oreSandstoneBlack;
+    public static TagPrefix oreSandstoneRed;
+    public static TagPrefix oreSandstoneYellow;
+    public static TagPrefix oreSandstoneGreen;
+    public static TagPrefix oreSandstonePink;
+
     public static void modifyExistingOres() {
         // Remove Unwanted Ore TagPrefixes
         TagPrefix.ORES.remove(TagPrefix.ore); // Vanilla Stone
@@ -445,6 +453,14 @@ public class InfinityTagPrefix {
         oreSandGreen = createTFCSandOreTagPrefix(SandBlockType.GREEN);
         oreSandYellow = createTFCSandOreTagPrefix(SandBlockType.YELLOW);
         oreSandPink = createTFCSandOreTagPrefix(SandBlockType.PINK);
+
+        oreSandstoneBrown = createTFCSandstoneOreTagPrefix(SandBlockType.BROWN);
+        oreSandstoneBlack = createTFCSandstoneOreTagPrefix(SandBlockType.BLACK);
+        oreSandstoneWhite = createTFCSandstoneOreTagPrefix(SandBlockType.WHITE);
+        oreSandstoneRed = createTFCSandstoneOreTagPrefix(SandBlockType.RED);
+        oreSandstoneGreen = createTFCSandstoneOreTagPrefix(SandBlockType.GREEN);
+        oreSandstoneYellow = createTFCSandstoneOreTagPrefix(SandBlockType.YELLOW);
+        oreSandstonePink = createTFCSandstoneOreTagPrefix(SandBlockType.PINK);
     }
 
     public static void init() {
@@ -517,6 +533,36 @@ public class InfinityTagPrefix {
                 .unformattedTagPath("ores")
                 .materialIconType(MaterialIconType.ore)
                 .miningToolTag(BlockTags.MINEABLE_WITH_SHOVEL)
+                .unificationEnabled(true)
+                .blockConstructor(OreBlock::new)
+                .generationCondition(mat -> mat.hasFlag(InfinityMaterialFlags.GENERATE_SAND_ORES)); // This doesn't do anything atm
+    }
+
+    private static ResourceLocation getTFCSandstone(SandBlockType sand) {
+        return ResourceLocation.fromNamespaceAndPath(TerraFirmaCraft.MOD_ID, "raw_sandstone/" + sand.name().toLowerCase(Locale.ROOT));
+    }
+
+    private static TagPrefix createTFCSandstoneOreTagPrefix(SandBlockType sand) {
+        String name = sand.name().toLowerCase(Locale.ROOT);
+
+        String formattedName = name.substring(0, 1).toUpperCase() + name.substring(1);
+
+        ResourceLocation resLoc = getTFCSandstone(sand);
+
+        return new TagPrefix(name + "_sandstone")
+                .langValue(formattedName + " Sandstone %s Ore")
+                .registerOre(blockStateSupplier(resLoc), () -> GTMaterials.Stone,
+                        BlockBehaviour.Properties.of()
+                                .mapColor(sand.getMaterialColor())
+                                .requiresCorrectToolForDrops()
+                                .strength(0.8F),
+                        ResourceLocation.fromNamespaceAndPath(resLoc.getNamespace(), "block/" + resLoc.getPath()),
+                        false, false, false)
+                .defaultTagPath("ores/%s")
+                .prefixOnlyTagPath("ores_in_ground/%s")
+                .unformattedTagPath("ores")
+                .materialIconType(MaterialIconType.ore)
+                .miningToolTag(BlockTags.MINEABLE_WITH_PICKAXE)
                 .unificationEnabled(true)
                 .blockConstructor(OreBlock::new)
                 .generationCondition(mat -> mat.hasFlag(InfinityMaterialFlags.GENERATE_SAND_ORES)); // This doesn't do anything atm
