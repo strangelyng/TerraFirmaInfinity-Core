@@ -26,20 +26,6 @@ public class InfinityLangHandler extends LangHandler {
 
     public static void init(RegistrateLangProvider provider) {
         // Materials
-        addGTMaterialLang(provider, "acanthite");
-        addGTMaterialLang(provider, "arsenopyrite");
-        addGTMaterialLang(provider, "bismuthinite");
-        addGTMaterialLang(provider, "columbite");
-        addGTMaterialLang(provider, "cryolite");
-        addGTMaterialLang(provider, "fluorite");
-        addGTMaterialLang(provider, "hafnon");
-        addGTMaterialLang(provider, "millerite");
-        addGTMaterialLang(provider, "petalite");
-        addGTMaterialLang(provider, "sperrylite");
-        addGTMaterialLang(provider, "thorianite");
-        addGTMaterialLang(provider, "thorite");
-        addGTMaterialLang(provider, "wolframite");
-        addGTMaterialLang(provider, "zircon");
 //        replaceMaterialLang(provider, "dawnstone", "Aurichalcum");
 
         // Tag Prefixes
