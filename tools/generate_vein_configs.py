@@ -2,6 +2,7 @@ import json
 import csv
 import os
 from collections import defaultdict
+from operator import truediv
 
 CONFIGURED_DIR = "data/tfinfinity/worldgen/configured_feature/vein"
 PLACED_DIR = "data/tfinfinity/worldgen/placed_feature/vein"
@@ -72,6 +73,11 @@ class VeinBuilder:
         vein_config['min_slant'] = min_slant
         vein_config['max_slant'] = max_slant
         vein_config['sign'] = sign
+
+        return self
+
+    def near_lava(self):
+        self.vein['config']['near_lava'] = True
 
         return self
 
@@ -525,10 +531,135 @@ VEIN_DICT = {
         .build(),
 
     # Deep deposits
-    "deep_bismuth": VeinBuilder("deep_bismuth", 180, 0.25, -50, 20)
+    "deep_apatite": VeinBuilder("deep_apatite", 240, 0.3, -50, 20)
+        .cluster_vein(30)
+        .blocks(ReplacementMapBuilder().rock(IGNEOUS_INTRUSIVE, {"apatite": 4, "tricalcium_phosphate": 3, "pyrochlore": 1}).build())
+        .indicator(make_deep_vein_indicator({"gtceu:apatite_indicator": 1}))
+        .build(),
+
+    "deep_bismuth": VeinBuilder("deep_bismuth", 230, 0.25, -50, 20)
         .pipe_vein(60, 10, 7, 20, 2, 5, 0)
         .blocks(ReplacementMapBuilder().rock(IGNEOUS_INTRUSIVE, {"tfinfinity:bismuthinite": 9, "silver": 8, "gold": 8}).build())
+        .indicator(make_deep_vein_indicator({"tfc:ore/small_bismuthinite": 5, "tfc:ore/small_native_silver": 2, "tfc:ore/small_native_gold": 2}))
         .biome_filter("montane")
+        .build(),
+
+    "deep_copper_sulfide": VeinBuilder("deep_copper_sulfide", 80, 0.3, -50, 20)
+        .disc_vein(25, 5)
+        .near_lava()
+        .blocks(ReplacementMapBuilder().rock(METAMORPHIC, {"sulfur": 8, "bornite": 1, "chalcocite": 1}).build())
+        .indicator(make_deep_vein_indicator({"gtceu:sulfur_indicator": 5, "gtceu:bornite_indicator": 1}))
+        .build(),
+
+    "deep_galena": VeinBuilder("deep_galena", 250, 0.25, -50, 20)
+        .cluster_vein(25)
+        .blocks(ReplacementMapBuilder().rock(IGNEOUS_INTRUSIVE, {"galena": 6, "sphalerite": 3, "tfinfinity:acanthite": 2, "silver": 2}).build())
+        .indicator(make_deep_vein_indicator({"gtceu:galena_indicator": 3, "tfc:ore/small_sphalerite": 2, "tfc:ore/small_native_silver": 1}))
+        .build(),
+
+    "deep_graphite": VeinBuilder("deep_graphite", 120, 0.35, -30, 50)
+        .disc_vein(15, 4)
+        .blocks(ReplacementMapBuilder().rock(METAMORPHIC, {"graphite": 100}).build())
+        .indicator(make_deep_vein_indicator({"gtceu:graphite_indicator": 1}))
+        .build(),
+
+    "deep_kyanite": VeinBuilder("deep_kyanite", 240, 0.2, -50, 20)
+        .cluster_vein(30)
+        .blocks(ReplacementMapBuilder().rock(IGNEOUS_INTRUSIVE + ["gneiss", "schist"], {"mica": 5, "kyanite": 5, "talc": 3}).build())
+        .build(),
+
+    "deep_lapis": VeinBuilder("deep_lapis", 250, 0.35, -50, 20)
+        .pipe_vein(60, 10, 7, 20, 2, 5, 0)
+        .blocks(ReplacementMapBuilder().rock(METAMORPHIC, {"lazurite": 5, "sodalite": 4, "lapis": 3, "calcite": 3, "pyrite": 2}).build())
+        .build(),
+
+    "deep_magnesiochromite": VeinBuilder("deep_magnesiochromite", 240, 0.25, -50, 20)
+        .cluster_vein(30)
+        .blocks(ReplacementMapBuilder().rock(["gabbro", "basalt"], {"chromite": 3, "magnesite": 3, "olivine": 2}).build())
+        .build(),
+
+    "deep_nb_hf_zr_th": VeinBuilder("deep_nb_hf_zr_th", 330, 0.2, -50, 20)
+        .cluster_vein(25)
+        .blocks(ReplacementMapBuilder().rock(IGNEOUS_INTRUSIVE, {"tfinfinity:thorite": 3, "tfinfinity:columbite": 3, "tfinfinity:zircon": 2, "tfinfinity:hafnon": 1}).build())
+        .build(),
+
+    "deep_niobium_tantalum": VeinBuilder("deep_niobium_tantalum", 270, 0.2, -50, 20)
+        .cluster_vein(25)
+        .blocks(ReplacementMapBuilder().rock(IGNEOUS_INTRUSIVE, {"tantalite": 4, "tfinfinity:columbite": 3, "cassiterite": 2}).build())
+        .build(),
+
+    "deep_pge_deposit": VeinBuilder("deep_pge_deposit", 400, 0.2, -70, -10)
+        .disc_vein(20, 6)
+        .blocks(ReplacementMapBuilder().rock(IGNEOUS_INTRUSIVE, {"cooperite": 3, "tfinfinity:sperrylite": 3, "platinum": 2, "palladium": 2}).build())
+        .build(),
+
+    "deep_pge_sulfides": VeinBuilder("deep_pge_sulfides", 300, 0.2, -50, 20)
+        .cluster_vein(25)
+        .blocks(ReplacementMapBuilder().rock(IGNEOUS_INTRUSIVE, {"pentlandite": 5, "chalcopyrite": 2, "pyrite": 2, "tfinfinity:sperrylite": 1}).build())
+        .build(),
+
+    "deep_pitchblende": VeinBuilder("deep_pitchblende", 270, 0.2, -50, 20)
+        .cluster_vein(25)
+        .blocks(ReplacementMapBuilder().rock(IGNEOUS_INTRUSIVE, {"pitchblende": 6, "uraninite": 4, "amethyst": 3, "tfinfinity:thorite": 2}).build())
+        .build(),
+
+    "deep_pollucite": VeinBuilder("deep_pollucite", 240, 0.2, -50, 20)
+        .cluster_vein(30)
+        .blocks(ReplacementMapBuilder().rock(IGNEOUS_INTRUSIVE, {"mica": 5, "pollucite": 5, "cassiterite": 3}).build())
+        .build(),
+
+    "deep_ruby": VeinBuilder("deep_ruby", 210, 0.2, -50, 10)
+        .cluster_vein(20)
+        .blocks(ReplacementMapBuilder().rock(["marble"], {"ruby": 100}).build())
+        .build(),
+
+    "deep_saltpeter_evaporite": VeinBuilder("deep_saltpeter_evaporite", 240, 0.2, -50, 20)
+        .cluster_vein(30)
+        .blocks(ReplacementMapBuilder().rock(METAMORPHIC, {"saltpeter": 3, "alunite": 2}).build())
+        .placement({"type": "tfc:climate", "max_groundwater": 150, "min_temperature": 18})
+        .build(),
+
+    "deep_sapphire": VeinBuilder("deep_sapphire", 230, 0.2, -50, 20)
+        .pipe_vein(60, 10, 7, 20, 2, 5, 0)
+        .blocks(ReplacementMapBuilder().rock(ALL_IGNEOUS, {"sapphire": 8, "green_sapphire": 7, "pyrope": 4, "almandine": 3}).build())
+        .build(),
+
+    "deep_scheelite": VeinBuilder("deep_scheelite", 300, 0.3, -50, 20)
+        .cluster_vein(25)
+        .blocks(ReplacementMapBuilder().rock(METAMORPHIC, {"scheelite": 3, "tfinfinity:wolframite": 3, "lepidolite": 1}).build())
+        .build(),
+
+    "deep_sulfide_molybdate": VeinBuilder("deep_sulfide_molybdate", 270, 0.25, -50, 20)
+        .cluster_vein(30)
+        .blocks(ReplacementMapBuilder().rock(IGNEOUS_INTRUSIVE, {"wulfenite": 10, "molybdenite": 7, "powellite": 8}).build())
+        .biome_filter("volcano")
+        .build(),
+
+    "deep_sulfur": VeinBuilder("deep_sulfur", 60, 0.6, -60, -40)
+        .disc_vein(30, 10)
+        .near_lava()
+        .blocks(ReplacementMapBuilder().rock(ALL_IGNEOUS + METAMORPHIC, {"sulfur": 1}).build())
+        .build(),
+
+    "deep_thorianite": VeinBuilder("deep_thorianite", 270, 0.2, -50, 20)
+        .cluster_vein(20)
+        .blocks(ReplacementMapBuilder().rock(IGNEOUS_INTRUSIVE, {"tfinfinity:thorianite": 6, "uraninite": 4, "emerald": 3, "tfinfinity:thorite": 2}).build())
+        .build(),
+
+    "deep_tin_tungsten": VeinBuilder("deep_tin_tungsten", 210, 0.25, -50, 20)
+        .cluster_vein(30)
+        .blocks(ReplacementMapBuilder().rock(IGNEOUS_INTRUSIVE, {"cassiterite": 4, "tfinfinity:arsenopyrite": 3, "tfinfinity:wolframite": 2}).build())
+        .biome_filter("volcano")
+        .build(),
+
+    "deep_topaz": VeinBuilder("deep_topaz", 250, 0.2, -50, 20)
+        .cluster_vein(30)
+        .blocks(ReplacementMapBuilder().rock(IGNEOUS_INTRUSIVE, {"blue_topaz": 6, "topaz": 5, "chalcocite": 3, "bornite": 1}).build())
+        .build(),
+
+    "deep_vanadium_magnetite": VeinBuilder("deep_vanadium_magnetite", 230, 0.3, -50, 20)
+        .cluster_vein(35)
+        .blocks(ReplacementMapBuilder().rock(IGNEOUS_INTRUSIVE, {"magnetite": 12, "vanadium_magnetite": 4, "gold": 4, "ilmenite": 2}).build())
         .build(),
 
     # Special deposits
