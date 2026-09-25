@@ -1,11 +1,12 @@
 import csv
 import json
+import re
 from generate_vein_configs import ALL_ROCKS, ALL_SANDS
 
 from vein_dictionary_tfc import VEIN_DICT
 
 def write_vein_data_to_csv(vein_dict: dict):
-    fieldnames = ["Vein ID", "Type", "Distribution", "Rarity", "Density","Min Y", "Max Y", "Size", "Height", "Radius", "Skew", "Slant", "Sign","Projected?", "Project Offset?", "Near Lava?", "Biome", "Placement", "Indicator"] + ALL_ROCKS + ALL_SANDS
+    fieldnames = ["Vein ID", "Type", "Distribution", "Min Y", "Max Y", "Projected?", "Project Offset?", "Rarity", "Density", "Size", "Height", "Radius", "Skew", "Slant", "Sign", "Near Lava?", "Biome", "Placement"] + ALL_ROCKS + ALL_SANDS + ["Indicator"]
 
     with open("veins_output.csv", mode="w", newline="", encoding="utf-8") as csv_file:
         writer = csv.DictWriter(csv_file, fieldnames=fieldnames)
@@ -50,11 +51,15 @@ def write_vein_data_to_csv(vein_dict: dict):
                     if "ore" in block_id and ("sandstone" in block_id or any(f"{r}" in block_id for r in ALL_ROCKS) or any(f"{s}" in block_id for s in ALL_SANDS)): # LMAO
                         material = block_id.split(":")[-1]
 
-                        for r in ALL_ROCKS:
-                            material = material.replace(f"{r}_", "")
-
                         for s in ALL_SANDS:
-                            material = material.replace(f"{s}_", "")
+                            pattern = f"^{s}_"
+
+                            material = re.sub(pattern, "", material)
+
+                        for r in ALL_ROCKS:
+                            pattern = f"^{r}_"
+
+                            material = re.sub(pattern, "", material)
 
                         material = material.replace("_ore", "")
 

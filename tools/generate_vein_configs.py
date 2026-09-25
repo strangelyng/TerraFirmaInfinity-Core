@@ -3,6 +3,7 @@ import json
 import csv
 import os
 from collections import defaultdict
+from itertools import chain
 
 CONFIGURED_DIR = "data/tfinfinity/worldgen/configured_feature/vein"
 PLACED_DIR = "data/tfinfinity/worldgen/placed_feature/vein"
@@ -263,11 +264,17 @@ def load_configs_from_csv(csv_filepath: str):
         return ore_weights, block_weights
 
     with open(csv_filepath, mode='r', encoding='utf-8') as file:
-        # Skip extra heading lines in exported sheet from Google Sheets
-        for _ in range(2):
-            file.readline()
+        for line in file:
+            cells = line.split(",")
+            if cells and cells[0].strip():
+                header_row = line
+                break
+        else:
+            raise ValueError("No valid header row could be found!")
 
-        reader = csv.DictReader(file)
+        remaining_file_with_header = chain([header_row], file)
+
+        reader = csv.DictReader(remaining_file_with_header)
 
         for row_num, row in enumerate(reader, start=3):
             vein_id = row.get("Vein ID")
@@ -458,7 +465,7 @@ def main():
         with open(tag_path, "w", encoding="utf-8") as f:
             json.dump(tag_data, f, indent=2)
 
-    print(f"\nSuccessfully generated {configured_count} configured features and {placed_count} placed features for {len(biome_groups)} biome{"" if len(biome_groups) < 2 else "s"}!")
+    print(f"\nSuccessfully generated {configured_count} configured features and {placed_count} placed features for {len(biome_groups)} biome group{"" if len(biome_groups) < 2 else "s"}!")
 
 
 if __name__ == "__main__":
