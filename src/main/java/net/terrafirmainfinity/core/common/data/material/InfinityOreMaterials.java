@@ -13,14 +13,14 @@ public class InfinityOreMaterials {
     public static void register() {
         Acanthite = new Material.Builder(InfinityCore.id("acanthite"))
                 .dust().ore()
-                .color(0x747a8d)
+                .color(0x6B7484).secondaryColor(0x1E234B)
                 .components(Silver, 2, Sulfur, 1)
                 .oreSmeltInto(Silver)
                 .buildAndRegister();
 
         Arsenopyrite = new Material.Builder(InfinityCore.id("arsenopyrite"))
                 .dust().ore()
-                .color(0x8f8259)
+                .color(0xA99543).secondaryColor(0x84611A)
                 .components(Iron, 1, Arsenic, 1, Sulfur, 1)
                 .separatedInto(Iron)
                 .oreSmeltInto(Iron)
@@ -36,7 +36,7 @@ public class InfinityOreMaterials {
 
         Columbite = new Material.Builder(InfinityCore.id("columbite"))
                 .dust().ore()
-                .color(0x575959)
+                .color(0x504C59).secondaryColor(0x2C0E2D)
                 .components(Manganese, 1, Niobium, 2, Oxygen, 6)
                 .buildAndRegister();
 
@@ -57,14 +57,14 @@ public class InfinityOreMaterials {
 
         Hafnon = new Material.Builder(InfinityCore.id("hafnon"))
                 .dust().ore()
-                .color(0x523322)
+                .color(0x523322).secondaryColor(0x3F1208)
                 .flags(DISABLE_DECOMPOSITION)
                 .components(Hafnium, 1, Silicon, 1, Oxygen, 4)
                 .buildAndRegister();
 
         Millerite = new Material.Builder(InfinityCore.id("millerite"))
                 .dust().ore()
-                .color(0x928771)
+                .color(0xBCAA86).secondaryColor(0x3D2D24)
                 .components(Nickel, 1, Sulfur, 1)
                 .oreSmeltInto(Nickel)
                 .buildAndRegister();
@@ -85,14 +85,14 @@ public class InfinityOreMaterials {
 
         Thorianite = new Material.Builder(InfinityCore.id("thorianite"))
                 .dust().ore()
-                .color(0x2e2823)
+                .color(0x8A5223).secondaryColor(0x2E2823)
                 .flags(DISABLE_DECOMPOSITION)
                 .components(Thorium, 1, Oxygen, 2)
                 .buildAndRegister();
 
         Thorite = new Material.Builder(InfinityCore.id("thorite"))
                 .dust().ore()
-                .color(0x985c39)
+                .color(0x985c39).secondaryColor(0x581F18)
                 .flags(DISABLE_DECOMPOSITION)
                 .components(Thorium, 1, Uranium238, 1, Silicon, 1, Oxygen, 4)
                 .radioactiveHazard(1.0f)
@@ -101,7 +101,7 @@ public class InfinityOreMaterials {
 
         Wolframite = new Material.Builder(InfinityCore.id("wolframite"))
                 .dust().ore()
-                .color(0x413138)
+                .color(0x3A3141).secondaryColor(0x2E2227)
                 .flags(DISABLE_DECOMPOSITION)
                 .components(Iron, 1, Manganese, 1, Tungsten, 1, Oxygen, 4)
                 .separatedInto(Iron)
