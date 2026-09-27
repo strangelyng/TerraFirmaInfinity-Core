@@ -119,6 +119,35 @@ public class InfinityLangHandler extends LangHandler {
 //            };
 //            replace(provider, "recipe_type." + InfinityCore.MOD_ID + "." + id, name);
 //        }
+
+        // InfinityEmiPlugin
+        // TODO: Ore Vein Names
+        provider.add("emi.category.tfinfinity.ore_vein_info", "Ore Vein Info");
+        provider.add("tfinfinity.emi.ore_veins.rarity", "Rarity: %d");
+        provider.add("tfinfinity.emi.ore_veins.density", "Density: %d");
+        provider.add("tfinfinity.emi.ore_veins.projected", "Below Surface: %d to %d");
+        provider.add("tfinfinity.emi.ore_veins.y_ranges", "Y Level: %d to %d");
+        provider.add("tfinfinity.emi.ore_veins.size", "Size: %d");
+        provider.add("tfinfinity.emi.ore_veins.height", "Height: %d");
+        provider.add("tfinfinity.emi.ore_veins.radius", "Radius: %d");
+        provider.add("tfinfinity.emi.ore_veins.near_lava", "Requires nearby Lava");
+        provider.add("tfinfinity.emi.ore_veins.indicator_depth", "Indicator depth: ");
+        provider.add("tfinfinity.emi.ore_veins.biomes", "Biomes:");
+        provider.add("tfinfinity.emi.ore_veins.biome_any", "Any");
+        // TODO: Ore Vein Tags
+        provider.add("tfinfinity.emi.ore_veins.rainfall", "Rainfall: ");
+        provider.add("tfinfinity.emi.ore_veins.rainfall_range", "%d - %dmm");
+        provider.add("tfinfinity.emi.ore_veins.temperature", "Temperature: ");
+        provider.add("tfinfinity.emi.ore_veins.temperature_and_below", "≤ %d°C");
+        provider.add("tfinfinity.emi.ore_veins.temperature_and_above", "≥ %d°C");
+        provider.add("tfinfinity.emi.ore_veins.temperature_range", "%d - %d°C");
+        provider.add("tfinfinity.emi.ore_veins.rarity.common", "Common");
+        provider.add("tfinfinity.emi.ore_veins.rarity.uncommon", "Uncommon");
+        provider.add("tfinfinity.emi.ore_veins.rarity.rare", "Rare");
+        provider.add("tfinfinity.emi.ore_veins.rarity.very_rare", "Very Rare");
+        provider.add("tfinfinity.emi.ore_veins.rarity.tooltip", "Spawns once every %d chunks on average");
+        provider.add("tfinfinity.emi.ore_veins.rock_types", "Found in rock types:");
+
     }
 
     public static void replaceToolLang(RegistrateLangProvider provider, String id, String name) {

@@ -9,8 +9,8 @@ dependencies {
     runtimeOnly("mezz.jei:jei-${minecraft_version}-neoforge:${jei_version}")
 
     // EMI
-    compileOnly("dev.emi:emi-neoforge:${emi_version}:api")
-    runtimeOnly("dev.emi:emi-neoforge:${emi_version}")
+//    compileOnly("dev.emi:emi-neoforge:${emi_version}:api")
+    implementation("dev.emi:emi-neoforge:${emi_version}")
 
     // KubeJS & Rhino
     implementation("dev.latvian.mods:kubejs-neoforge:${kubejs_version}")
