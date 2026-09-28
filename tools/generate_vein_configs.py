@@ -4,30 +4,14 @@ import csv
 import os
 from collections import defaultdict
 from itertools import chain
+from tools_global import ALL_ROCKS, ALL_SANDS
+from generate_ore_vein_info import write_to_ore_vein_info_recipes
 
 CONFIGURED_DIR = "data/tfinfinity/worldgen/configured_feature/vein"
 PLACED_DIR = "data/tfinfinity/worldgen/placed_feature/vein"
 
 TAGS_DIR = "data/tfc/tags/worldgen/placed_feature/in_biome"
 BIOME_VEINS_DIR = "data/tfc/tags/worldgen/placed_feature/in_biome/veins"
-
-# Rock Groups for Block Replacement Map
-IGNEOUS_INTRUSIVE = ["granite", "diorite", "gabbro"]
-IGNEOUS_EXTRUSIVE = ["rhyolite", "basalt", "andesite", "dacite", "tuff"]  # Tuff is treated as igneous extrusive due to mineral similarity
-ALL_IGNEOUS = IGNEOUS_INTRUSIVE + IGNEOUS_EXTRUSIVE
-
-SEDIMENTARY = ["shale", "claystone", "limestone", "conglomerate", "dolomite", "chert", "chalk"]
-METAMORPHIC = ["quartzite", "slate", "phyllite", "schist", "gneiss", "marble"]
-
-CARBONATE_ROCKS = ["marble", "chalk", "limestone", "dolomite"]
-
-ALL_ROCKS = ALL_IGNEOUS + SEDIMENTARY + METAMORPHIC
-ALL_SANDS = ["brown", "white", "black", "red", "yellow", "green", "pink"]
-
-# Specific rocks
-MAFIC_ONLY = ["basalt", "gabbro"]
-KARST_ONLY = ["limestone", "dolomite"]
-
 
 #region HELPER FUNCTIONS
 # Vein Functions
@@ -385,6 +369,7 @@ def load_configs_from_csv(csv_filepath: str):
 
     return loaded_veins
 
+
 #region MAIN
 def main():
     csv_filepath = "veins_input.csv"
@@ -395,6 +380,8 @@ def main():
 
     print(f"Parsing configs from '{csv_filepath}'...")
     vein_dict = load_configs_from_csv(csv_filepath)
+
+    write_to_ore_vein_info_recipes(vein_dict)
 
     #region MAKE FEATURES
     os.makedirs(CONFIGURED_DIR, exist_ok=True)

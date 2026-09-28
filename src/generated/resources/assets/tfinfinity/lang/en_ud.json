@@ -162,5 +162,12 @@
   "tfinfinity.emi.ore_veins.temperature_and_below": "Ɔ°%d ≤",
   "tfinfinity.emi.ore_veins.temperature_range": "Ɔ°%d - %d",
   "tfinfinity.emi.ore_veins.y_ranges": "%d oʇ %d :ןǝʌǝꞀ ʎ",
-  "tfinfinity.machine.roaster.tooltip": "¿ǝuoʎuɐ 'ʇsɐoɹ ǝpıɟןnSㄥ§"
+  "tfinfinity.machine.roaster.tooltip": "¿ǝuoʎuɐ 'ʇsɐoɹ ǝpıɟןnSㄥ§",
+  "tfinfinity.ore_vein_tag.atolls": "sןןoʇⱯ",
+  "tfinfinity.ore_vein_tag.beach": "sǝɹoɥS puɐ sǝɥɔɐǝᗺ",
+  "tfinfinity.ore_vein_tag.collisional_mountains": "suıɐʇunoW ןɐuoısıןןoƆ",
+  "tfinfinity.ore_vein_tag.montane": "suıɐʇunoW",
+  "tfinfinity.ore_vein_tag.river": "sǝʞɐꞀ puɐ sɹǝʌıᴚ",
+  "tfinfinity.ore_vein_tag.swamp": "spuɐןʍoꞀ puɐ sdɯɐʍS",
+  "tfinfinity.ore_vein_tag.volcanic": "ɔıuɐɔןoΛ"
 }

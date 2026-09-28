@@ -162,5 +162,12 @@
   "tfinfinity.emi.ore_veins.temperature_and_below": "≤ %d°C",
   "tfinfinity.emi.ore_veins.temperature_range": "%d - %d°C",
   "tfinfinity.emi.ore_veins.y_ranges": "Y Level: %d to %d",
-  "tfinfinity.machine.roaster.tooltip": "§7Sulfide roast, anyone?"
+  "tfinfinity.machine.roaster.tooltip": "§7Sulfide roast, anyone?",
+  "tfinfinity.ore_vein_tag.atolls": "Atolls",
+  "tfinfinity.ore_vein_tag.beach": "Beaches and Shores",
+  "tfinfinity.ore_vein_tag.collisional_mountains": "Collisional Mountains",
+  "tfinfinity.ore_vein_tag.montane": "Mountains",
+  "tfinfinity.ore_vein_tag.river": "Rivers and Lakes",
+  "tfinfinity.ore_vein_tag.swamp": "Swamps and Lowlands",
+  "tfinfinity.ore_vein_tag.volcanic": "Volcanic"
 }

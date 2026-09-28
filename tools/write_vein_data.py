@@ -1,7 +1,6 @@
 import csv
 import json
-import re
-from generate_vein_configs import ALL_ROCKS, ALL_SANDS
+from tools_global import ALL_ROCKS, ALL_SANDS, ore_block_to_material
 
 from vein_dictionary_tfc import VEIN_DICT
 
@@ -49,22 +48,7 @@ def write_vein_data_to_csv(vein_dict: dict):
                     weight = entry.get("weight", 100)
 
                     if "ore" in block_id and ("sandstone" in block_id or any(f"{r}" in block_id for r in ALL_ROCKS) or any(f"{s}" in block_id for s in ALL_SANDS)): # LMAO
-                        material = block_id.split(":")[-1]
-
-                        for s in ALL_SANDS:
-                            pattern = f"^{s}_"
-
-                            material = re.sub(pattern, "", material)
-
-                        for r in ALL_ROCKS:
-                            pattern = f"^{r}_"
-
-                            material = re.sub(pattern, "", material)
-
-                        material = material.replace("_ore", "")
-
-                        if ":" in block_id and not block_id.startswith("gtceu:"):
-                            material = f"{block_id.split(':')[0]}:{material}"
+                        material = ore_block_to_material(block_id, True)
 
                         ore_weights_dict[material] = weight
                     else:

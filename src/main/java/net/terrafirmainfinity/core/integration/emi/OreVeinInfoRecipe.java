@@ -264,10 +264,10 @@ public class OreVeinInfoRecipe implements EmiRecipe {
             MutableComponent tooltip = Component.empty();
 
             for (String biome : biomeList) {
-                tooltip.append(Component.translatable(biome)).append(++i == biomeList.length ? "" : ", ");
+                tooltip.append(Component.translatable("biome." + biome.replace(":", "."))).append(++i == biomeList.length ? "" : ", ");
             }
 
-            var overflowText = new TextWidget(Component.translatable(biomeTag.replace("tfc:", "tfinfinity.ore_vein_tag.").replace('/', '.')).getVisualOrderText(), 8, offsetY, 0x00AA00, false) {
+            var overflowText = new TextWidget(Component.translatable("tfinfinity.ore_vein_tag." + biomeTag).getVisualOrderText(), 8, offsetY, 0x00AA00, false) {
                 @Override
                 public List<ClientTooltipComponent> getTooltip(int mouseX, int mouseY) {
                     return List.of(ClientTooltipComponent.create(tooltip.getVisualOrderText()));

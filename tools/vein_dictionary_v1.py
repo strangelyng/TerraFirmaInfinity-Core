@@ -1,5 +1,5 @@
 from generate_vein_configs import VeinBuilder, ReplacementMapBuilder, make_surface_vein_indicator, make_normal_vein_indicator, make_deep_vein_indicator
-from generate_vein_configs import IGNEOUS_EXTRUSIVE, IGNEOUS_INTRUSIVE, ALL_IGNEOUS, METAMORPHIC, SEDIMENTARY, CARBONATE_ROCKS, KARST_ONLY, ALL_SANDS
+from tools_global import IGNEOUS_EXTRUSIVE, IGNEOUS_INTRUSIVE, ALL_IGNEOUS, METAMORPHIC, SEDIMENTARY, CARBONATE_ROCKS, KARST_ONLY, ALL_SANDS
 
 
 VEIN_DICT = {

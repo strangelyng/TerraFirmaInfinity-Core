@@ -134,7 +134,15 @@ public class InfinityLangHandler extends LangHandler {
         provider.add("tfinfinity.emi.ore_veins.indicator_depth", "Indicator depth: ");
         provider.add("tfinfinity.emi.ore_veins.biomes", "Biomes:");
         provider.add("tfinfinity.emi.ore_veins.biome_any", "Any");
-        // TODO: Ore Vein Tags
+
+        provider.add("tfinfinity.ore_vein_tag.swamp", "Swamps and Lowlands");
+        provider.add("tfinfinity.ore_vein_tag.montane", "Mountains");
+        provider.add("tfinfinity.ore_vein_tag.river", "Rivers and Lakes");
+        provider.add("tfinfinity.ore_vein_tag.volcanic", "Volcanic");
+        provider.add("tfinfinity.ore_vein_tag.collisional_mountains", "Collisional Mountains");
+        provider.add("tfinfinity.ore_vein_tag.beach", "Beaches and Shores");
+        provider.add("tfinfinity.ore_vein_tag.atolls", "Atolls");
+
         provider.add("tfinfinity.emi.ore_veins.rainfall", "Rainfall: ");
         provider.add("tfinfinity.emi.ore_veins.rainfall_range", "%d - %dmm");
         provider.add("tfinfinity.emi.ore_veins.temperature", "Temperature: ");
@@ -147,7 +155,6 @@ public class InfinityLangHandler extends LangHandler {
         provider.add("tfinfinity.emi.ore_veins.rarity.very_rare", "Very Rare");
         provider.add("tfinfinity.emi.ore_veins.rarity.tooltip", "Spawns once every %d chunks on average");
         provider.add("tfinfinity.emi.ore_veins.rock_types", "Found in rock types:");
-
     }
 
     public static void replaceToolLang(RegistrateLangProvider provider, String id, String name) {
