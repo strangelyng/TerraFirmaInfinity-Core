@@ -71,7 +71,7 @@ public class InfinityOreMaterials {
 
         Petalite = new Material.Builder(InfinityCore.id("petalite"))
                 .dust().ore()
-                .color(0xFFBCBC).secondaryColor(0x9f558d) // 0xfff1de, 0xf38d8d
+                .color(0xFFBCBC).secondaryColor(0x9f558d)
                 .flags(DISABLE_DECOMPOSITION)
                 .components(Lithium, 1, Aluminium, 1, Silicon, 4, Oxygen, 10)
                 .buildAndRegister();

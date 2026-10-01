@@ -1,6 +1,8 @@
 package net.terrafirmainfinity.core.common.data.material;
 
 import com.gregtechceu.gtceu.api.data.chemical.material.Material;
+import com.gregtechceu.gtceu.api.fluids.FluidBuilder;
+import com.gregtechceu.gtceu.api.fluids.attribute.FluidAttributes;
 import net.terrafirmainfinity.core.InfinityCore;
 
 import static com.gregtechceu.gtceu.api.data.chemical.material.info.MaterialFlags.*;
@@ -35,7 +37,7 @@ public class InfinityCompoundMaterials {
                 .buildAndRegister();
 
         HydrogenChloride = new Material.Builder(InfinityCore.id("hydrogen_chloride")) // TODO: Is this stupid?
-                .gas()
+                .gas(new FluidBuilder().attribute(FluidAttributes.ACID))
                 .components(Hydrogen, 1, Chlorine, 1)
                 .colorAverage()
                 // TODO Hazard?
@@ -43,7 +45,7 @@ public class InfinityCompoundMaterials {
                 .buildAndRegister();
 
         HydrogenFluoride = new Material.Builder(InfinityCore.id("hydrogen_fluoride")) // TODO: Is this stupid?
-                .gas()
+                .gas(new FluidBuilder().attribute(FluidAttributes.ACID))
                 .components(Hydrogen, 1, Fluorine, 1)
                 .colorAverage()
                 // TODO Hazard?

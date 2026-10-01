@@ -469,10 +469,7 @@ public class InfinityTagPrefix {
         createTFCOres();
     }
 
-    /**
-     * This supplier ensures that the block has been registered before the TagPrefix attempts to register the ore
-     */
-    public static Supplier<BlockState> blockStateSupplier(ResourceLocation resLoc) {
+    private static Supplier<BlockState> blockStateSupplier(ResourceLocation resLoc) {
         return () -> BuiltInRegistries.BLOCK.get(resLoc).defaultBlockState();
     }
 

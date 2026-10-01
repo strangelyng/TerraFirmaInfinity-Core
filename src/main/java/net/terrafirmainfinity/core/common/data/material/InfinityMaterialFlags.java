@@ -19,7 +19,7 @@ public class InfinityMaterialFlags {
             .requireProps(PropertyKey.INGOT)
             .build();
 
-    // Sand Ores
+    /* Sand Ores, Does Not Currently Affect Sand Ore Blocks Generation */
     public static final MaterialFlag GENERATE_SAND_ORES = new MaterialFlag.Builder("generate_sand_ores")
             .requireProps(PropertyKey.ORE)
             .build();

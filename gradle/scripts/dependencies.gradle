@@ -21,6 +21,8 @@ dependencies {
     implementation("maven.modrinth:terrafirmacraft:${tfc_version}")
 
     runtimeOnly("maven.modrinth:kubejs-tfc:${kubejs_tfc_version}")
+    runtimeOnly("maven.modrinth:lootjs:${lootjs_version}")
+    runtimeOnly("maven.modrinth:worldjs:${worldjs_version}")
 
     // Beneath
     implementation("maven.modrinth:beneath:${beneath_version}")
