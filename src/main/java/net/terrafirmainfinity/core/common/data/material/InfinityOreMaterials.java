@@ -62,6 +62,13 @@ public class InfinityOreMaterials {
                 .components(Hafnium, 1, Silicon, 1, Oxygen, 4)
                 .buildAndRegister();
 
+        Lignite = new Material.Builder(InfinityCore.id("lignite"))
+                .gem()
+                .color(0x2d2725).iconSet(MaterialIconSet.DULL)
+                .flags(FLAMMABLE, DISABLE_MATERIAL_RECIPES)
+                .components(Carbon, 1)
+                .buildAndRegister();
+
         Millerite = new Material.Builder(InfinityCore.id("millerite"))
                 .dust().ore()
                 .color(0xBCAA86).secondaryColor(0x3D2D24)

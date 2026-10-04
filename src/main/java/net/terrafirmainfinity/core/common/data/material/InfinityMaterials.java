@@ -75,6 +75,9 @@ public class InfinityMaterials {
 
     public static Material Sperrylite; // Platinum Arsenide
 
+    public static Material Lignite;
+    public static Material Anthracite;
+
     // Compounds
     public static Material Alumina; // Al2O3
     public static Material Beryllia; // BeO
@@ -340,6 +343,9 @@ public class InfinityMaterials {
         Soapstone.removeProperty(PropertyKey.ORE); // A Metamorphic Rock Largely Composed of Talc... Just Use Talc
         Tungstate.removeProperty(PropertyKey.ORE);
 
+        // Coal is not a conventional ore
+        Coal.removeProperty(PropertyKey.ORE);
+
         CassiteriteSand.addFlags(InfinityMaterialFlags.GENERATE_SAND_ORES);
         GlauconiteSand.addFlags(InfinityMaterialFlags.GENERATE_SAND_ORES);
         Oilsands.addFlags(InfinityMaterialFlags.GENERATE_SAND_ORES);
@@ -563,6 +569,7 @@ public class InfinityMaterials {
         tfcOres.put(Amethyst, Ore.AMETHYST);
         tfcOres.put(Borax, Ore.BORAX);
         tfcOres.put(Cinnabar, Ore.CINNABAR);
+        tfcOres.put(Coal, Ore.BITUMINOUS_COAL);
         tfcOres.put(Cryolite, Ore.CRYOLITE);
         tfcOres.put(Diamond, Ore.DIAMOND);
         tfcOres.put(Emerald, Ore.EMERALD);
@@ -570,7 +577,7 @@ public class InfinityMaterials {
         tfcOres.put(Gypsum, Ore.GYPSUM);
         tfcOres.put(Salt, Ore.HALITE); // Halite = NaCl
         tfcOres.put(Lapis, Ore.LAPIS_LAZULI);
-//        tfcOres.put(Lignite, Ore.LIGNITE);
+        tfcOres.put(Lignite, Ore.LIGNITE);
         tfcOres.put(Opal, Ore.OPAL);
         tfcOres.put(Pyrite, Ore.PYRITE);
         tfcOres.put(Ruby, Ore.RUBY);
