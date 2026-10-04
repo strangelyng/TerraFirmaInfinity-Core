@@ -124,7 +124,7 @@ class ReplacementMapBuilder:
 
     def rock(self, rock_list: list, ore_weights: dict, block_weights: dict | None = None):
         for rock in rock_list:
-            target = f"tfc:rock/raw/{rock}"
+            target = f"tfc:rock/raw/{rock}" # Use a map here instead if support for blocks outside TFC namespace is required, e.g. TARGET_ROCK_MAP[rock]
             with_entry = [
                 {"weight": weight, "block": make_rock_ore(ore, rock)}
                 for ore, weight in (ore_weights or {}).items()
@@ -352,7 +352,7 @@ def load_configs_from_csv(csv_filepath: str):
 
             indicator_exp = row.get("Indicator", "")
             if indicator_exp and indicator_exp not in ("[]", ""):
-                ind_vars = indicator_exp.split(",")
+                ind_vars = indicator_exp.rsplit(",", 4)
 
                 ind_blocks = ast.literal_eval(ind_vars[0]) or {}
                 ind_rarity = int(ind_vars[1]) or 0

@@ -141,9 +141,11 @@ public class InfinityLangHandler extends LangHandler {
         provider.add("tfinfinity.ore_vein_tag.volcanic", "Volcanic");
         provider.add("tfinfinity.ore_vein_tag.collisional_mountains", "Collisional Mountains");
         provider.add("tfinfinity.ore_vein_tag.beach", "Beaches and Shores");
-        provider.add("tfinfinity.ore_vein_tag.atolls", "Atolls");
+        provider.add("tfinfinity.ore_vein_tag.atoll", "Atolls");
 
         provider.add("tfinfinity.emi.ore_veins.rainfall", "Rainfall: ");
+        provider.add("tfinfinity.emi.ore_veins.rainfall_and_below", "≤ %dmm");
+        provider.add("tfinfinity.emi.ore_veins.rainfall_and_above", "≥ %dmm");
         provider.add("tfinfinity.emi.ore_veins.rainfall_range", "%d - %dmm");
         provider.add("tfinfinity.emi.ore_veins.temperature", "Temperature: ");
         provider.add("tfinfinity.emi.ore_veins.temperature_and_below", "≤ %d°C");

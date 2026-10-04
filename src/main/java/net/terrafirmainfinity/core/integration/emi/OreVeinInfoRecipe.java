@@ -282,18 +282,27 @@ public class OreVeinInfoRecipe implements EmiRecipe {
     private int createClimateText(WidgetHolder holder, int offsetY) {
         var lineH = Minecraft.getInstance().font.lineHeight;
 
-        if (minRainfall != null && maxRainfall != null) {
+        if (minRainfall == null && maxRainfall != null) {
             holder.addText(
-                    Component.translatable("tfinfinity.emi.ore_veins.rainfall").append(Component.translatable("tfinfinity.emi.ore_veins.rainfall_range", minRainfall, maxRainfall).withStyle(ChatFormatting.BLUE)), 2,
-                    offsetY, 0,
-                    false);
+                    Component.translatable("tfinfinity.emi.ore_veins.rainfall").append(Component.translatable("tfinfinity.emi.ore_veins.rainfall_and_below", maxRainfall).withStyle(ChatFormatting.BLUE)),
+                    2, offsetY, 0, false);
+            offsetY += lineH;
+        } else if (minRainfall != null && maxRainfall == null) {
+            holder.addText(
+                    Component.translatable("tfinfinity.emi.ore_veins.rainfall").append(Component.translatable("tfinfinity.emi.ore_veins.rainfall_and_above", minRainfall).withStyle(ChatFormatting.BLUE)),
+                    2, offsetY, 0, false);
+            offsetY += lineH;
+        } else if (minRainfall != null && maxRainfall != null) {
+            holder.addText(
+                    Component.translatable("tfinfinity.emi.ore_veins.rainfall").append(Component.translatable("tfinfinity.emi.ore_veins.rainfall_range", minRainfall, maxRainfall).withStyle(ChatFormatting.BLUE)),
+                    2, offsetY, 0, false);
             offsetY += lineH;
         }
 
         if (minTemperature == null && maxTemperature != null) {
             holder.addText(
-                    Component.translatable("tfinfinity.emi.ore_veins.temperature").append(Component.translatable("tfinfinity.emi.ore_veins.temperature_and_below", maxTemperature).withStyle(ChatFormatting.AQUA)), 2,
-                    offsetY, 0, false);
+                    Component.translatable("tfinfinity.emi.ore_veins.temperature").append(Component.translatable("tfinfinity.emi.ore_veins.temperature_and_below", maxTemperature).withStyle(ChatFormatting.AQUA)),
+                    2, offsetY, 0, false);
             offsetY += lineH;
         } else if (minTemperature != null && maxTemperature == null) {
             holder.addText(
@@ -302,7 +311,8 @@ public class OreVeinInfoRecipe implements EmiRecipe {
             offsetY += lineH;
         } else if (minTemperature != null && maxTemperature != null) {
             holder.addText(Component.translatable("tfinfinity.emi.ore_veins.temperature")
-                    .append(Component.translatable("tfinfinity.emi.ore_veins.temperature_range", minTemperature, maxTemperature).withStyle(ChatFormatting.DARK_GREEN)), 2, offsetY, 0, false);
+                    .append(Component.translatable("tfinfinity.emi.ore_veins.temperature_range", minTemperature, maxTemperature).withStyle(ChatFormatting.DARK_GREEN)),
+                    2, offsetY, 0, false);
             offsetY += lineH;
         }
 
