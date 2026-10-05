@@ -14,16 +14,6 @@ public class InfinityLangHandler extends LangHandler {
             "roaster", "electrolytic_cell", "spiral_separator", "metallurgical_converter", "flash_smelting"
     };
 
-    private static String toTitle(String snakeCase) {
-        StringBuilder out = new StringBuilder();
-        for (String part : snakeCase.split("_")) {
-            if (part.isEmpty()) continue;
-            if (out.length() > 0) out.append(' ');
-            out.append(Character.toUpperCase(part.charAt(0))).append(part.substring(1));
-        }
-        return out.toString();
-    }
-
     public static void init(RegistrateLangProvider provider) {
         // Materials
 //        replaceMaterialLang(provider, "dawnstone", "Aurichalcum");
@@ -115,13 +105,12 @@ public class InfinityLangHandler extends LangHandler {
 //                case "spiral_separator" -> "Spiral Separation";
 //                case "electrolytic_cell" -> "Advanced Electrolysis";
 //                case "metallurgical_converter" -> "Metallurgical Conversion";
-//                default -> toTitle(id);
+//                default -> InfinityUtil.snakecaseToTitle(id);
 //            };
 //            replace(provider, "recipe_type." + InfinityCore.MOD_ID + "." + id, name);
 //        }
 
         // InfinityEmiPlugin
-        // TODO: Ore Vein Names
         provider.add("emi.category.tfinfinity.ore_vein_info", "Ore Vein Info");
         provider.add("tfinfinity.emi.ore_veins.rarity", "Rarity: %d");
         provider.add("tfinfinity.emi.ore_veins.density", "Density: %d");

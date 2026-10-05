@@ -11,6 +11,8 @@ METAMORPHIC = ["quartzite", "slate", "phyllite", "schist", "gneiss", "marble"]
 ALL_ROCKS = ALL_IGNEOUS + SEDIMENTARY + METAMORPHIC
 ALL_SANDS = ["brown", "white", "black", "red", "yellow", "green", "pink"]
 
+ALL_SOILS = ["alfisol", "andisol", "aridisol", "entisol", "fluvisol", "mollisol", "oxisol", "podzol"]
+
 CARBONATE_ROCKS = ["chalk", "limestone", "dolomite", "marble"]
 KARST_ONLY = ["limestone", "dolomite"]
 

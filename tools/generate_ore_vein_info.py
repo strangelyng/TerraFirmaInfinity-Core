@@ -120,7 +120,7 @@ def write_to_ore_vein_info_recipes(vein_dict: dict):
     make_lang(vein_dict)
 
 def make_lang(vein_dict: dict):
-    lang_dir = "assets\tfinfinity\lang"
+    lang_dir = "assets/tfinfinity/lang"
     lang_file = "en_us.json"
 
     lang_path = os.path.join(lang_dir, lang_file)

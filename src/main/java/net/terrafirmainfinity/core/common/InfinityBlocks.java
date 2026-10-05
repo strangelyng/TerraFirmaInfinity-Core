@@ -15,7 +15,6 @@ import net.minecraft.client.renderer.RenderType;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.BlockTags;
-import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
@@ -26,8 +25,8 @@ import net.terrafirmainfinity.core.InfinityCore;
 import net.terrafirmainfinity.core.common.data.InfinityTagPrefix;
 import net.terrafirmainfinity.core.common.data.block.LateriteBlock;
 import net.terrafirmainfinity.core.common.data.models.InfinityModels;
+import net.terrafirmainfinity.core.util.InfinityUtil;
 
-import java.util.List;
 import java.util.Locale;
 
 import static net.terrafirmainfinity.core.InfinityCore.InfinityRegistrate;
@@ -115,116 +114,50 @@ public class InfinityBlocks {
             .register();
 
     // Laterites
-    public List<TagKey<Block>> LATERITE_TAGS = List.of(
-            TFCTags.Blocks.CAN_LANDSLIDE,
-            BlockTags.MINEABLE_WITH_SHOVEL,
-            TFCTags.Blocks.GRASS_PLANTABLE_ON,
-            TFCTags.Blocks.BUSH_PLANTABLE_ON,
-            TFCTags.Blocks.DRY_PLANT_PLANTABLE_ON,
-            TFCTags.Blocks.SPREADING_FRUIT_GROWS_ON
-    );
+    public static final BlockEntry<LateriteBlock> BAUXITE_SOIL = createLateriteDirtBlock("bauxite", MapColor.TERRACOTTA_PINK);
+    public static final BlockEntry<ConnectedGrassBlock> BAUXITE_GRASS = createLateriteGrassBlock("bauxite", BAUXITE_SOIL);
 
-    public static final BlockEntry<LateriteBlock> BAUXITE_SOIL = InfinityRegistrate
-            .block("laterite/bauxite", p ->
-                    new LateriteBlock(BlockBehaviour.Properties.of().mapColor(MapColor.TERRACOTTA_PINK).strength(3.0F).sound(SoundType.GRAVEL),
-                            () -> BuiltInRegistries.BLOCK.get(InfinityCore.id("laterite/bauxite_grass"))))
-            .lang("Bauxite Laterite")
-            .blockstate((ctx, prov) -> {
-                prov.simpleBlock(ctx.get(), prov.models().cubeAll("block/" + ctx.getName(),
-                        InfinityCore.id("block/" + ctx.getName())));
-            })
-            .properties(p -> p.mapColor(MapColor.TERRACOTTA_PINK).strength(3.0F).sound(SoundType.GRAVEL))
-            .tag(TFCTags.Blocks.CAN_LANDSLIDE, BlockTags.MINEABLE_WITH_SHOVEL)
-            .item(BlockItem::new)
-            .model((ctx, prov) -> {
-                prov.withExistingParent("item/" + ctx.getName(), InfinityCore.id("block/" + ctx.getName()));
-            })
-            .build()
-            .register();
+    public static final BlockEntry<LateriteBlock> GARNIERITE_SOIL = createLateriteDirtBlock("garnierite", MapColor.COLOR_GREEN);
+    public static final BlockEntry<ConnectedGrassBlock> GARNIERITE_GRASS = createLateriteGrassBlock("garnierite", GARNIERITE_SOIL);
 
-    public static final BlockEntry<ConnectedGrassBlock> BAUXITE_GRASS = InfinityRegistrate
-            .block("laterite/bauxite_grass", p ->
-                    new ConnectedGrassBlock(BlockBehaviour.Properties.of().mapColor(MapColor.GRASS).randomTicks().strength(3.0F).sound(SoundType.GRAVEL), BAUXITE_SOIL, null, null))
-            .lang("Bauxite Laterite Grass")
-            .blockstate(InfinityModels.createTFCConnectedGrassModel())
-            .addLayer(() -> RenderType::cutoutMipped)
-            .tag(TFCTags.Blocks.CAN_LANDSLIDE, BlockTags.MINEABLE_WITH_SHOVEL)
-            .loot((ctx, prov) -> ctx.dropOther(prov, BAUXITE_SOIL))
-            .item(BlockItem::new)
-            .model((ctx, prov) -> {
-                prov.withExistingParent("item/" + ctx.getName(), ResourceLocation.fromNamespaceAndPath(TerraFirmaCraft.MOD_ID, "item/grass_inv"))
-                        .texture("block", InfinityCore.id("block/" + ctx.getName().replace("_grass", "")));
-            })
-            .build()
-            .register();
+    public static final BlockEntry<LateriteBlock> LIMONITE_SOIL = createLateriteDirtBlock("limonite", MapColor.TERRACOTTA_YELLOW);
+    public static final BlockEntry<ConnectedGrassBlock> LIMONITE_GRASS = createLateriteGrassBlock("limonite", LIMONITE_SOIL);
 
-    public static final BlockEntry<LateriteBlock> GARNIERITE_SOIL = InfinityRegistrate
-            .block("laterite/garnierite", p ->
-                    new LateriteBlock(BlockBehaviour.Properties.of().mapColor(MapColor.COLOR_GREEN).strength(3.0F).sound(SoundType.GRAVEL),
-                            () -> BuiltInRegistries.BLOCK.get(InfinityCore.id("laterite/garnierite_grass"))))
-            .lang("Garnierite Laterite")
-            .blockstate((ctx, prov) -> {
-                prov.simpleBlock(ctx.get(), prov.models().cubeAll("block/" + ctx.getName(),
-                        InfinityCore.id("block/" + ctx.getName())));
-            })
-            .properties(p -> p.mapColor(MapColor.COLOR_GREEN).strength(3.0F).sound(SoundType.GRAVEL))
-            .tag(TFCTags.Blocks.CAN_LANDSLIDE, BlockTags.MINEABLE_WITH_SHOVEL)
-            .item(BlockItem::new)
-            .model((ctx, prov) -> {
-                prov.withExistingParent("item/" + ctx.getName(), InfinityCore.id("block/" + ctx.getName()));
-            })
-            .build()
-            .register();
+    private static BlockEntry<LateriteBlock> createLateriteDirtBlock(String material, MapColor color) {
+        return InfinityRegistrate
+                .block("laterite/" + material, p ->
+                        new LateriteBlock(BlockBehaviour.Properties.of().mapColor(color).strength(3.0F).sound(SoundType.GRAVEL),
+                                () -> BuiltInRegistries.BLOCK.get(InfinityCore.id("laterite/" + material + "_grass"))))
+                .lang("Laterite " + InfinityUtil.capitalize(material))
+                .blockstate((ctx, prov) ->
+                        prov.simpleBlock(ctx.get(), prov.models().cubeAll("block/" + ctx.getName(),
+                                InfinityCore.id("block/" + ctx.getName()))))
+                .tag(BlockTags.MINEABLE_WITH_SHOVEL, TFCTags.Blocks.CAN_LANDSLIDE,
+                        TFCTags.Blocks.GRASS_PLANTABLE_ON, TFCTags.Blocks.BUSH_PLANTABLE_ON, TFCTags.Blocks.DRY_PLANT_PLANTABLE_ON, TFCTags.Blocks.SPREADING_FRUIT_GROWS_ON)
+                .item(BlockItem::new)
+                .model((ctx, prov) ->
+                        prov.withExistingParent("item/" + ctx.getName(), InfinityCore.id("block/" + ctx.getName())))
+                .build().register();
+    }
 
-    public static final BlockEntry<ConnectedGrassBlock> GARNIERITE_GRASS = InfinityRegistrate
-            .block("laterite/garnierite_grass", p ->
-                    new ConnectedGrassBlock(BlockBehaviour.Properties.of().mapColor(MapColor.GRASS).randomTicks().strength(3.0F).sound(SoundType.GRAVEL), GARNIERITE_SOIL, null, null))
-            .lang("Garnierite Laterite Grass")
-            .blockstate(InfinityModels.createTFCConnectedGrassModel())
-            .addLayer(() -> RenderType::cutoutMipped)
-            .tag(TFCTags.Blocks.CAN_LANDSLIDE, BlockTags.MINEABLE_WITH_SHOVEL)
-            .loot((ctx, prov) -> ctx.dropOther(prov, GARNIERITE_SOIL))
-            .item(BlockItem::new)
-            .model((ctx, prov) -> {
-                prov.withExistingParent("item/" + ctx.getName(), ResourceLocation.fromNamespaceAndPath(TerraFirmaCraft.MOD_ID, "item/grass_inv"))
-                        .texture("block", InfinityCore.id("block/" + ctx.getName().replace("_grass", "")));
-            })
-            .build()
-            .register();
+    private static BlockEntry<ConnectedGrassBlock> createLateriteGrassBlock(String material, BlockEntry<? extends Block> dirtBlock) {
+        return InfinityRegistrate
+                .block("laterite/" + material + "_grass", p ->
+                        new ConnectedGrassBlock(BlockBehaviour.Properties.of().mapColor(MapColor.GRASS).randomTicks().strength(3.0F).sound(SoundType.GRASS), dirtBlock, null, null))
+                .lang("Laterite " + InfinityUtil.capitalize(material) + " Grass")
+                .blockstate(InfinityModels.createTFCConnectedGrassModel())
+                .addLayer(() -> RenderType::cutoutMipped)
+                .tag(BlockTags.MINEABLE_WITH_SHOVEL, TFCTags.Blocks.CAN_LANDSLIDE,
+                        TFCTags.Blocks.GRASS_PLANTABLE_ON, TFCTags.Blocks.BUSH_PLANTABLE_ON, TFCTags.Blocks.DRY_PLANT_PLANTABLE_ON, TFCTags.Blocks.SPREADING_FRUIT_GROWS_ON)
+                .loot((ctx, prov) -> ctx.dropOther(prov, dirtBlock))
+                .item(BlockItem::new)
+                .model((ctx, prov) ->
+                        prov.withExistingParent("item/" + ctx.getName(), ResourceLocation.fromNamespaceAndPath(TerraFirmaCraft.MOD_ID, "item/grass_inv"))
+                                .texture("block", InfinityCore.id("block/" + ctx.getName().replace("_grass", ""))))
+                .build().register();
+    }
 
-    public static final BlockEntry<LateriteBlock> LIMONITE_SOIL = InfinityRegistrate
-            .block("laterite/limonite", p ->
-                    new LateriteBlock(BlockBehaviour.Properties.of().mapColor(MapColor.TERRACOTTA_YELLOW).strength(3.0F).sound(SoundType.GRAVEL),
-                            () -> BuiltInRegistries.BLOCK.get(InfinityCore.id("laterite/limonite_grass"))))
-            .lang("Limonite Laterite")
-            .blockstate((ctx, prov) -> {
-                prov.simpleBlock(ctx.get(), prov.models().cubeAll("block/" + ctx.getName(),
-                        InfinityCore.id("block/" + ctx.getName())));
-            })
-            .tag(TFCTags.Blocks.CAN_LANDSLIDE, BlockTags.MINEABLE_WITH_SHOVEL)
-            .item(BlockItem::new)
-            .model((ctx, prov) -> {
-                prov.withExistingParent("item/" + ctx.getName(), InfinityCore.id("block/" + ctx.getName()));
-            })
-            .build()
-            .register();
-
-    public static final BlockEntry<ConnectedGrassBlock> LIMONITE_GRASS = InfinityRegistrate
-            .block("laterite/limonite_grass", p ->
-                    new ConnectedGrassBlock(BlockBehaviour.Properties.of().mapColor(MapColor.GRASS).randomTicks().strength(3.0F).sound(SoundType.GRAVEL), LIMONITE_SOIL, null, null))
-            .lang("Limonite Laterite Grass")
-            .blockstate(InfinityModels.createTFCConnectedGrassModel())
-            .addLayer(() -> RenderType::cutoutMipped)
-            .tag(TFCTags.Blocks.CAN_LANDSLIDE, BlockTags.MINEABLE_WITH_SHOVEL)
-            .loot((ctx, prov) -> ctx.dropOther(prov, LIMONITE_SOIL))
-            .item(BlockItem::new)
-            .model((ctx, prov) -> {
-                prov.withExistingParent("item/" + ctx.getName(), ResourceLocation.fromNamespaceAndPath(TerraFirmaCraft.MOD_ID, "item/grass_inv"))
-                        .texture("block", InfinityCore.id("block/" + ctx.getName().replace("_grass", "")));
-            })
-            .build()
-            .register();
-
+    // Cobble Replacement
     public static void init() {
         reinitializeCobbleReplacements();
     }

@@ -161,6 +161,36 @@ class ReplacementMapBuilder:
             self.blocks.append({"replace": [target], "with": with_entry})
         return self
 
+    def dirt(self, soil_types: list, block_weights: dict):
+        for soil in soil_types:
+            target = f"tfc:dirt/{soil}"
+            with_entry = [
+                {"weight": weight, "block": f"{block}"}
+                for block, weight in (block_weights or {}).items()
+            ]
+            self.blocks.append({"replace": [target], "with": with_entry})
+        return self
+
+    def grass(self, soil_types: list, block_weights: dict):
+        for soil in soil_types:
+            target = f"tfc:grass/{soil}"
+            with_entry = [
+                {"weight": weight, "block": f"{block}"}
+                for block, weight in (block_weights or {}).items()
+            ]
+            self.blocks.append({"replace": [target], "with": with_entry})
+        return self
+
+    def mud(self, soil_types: list, block_weights: dict):
+        for soil in soil_types:
+            target = f"tfc:mud/{soil}"
+            with_entry = [
+                {"weight": weight, "block": f"{block}"}
+                for block, weight in (block_weights or {}).items()
+            ]
+            self.blocks.append({"replace": [target], "with": with_entry})
+        return self
+
     def build(self) -> list:
         return self.blocks
 
@@ -372,6 +402,8 @@ def load_configs_from_csv(csv_filepath: str):
 
 #region MAIN
 def main():
+    from vein_dictionary_additions import VEIN_ADDITIONS
+
     csv_filepath = "veins_input.csv"
 
     if not os.path.exists(csv_filepath):
@@ -380,6 +412,8 @@ def main():
 
     print(f"Parsing configs from '{csv_filepath}'...")
     vein_dict = load_configs_from_csv(csv_filepath)
+
+    vein_dict.update(VEIN_ADDITIONS)
 
     write_to_ore_vein_info_recipes(vein_dict)
 
