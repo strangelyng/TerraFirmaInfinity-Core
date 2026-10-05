@@ -1,0 +1,6 @@
+{
+  "parent": "tfc:block/grass_side",
+  "textures": {
+    "texture": "tfinfinity:block/laterite/garnierite"
+  }
+}

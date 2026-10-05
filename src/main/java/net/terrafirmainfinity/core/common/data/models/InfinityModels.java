@@ -3,7 +3,13 @@ package net.terrafirmainfinity.core.common.data.models;
 import com.tterrag.registrate.providers.DataGenContext;
 import com.tterrag.registrate.providers.RegistrateBlockstateProvider;
 import com.tterrag.registrate.util.nullness.NonNullBiConsumer;
+import net.dries007.tfc.TerraFirmaCraft;
+import net.dries007.tfc.common.blocks.soil.ConnectedGrassBlock;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.state.properties.BlockStateProperties;
+import net.neoforged.neoforge.client.model.generators.ModelFile;
+import net.neoforged.neoforge.client.model.generators.MultiPartBlockStateBuilder;
 import net.terrafirmainfinity.core.InfinityCore;
 
 public class InfinityModels {
@@ -13,6 +19,53 @@ public class InfinityModels {
                     InfinityCore.id("block/casings/dwarven/%s/side".formatted(material)),
                     InfinityCore.id("block/casings/dwarven/%s/bottom".formatted(material)),
                     InfinityCore.id("block/casings/dwarven/%s/top".formatted(material))));
+        };
+    }
+
+    public static NonNullBiConsumer<DataGenContext<Block, ConnectedGrassBlock>, RegistrateBlockstateProvider> createTFCConnectedGrassModel() {
+        return (ctx, prov) -> {
+            String name = ctx.getName();
+            Block block = ctx.getEntry();
+            ModelFile modelBottom = prov.models().withExistingParent("block/" + name + "/bottom", ResourceLocation.fromNamespaceAndPath(TerraFirmaCraft.MOD_ID, "block/grass_bottom"))
+                    .texture("texture", InfinityCore.id("block/" + name.replace("_grass", "")));
+            ModelFile modelSide = prov.models().withExistingParent("block/" + name + "/side", ResourceLocation.fromNamespaceAndPath(TerraFirmaCraft.MOD_ID, "block/grass_side"))
+                    .texture("texture", InfinityCore.id("block/" + name.replace("_grass", "")));
+            ModelFile modelTop = prov.models().withExistingParent("block/" + name + "/top", ResourceLocation.fromNamespaceAndPath(TerraFirmaCraft.MOD_ID, "block/grass_top"))
+                    .texture("texture", InfinityCore.id("block/" + name.replace("_grass", "")));
+            ModelFile modelSnowySide = prov.models().withExistingParent("block/" + name + "/snowy_side", ResourceLocation.fromNamespaceAndPath(TerraFirmaCraft.MOD_ID, "block/grass_snowy_side"))
+                    .texture("texture", InfinityCore.id("block/" + name.replace("_grass", "")));
+            ModelFile modelSnowyTop = prov.models().withExistingParent("block/" + name + "/snowy_top", ResourceLocation.fromNamespaceAndPath(TerraFirmaCraft.MOD_ID, "block/grass_snowy_top"))
+                    .texture("texture", InfinityCore.id("block/" + name.replace("_grass", "")));
+
+            MultiPartBlockStateBuilder builder = prov.getMultipartBuilder(block);
+
+            builder.part().modelFile(modelBottom).rotationX(90).addModel();
+            builder.part().modelFile(modelTop).rotationX(270).rotationY(90).nextModel()
+                    .modelFile(modelTop).rotationX(270).nextModel()
+                    .modelFile(modelTop).rotationX(270).rotationY(180).nextModel()
+                    .modelFile(modelTop).rotationX(270).rotationY(270)
+                    .addModel().condition(BlockStateProperties.SNOWY, false);
+            builder.part().modelFile(modelSnowyTop).rotationX(270).rotationY(90).nextModel()
+                    .modelFile(modelSnowyTop).rotationX(270).nextModel()
+                    .modelFile(modelSnowyTop).rotationX(270).rotationY(180).nextModel()
+                    .modelFile(modelSnowyTop).rotationX(270).rotationY(270)
+                    .addModel().condition(BlockStateProperties.SNOWY, true);
+            builder.part().modelFile(modelTop).addModel().condition(BlockStateProperties.NORTH, true).condition(BlockStateProperties.SNOWY, false);
+            builder.part().modelFile(modelTop).rotationY(90).addModel().condition(BlockStateProperties.EAST, true).condition(BlockStateProperties.SNOWY, false);
+            builder.part().modelFile(modelTop).rotationY(180).addModel().condition(BlockStateProperties.SOUTH, true).condition(BlockStateProperties.SNOWY, false);
+            builder.part().modelFile(modelTop).rotationY(270).addModel().condition(BlockStateProperties.WEST, true).condition(BlockStateProperties.SNOWY, false);
+            builder.part().modelFile(modelSnowyTop).addModel().condition(BlockStateProperties.NORTH, true).condition(BlockStateProperties.SNOWY, true);
+            builder.part().modelFile(modelSnowyTop).rotationY(90).addModel().condition(BlockStateProperties.EAST, true).condition(BlockStateProperties.SNOWY, true);
+            builder.part().modelFile(modelSnowyTop).rotationY(180).addModel().condition(BlockStateProperties.SOUTH, true).condition(BlockStateProperties.SNOWY, true);
+            builder.part().modelFile(modelSnowyTop).rotationY(270).addModel().condition(BlockStateProperties.WEST, true).condition(BlockStateProperties.SNOWY, true);
+            builder.part().modelFile(modelSide).addModel().condition(BlockStateProperties.NORTH, false).condition(BlockStateProperties.SNOWY, false);
+            builder.part().modelFile(modelSide).rotationY(90).addModel().condition(BlockStateProperties.EAST, false).condition(BlockStateProperties.SNOWY, false);
+            builder.part().modelFile(modelSide).rotationY(180).addModel().condition(BlockStateProperties.SOUTH, false).condition(BlockStateProperties.SNOWY, false);
+            builder.part().modelFile(modelSide).rotationY(270).addModel().condition(BlockStateProperties.WEST, false).condition(BlockStateProperties.SNOWY, false);
+            builder.part().modelFile(modelSnowySide).addModel().condition(BlockStateProperties.NORTH, false).condition(BlockStateProperties.SNOWY, true);
+            builder.part().modelFile(modelSnowySide).rotationY(90).addModel().condition(BlockStateProperties.EAST, false).condition(BlockStateProperties.SNOWY, true);
+            builder.part().modelFile(modelSnowySide).rotationY(180).addModel().condition(BlockStateProperties.SOUTH, false).condition(BlockStateProperties.SNOWY, true);
+            builder.part().modelFile(modelSnowySide).rotationY(270).addModel().condition(BlockStateProperties.WEST, false).condition(BlockStateProperties.SNOWY, true);
         };
     }
 }

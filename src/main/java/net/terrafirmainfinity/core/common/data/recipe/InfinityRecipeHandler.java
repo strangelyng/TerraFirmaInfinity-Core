@@ -1,8 +1,11 @@
 package net.terrafirmainfinity.core.common.data.recipe;
 
 import com.gregtechceu.gtceu.common.data.GTRecipeTypes;
+import net.dries007.tfc.common.recipes.LandslideRecipe;
+import net.dries007.tfc.common.recipes.ingredients.BlockIngredient;
 import net.minecraft.data.recipes.RecipeOutput;
 import net.terrafirmainfinity.core.InfinityCore;
+import net.terrafirmainfinity.core.common.InfinityBlocks;
 import net.terrafirmainfinity.core.common.data.InfinityTagPrefix;
 import net.terrafirmainfinity.core.common.data.material.InfinityMaterials;
 
@@ -81,5 +84,25 @@ public class InfinityRecipeHandler {
                 .EUt(VA[MV])
                 .duration(200)
                 .save(provider);
+    }
+
+    public static void landslideRecipes(RecipeOutput provider) {
+        provider.accept(InfinityCore.id("collapse/laterite/bauxite_grass"),
+                new LandslideRecipe(
+                        BlockIngredient.of(InfinityBlocks.BAUXITE_GRASS.get()),
+                        InfinityBlocks.BAUXITE_SOIL.get().defaultBlockState()
+                ), null);
+
+        provider.accept(InfinityCore.id("collapse/laterite/garnierite_grass"),
+                new LandslideRecipe(
+                        BlockIngredient.of(InfinityBlocks.GARNIERITE_GRASS.get()),
+                        InfinityBlocks.GARNIERITE_SOIL.get().defaultBlockState()
+                ), null);
+
+        provider.accept(InfinityCore.id("collapse/laterite/limonite_grass"),
+                new LandslideRecipe(
+                        BlockIngredient.of(InfinityBlocks.LIMONITE_GRASS.get()),
+                        InfinityBlocks.LIMONITE_SOIL.get().defaultBlockState()
+                ), null);
     }
 }

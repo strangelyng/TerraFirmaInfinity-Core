@@ -1,0 +1,218 @@
+{
+  "multipart": [
+    {
+      "apply": {
+        "model": "tfinfinity:block/laterite/bauxite_grass/bottom",
+        "x": 90
+      }
+    },
+    {
+      "apply": [
+        {
+          "model": "tfinfinity:block/laterite/bauxite_grass/top",
+          "x": 270,
+          "y": 90
+        },
+        {
+          "model": "tfinfinity:block/laterite/bauxite_grass/top",
+          "x": 270
+        },
+        {
+          "model": "tfinfinity:block/laterite/bauxite_grass/top",
+          "x": 270,
+          "y": 180
+        },
+        {
+          "model": "tfinfinity:block/laterite/bauxite_grass/top",
+          "x": 270,
+          "y": 270
+        }
+      ],
+      "when": {
+        "snowy": "false"
+      }
+    },
+    {
+      "apply": [
+        {
+          "model": "tfinfinity:block/laterite/bauxite_grass/snowy_top",
+          "x": 270,
+          "y": 90
+        },
+        {
+          "model": "tfinfinity:block/laterite/bauxite_grass/snowy_top",
+          "x": 270
+        },
+        {
+          "model": "tfinfinity:block/laterite/bauxite_grass/snowy_top",
+          "x": 270,
+          "y": 180
+        },
+        {
+          "model": "tfinfinity:block/laterite/bauxite_grass/snowy_top",
+          "x": 270,
+          "y": 270
+        }
+      ],
+      "when": {
+        "snowy": "true"
+      }
+    },
+    {
+      "apply": {
+        "model": "tfinfinity:block/laterite/bauxite_grass/top"
+      },
+      "when": {
+        "north": "true",
+        "snowy": "false"
+      }
+    },
+    {
+      "apply": {
+        "model": "tfinfinity:block/laterite/bauxite_grass/top",
+        "y": 90
+      },
+      "when": {
+        "east": "true",
+        "snowy": "false"
+      }
+    },
+    {
+      "apply": {
+        "model": "tfinfinity:block/laterite/bauxite_grass/top",
+        "y": 180
+      },
+      "when": {
+        "snowy": "false",
+        "south": "true"
+      }
+    },
+    {
+      "apply": {
+        "model": "tfinfinity:block/laterite/bauxite_grass/top",
+        "y": 270
+      },
+      "when": {
+        "snowy": "false",
+        "west": "true"
+      }
+    },
+    {
+      "apply": {
+        "model": "tfinfinity:block/laterite/bauxite_grass/snowy_top"
+      },
+      "when": {
+        "north": "true",
+        "snowy": "true"
+      }
+    },
+    {
+      "apply": {
+        "model": "tfinfinity:block/laterite/bauxite_grass/snowy_top",
+        "y": 90
+      },
+      "when": {
+        "east": "true",
+        "snowy": "true"
+      }
+    },
+    {
+      "apply": {
+        "model": "tfinfinity:block/laterite/bauxite_grass/snowy_top",
+        "y": 180
+      },
+      "when": {
+        "snowy": "true",
+        "south": "true"
+      }
+    },
+    {
+      "apply": {
+        "model": "tfinfinity:block/laterite/bauxite_grass/snowy_top",
+        "y": 270
+      },
+      "when": {
+        "snowy": "true",
+        "west": "true"
+      }
+    },
+    {
+      "apply": {
+        "model": "tfinfinity:block/laterite/bauxite_grass/side"
+      },
+      "when": {
+        "north": "false",
+        "snowy": "false"
+      }
+    },
+    {
+      "apply": {
+        "model": "tfinfinity:block/laterite/bauxite_grass/side",
+        "y": 90
+      },
+      "when": {
+        "east": "false",
+        "snowy": "false"
+      }
+    },
+    {
+      "apply": {
+        "model": "tfinfinity:block/laterite/bauxite_grass/side",
+        "y": 180
+      },
+      "when": {
+        "snowy": "false",
+        "south": "false"
+      }
+    },
+    {
+      "apply": {
+        "model": "tfinfinity:block/laterite/bauxite_grass/side",
+        "y": 270
+      },
+      "when": {
+        "snowy": "false",
+        "west": "false"
+      }
+    },
+    {
+      "apply": {
+        "model": "tfinfinity:block/laterite/bauxite_grass/snowy_side"
+      },
+      "when": {
+        "north": "false",
+        "snowy": "true"
+      }
+    },
+    {
+      "apply": {
+        "model": "tfinfinity:block/laterite/bauxite_grass/snowy_side",
+        "y": 90
+      },
+      "when": {
+        "east": "false",
+        "snowy": "true"
+      }
+    },
+    {
+      "apply": {
+        "model": "tfinfinity:block/laterite/bauxite_grass/snowy_side",
+        "y": 180
+      },
+      "when": {
+        "snowy": "true",
+        "south": "false"
+      }
+    },
+    {
+      "apply": {
+        "model": "tfinfinity:block/laterite/bauxite_grass/snowy_side",
+        "y": 270
+      },
+      "when": {
+        "snowy": "true",
+        "west": "false"
+      }
+    }
+  ]
+}

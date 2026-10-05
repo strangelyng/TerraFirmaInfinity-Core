@@ -33,6 +33,7 @@ public class InfinityCoreGTAddon implements IGTAddon
         ItemMaterialData.registerMaterialEntry(() -> TFCItems.KAOLIN_CLAY, ingot, InfinityMaterials.Kaolinite);
 
         InfinityRecipeHandler.testRecipes(provider);
+        InfinityRecipeHandler.landslideRecipes(provider);
         InfinityMachineRecipes.init(provider);
 
         for (Material material : GTRegistries.MATERIALS) {
