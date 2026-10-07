@@ -24,5 +24,8 @@ public class InfinityEmiPlugin implements EmiPlugin {
 
         Arrays.stream(OreVeinDictionary.RECIPES)
                 .forEach(registry::addRecipe);
+
+        Arrays.stream(HotSpringsDictionary.RECIPES)
+                .forEach(registry::addRecipe);
     }
 }

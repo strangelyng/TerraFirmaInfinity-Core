@@ -7,7 +7,7 @@ public class InfinityUtil {
         return out.toString();
     }
 
-    private static String snakecaseToTitle(String snakeCase) {
+    public static String snakecaseToTitle(String snakeCase) {
         StringBuilder out = new StringBuilder();
         for (String part : snakeCase.split("_")) {
             if (part.isEmpty()) continue;

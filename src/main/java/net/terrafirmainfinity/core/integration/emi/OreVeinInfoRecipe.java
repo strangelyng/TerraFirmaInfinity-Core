@@ -133,6 +133,10 @@ public class OreVeinInfoRecipe implements EmiRecipe {
         return InfinityCore.id("/" + ID + "_emi");
     }
 
+    public String getKey() {
+        return ID;
+    }
+
     @Override
     public int getDisplayWidth() {
         return 140;

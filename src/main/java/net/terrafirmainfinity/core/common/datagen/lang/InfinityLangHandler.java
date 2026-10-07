@@ -6,6 +6,10 @@ import com.gregtechceu.gtceu.data.lang.LangHandler;
 import com.tterrag.registrate.providers.RegistrateLangProvider;
 import net.terrafirmainfinity.core.InfinityCore;
 import net.terrafirmainfinity.core.common.data.InfinityTagPrefix;
+import net.terrafirmainfinity.core.integration.emi.HotSpringsDictionary;
+import net.terrafirmainfinity.core.integration.emi.OreVeinDictionary;
+import net.terrafirmainfinity.core.integration.emi.OreVeinInfoRecipe;
+import net.terrafirmainfinity.core.util.InfinityUtil;
 
 import java.util.Locale;
 
@@ -132,6 +136,8 @@ public class InfinityLangHandler extends LangHandler {
         provider.add("tfinfinity.ore_vein_tag.beach", "Beaches and Shores");
         provider.add("tfinfinity.ore_vein_tag.atoll", "Atolls");
 
+        provider.add("tfinfinity.ore_vein_tag.hot_springs", "Hot Springs");
+
         provider.add("tfinfinity.emi.ore_veins.rainfall", "Rainfall: ");
         provider.add("tfinfinity.emi.ore_veins.rainfall_and_below", "≤ %dmm");
         provider.add("tfinfinity.emi.ore_veins.rainfall_and_above", "≥ %dmm");
@@ -146,6 +152,21 @@ public class InfinityLangHandler extends LangHandler {
         provider.add("tfinfinity.emi.ore_veins.rarity.very_rare", "Very Rare");
         provider.add("tfinfinity.emi.ore_veins.rarity.tooltip", "Spawns once every %d chunks on average");
         provider.add("tfinfinity.emi.ore_veins.rock_types", "Found in rock types:");
+
+        provider.add("tfinfinity.ore_vein.hot_springs.emi.0", "Found beneath hot springs,");
+        provider.add("tfinfinity.ore_vein.hot_springs.emi.1", "active springs are denser.");
+
+        for (OreVeinInfoRecipe veinInfoRecipe : OreVeinDictionary.RECIPES) {
+            String veinName = veinInfoRecipe.getKey();
+
+            provider.add("tfinfinity.ore_vein." + veinName, InfinityUtil.snakecaseToTitle(veinName));
+        }
+
+        for (OreVeinInfoRecipe hotSpringInfoRecipe : HotSpringsDictionary.RECIPES) {
+            String veinName = hotSpringInfoRecipe.getKey();
+
+            provider.add("tfinfinity.ore_vein." + veinName, InfinityUtil.snakecaseToTitle(veinName));
+        }
     }
 
     public static void replaceToolLang(RegistrateLangProvider provider, String id, String name) {

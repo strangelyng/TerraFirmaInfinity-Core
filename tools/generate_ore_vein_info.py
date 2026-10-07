@@ -116,28 +116,3 @@ def write_to_ore_vein_info_recipes(vein_dict: dict):
         file.write("    };" + "\n")
 
         file.write("}" + "\n")
-
-    make_lang(vein_dict)
-
-def make_lang(vein_dict: dict):
-    lang_dir = "assets/tfinfinity/lang"
-    lang_file = "en_us.json"
-
-    lang_path = os.path.join(lang_dir, lang_file)
-
-    if not os.path.exists(lang_dir):
-        os.makedirs(lang_dir, exist_ok=True)
-
-    print(f"Writing vein lang to '{lang_path}")
-
-    with open(lang_path, "w", encoding="utf-8") as file:
-        lang_obj = {}
-
-        for vein_key, vein_data in vein_dict.items():
-            lang_key = "tfinfinity.ore_vein." + vein_key
-
-            vein_name = vein_key.replace("_", " ").title()
-
-            lang_obj[lang_key] = vein_name
-
-        json.dump(lang_obj, file, indent=4)
