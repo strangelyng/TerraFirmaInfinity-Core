@@ -1,4 +1,4 @@
-package net.terrafirmainfinity.core.common.datagen.lang;
+package net.terrafirmainfinity.core.common.data.lang;
 
 import com.gregtechceu.gtceu.GTCEu;
 import com.gregtechceu.gtceu.api.data.tag.TagPrefix;
