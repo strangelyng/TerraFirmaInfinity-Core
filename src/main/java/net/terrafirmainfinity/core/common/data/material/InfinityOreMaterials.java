@@ -18,6 +18,13 @@ public class InfinityOreMaterials {
                 .oreSmeltInto(Silver)
                 .buildAndRegister();
 
+        Anthracite = new Material.Builder(InfinityCore.id("anthracite"))
+                .gem()
+                .color(0x241d29).iconSet(MaterialIconSet.METALLIC)
+                .flags(FLAMMABLE, DISABLE_MATERIAL_RECIPES)
+                .components(Carbon, 1)
+                .buildAndRegister();
+
         Arsenopyrite = new Material.Builder(InfinityCore.id("arsenopyrite"))
                 .dust().ore()
                 .color(0xA99543).secondaryColor(0x84611A)

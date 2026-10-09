@@ -1,5 +1,6 @@
 package net.terrafirmainfinity.core.common;
 
+import com.eerussianguy.beneath.common.items.BeneathItems;
 import com.gregtechceu.gtceu.api.GTValues;
 import com.gregtechceu.gtceu.api.data.tag.TagPrefix;
 import com.gregtechceu.gtceu.common.data.GTBlocks;
@@ -7,7 +8,10 @@ import com.gregtechceu.gtceu.common.data.models.GTModels;
 import com.gregtechceu.gtceu.data.recipe.CustomTags;
 import com.tterrag.registrate.util.entry.BlockEntry;
 import net.dries007.tfc.TerraFirmaCraft;
+import net.dries007.tfc.client.TFCSounds;
 import net.dries007.tfc.common.TFCTags;
+import net.dries007.tfc.common.blocks.ExtendedBlock;
+import net.dries007.tfc.common.blocks.ExtendedProperties;
 import net.dries007.tfc.common.blocks.TFCBlocks;
 import net.dries007.tfc.common.blocks.rock.Rock;
 import net.dries007.tfc.common.blocks.soil.ConnectedGrassBlock;
@@ -21,6 +25,7 @@ import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.SoundType;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.material.MapColor;
+import net.neoforged.neoforge.common.Tags;
 import net.terrafirmainfinity.core.InfinityCore;
 import net.terrafirmainfinity.core.common.data.InfinityTagPrefix;
 import net.terrafirmainfinity.core.common.data.block.LateriteBlock;
@@ -156,6 +161,14 @@ public class InfinityBlocks {
                                 .texture("block", InfinityCore.id("block/" + ctx.getName().replace("_grass", ""))))
                 .build().register();
     }
+
+    // Ore Blocks
+    public static BlockEntry<ExtendedBlock> ANTHRACITE = InfinityRegistrate
+            .block("anthracite", p -> new ExtendedBlock(ExtendedProperties.of().mapColor(MapColor.TERRACOTTA_BLACK).strength(6.0F).sound(TFCSounds.CHARCOAL).requiresCorrectToolForDrops().flammable(5, 120)))
+            .tag(BlockTags.MINEABLE_WITH_PICKAXE, Tags.Blocks.ORES)
+            .loot((ctx, prov) -> ctx.dropOther(prov, BeneathItems.CURSECOAL))
+            .item(BlockItem::new)
+            .build().register();
 
     // Cobble Replacement
     public static void init() {

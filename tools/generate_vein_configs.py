@@ -99,6 +99,15 @@ def make_rock_ore(material : str, rock : str):
 
     return f"{namespace}:{rock}_{material}_ore"
 
+def make_gravel_deposit(material : str, rock : str):
+    namespace = "gtceu"
+    if ":" in material:
+        split_str = material.split(":")
+        namespace = split_str[0]
+        material = split_str[1]
+
+    return f"{namespace}:{rock}_{material}_deposit"
+
 def make_sand_ore(material : str, color : str):
     namespace = "gtceu"
     if ":" in material:
@@ -127,6 +136,19 @@ class ReplacementMapBuilder:
             target = f"tfc:rock/raw/{rock}" # Use a map here instead if support for blocks outside TFC namespace is required, e.g. TARGET_ROCK_MAP[rock]
             with_entry = [
                 {"weight": weight, "block": make_rock_ore(ore, rock)}
+                for ore, weight in (ore_weights or {}).items()
+            ] + [
+                {"weight": weight, "block": f"{block}"}
+                for block, weight in (block_weights or {}).items()
+            ]
+            self.blocks.append({"replace": [target], "with": with_entry})
+        return self
+
+    def gravel(self, rock_list: list, ore_weights: dict, block_weights: dict | None = None):
+        for rock in rock_list:
+            target = f"tfc:rock/gravel/{rock}" # Use a map here instead if support for blocks outside TFC namespace is required, e.g. TARGET_ROCK_MAP[rock]
+            with_entry = [
+                {"weight": weight, "block": make_gravel_deposit(ore, rock)}
                 for ore, weight in (ore_weights or {}).items()
             ] + [
                 {"weight": weight, "block": f"{block}"}
@@ -338,7 +360,7 @@ def load_configs_from_csv(csv_filepath: str):
                     sign = float(row.get("Sign") or 0.0)
                     builder.pipe_vein(height, radius, min_skew, max_skew, min_slant, max_slant, sign)
                 case _:
-                    print(f"Skipping row {row_num}: Invalid Type '{vein_type}")
+                    print(f"Skipping row {row_num}: Invalid Type '{vein_type}'")
                     continue
 
             if near_lava:
@@ -438,7 +460,7 @@ def main():
         cf_filename = f"{vein_key}.json"
         cf_path = os.path.join(CONFIGURED_DIR, cf_filename)
         with open(cf_path, "w", encoding="utf-8") as f:
-            json.dump(data, f, indent=2)
+            json.dump(data, f, indent=4)
         configured_count += 1
 
         pf_filename = f"{vein_key}.json"

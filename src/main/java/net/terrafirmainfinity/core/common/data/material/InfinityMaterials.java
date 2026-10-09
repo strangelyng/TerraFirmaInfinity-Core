@@ -3,6 +3,7 @@ package net.terrafirmainfinity.core.common.data.material;
 import alexthw.eidolon_repraised.registries.Registry;
 import appeng.core.definitions.AEBlocks;
 import appeng.core.definitions.AEItems;
+import com.eerussianguy.beneath.common.items.BeneathItems;
 import com.eerussianguy.firmalife.common.blocks.FLBlocks;
 import com.eerussianguy.firmalife.common.items.FLItems;
 import com.eerussianguy.firmalife.common.util.FLMetal;
@@ -22,18 +23,14 @@ import com.simibubi.create.AllBlocks;
 import com.simibubi.create.AllItems;
 import net.dries007.tfc.common.blocks.TFCBlocks;
 import net.dries007.tfc.common.blocks.rock.Ore;
-import net.dries007.tfc.common.fluids.SimpleFluid;
-import net.dries007.tfc.common.fluids.TFCFluids;
 import net.dries007.tfc.common.items.Powder;
 import net.dries007.tfc.common.items.TFCItems;
 import net.dries007.tfc.util.Metal;
 import net.minecraft.world.level.block.Blocks;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 
 import static com.gregtechceu.gtceu.api.GTValues.*;
-import static com.gregtechceu.gtceu.api.data.chemical.material.info.MaterialFlags.*;
 import static com.gregtechceu.gtceu.api.data.tag.TagPrefix.*;
 import static com.gregtechceu.gtceu.common.data.GTMaterials.*;
 import static net.terrafirmainfinity.core.common.data.InfinityTagPrefix.*;
@@ -329,7 +326,7 @@ public class InfinityMaterials {
         Beryllium.removeProperty(PropertyKey.ORE);
         Cobalt.removeProperty(PropertyKey.ORE);
         Iron.removeProperty(PropertyKey.ORE);
-//        Lead.removeProperty(PropertyKey.ORE);
+        Lead.removeProperty(PropertyKey.ORE);
         Lithium.removeProperty(PropertyKey.ORE);
         Molybdenum.removeProperty(PropertyKey.ORE);
         Neodymium.removeProperty(PropertyKey.ORE);
@@ -415,8 +412,23 @@ public class InfinityMaterials {
         powder.setIgnored(Coke, () -> TFCItems.POWDERS.get(Powder.COKE));
         powder.setIgnored(Salt, () -> TFCItems.POWDERS.get(Powder.SALT));
 
-//        GTFluids.handleNonMaterialFluids(PotassiumHydroxide, () -> TFCFluids.SIMPLE_FLUIDS.get(SimpleFluid.LYE).source().get());
-//        GTFluids.handleNonMaterialFluids(CalciumHydroxide, () -> TFCFluids.SIMPLE_FLUIDS.get(SimpleFluid.LIMEWATER).source().get());
+        gemChipped.setIgnored(Lignite);
+        gemFlawed.setIgnored(Lignite);
+        gem.setIgnored(Lignite, () -> TFCItems.ORES.get(Ore.LIGNITE));
+        gemFlawless.setIgnored(Lignite);
+        gemExquisite.setIgnored(Lignite);
+
+        gemChipped.setIgnored(Coal);
+        gemFlawed.setIgnored(Coal);
+        gem.setIgnored(Coal, () -> TFCItems.ORES.get(Ore.BITUMINOUS_COAL));
+        gemFlawless.setIgnored(Coal);
+        gemExquisite.setIgnored(Coal);
+
+        gemChipped.setIgnored(Anthracite);
+        gemFlawed.setIgnored(Anthracite);
+        gem.setIgnored(Anthracite, () -> BeneathItems.CURSECOAL);
+        gemFlawless.setIgnored(Anthracite);
+        gemExquisite.setIgnored(Anthracite);
 
         ingot.removeIgnored(Iron);
         ingot.setIgnored(Iron, // Iron to Cast Iron
@@ -569,7 +581,6 @@ public class InfinityMaterials {
         tfcOres.put(Amethyst, Ore.AMETHYST);
         tfcOres.put(Borax, Ore.BORAX);
         tfcOres.put(Cinnabar, Ore.CINNABAR);
-        tfcOres.put(Coal, Ore.BITUMINOUS_COAL);
         tfcOres.put(Cryolite, Ore.CRYOLITE);
         tfcOres.put(Diamond, Ore.DIAMOND);
         tfcOres.put(Emerald, Ore.EMERALD);
@@ -577,7 +588,6 @@ public class InfinityMaterials {
         tfcOres.put(Gypsum, Ore.GYPSUM);
         tfcOres.put(Salt, Ore.HALITE); // Halite = NaCl
         tfcOres.put(Lapis, Ore.LAPIS_LAZULI);
-        tfcOres.put(Lignite, Ore.LIGNITE);
         tfcOres.put(Opal, Ore.OPAL);
         tfcOres.put(Pyrite, Ore.PYRITE);
         tfcOres.put(Ruby, Ore.RUBY);
