@@ -65,7 +65,7 @@ public class FlashFurnace {
                                 )))
                         .where('P', blocks(GTBlocks.CASING_STEEL_PIPE.get()))
                         .where('F', frames(GTMaterials.Steel))
-                        .where(' ', MultiPredicate.ANY)
+                        .where(' ', MultiPredicate.any())
                         .build();
             })
             .partSorter(Comparator.comparingInt(p -> p.getBlockPos().getY()))

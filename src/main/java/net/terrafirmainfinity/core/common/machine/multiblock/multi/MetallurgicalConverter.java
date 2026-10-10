@@ -44,8 +44,8 @@ public class MetallurgicalConverter {
                     .where('B', blocks(GTBlocks.FIREBOX_STEEL.get()))
                     .where('G', blocks(GTBlocks.CASING_STEEL_GEARBOX.get()))
                     .where('M', abilities(PartAbility.MUFFLER))
-                    .where('#', MultiPredicate.AIR)
-                    .where(' ', MultiPredicate.ANY)
+                    .where('#', MultiPredicate.air())
+                    .where(' ', MultiPredicate.any())
                     .build())
             .workableCasingModel(GTCEu.id("block/casings/solid/machine_casing_solid_steel"),
                     GTCEu.id("block/multiblock/blast_furnace"))

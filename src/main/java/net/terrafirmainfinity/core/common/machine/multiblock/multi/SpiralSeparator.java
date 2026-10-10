@@ -45,7 +45,7 @@ public class SpiralSeparator {
                     .where('G', blocks(AllBlocks.METAL_GIRDER.get()))
                     .where('F', frames(GTMaterials.Steel))
                     .where('P', blocks(GTBlocks.CASING_STEEL_PIPE.get()))
-                    .where('#', MultiPredicate.AIR)
+                    .where('#', MultiPredicate.air())
                     .build())
             .workableCasingModel(GTCEu.id("block/casings/solid/machine_casing_solid_steel"),
                     GTCEu.id("block/machines/ore_washer"))
