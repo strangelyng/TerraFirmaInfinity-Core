@@ -1,4 +1,4 @@
-## [Unreleased]
+## [0.0.4]
 This version is a massive restructuring, that began with a complete wipe of the project shortly after the release of v0.0.3.
 
 ### Additions
