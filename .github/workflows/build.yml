@@ -193,6 +193,7 @@ jobs:
           name: ${{ needs.info.outputs.full_name }}
           version: ${{ needs.info.outputs.version }}
           version-type: ${{ needs.info.outputs.version_type }}
+          changelog-file: CHANGELOG.*
 
           loaders: ${{ needs.info.outputs.loaders }}
           game-versions: ${{ needs.info.outputs.game_versions }}
