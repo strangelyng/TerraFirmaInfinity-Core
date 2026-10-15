@@ -1,0 +1,94 @@
+,,,,,,,,,,,,,,,,,,Found in:,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,,Sedimentary,,,,,,,Metamorphic,,,,,,Igneous Extrusive,,,,,Igneous Intrusive,,,Sand,,,,,,,
+Vein ID,Type,Distribution,Min Y,Max Y,Projected?,Project Offset?,Rarity,Density,Size,Height,Radius,Skew,Slant,Sign,Near Lava?,Biome,Placement,Chalk,Chert,Claystone,Conglomerate,Dolomite,Limestone,Shale,Gneiss,Marble,Phyllite,Quartzite,Schist,Slate,Andesite,Basalt,Dacite,Rhyolite,Tuff,Diorite,Gabbro,Granite,Black,Brown,Green,Pink,Red,White,Yellow,Indicator
+generic_deep,,,-50,20,,,-140-230+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,"{'tfc:ore/small_sphalerite': 1}, 0, 35, 1, 5"
+generic_normal,,,10,70,,,130-230,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,"{'tfc:ore/small_malachite': 1}, 24, 35, 1, 0"
+generic_high,,,-30,1,✔️,,30-90,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,"{'tfc:ore/small_malachite': 1}, 14, 35, 1, 0"
+generic_sand,,,-5,1,✔️,,190 / 270,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,"{'tfc:ore/small_malachite': 1}, 14, 35, 1, 0"
+generic_surface,,,-20,-5,✔️,,70-90 + 120,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,"{'tfc:ore/small_malachite': 1}, 14, 35, 1, 0"
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+surface_bismuthinite,cluster_vein,tfinfinity:bismuthinite 100,-20,-5,✔️,,90,0.2,20,,,,,,,,,,,,,,,,,,,,,,,,,,✔️,✔️,✔️,✔️,,,,,,,,"{'tfc:ore/small_bismuthinite': 1}, 14, 35, 1, 0"
+surface_hematite,cluster_vein,hematite 100,-20,-5,✔️,,90,0.3,20,,,,,,,,,✔️,✔️,✔️,✔️,✔️,✔️,✔️,,,,,,,✔️,✔️,✔️,✔️,,,,,,,,,,,,"{'tfc:ore/small_hematite': 1}, 14, 35, 1, 0"
+surface_magnetite,cluster_vein,magnetite 100,-20,-5,✔️,,120,0.3,20,,,,,,,,,✔️,✔️,✔️,✔️,✔️,✔️,✔️,,,,,,,,,,,✔️,✔️,✔️,✔️,,,,,,,,"{'tfc:ore/small_magnetite': 1}, 14, 35, 1, 0"
+surface_malachite,cluster_vein,malachite 100,-20,-5,✔️,,120,0.2,20,,,,,,,,,✔️,,,,✔️,✔️,,,✔️,,,,,,,,,,,,,,,,,,,,"{'tfc:ore/small_malachite': 1}, 14, 35, 1, 0"
+surface_chalcocite,cluster_vein,chalcocite 100,-20,-5,✔️,,120,0.2,20,,,,,,,,,✔️,✔️,✔️,✔️,✔️,✔️,✔️,,,,,,,,,,,,,,,,,,,,,,"{'gtceu:chalcocite_indicator': 1}, 14, 35, 1, 0"
+surface_copper,cluster_vein,copper 100,-20,-5,✔️,,70,0.2,20,,,,,,,,,,,,,,,,,,,,,,✔️,✔️,✔️,✔️,,,,,,,,,,,,"{'tfc:ore/small_native_copper': 1}, 14, 35, 1, 0"
+surface_sphalerite,cluster_vein,sphalerite 100,-20,-5,✔️,,90,0.2,20,,,,,,,,,✔️,✔️,✔️,✔️,✔️,✔️,✔️,,,,,,,✔️,✔️,✔️,✔️,,,,,,,,,,,,"{'tfc:ore/small_sphalerite': 1}, 14, 35, 1, 0"
+surface_tetrahedrite,cluster_vein,tetrahedrite 100,-20,-5,✔️,,80,0.2,20,,,,,,,,,,,,,,,,✔️,✔️,✔️,✔️,✔️,✔️,,,,,,,,,,,,,,,,"{'tfc:ore/small_tetrahedrite': 1}, 14, 35, 1, 0"
+surface_saltpeter,disc_vein,saltpeter 100,-20,1,✔️,✔️,180,0.25,20,5,,,,,,,,✔️,✔️,✔️,✔️,✔️,✔️,✔️,,,,,,,,,,,,,,,,,,,,,,
+surface_lignite,disc_vein,|| tfc:lignite 100,-20,-5,✔️,✔️,210,0.35,40,2,,,,,,,,✔️,✔️,✔️,✔️,✔️,✔️,✔️,,,,,,,,,,,,,,,sandstone,sandstone,sandstone,sandstone,sandstone,sandstone,sandstone,
+surface_mica,disc_vein,mica 100,-30,-5,✔️,,160,0.25,20,5,,,,,,,,✔️,✔️,✔️,✔️,✔️,✔️,✔️,,,✔️,,✔️,✔️,,,,,,,,,,,,,,,,"{'gtceu:mica_indicator': 1}, 14, 35, 1, 0"
+surface_bauxite_karst,disc_vein,bauxite 75 / hematite 10 / goethite 5 / bastnasite 5,-20,-5,✔️,,160,0.25,20,5,,,,,,,"{""type"": ""tfc:climate"", ""min_groundwater"": 150, ""min_temperature"": 8, ""max_temperature"": 18}",✔️,,,,✔️,✔️,,,✔️,,,,,,,,,,,,,,,,,,,,"{'gtceu:bauxite_indicator': 3, 'tfc:ore/small_hematite': 1, 'gtceu:goethite_indicator': 1}, 14, 35, 1, 0"
+surface_bauxite_tropical,disc_vein,bauxite 80 / hematite 15 / goethite 5,-20,-5,✔️,,120,0.3,20,5,,,,,,,"{""type"": ""tfc:climate"", ""min_groundwater"": 300, ""min_temperature"": 18}",✔️,✔️,✔️,✔️,✔️,✔️,✔️,,,,,,,,,,,,,,,,,,,,,,"{'gtceu:bauxite_indicator': 4, 'tfc:ore/small_hematite': 1}, 14, 35, 1, 0"
+surface_bog_iron,disc_vein,yellow_limonite 75 / goethite 15 / garnierite 10,-30,-5,✔️,,120,0.3,20,5,,,,,,swamp,"{""type"": ""tfc:climate"", ""min_groundwater"": 150, ""min_temperature"": -13}",✔️,✔️,✔️,✔️,✔️,✔️,✔️,,,,,,,,,,,,,,,,,,,,,,"{'tfc:ore/small_limonite': 3, 'gtceu:goethite_indicator': 1}, 14, 35, 1, 0"
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+bentonite_tuff,disc_vein,bentonite 100,-20,1,✔️,,70,0.3,20,5,,,,,,,,,,,,,,,,,,,,,,,,,✔️,,,,,,,,,,,
+saltpeter_atolls,disc_vein,saltpeter 100,60,80,,,40,0.4,40,5,,,,,,atoll,,✔️,✔️,✔️,✔️,✔️,✔️,✔️,✔️,✔️,✔️,✔️,✔️,✔️,✔️,✔️,✔️,✔️,✔️,✔️,✔️,✔️,,,,,,,,
+manganese_bog,disc_vein,pyrolusite 50 / yellow_limonite 35 / goethite 15,-30,-5,✔️,,160,0.3,20,5,,,,,,swamp,"{""type"": ""tfc:climate"", ""min_groundwater"": 150, ""min_temperature"": -13}",✔️,✔️,✔️,✔️,✔️,✔️,✔️,,,,,,,,,,,,,,,,,,,,,,"{'tfc:ore/small_limonite': 3, 'gtceu:pyrolusite_indicator': 1}, 14, 35, 1, 0"
+fossil_sand_cassiterite,manual_cluster,cassiterite 100 / cassiterite_sand 100,-20,-5,✔️,,140,0.25,20,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,sandstone,sandstone,,,sandstone,,sandstone,"{'gtceu:cassiterite_sand_indicator': 1}, 14, 35, 1, 0"
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+sand_cassiterite,cluster_vein,cassiterite_sand 100,-5,1,✔️,,180,0.25,20,,,,,,,beach,,,,,,,,,,,,,,,,,,,,,,,sand,sand,,,sand,,sand,"{'gtceu:cassiterite_sand_indicator': 1}, 14, 35, 1, 0"
+sand_basaltic,cluster_vein,basaltic_mineral_sand 75 / garnet_sand 25,-5,1,✔️,,180,0.25,20,,,,,,,beach,,,,,,,,,,,,,,,,,,,,,,,sand,,sand,,sand,,,"{'gtceu:basaltic_mineral_sand_indicator': 1}, 14, 35, 1, 0"
+sand_granitic,cluster_vein,granitic_mineral_sand 75 / cassiterite_sand 15 / garnet_sand 10,-5,1,✔️,,180,0.25,20,,,,,,,beach,,,,,,,,,,,,,,,,,,,,,,,sand,sand,,,sand,,sand,"{'gtceu:granitic_mineral_sand_indicator': 1}, 14, 35, 1, 0"
+sand_garnet,cluster_vein,garnet_sand 100,-5,1,✔️,,180,0.25,20,,,,,,,beach,,,,,,,,,,,,,,,,,,,,,,,sand,,sand,sand,,,sand,"{'gtceu:garnet_sand_indicator': 1}, 14, 35, 1, 0"
+sand_glauconite,cluster_vein,glauconite_sand 100,-5,1,✔️,,180,0.25,20,,,,,,,beach,,,,,,,,,,,,,,,,,,,,,,,,sand,sand,,,,sand,"{'gtceu:glauconite_sand_indicator': 1}, 14, 35, 1, 0"
+sand_rare_earth,cluster_vein,granitic_mineral_sand 60 / cassiterite_sand 25 / monazite 15,-5,1,✔️,,240,0.25,20,,,,,,,beach,,,,,,,,,,,,,,,,,,,,,,,sand,sand,,,sand,,sand,"{'gtceu:granitic_mineral_sand_indicator': 2, 'gtceu:cassiterite_sand_indicator': 1}, 14, 35, 1, 0"
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+calcium_evaporite_basin,disc_vein,calcite 60 / gypsum 40,-20,1,✔️,✔️,90,0.3,25,5,,,,,,,"{""type"": ""tfc:climate"", ""max_groundwater"": 150, ""min_temperature"": 18}",,,,,,,,,,,,,,,,,,,,,,✔️,✔️,✔️,✔️,✔️,✔️,✔️,"{'gtceu:calcite_indicator': 3, 'gtceu:gypsum_indicator': 2}, 14, 35, 1, 0"
+palygorskite_basin,disc_vein,fullers_earth 70 / glauconite_sand 30,-20,1,✔️,✔️,90,0.3,25,5,,,,,,,"{""type"": ""tfc:climate"", ""max_groundwater"": 150, ""min_temperature"": 18}",,,,,,,,,,,,,,,,,,,,,,✔️,✔️,✔️,✔️,✔️,✔️,✔️,
+salts_evaporite_basin,disc_vein,salt 60 / rock_salt 40,-20,1,✔️,✔️,90,0.3,25,5,,,,,,,"{""type"": ""tfc:climate"", ""max_groundwater"": 150, ""min_temperature"": 18}",,,,,,,,,,,,,,,,,,,,,,✔️,✔️,✔️,✔️,✔️,✔️,✔️,"{'gtceu:salt_indicator': 3, 'gtceu:rock_salt_indicator': 2}, 14, 35, 1, 0"
+trona_borax_basin,disc_vein,trona 60 / borax 40,-20,1,✔️,✔️,120,0.3,25,5,,,,,,,"{""type"": ""tfc:climate"", ""max_groundwater"": 150, ""min_temperature"": 18}",,,,,,,,,,,,,,,,,,,,,,✔️,✔️,✔️,✔️,✔️,✔️,✔️,"{'gtceu:trona_indicator': 3, 'gtceu:borax_indicator': 2}, 14, 35, 1, 0"
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+gabbro_kimberlite,pipe_vein,diamond 100,-64,100,,,80,0.15,,60,5,"5,13","0,2",0,,,,,,,,,,,,,,,,,,,,,,,✔️,,,,,,,,,
+marble_ruby_belt,disc_vein,|| gtceu:marble_ruby_ore 6 / tfc:rock/raw/marble 94,-40,-4,✔️,✔️,40,1,50,5,,,,,,collisional_mountains,,,,,,,,,✔️,✔️,✔️,✔️,✔️,✔️,✔️,✔️,✔️,✔️,,✔️,✔️,✔️,,,,,,,,
+alluvial_amethyst,disc_vein,amethyst 100,40,60,,,80,0.2,8,4,,,,,,river,,✔️,✔️,✔️,✔️,✔️,✔️,✔️,✔️,✔️,✔️,✔️,✔️,✔️,,,,,✔️,,,,,,,,,,,
+alluvial_opal,disc_vein,opal 100,40,60,,,80,0.2,8,4,,,,,,river,,✔️,✔️,✔️,✔️,✔️,✔️,✔️,,,,,,,✔️,✔️,✔️,✔️,✔️,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+high_cassiterite,cluster_vein,cassiterite 100,-30,1,✔️,,90,0.2,20,,,,,,,montane,,,,,,,,,,,,,,,✔️,✔️,✔️,✔️,✔️,✔️,✔️,✔️,,,,,,,,"{'tfc:ore/small_cassiterite': 1}, 14, 35, 1, 0"
+high_galena,cluster_vein,galena 60 / tfinfinity:acanthite 30 / silver 10,-30,1,✔️,,90,0.2,20,,,,,,,montane,,,,,,,,,,,,,,,✔️,✔️,✔️,✔️,✔️,✔️,✔️,✔️,,,,,,,,"{'gtceu:galena_indicator': 1}, 14, 35, 1, 1"
+high_gold,cluster_vein,gold 100,-30,1,✔️,,120,0.2,20,,,,,,,montane,,,,,,,,,,,,,,,✔️,✔️,✔️,✔️,✔️,✔️,✔️,✔️,,,,,,,,"{'tfc:ore/small_native_gold': 1}, 14, 35, 1, 0"
+high_silver,cluster_vein,silver 100,-30,1,✔️,,120,0.2,20,,,,,,,montane,,,,,,,,,✔️,,,,✔️,,✔️,✔️,✔️,✔️,✔️,✔️,,✔️,,,,,,,,"{'tfc:ore/small_native_silver': 1}, 14, 35, 1, 0"
+high_sulfur,disc_vein,sulfur 100,70,200,,,30,0.35,20,5,,,,,,volcanic,,,,,,,,,✔️,✔️,✔️,✔️,✔️,✔️,✔️,✔️,✔️,✔️,✔️,✔️,✔️,✔️,,,,,,,,
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+normal_coal,disc_vein,|| tfc:bituminous_coal 100,-40,-10,✔️,✔️,240,0.4,40,3,,,,,,,,✔️,✔️,✔️,✔️,✔️,✔️,✔️,,,,,,,,,,,,,,,sandstone,sandstone,sandstone,sandstone,sandstone,sandstone,sandstone,
+normal_anthracite,disc_vein,|| tfinfinity:anthracite 100,-80,-20,✔️,,270,0.35,35,3,,,,,,,,✔️,✔️,✔️,✔️,✔️,✔️,✔️,,,✔️,,,✔️,,,,,,,,,sandstone,sandstone,sandstone,sandstone,sandstone,sandstone,sandstone,
+normal_graphite,disc_vein,graphite 100,-90,-30,✔️,,190,0.3,25,3,,,,,,,,,,,,,,,✔️,✔️,,✔️,✔️,,,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+normal_alunite,disc_vein,alunite 60 / nether_quartz 30 / opal 10,10,70,,,160,0.25,20,5,,,,,,volcanic,,,,,,,,,,,,,,,✔️,✔️,✔️,✔️,✔️,,,,,,,,,,,
+normal_asbestos,cluster_vein,asbestos 100,10,70,,,160,0.3,20,,,,,,,volcanic,,,,,,,,,,,,,,,✔️,✔️,✔️,✔️,✔️,✔️,✔️,✔️,,,,,,,,"{'gtceu:asbestos_indicator': 1}, 24, 35, 1, 0"
+normal_banded_iron,disc_vein,hematite 60 / magnetite 40,10,70,,,180,0.25,25,10,,,,,,,,✔️,✔️,✔️,✔️,✔️,✔️,✔️,✔️,✔️,✔️,✔️,✔️,✔️,,,,,,,,,,,,,,,,"{'tfc:ore/small_hematite': 2, 'tfc:ore/small_magnetite': 1}, 24, 35, 1, 0"
+normal_tropical_bauxite,disc_vein,bauxite 60 / hematite 30 / goethite 10,10,70,,,240,0.25,25,10,,,,,,,"{""type"": ""tfc:climate"", ""min_groundwater"": 300, ""min_temperature"": 18}",✔️,✔️,✔️,✔️,✔️,✔️,✔️,,,,,,,,,,,,,,,,,,,,,,"{'gtceu:bauxite_indicator': 4, 'tfc:ore/small_hematite': 1}, 24, 35, 1, 0"
+normal_porphyry_copper,pipe_vein,chalcopyrite 40 / chalcocite 25 / copper 10 / pyrite 25,-30,70,,,180,0.3,,60,10,"7,20","2,5",0,,,,,,,,,,,,,,,,,✔️,✔️,✔️,✔️,✔️,✔️,✔️,✔️,,,,,,,,"{'gtceu:chalcopyrite_indicator': 2, 'gtceu:chalcocite_indicator': 1}, 24, 35, 1, 0"
+normal_diatomite_karst,disc_vein,diatomite 60 / gypsum 24 / sulfur 16,10,70,,,240,0.3,20,5,,,,,,,,✔️,,,,✔️,✔️,,,✔️,,,,,,,,,,,,,,,,,,,,"{'gtceu:diatomite_indicator': 3, 'gtceu:gypsum_indicator': 1}, 24, 35, 1, 0"
+normal_stibnite_electrum,pipe_vein,gold 35 / silver 35 / stibnite 30,-30,70,,,200,0.25,,60,10,"7,20","2,5",0,,,,,,,,,,,,,,,,,,,,,,✔️,✔️,✔️,,,,,,,,"{'tfc:ore/small_native_gold': 2, 'tfc:ore/small_native_silver': 2, 'gtceu:stibnite_indicator': 1}, 24, 35, 1, 0"
+normal_kyanite,disc_vein,kyanite 100,-30,70,,,200,0.25,20,5,,,,,,,,,,,,,,,✔️,✔️,,✔️,✔️,,,,,,,,,,,,,,,,,"{'gtceu:kyanite_indicator': 1}, 24, 35, 1, 0"
+normal_nickel_cobalt_copper,disc_vein,pentlandite 50 / cobaltite 30 / chalcopyrite 20,-30,70,,,240,0.25,25,10,,,,,,,,,,,,,,,✔️,✔️,,✔️,✔️,,✔️,✔️,✔️,✔️,,✔️,✔️,✔️,,,,,,,,"{'gtceu:pentlandite_indicator': 5, 'gtceu:cobaltite_indicator': 3, 'gtceu:chalcopyrite_indicator': 2}, 24, 35, 1, 0"
+normal_red_garnet,disc_vein,almandine 40 / pyrope 25 / red_garnet 20 / spessartine 15,10,70,,,160,0.3,15,10,,,,,,,,,,,,,,,✔️,✔️,✔️,✔️,✔️,✔️,,,,,,,,,,,,,,,,
+normal_yellow_garnet,disc_vein,grossular 40 / andradite 30 / yellow_garnet 25 / uvarovite 5,10,70,,,200,0.3,15,10,,,,,,,,,,,,,,,✔️,✔️,✔️,✔️,✔️,✔️,,,,,,,,,,,,,,,,
+normal_quartz_barite,disc_vein,quartzite 50 / nether_quartz 25 / barite 25,10,70,,,240,0.2,20,10,,,,,,,,✔️,✔️,✔️,✔️,✔️,✔️,✔️,,,,,,,✔️,✔️,✔️,✔️,✔️,,,,,,,,,,,
+normal_zeolite,disc_vein,zeolite 30 / calcite 30 / fullers_earth 20 / glauconite_sand 10,10,70,,,180,0.25,20,5,,,,,,volcanic,,,,,,,,,,,,,,,,✔️,,,,,,,,,,,,,,"{'gtceu:fullers_earth_indicator': 1, 'gtceu:zeolite_indicator': 1}, 24, 35, 1, 0"
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+deep_apatite,disc_vein,apatite 50 / tricalcium_phosphate 35 / pyrochlore 15,-50,20,,,240,0.3,20,10,,,,,,,,,,,,,,,,,,,,,,,,,,✔️,✔️,✔️,,,,,,,,
+deep_bismuth,cluster_vein,tfinfinity:bismuthinite 40 / tfinfinity:arsenopyrite 25 / gold 20 / pyrite 15,-50,20,,,240,0.3,30,,,,,,,,,,,,,,,,,,,,,,,,,,,✔️,✔️,✔️,,,,,,,,"{'tfc:ore/small_bismuthinite': 2, 'tfinfinity:arsenopyrite_indicator': 1}, 0, 35, 1, 5"
+deep_coltan_deposit,cluster_vein,cassiterite 30 / tfinfinity:columbite 30 / tantalite 30 / monazite 10,-50,20,,,300,0.2,30,,,,,,,,,,,,,,,,,,,,,,,,,,,✔️,✔️,✔️,,,,,,,,"{'tfc:ore/small_cassiterite': 3, 'tfinfinity:columbite_indicator': 1, 'gtceu:tantalite_indicator': 1}, 0, 35, 1, 5"
+deep_chrome_garnet,cluster_vein,chromite 30 / talc 40 / yellow_garnet 25 / uvarovite 5,-50,20,,,300,0.25,30,,,,,,,,,,,,,,,,✔️,✔️,✔️,✔️,✔️,,,,,,,,,,,,,,,,,"{'gtceu:talc_indicator': 4, 'gtceu:chromite_indicator': 3}, 0, 35, 1, 5"
+deep_magnesiochromite,cluster_vein,chromite 40 / magnesite 30 / olivine 30,-50,20,,,270,0.25,30,,,,,,,,,,,,,,,,,,,,,,,✔️,,,,,✔️,,,,,,,,,"{'gtceu:chromite_indicator': 2, 'gtceu:olivine_indicator': 1}, 0, 35, 1, 5"
+deep_lct_deposit,cluster_vein,spodumene 30 / pollucite 30 / tantalite 20 / emerald 20,-50,20,,,300,0.2,30,,,,,,,,,,,,,,,,,,,,,,,,,,,✔️,✔️,✔️,,,,,,,,"{'gtceu:spodumene_indicator': 1, 'gtceu:pollucite_indicator': 1}, 0, 35, 1, 5"
+deep_petalite_deposit,cluster_vein,tfinfinity:petalite 30 / lepidolite 30 / pollucite 20 / tfinfinity:fluorite 20,-50,20,,,320,0.2,30,,,,,,,,,,,,,,,,,,,,,,,,,,,✔️,✔️,✔️,,,,,,,,"{'tfinfinity:petalite_indicator': 1, 'gtceu:lepidolite_indicator': 1}, 0, 35, 1, 5"
+deep_pge_deposit,disc_vein,cooperite 30 / tfinfinity:sperrylite 30 / platinum 20 / palladium 20,-50,20,,,400,0.2,25,6,,,,,,,,,,,,,,,,,,,,,,,,,,✔️,✔️,✔️,,,,,,,,"{'gtceu:platinum_indicator': 1, 'gtceu:palladium_indicator': 1}, 0, 35, 1, 5"
+deep_pitchblende_deposit,cluster_vein,pitchblende 40 / uraninite 25 / amethyst 20 / tfinfinity:thorite 15,-50,20,,,360,0.2,30,,,,,,,,,,,,,,,,,,,,,,,,,,,✔️,✔️,✔️,,,,,,,,"{'gtceu:pitchblende_indicator': 2, 'gtceu:amethyst_indicator': 3}, 0, 35, 1, 5"
+deep_red_garnet,pipe_vein,pyrope 35 / almandine 35 / red_garnet 30,-50,20,,,270,0.2,,80,10,"7,20","2,5",0,,,,,,,,,,,✔️,✔️,✔️,✔️,✔️,✔️,,,,,,,,,,,,,,,,
+deep_manganese,disc_vein,pyrolusite 45 / spessartine 30 / mica 25,-50,20,,,280,0.25,20,10,,,,,,,,,,,,,,,✔️,✔️,✔️,✔️,✔️,,,,,,,,,,,,,,,,,"{'gtceu:pyrolusite_indicator': 1, 'gtceu:mica_indicator': 2}, 0, 35, 1, 5"
+deep_corundum,pipe_vein,sapphire 50 / green_sapphire 50,-50,20,,,270,0.2,,80,10,"7,20","2,5",0,,,,,,,,,,,,,,,,,✔️,✔️,✔️,✔️,✔️,✔️,✔️,✔️,,,,,,,,
+deep_redstone,cluster_vein,redstone 40 / sulfur 30 / cinnabar 30,-50,20,,,240,0.2,30,,,,,,,,,,,,,,,,✔️,✔️,✔️,✔️,✔️,,,,,,,✔️,✔️,✔️,,,,,,,,"{'gtceu:redstone_indicator': 1}, 0, 35, 1, 5"
+deep_sodalite_deposit,pipe_vein,lazurite 30 / sodalite 25 / lapis 25 / calcite 20,-50,20,,,240,0.3,,80,10,"7,20","2,5",0,,,,,,,,,,,✔️,✔️,✔️,✔️,✔️,,,,,,,,,,,,,,,,,
+deep_thorianite_deposit,cluster_vein,tfinfinity:thorianite 40 / uraninite 25 / emerald 20 / tfinfinity:thorite 15,-50,20,,,320,0.2,25,,,,,,,,,,,,,,,,,,,,,,,,,,,✔️,✔️,✔️,,,,,,,,"{'tfinfinity:thorianite_indicator': 1}, 0, 35, 1, 5"
+deep_rare_earth_deposit,cluster_vein,ilmenite 35 / monazite 35 / tfinfinity:zircon 15 / tfinfinity:hafnon 15,-50,20,,,360,0.2,25,,,,,,,,,,,,,,,,,,,,,,,,,,,✔️,✔️,✔️,,,,,,,,"{'gtceu:ilmenite_indicator': 1, 'gtceu:monazite_indicator': 1}, 0, 35, 1, 5"
+deep_copper_sulfides,pipe_vein,chalcocite 40 / bornite 30 / topaz 20 / molybdenite 10,-50,20,,,270,0.2,,80,10,"7,20","2,5",0,,,,,,,,,,,✔️,✔️,✔️,✔️,✔️,✔️,,,,,,✔️,✔️,✔️,,,,,,,,"{'gtceu:chalcocite_indicator': 2, 'gtceu:bornite_indicator': 1}, 0, 35, 1, 5"
+deep_vanadium_titanomagnetite,disc_vein,magnetite 40 / vanadium_magnetite 30 / ilmenite 15 / gold 15,-50,20,,,270,0.35,30,10,,,,,,,,,,,,,,,✔️,✔️,,✔️,✔️,,,,,,,✔️,✔️,✔️,,,,,,,,"{'tfc:ore/small_magnetite': 2, 'gtceu:vanadium_magnetite_indicator': 1, 'tfc:ore/small_native_gold': 1}, 0, 35, 1, 5"
+deep_molybdate_tungstate,disc_vein,powellite 30 / scheelite 30 / tfinfinity:wolframite 20 / tfinfinity:fluorite 20,-50,20,,,320,0.2,25,10,,,,,,,,,,,,,,,,,,,,,,,,,,✔️,✔️,✔️,,,,,,,,"{'gtceu:powellite_indicator': 1, 'gtceu:scheelite_indicator': 1}, 0, 35, 1, 5"
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+sedex_sulfide_deposit,disc_vein,sphalerite 60 / galena 30 / pyrite 10,10,70,,,210,0.3,25,10,,,,,,,,✔️,✔️,✔️,✔️,✔️,✔️,✔️,,,,,,,,,,,,,,,,,,,,,,"{'tfc:ore/small_sphalerite': 2, 'gtceu:galena_indicator': 1}, 24, 35, 1, 0"
+volcanogenic_massive_sulfide,disc_vein,chalcopyrite 40 / sphalerite 30 / pyrite 20 / galena 10,10,70,,,210,0.3,25,10,,,,,,volcanic,,,,,,,,,,,,,,,✔️,✔️,✔️,✔️,✔️,,,,,,,,,,,"{'gtceu:chalcopyrite_indicator': 4, 'tfc:ore/small_sphalerite': 3}, 24, 35, 1, 0"
+polar_cryolite,cluster_vein,tfinfinity:cryolite 50 / tfinfinity:fluorite 25 / blue_topaz 15 / galena 10,10,70,,,270,0.25,25,,,,,,,,"{""type"": ""tfc:climate"", ""max_temperature"": -12}",,,,,,,,,,,,,,,,,,,✔️,✔️,✔️,,,,,,,,"{'gtceu:galena_indicator': 3, 'gtceu:blue_topaz_indicator': 2, 'tfinfinity:cryolite_indicator': 1}, 24, 35, 1, 0"
+deep_polar_cryolite,cluster_vein,tfinfinity:cryolite 50 / tfinfinity:fluorite 25 / blue_topaz 15 / galena 10,-50,20,,,240,0.35,40,,,,,,,,"{""type"": ""tfc:climate"", ""max_temperature"": -12}",,,,,,,,,,,,,,,,,,,✔️,✔️,✔️,,,,,,,,"{'tfinfinity:cryolite_indicator': 3, 'gtceu:galena_indicator': 1}, 0, 35, 1, 5"

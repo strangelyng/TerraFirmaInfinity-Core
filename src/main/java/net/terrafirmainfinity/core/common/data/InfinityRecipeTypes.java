@@ -8,8 +8,6 @@ import com.gregtechceu.gtceu.api.machine.feature.ITieredMachine;
 import com.gregtechceu.gtceu.api.machine.steam.SimpleSteamMachine;
 import com.gregtechceu.gtceu.api.recipe.GTRecipeType;
 import com.gregtechceu.gtceu.api.recipe.gui.GTRecipeTypeUILayout;
-import com.gregtechceu.gtceu.api.registry.GTRegistries;
-import com.gregtechceu.gtceu.api.registry.registrate.builder.GTRecipeTypeBuilder;
 import com.gregtechceu.gtceu.api.registry.registrate.entry.GTRecipeTypeEntry;
 import com.gregtechceu.gtceu.common.data.GTRecipeTypes;
 import com.gregtechceu.gtceu.common.data.GTSoundEntries;
@@ -17,11 +15,9 @@ import com.gregtechceu.gtceu.common.mui.GTGuiTextures;
 import com.gregtechceu.gtceu.common.mui.GTMuiWidgets;
 import com.tterrag.registrate.providers.ProviderType;
 import net.minecraft.util.Mth;
-import net.terrafirmainfinity.core.InfinityCore;
 import net.terrafirmainfinity.core.common.ui.InfinityGuiTextures;
 
-import static com.gregtechceu.gtceu.common.data.GTRecipeTypes.ELECTRIC;
-import static com.gregtechceu.gtceu.common.data.GTRecipeTypes.MULTIBLOCK;
+import static com.gregtechceu.gtceu.common.data.GTRecipeTypes.*;
 import static net.terrafirmainfinity.core.InfinityCore.InfinityRegistrate;
 import static net.terrafirmainfinity.core.InfinityCore.MOD_ID;
 
@@ -124,16 +120,16 @@ public class InfinityRecipeTypes {
             .setEUIO(IO.IN)
             .register();
 
-    public static void init() {
-        /*
-        for (GTRecipeTypeEntry recipeTypeEntry : new GTRecipeTypeEntry[] {
-                ROASTER_RECIPE, ELECTROLYTIC_CELL_RECIPE, SPIRAL_SEPARATOR_RECIPE, METALLURGICAL_CONVERTER_RECIPE, FLASH_SMELTING_RECIPE
-        }) {
-            recipeTypeEntry.setEUIO(IO.IN);
-        }
+    private static void setMaxIOSize(GTRecipeType type, int itemInputs, int itemOutputs, int fluidInputs, int fluidOutputs) {
+        type.maxInputs.put(ItemRecipeCapability.CAP, itemInputs);
+        type.maxOutputs.put(ItemRecipeCapability.CAP, itemOutputs);
+        type.maxInputs.put(FluidRecipeCapability.CAP, fluidInputs);
+        type.maxOutputs.put(FluidRecipeCapability.CAP, fluidOutputs);
+    }
 
+    public static void init() {
+    /*
         // TODO: Arc Furnace Overhaul
-        GTRecipeTypes.ARC_FURNACE_RECIPES.setMaxIOSize(4, 9, 1, 1);
         var type = GTRecipeTypes.ARC_FURNACE_RECIPES.get();
         var builder = new GTRecipeTypeUILayout.Builder(type);
         builder.setProgressBar(GTGuiTextures.PROGRESS_ARROW)
@@ -158,7 +154,6 @@ public class InfinityRecipeTypes {
         GTRecipeTypes.ARC_FURNACE_RECIPES.setUiLayout(builder.build());
 
         // TODO: Electrolyzer Overhaul
-        GTRecipeTypes.ELECTROLYZER_RECIPES.setMaxIOSize(4, 3, 1, 3);
         type = GTRecipeTypes.ELECTROLYZER_RECIPES.get();
         builder = new GTRecipeTypeUILayout.Builder(type);
         builder.setProgressBar(GTGuiTextures.PROGRESS_EXTRACT)
@@ -174,6 +169,12 @@ public class InfinityRecipeTypes {
                 .setItemSlotsOverlay(IO.IN, 2, 3, GTGuiTextures.CANISTER_OVERLAY)
                 .setFluidSlotOverlay(IO.IN, 0, GTGuiTextures.LIGHTNING_OVERLAY_2);
         GTRecipeTypes.ELECTROLYZER_RECIPES.setUiLayout(builder.build());
-         */
+    */
+    }
+
+    public static void configure() {
+        setMaxIOSize(ARC_FURNACE_RECIPES.get(), 4, 9, 1, 1);
+
+        setMaxIOSize(ELECTROLYZER_RECIPES.get(), 4, 3, 1, 3);
     }
 }

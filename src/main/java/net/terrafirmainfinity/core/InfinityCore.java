@@ -1,12 +1,12 @@
 package net.terrafirmainfinity.core;
 
-import com.gregtechceu.gtceu.api.capability.recipe.ItemRecipeCapability;
 import com.gregtechceu.gtceu.api.data.chemical.material.event.PostMaterialEvent;
 import com.gregtechceu.gtceu.api.registry.registrate.GTRegistrate;
-import com.gregtechceu.gtceu.common.data.GTRecipeTypes;
 import com.tterrag.registrate.util.entry.RegistryEntry;
+import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.CreativeModeTab;
+import net.neoforged.bus.api.EventPriority;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.event.lifecycle.FMLLoadCompleteEvent;
 import net.neoforged.fml.loading.FMLEnvironment;
@@ -97,22 +97,18 @@ public class InfinityCore {
         InfinityMaterials.modifyMaterials();
     }
 
+    @SubscribeEvent(priority = EventPriority.LOWEST)
+    public void configureRecipeTypes(RegisterEvent event) {
+        if (event.getRegistryKey() == Registries.RECIPE_TYPE) {
+            InfinityRecipeTypes.configure();
+        }
+    }
+
     @SubscribeEvent
     private void commonSetup(FMLCommonSetupEvent event) {
         event.enqueueWork(() -> {
 
         });
-//        GTRecipeTypes.FLUID_HEATER_RECIPES.value().maxOutputs.put(ItemRecipeCapability.CAP, 1);
-//
-//        GTRecipeTypes.ARC_FURNACE_RECIPES.value().maxInputs.put(ItemRecipeCapability.CAP, 4);
-//        GTRecipeTypes.ARC_FURNACE_RECIPES.value().maxInputs.put(FluidRecipeCapability.CAP, 1);
-//        GTRecipeTypes.ARC_FURNACE_RECIPES.value().maxOutputs.put(ItemRecipeCapability.CAP, 9);
-//        GTRecipeTypes.ARC_FURNACE_RECIPES.value().maxOutputs.put(FluidRecipeCapability.CAP, 1);
-//
-//        GTRecipeTypes.ELECTROLYZER_RECIPES.value().maxInputs.put(ItemRecipeCapability.CAP, 4);
-//        GTRecipeTypes.ELECTROLYZER_RECIPES.value().maxInputs.put(FluidRecipeCapability.CAP, 1);
-//        GTRecipeTypes.ELECTROLYZER_RECIPES.value().maxOutputs.put(ItemRecipeCapability.CAP, 3);
-//        GTRecipeTypes.ELECTROLYZER_RECIPES.value().maxOutputs.put(FluidRecipeCapability.CAP, 3);
     }
 
     @SubscribeEvent

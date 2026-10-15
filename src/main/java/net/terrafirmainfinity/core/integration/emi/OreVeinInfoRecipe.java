@@ -220,8 +220,10 @@ public class OreVeinInfoRecipe implements EmiRecipe {
 
     private int createVeinInfoText(WidgetHolder holder, int offsetY) {
         var lineH = Minecraft.getInstance().font.lineHeight;
-        holder.addText(Component.translatable("tfinfinity.emi.ore_veins.rarity", rarity).append(rarityText()), 2, offsetY, 0, false);
-        offsetY += lineH;
+        if (rarity != 0) {
+            holder.addText(Component.translatable("tfinfinity.emi.ore_veins.rarity", rarity).append(rarityText()), 2, offsetY, 0, false);
+            offsetY += lineH;
+        }
         holder.addText(Component.translatable("tfinfinity.emi.ore_veins.density", (int) (density * 100)).append("%"), 2, offsetY, 0, false);
         offsetY += lineH;
 

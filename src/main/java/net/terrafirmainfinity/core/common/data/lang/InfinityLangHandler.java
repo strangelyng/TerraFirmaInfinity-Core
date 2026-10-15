@@ -9,6 +9,7 @@ import net.terrafirmainfinity.core.common.data.InfinityTagPrefix;
 import net.terrafirmainfinity.core.integration.emi.HotSpringsDictionary;
 import net.terrafirmainfinity.core.integration.emi.OreVeinDictionary;
 import net.terrafirmainfinity.core.integration.emi.OreVeinInfoRecipe;
+import net.terrafirmainfinity.core.integration.emi.VolcanoFissureDictionary;
 import net.terrafirmainfinity.core.util.InfinityUtil;
 
 import java.util.Locale;
@@ -137,6 +138,7 @@ public class InfinityLangHandler extends LangHandler {
         provider.add("tfinfinity.ore_vein_tag.atoll", "Atolls");
 
         provider.add("tfinfinity.ore_vein_tag.hot_springs", "Hot Springs");
+        provider.add("tfinfinity.ore_vein_tag.volcanoes", "Volcanoes");
 
         provider.add("tfinfinity.emi.ore_veins.rainfall", "Rainfall: ");
         provider.add("tfinfinity.emi.ore_veins.rainfall_and_below", "≤ %dmm");
@@ -156,6 +158,9 @@ public class InfinityLangHandler extends LangHandler {
         provider.add("tfinfinity.ore_vein.hot_springs.emi.0", "Found beneath hot springs,");
         provider.add("tfinfinity.ore_vein.hot_springs.emi.1", "active springs are denser.");
 
+        provider.add("tfinfinity.ore_vein.volcano_fissures.emi.0", "Found beneath volcanic");
+        provider.add("tfinfinity.ore_vein.volcano_fissures.emi.1", "craters.");
+
         for (OreVeinInfoRecipe veinInfoRecipe : OreVeinDictionary.RECIPES) {
             String veinName = veinInfoRecipe.getKey();
 
@@ -167,6 +172,27 @@ public class InfinityLangHandler extends LangHandler {
 
             provider.add("tfinfinity.ore_vein." + veinName, InfinityUtil.snakecaseToTitle(veinName));
         }
+
+        for (OreVeinInfoRecipe volcanoFissureInfoRecipe : VolcanoFissureDictionary.RECIPES) {
+            String veinName = volcanoFissureInfoRecipe.getKey();
+
+            provider.add("tfinfinity.ore_vein." + veinName, InfinityUtil.snakecaseToTitle(veinName));
+        }
+
+        replace(provider, "tfinfinity.ore_vein.deep_lct_deposit", "Deep Li-Ce-Ta Deposit");
+        replace(provider, "tfinfinity.ore_vein.deep_pge_deposit", "Deep PGE Deposit");
+        replace(provider, "tfinfinity.ore_vein.epithermal_gold_silver", "Epithermal Gold-Silver");
+        replace(provider, "tfinfinity.ore_vein.normal_nickel_cobalt_copper", "Normal Ni-Co-Cu");
+        replace(provider, "tfinfinity.ore_vein.normal_quartz_barite", "Normal Quartz-Barite");
+        replace(provider, "tfinfinity.ore_vein.normal_stibnite_electrum", "Normal Stibnite-Electrum");
+        replace(provider, "tfinfinity.ore_vein.sedex_sulfide_deposit", "SEDEX Sulfide Deposit");
+        replace(provider, "tfinfinity.ore_vein.tin_tungsten_fissure", "Tin-Tungsten Fissure");
+        replace(provider, "tfinfinity.ore_vein.trona_borax_basin", "Trona-Borax Basin");
+
+        replace(provider, "tfinfinity.ore_vein.normal_diatomite_karst", "Normal Diatomite (Karst)");
+        replace(provider, "tfinfinity.ore_vein.normal_tropical_bauxite", "Normal Bauxite (Tropical)");
+        replace(provider, "tfinfinity.ore_vein.surface_bauxite_karst", "Surface Bauxite (Karst)");
+        replace(provider, "tfinfinity.ore_vein.surface_bauxite_tropical", "Surface Bauxite (Tropical)");
     }
 
     public static void replaceToolLang(RegistrateLangProvider provider, String id, String name) {

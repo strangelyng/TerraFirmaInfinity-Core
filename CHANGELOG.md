@@ -111,6 +111,7 @@ This version is a massive restructuring, that began with a complete wipe of the 
     - Tantalum to Tantalite
   - Modified Material Components of Alunite, Sodalite, Lazurite, and Lepidolite for improved accuracy 
   - Modified Material Components of Corundum (Ruby, Sapphire) to reference new material Alumina
+- Adjusted IO amounts for Arc Furnace and Electrolyzer recipes
 - Reduced Quantum Tank, Quantum Chest default capacities
 - Remove secondary material info from Wrench and Wirecutter tool heads
 - Disabled Ore Block recipes as they clutter recipe viewers and the blocks are unobtainable

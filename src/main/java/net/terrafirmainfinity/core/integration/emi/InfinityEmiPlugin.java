@@ -27,5 +27,8 @@ public class InfinityEmiPlugin implements EmiPlugin {
 
         Arrays.stream(HotSpringsDictionary.RECIPES)
                 .forEach(registry::addRecipe);
+
+        Arrays.stream(VolcanoFissureDictionary.RECIPES)
+                .forEach(registry::addRecipe);
     }
 }
