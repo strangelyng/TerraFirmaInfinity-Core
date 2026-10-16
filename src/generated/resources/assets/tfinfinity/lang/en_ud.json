@@ -274,5 +274,12 @@
   "tfinfinity.ore_vein_tag.river": "sǝʞɐꞀ puɐ sɹǝʌıᴚ",
   "tfinfinity.ore_vein_tag.swamp": "spuɐןʍoꞀ puɐ sdɯɐʍS",
   "tfinfinity.ore_vein_tag.volcanic": "ɔıuɐɔןoΛ",
-  "tfinfinity.ore_vein_tag.volcanoes": "sǝouɐɔןoΛ"
+  "tfinfinity.ore_vein_tag.volcanoes": "sǝouɐɔןoΛ",
+  "tfinfinity.toast.ore_prospector_message": "%s :uoıʇɔǝɹıp sıɥʇ uı sʞɔoןq9§ %s uıɥʇıʍ punoɟ sǝɹO",
+  "tfinfinity.toast.ore_prospector_none": "˙ǝbuɐɹ uı punoɟ sǝɹo oN",
+  "tfinfinity.tooltip.ore_prospector_count": "˙sʇunoɔ ǝɹo ʎɐןdsıp ןןıʍ ɹoʇɔǝdsoɹd sıɥ⟘",
+  "tfinfinity.tooltip.ore_prospector_mode_block": "ʞɔoןq-ɹǝd",
+  "tfinfinity.tooltip.ore_prospector_mode_vein": "uıǝʌ-ɹǝd",
+  "tfinfinity.tooltip.ore_prospector_stats": "˙%s x %s :uoıʇɔǝS ssoɹƆ '%s :ǝbuɐᴚ uɐɔS",
+  "tfinfinity.tooltip.ore_prospector_xray": "˙sʞɔoןq ǝɹo ɟo ʍǝıʌ ʎɐɹ-x %s ɐ ʎɐןdsıp ןןıʍ ɹoʇɔǝdsoɹd sıɥ⟘"
 }

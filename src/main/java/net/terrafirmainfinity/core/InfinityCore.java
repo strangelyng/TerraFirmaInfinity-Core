@@ -11,10 +11,13 @@ import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.event.lifecycle.FMLLoadCompleteEvent;
 import net.neoforged.fml.loading.FMLEnvironment;
 import net.neoforged.neoforge.capabilities.RegisterCapabilitiesEvent;
+import net.neoforged.neoforge.network.event.RegisterPayloadHandlersEvent;
+import net.neoforged.neoforge.network.registration.PayloadRegistrar;
 import net.neoforged.neoforge.registries.RegisterEvent;
 import net.terrafirmainfinity.core.client.InfinityCoreClient;
 import net.terrafirmainfinity.core.common.InfinityBlocks;
 import net.terrafirmainfinity.core.common.InfinityItems;
+import net.terrafirmainfinity.core.common.InfinityParticles;
 import net.terrafirmainfinity.core.common.data.*;
 import net.terrafirmainfinity.core.common.data.material.InfinityElements;
 import net.terrafirmainfinity.core.common.data.material.InfinityMaterialIconSet;
@@ -22,6 +25,9 @@ import net.terrafirmainfinity.core.common.data.material.InfinityMaterialFlags;
 import net.terrafirmainfinity.core.common.data.material.InfinityMaterials;
 import net.terrafirmainfinity.core.common.data.InfinityCoreDatagen;
 import net.terrafirmainfinity.core.common.machine.InfinityMulti;
+import net.terrafirmainfinity.core.common.network.packets.OreHighlightPacket;
+import net.terrafirmainfinity.core.common.network.packets.OreHighlightVeinPacket;
+import net.terrafirmainfinity.core.config.InfinityConfig;
 import org.slf4j.Logger;
 
 import com.mojang.logging.LogUtils;
@@ -53,12 +59,32 @@ public class InfinityCore {
     public InfinityCore(IEventBus modBus, ModContainer modContainer) {
         InfinityCoreDatagen.init();
         modBus.register(this);
-        modContainer.registerConfig(ModConfig.Type.COMMON, InfinityConfig.SPEC);
+        modContainer.registerConfig(ModConfig.Type.CLIENT, InfinityConfig.CLIENT.spec());
+        modContainer.registerConfig(ModConfig.Type.SERVER, InfinityConfig.SERVER.spec());
         InfinityRegistrate.registerEventListeners(modBus);
+
+        InfinityParticles.init(modBus);
 
         if (FMLEnvironment.dist.isClient()) {
             InfinityCoreClient.init(modBus);
         }
+    }
+
+    @SubscribeEvent
+    public void registerPackets(RegisterPayloadHandlersEvent event) {
+        final PayloadRegistrar registrar = event.registrar("1");
+
+        registrar.playToClient(
+                OreHighlightPacket.TYPE,
+                OreHighlightPacket.CODEC,
+                OreHighlightPacket::handle
+        );
+
+        registrar.playToClient(
+                OreHighlightVeinPacket.TYPE,
+                OreHighlightVeinPacket.CODEC,
+                OreHighlightVeinPacket::handle
+        );
     }
 
     /**

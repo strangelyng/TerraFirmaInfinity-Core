@@ -7,8 +7,12 @@ import net.neoforged.api.distmarker.Dist;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.neoforge.client.event.RegisterColorHandlersEvent;
+import net.neoforged.neoforge.client.event.RegisterParticleProvidersEvent;
 import net.terrafirmainfinity.core.InfinityCore;
 import net.terrafirmainfinity.core.common.InfinityBlocks;
+import net.terrafirmainfinity.core.common.InfinityParticles;
+import net.terrafirmainfinity.core.common.particle.OreProspectorProvider;
+import net.terrafirmainfinity.core.common.particle.OreProspectorVeinProvider;
 
 @EventBusSubscriber(modid = InfinityCore.MOD_ID, value = Dist.CLIENT)
 public class ClientEventHandler {
@@ -21,5 +25,11 @@ public class ClientEventHandler {
         event.register(grassBlockColor, InfinityBlocks.BAUXITE_GRASS.get());
         event.register(grassBlockColor, InfinityBlocks.GARNIERITE_GRASS.get());
         event.register(grassBlockColor, InfinityBlocks.LIMONITE_GRASS.get());
+    }
+
+    @SubscribeEvent
+    public static void registerParticleProviders(RegisterParticleProvidersEvent event) {
+        event.registerSpriteSet(InfinityParticles.ORE_PROSPECTOR.get(), OreProspectorProvider::new);
+        event.registerSpriteSet(InfinityParticles.ORE_PROSPECTOR_VEIN.get(), OreProspectorVeinProvider::new);
     }
 }

@@ -274,5 +274,12 @@
   "tfinfinity.ore_vein_tag.river": "Rivers and Lakes",
   "tfinfinity.ore_vein_tag.swamp": "Swamps and Lowlands",
   "tfinfinity.ore_vein_tag.volcanic": "Volcanic",
-  "tfinfinity.ore_vein_tag.volcanoes": "Volcanoes"
+  "tfinfinity.ore_vein_tag.volcanoes": "Volcanoes",
+  "tfinfinity.toast.ore_prospector_message": "Ores found within %s §6blocks in this direction: %s",
+  "tfinfinity.toast.ore_prospector_none": "No ores found in range.",
+  "tfinfinity.tooltip.ore_prospector_count": "This prospector will display ore counts.",
+  "tfinfinity.tooltip.ore_prospector_mode_block": "per-block",
+  "tfinfinity.tooltip.ore_prospector_mode_vein": "per-vein",
+  "tfinfinity.tooltip.ore_prospector_stats": "Scan Range: %s, Cross Section: %s x %s.",
+  "tfinfinity.tooltip.ore_prospector_xray": "This prospector will display a %s x-ray view of ore blocks."
 }

@@ -98,6 +98,15 @@ public class InfinityLangHandler extends LangHandler {
         replaceToolLang(provider, "mv_screwdriver", "%s Screwdriver (MV)");
         replaceToolLang(provider, "ev_screwdriver", "%s Screwdriver (EV)");
 
+        // Prospecting
+        provider.add("tfinfinity.toast.ore_prospector_none", "No ores found in range.");
+        provider.add("tfinfinity.toast.ore_prospector_message", "Ores found within %s §6blocks in this direction: %s");
+
+        provider.add("tfinfinity.tooltip.ore_prospector_stats", "Scan Range: %s, Cross Section: %s x %s.");
+        provider.add("tfinfinity.tooltip.ore_prospector_count", "This prospector will display ore counts.");
+        provider.add("tfinfinity.tooltip.ore_prospector_xray", "This prospector will display a %s x-ray view of ore blocks.");
+        provider.add("tfinfinity.tooltip.ore_prospector_mode_vein", "per-vein");
+        provider.add("tfinfinity.tooltip.ore_prospector_mode_block", "per-block");
 
         // Machines & Recipe Types
         provider.add("tfinfinity.machine.roaster.tooltip", "§7Sulfide roast, anyone?");

@@ -1,0 +1,57 @@
+/*
+ * This class is adapted from TerraFirmaGreg-Core - Modern, which is licensed under LGPL-3.0
+ * A copy of the license can be found here:
+ * https://www.gnu.org/licenses/lgpl-3.0.en.html
+ */
+
+package net.terrafirmainfinity.core.client.renderer;
+
+import net.minecraft.client.Minecraft;
+import net.minecraft.core.BlockPos;
+import net.neoforged.api.distmarker.Dist;
+import net.neoforged.bus.api.SubscribeEvent;
+import net.neoforged.fml.common.EventBusSubscriber;
+import net.neoforged.neoforge.client.event.ClientTickEvent;
+import net.terrafirmainfinity.core.InfinityCore;
+import net.terrafirmainfinity.core.common.InfinityParticles;
+
+import java.util.ArrayList;
+import java.util.List;
+
+@EventBusSubscriber(modid = InfinityCore.MOD_ID, value = Dist.CLIENT)
+public class OreHighlightVeinRenderer {
+
+    private static final List<Highlight> highlights = new ArrayList<>();
+    private static final long HIGHLIGHT_DURATION_MS = 6_000;
+
+    public static void addVeinHighlights(List<BlockPos> positions) {
+        long expireTime = System.currentTimeMillis() + HIGHLIGHT_DURATION_MS;
+        Minecraft mc = Minecraft.getInstance();
+
+        synchronized (highlights) {
+            for (BlockPos pos : positions) {
+                highlights.add(new Highlight(pos, expireTime));
+
+                if (mc.level != null) {
+                    mc.level.addParticle(
+                            InfinityParticles.ORE_PROSPECTOR_VEIN.get(),
+                            pos.getX() + 0.5,
+                            pos.getY() + 0.5,
+                            pos.getZ() + 0.5,
+                            0, 0, 0);
+                }
+            }
+        }
+    }
+
+    @SubscribeEvent
+    public static void onClientTick(ClientTickEvent.Post event) {
+        long now = System.currentTimeMillis();
+
+        synchronized (highlights) {
+            highlights.removeIf(h -> h.expireTime < now);
+        }
+    }
+
+    private record Highlight(BlockPos pos, long expireTime) {}
+}
