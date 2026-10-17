@@ -10,6 +10,7 @@ public class InfinityCoreDatagen {
     public static void init() {
         InfinityRegistrate.addDataGenerator(ProviderType.BLOCK_TAGS, InfinityTagsHandler::initBlockTags);
         InfinityRegistrate.addDataGenerator(ProviderType.ITEM_TAGS, InfinityTagsHandler::initItemTags);
+        InfinityRegistrate.addDataGenerator(ProviderType.FLUID_TAGS, InfinityTagsHandler::initFluidTags);
         InfinityRegistrate.addDataGenerator(ProviderType.LANG, InfinityLangHandler::init);
     }
 }
