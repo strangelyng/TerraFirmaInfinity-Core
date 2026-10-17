@@ -28,6 +28,7 @@ import net.terrafirmainfinity.core.common.machine.InfinityMulti;
 import net.terrafirmainfinity.core.common.network.packets.OreHighlightPacket;
 import net.terrafirmainfinity.core.common.network.packets.OreHighlightVeinPacket;
 import net.terrafirmainfinity.core.config.InfinityConfig;
+import net.terrafirmainfinity.core.integration.create.CustomArmInteractionPoints;
 import org.slf4j.Logger;
 
 import com.mojang.logging.LogUtils;
@@ -116,6 +117,8 @@ public class InfinityCore {
 
         InfinityMulti.init();
         InfinityMachines.init();
+
+        CustomArmInteractionPoints.init();
     }
 
     @SubscribeEvent
