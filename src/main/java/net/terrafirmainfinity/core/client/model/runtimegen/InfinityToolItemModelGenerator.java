@@ -1,5 +1,7 @@
 package net.terrafirmainfinity.core.client.model.runtimegen;
 
+import com.google.common.collect.HashBasedTable;
+import com.google.common.collect.Table;
 import com.gregtechceu.gtceu.GTCEu;
 import com.gregtechceu.gtceu.api.data.chemical.material.info.MaterialIconSet;
 import com.gregtechceu.gtceu.api.item.tool.GTToolType;
@@ -20,11 +22,13 @@ public class InfinityToolItemModelGenerator {
 
     private static final Set<InfinityToolItemModelGenerator> MODELS = new HashSet<>();
 
+    private static final Table<GTToolType, MaterialIconSet, ResourceLocation> TOOL_ITEM_MODEL_CACHE = HashBasedTable.create();
+
     public static void reinitModels() {
         for (InfinityToolItemModelGenerator model : MODELS) {
             ResourceLocation itemId = BuiltInRegistries.ITEM.getKey(model.item);
             GTDynamicResourcePack.addItemModel(itemId,
-                    new DelegatedModel(getToolItemModelPath(model.iconSet, model.toolType)));
+                    new DelegatedModel(getToolItemModelPath(model.iconSet, model.toolType, true)));
         }
     }
 
@@ -42,7 +46,13 @@ public class InfinityToolItemModelGenerator {
         MODELS.add(new InfinityToolItemModelGenerator(item, toolType, iconSet));
     }
 
-    public static ResourceLocation getToolItemModelPath(@NotNull MaterialIconSet materialIconSet, GTToolType gtToolType) {
+    public static ResourceLocation getToolItemModelPath(@NotNull MaterialIconSet materialIconSet, GTToolType gtToolType, boolean doReadCache) {
+        if (doReadCache) {
+            if (TOOL_ITEM_MODEL_CACHE.contains(gtToolType, materialIconSet)) {
+                return TOOL_ITEM_MODEL_CACHE.get(gtToolType, materialIconSet);
+            }
+        }
+
         MaterialIconSet toolIconSet = materialIconSet;
         if (!toolIconSet.isRootIconset && GTCEu.isClientSide() && Minecraft.getInstance() != null &&
             Minecraft.getInstance().getResourceManager() != null) {
@@ -60,6 +70,8 @@ public class InfinityToolItemModelGenerator {
 
         ResourceLocation location = toolIconSet.id
                 .withPath(String.format("item/tools/%s/%s", toolIconSet.getName(), gtToolType.name));
+
+        TOOL_ITEM_MODEL_CACHE.put(gtToolType, materialIconSet, location);
 
         return location;
     }
