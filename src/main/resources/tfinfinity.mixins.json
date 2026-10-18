@@ -4,6 +4,7 @@
   "compatibilityLevel": "JAVA_21",
   "mixins": [
     "gtceu.GTMachineUtilsMixin",
+    "gtceu.GTToolItemMixin",
     "gtceu.OreRecipeHandlerMixin"
   ],
   "client": [
