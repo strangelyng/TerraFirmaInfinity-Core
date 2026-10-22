@@ -1,0 +1,22 @@
+{
+  "parent": "minecraft:block/block",
+  "loader": "gtceu:machine",
+  "machine": "tfinfinity:luv_electrode_holder",
+  "replaceable_textures": [
+    "bottom",
+    "top",
+    "side"
+  ],
+  "variants": {
+    "": {
+      "model": {
+        "parent": "tfinfinity:block/machine/part/electrode_holder",
+        "textures": {
+          "bottom": "gtceu:block/casings/voltage/luv/bottom",
+          "side": "gtceu:block/casings/voltage/luv/side",
+          "top": "gtceu:block/casings/voltage/luv/top"
+        }
+      }
+    }
+  }
+}

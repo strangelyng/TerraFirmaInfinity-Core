@@ -2,6 +2,7 @@ package net.terrafirmainfinity.core.common.data;
 
 import brachy.modularui.utils.FormattingUtil;
 import com.gregtechceu.gtceu.GTCEu;
+import com.gregtechceu.gtceu.api.GTCEuAPI;
 import com.gregtechceu.gtceu.api.GTValues;
 import com.gregtechceu.gtceu.api.capability.recipe.FluidRecipeCapability;
 import com.gregtechceu.gtceu.api.capability.recipe.ItemRecipeCapability;
@@ -24,8 +25,11 @@ import it.unimi.dsi.fastutil.Pair;
 import net.minecraft.network.chat.Component;
 import net.neoforged.neoforge.fluids.FluidType;
 import net.terrafirmainfinity.core.InfinityCore;
+import net.terrafirmainfinity.core.common.machine.part.ElectrodeHolderPartMachine;
+import net.terrafirmainfinity.core.common.machine.part.InfinityPartAbility;
 
 import static com.gregtechceu.gtceu.api.GTValues.*;
+import static com.gregtechceu.gtceu.api.machine.property.GTMachineModelProperties.IS_FORMED;
 import static com.gregtechceu.gtceu.common.data.machines.GTMachineUtils.*;
 import static net.terrafirmainfinity.core.InfinityCore.InfinityRegistrate;
 
@@ -61,7 +65,7 @@ public class InfinityMachines {
 
     private static MachineEntry<MachineDefinition> registerULVSuperTank() {
         long maxAmount = 500 * FluidType.BUCKET_VOLUME;
-        MachineEntry<MachineDefinition> entry = InfinityRegistrate.machine("ulv_super_tank",
+        return InfinityRegistrate.machine("ulv_super_tank",
                         holder -> new QuantumTankMachine(holder, GTValues.ULV, maxAmount))
                 .langValue("Basic Super Tank")
                 .rotationState(RotationState.ALL)
@@ -76,8 +80,6 @@ public class InfinityMachines {
                 .tier(GTValues.ULV)
                 .onRegister(d -> QuantumTankMachine.TANK_CAPACITY.put(d, maxAmount))
                 .register();
-
-        return entry;
     }
 
     // Custom Machines
@@ -92,9 +94,7 @@ public class InfinityMachines {
                     .addOutputLimit(FluidRecipeCapability.CAP, 0)
                     .modelProperty(GTMachineModelProperties.VENT_DIRECTION, RelativeDirection.BACK)
                     .workableSteamHullModel(pressure, InfinityCore.id("block/machines/roaster"))
-                    .tooltipBuilder((stack, list) -> {
-                        list.add(Component.translatable("tfinfinity.machine.roaster.tooltip"));
-                    })
+                    .tooltipBuilder((stack, list) -> list.add(Component.translatable("tfinfinity.machine.roaster.tooltip")))
                     .register());
 
     public static final MachineEntry<MachineDefinition>[] ROASTER = registerTieredMachines(InfinityRegistrate, "roaster",
@@ -104,13 +104,26 @@ public class InfinityMachines {
                     .recipeType(InfinityRecipeTypes.ROASTER_RECIPE)
                     .ui(GTSingleblockMachinePanels.GENERAL_MACHINE)
                     .workableTieredHullModel(InfinityCore.id("block/machines/roaster"))
-                    .tooltipBuilder((stack, list) -> {
-                        list.add(Component.translatable("tfinfinity.machine.roaster.tooltip"));
-                    })
+                    .tooltipBuilder((stack, list) -> list.add(Component.translatable("tfinfinity.machine.roaster.tooltip")))
                     .tooltips(workableTiered(tier, GTValues.V[tier], GTValues.V[tier] * 64, InfinityRecipeTypes.ROASTER_RECIPE,
                             defaultTankSizeFunction.applyAsInt(tier), true))
                     .register(),
             ELECTRIC_TIERS);
+
+    // Machine Parts
+    public static final MachineEntry<MachineDefinition>[] ELECTRODE_HOLDER = registerTieredMachines(InfinityRegistrate,
+            "electrode_holder",
+            ElectrodeHolderPartMachine::new,
+            (tier, builder) -> builder
+                    .langValue("%s Electrode Holder".formatted(VNF[tier]))
+                    .rotationState(RotationState.ALL)
+                    .abilities(InfinityPartAbility.ELECTRODE_HOLDER)
+                    .modelProperty(IS_FORMED, false)
+                    .overlayTieredHullModel(InfinityCore.id("block/machine/part/electrode_holder"))
+                    .tooltips(Component.translatable("tfinfinity.machine.electrode_holder.tooltip"))
+                    .tooltips(Component.translatable("gtceu.part_sharing.disabled"))
+                    .register(),
+            GTValues.tiersBetween(LV, GTCEuAPI.isHighTier() ? OpV : UV));
 
     public static void init() {}
 }

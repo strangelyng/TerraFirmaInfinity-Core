@@ -27,6 +27,8 @@ import net.dries007.tfc.common.items.Powder;
 import net.dries007.tfc.common.items.TFCItems;
 import net.dries007.tfc.util.Metal;
 import net.minecraft.world.level.block.Blocks;
+import net.terrafirmainfinity.core.common.data.InfinityPropertyKeys;
+import net.terrafirmainfinity.core.common.data.material.property.ElectrodeProperty;
 
 import java.util.HashMap;
 
@@ -135,6 +137,9 @@ public class InfinityMaterials {
         Carbon.addFlags(MaterialFlags.GENERATE_ROD, MaterialFlags.GENERATE_LONG_ROD);
         Graphite.addFlags(MaterialFlags.GENERATE_ROD, MaterialFlags.GENERATE_LONG_ROD);
 
+        Carbon.setProperty(InfinityPropertyKeys.ELECTRODE, new ElectrodeProperty(100, 256));
+        Graphite.setProperty(InfinityPropertyKeys.ELECTRODE, new ElectrodeProperty(120, 512));
+
         Lead.addFlags(MaterialFlags.GENERATE_FRAME);
 
         // Modify Components
@@ -184,6 +189,17 @@ public class InfinityMaterials {
         GreenSapphire.setComponents(
                 new MaterialStack(Alumina, 1)
         ).setFormula("(Al2O3)", true);
+
+        AllylChloride.setComponents(
+                new MaterialStack(Carbon, 2),
+                new MaterialStack(Methane, 1),
+                new MaterialStack(HydrogenChloride, 1)
+        ).setFormula("C3H5Cl", true);
+
+        AmmoniumChloride.setComponents(
+                new MaterialStack(Ammonia, 1),
+                new MaterialStack(HydrogenChloride, 1)
+        ).setFormula("NH4Cl", true);
 
         // Modify Properties
         IngotProperty ingotProp = WroughtIron.getProperty(PropertyKey.INGOT);

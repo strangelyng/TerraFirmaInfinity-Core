@@ -23,9 +23,6 @@ import static net.terrafirmainfinity.core.InfinityCore.MOD_ID;
 
 public class InfinityRecipeTypes {
     public static final GTRecipeTypeEntry ROASTER_RECIPE = InfinityRegistrate.recipeType("roaster", ELECTRIC)
-            .setData(ProviderType.LANG, (ctx, prov) -> {
-                prov.add("recipe_type." + MOD_ID + "." + ctx.getName(), "Ore Roasting");
-            })
             .setMaxIOSize(3, 2, 2, 3)
             .UI(builder -> builder.setProgressBar(GTGuiTextures.PROGRESS_ARROW)
                     .setMachineLayoutGridBuilder(ItemRecipeCapability.CAP, IO.IN, ((machine, layout) -> {
@@ -73,7 +70,7 @@ public class InfinityRecipeTypes {
 
     public static final GTRecipeTypeEntry ELECTROLYTIC_CELL_RECIPE = InfinityRegistrate.recipeType("electrolytic_cell", ELECTRIC)
             .setData(ProviderType.LANG, (ctx, prov) -> {
-                prov.add("recipe_type." + MOD_ID + "." + ctx.getName(), "Advanced Electrolysis");
+                prov.add("recipe_category." + MOD_ID + "." + ctx.getName(), "Advanced Electrolysis");
             })
             .setMaxIOSize(4, 3, 3, 4)
             .prepareBuilder(recipeBuilder -> recipeBuilder.EUt(GTValues.VA[GTValues.LV]))
@@ -93,7 +90,7 @@ public class InfinityRecipeTypes {
 
     public static final GTRecipeTypeEntry SPIRAL_SEPARATOR_RECIPE = InfinityRegistrate.recipeType("spiral_separator", MULTIBLOCK)
             .setData(ProviderType.LANG, (ctx, prov) -> {
-                prov.add("recipe_type." + MOD_ID + "." + ctx.getName(), "Spiral Separation");
+                prov.add("recipe_category." + MOD_ID + "." + ctx.getName(), "Spiral Separation");
             })
             .setMaxIOSize(1, 6, 1, 3)
             .UI(builder -> builder.setProgressBar(GTGuiTextures.PROGRESS_ARROW))
@@ -103,7 +100,7 @@ public class InfinityRecipeTypes {
 
     public static final GTRecipeTypeEntry METALLURGICAL_CONVERTER_RECIPE = InfinityRegistrate.recipeType("metallurgical_converter", MULTIBLOCK)
             .setData(ProviderType.LANG, (ctx, prov) -> {
-                prov.add("recipe_type." + MOD_ID + "." + ctx.getName(), "Metallurgical Conversion");
+                prov.add("recipe_category." + MOD_ID + "." + ctx.getName(), "Metallurgical Conversion");
             })
             .setMaxIOSize(3, 2, 3, 2)
             .prepareBuilder(recipeBuilder -> recipeBuilder.EUt(GTValues.VA[GTValues.LV]))
@@ -112,11 +109,28 @@ public class InfinityRecipeTypes {
             .setEUIO(IO.IN)
             .register();
 
-    public static final GTRecipeTypeEntry FLASH_SMELTING_RECIPE = InfinityRegistrate.recipeType("flash_smelting", MULTIBLOCK)
+    public static final GTRecipeTypeEntry FLASH_SMELTING_RECIPE = InfinityRegistrate.recipeType("flash_furnace", MULTIBLOCK)
+            .setData(ProviderType.LANG, (ctx, prov) -> {
+                prov.add("recipe_category." + MOD_ID + "." + ctx.getName(), "Flash Smelting");
+            })
             .setMaxIOSize(2, 0, 2, 3)
             .prepareBuilder(recipeBuilder -> recipeBuilder.EUt(GTValues.VA[GTValues.MV]))
             .UI(builder -> builder.setProgressBar(GTGuiTextures.PROGRESS_ARROW_MULTIPLE))
             .setSound(GTSoundEntries.FURNACE)
+            .setEUIO(IO.IN)
+            .register();
+
+    public static final GTRecipeTypeEntry ADVANCED_ARC_FURNACE_RECIPE = InfinityRegistrate.recipeType("advanced_arc_furnace", MULTIBLOCK)
+            .setData(ProviderType.LANG, (ctx, prov) -> {
+                prov.add("recipe_category." + MOD_ID + "." + ctx.getName(), "Advanced Arc Smelting");
+            })
+            .setMaxIOSize(9, 0, 3, 3)
+            .prepareBuilder(recipeBuilder -> recipeBuilder.EUt(GTValues.VA[GTValues.LV]))
+            .UI(builder -> builder
+                    .setItemSlotsOverlay(IO.IN, 0, 8, GTGuiTextures.FURNACE_OVERLAY_1)
+                    .setFluidSlotsOverlay(IO.IN, 0, 2, GTGuiTextures.FURNACE_OVERLAY_2)
+                    .setProgressBar(GTGuiTextures.PROGRESS_ARROW))
+            .setSound(GTSoundEntries.ARC)
             .setEUIO(IO.IN)
             .register();
 

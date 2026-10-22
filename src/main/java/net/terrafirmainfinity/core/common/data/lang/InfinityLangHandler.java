@@ -15,10 +15,6 @@ import net.terrafirmainfinity.core.util.InfinityUtil;
 import java.util.Locale;
 
 public class InfinityLangHandler extends LangHandler {
-    private static final String[] INFINITY_RECIPE_TYPE_IDS = {
-            "roaster", "electrolytic_cell", "spiral_separator", "metallurgical_converter", "flash_smelting"
-    };
-
     public static void init(RegistrateLangProvider provider) {
         // Materials
 //        replaceMaterialLang(provider, "dawnstone", "Aurichalcum");
@@ -78,6 +74,9 @@ public class InfinityLangHandler extends LangHandler {
         addTagPrefixLang(provider, InfinityTagPrefix.oreSandstoneYellow);
         addTagPrefixLang(provider, InfinityTagPrefix.oreSandstonePink);
 
+        provider.add(  "metaitem.tool.tooltip.electrode.efficiency", "Electrode Efficiency: §9%d%%");
+        provider.add("tfinfinity.machine.electrode_holder.tooltip", "Electrode Holder for Multiblocks");
+
         addToolClassLang(provider, "Chisel");
         addToolClassLang(provider, "Mace");
 
@@ -112,17 +111,6 @@ public class InfinityLangHandler extends LangHandler {
         provider.add("tfinfinity.machine.roaster.tooltip", "§7Sulfide roast, anyone?");
 
         provider.add("fluid.gtceu.salt", "Molten Salt");
-
-//        for (String id : INFINITY_RECIPE_TYPE_IDS) {
-//            String name = switch (id) {
-//                case "roaster" -> "Ore Roasting";
-//                case "spiral_separator" -> "Spiral Separation";
-//                case "electrolytic_cell" -> "Advanced Electrolysis";
-//                case "metallurgical_converter" -> "Metallurgical Conversion";
-//                default -> InfinityUtil.snakecaseToTitle(id);
-//            };
-//            replace(provider, "recipe_type." + InfinityCore.MOD_ID + "." + id, name);
-//        }
 
         // InfinityEmiPlugin
         provider.add("emi.category.tfinfinity.ore_vein_info", "Ore Vein Info");

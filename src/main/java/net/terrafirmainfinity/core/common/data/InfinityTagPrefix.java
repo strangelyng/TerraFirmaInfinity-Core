@@ -3,6 +3,7 @@ package net.terrafirmainfinity.core.common.data;
 import com.gregtechceu.gtceu.GTCEu;
 import com.gregtechceu.gtceu.api.GTValues;
 import com.gregtechceu.gtceu.api.block.OreBlock;
+import com.gregtechceu.gtceu.api.data.chemical.material.Material;
 import com.gregtechceu.gtceu.api.data.chemical.material.info.MaterialIconType;
 import com.gregtechceu.gtceu.api.data.chemical.material.properties.PropertyKey;
 import com.gregtechceu.gtceu.api.data.tag.TagPrefix;
@@ -22,11 +23,14 @@ import net.terrafirmainfinity.core.common.data.item.InfinityToolTypes;
 import net.terrafirmainfinity.core.common.data.material.InfinityMaterialFlags;
 
 import java.util.Locale;
+import java.util.function.Predicate;
 import java.util.function.Supplier;
 
 import static com.gregtechceu.gtceu.api.data.tag.TagPrefix.Conditions.*;
 
 public class InfinityTagPrefix {
+    public static final Predicate<Material> hasElectrodeProperty = mat -> mat.hasProperty(InfinityPropertyKeys.ELECTRODE);
+
     /** TFC Items */
     public static final TagPrefix ingotDouble = new TagPrefix(GTCEu.id("ingot_double"))
             .idPattern("%s_double_ingot")
@@ -331,13 +335,12 @@ public class InfinityTagPrefix {
             .materialAmount((GTValues.M * 3) / 4)
             .unificationEnabled(true);
 
-
     /** Embers Items */
     public static final TagPrefix aspectus = new TagPrefix(GTCEu.id("aspectus"))
             .materialAmount(GTValues.M)
             .unificationEnabled(true);
 
-    public static void modifyExistingToolHeadPrefixes() {
+    public static void modifyExistingTagPrefixes() {
         TagPrefix.toolHeadBuzzSaw.materialAmount(GTValues.M*2);
         TagPrefix.toolHeadScrewdriver.materialAmount(GTValues.M);
         TagPrefix.toolHeadWrench.materialAmount(GTValues.M*2);
@@ -352,6 +355,37 @@ public class InfinityTagPrefix {
         TagPrefix.toolHeadScrewdriver.generationCondition(TagPrefix.toolHeadScrewdriver.generationCondition().or(mat -> mat.hasFlag(InfinityMaterialFlags.GENERATE_SCREWDRIVER_HEAD)));
         TagPrefix.toolHeadWrench.generationCondition(TagPrefix.toolHeadWrench.generationCondition().or(mat -> mat.hasFlag(InfinityMaterialFlags.GENERATE_WRENCH_HEAD)));
         TagPrefix.toolHeadWireCutter.generationCondition(TagPrefix.toolHeadWireCutter.generationCondition().or(mat -> mat.hasFlag(InfinityMaterialFlags.GENERATE_WIRE_CUTTER_HEAD)));
+
+        TagPrefix.turbineBlade.defaultTagPath("turbine_blades/%s").unformattedTagPath("turbine_blades");
+        TagPrefix.pipeTinyFluid.defaultTagPath("tiny_fluid_pipes/%s").unformattedTagPath("tiny_fluid_pipes");
+        TagPrefix.pipeSmallFluid.defaultTagPath("small_fluid_pipes/%s").unformattedTagPath("small_fluid_pipes");
+        TagPrefix.pipeNormalFluid.defaultTagPath("normal_fluid_pipes/%s").unformattedTagPath("normal_fluid_pipes");
+        TagPrefix.pipeLargeFluid.defaultTagPath("large_fluid_pipes/%s").unformattedTagPath("large_fluid_pipes");
+        TagPrefix.pipeHugeFluid.defaultTagPath("huge_fluid_pipes/%s").unformattedTagPath("huge_fluid_pipes");
+        TagPrefix.pipeQuadrupleFluid.defaultTagPath("quadruple_fluid_pipes/%s").unformattedTagPath("quadruple_fluid_pipes");
+        TagPrefix.pipeNonupleFluid.defaultTagPath("nonuple_fluid_pipes/%s").unformattedTagPath("nonuple_fluid_pipes");
+
+        TagPrefix.turbineBlade.defaultTagPath("turbine_blades/%s").unformattedTagPath("turbine_blades");
+        TagPrefix.pipeSmallItem.defaultTagPath("small_item_pipes/%s").unformattedTagPath("small_item_pipes");
+        TagPrefix.pipeNormalItem.defaultTagPath("normal_item_pipes/%s").unformattedTagPath("normal_item_pipes");
+        TagPrefix.pipeLargeItem.defaultTagPath("large_item_pipes/%s").unformattedTagPath("large_item_pipes");
+        TagPrefix.pipeHugeItem.defaultTagPath("huge_item_pipes/%s").unformattedTagPath("huge_item_pipes");
+        TagPrefix.pipeSmallRestrictive.defaultTagPath("small_restrictive_pipes/%s").unformattedTagPath("small_restrictive_pipes");
+        TagPrefix.pipeNormalRestrictive.defaultTagPath("normal_restrictive_pipes/%s").unformattedTagPath("normal_restrictive_pipes");
+        TagPrefix.pipeLargeRestrictive.defaultTagPath("large_restrictive_pipes/%s").unformattedTagPath("large_restrictive_pipes");
+        TagPrefix.pipeHugeRestrictive.defaultTagPath("huge_restrictive_pipes/%s").unformattedTagPath("huge_restrictive_pipes");
+
+        TagPrefix.wireGtSingle.defaultTagPath("single_wires/%s").unformattedTagPath("single_wires");
+        TagPrefix.wireGtDouble.defaultTagPath("double_wires/%s").unformattedTagPath("double_wires");
+        TagPrefix.wireGtQuadruple.defaultTagPath("quadruple_wires/%s").unformattedTagPath("quadruple_wires");
+        TagPrefix.wireGtOctal.defaultTagPath("octal_wires/%s").unformattedTagPath("octal_wires");
+        TagPrefix.wireGtHex.defaultTagPath("hex_wires/%s").unformattedTagPath("hex_wires");
+
+        TagPrefix.cableGtSingle.defaultTagPath("single_cables/%s").unformattedTagPath("single_cables");
+        TagPrefix.cableGtDouble.defaultTagPath("double_cables/%s").unformattedTagPath("double_cables");
+        TagPrefix.cableGtQuadruple.defaultTagPath("quadruple_cables/%s").unformattedTagPath("quadruple_cables");
+        TagPrefix.cableGtOctal.defaultTagPath("octal_cables/%s").unformattedTagPath("octal_cables");
+        TagPrefix.cableGtHex.defaultTagPath("hex_cables/%s").unformattedTagPath("hex_cables");
     }
 
     // TFC Stone Types
@@ -444,7 +478,7 @@ public class InfinityTagPrefix {
     }
 
     public static void init() {
-        modifyExistingToolHeadPrefixes();
+        modifyExistingTagPrefixes();
         modifyExistingOres();
         createTFCOres();
     }

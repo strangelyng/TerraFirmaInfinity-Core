@@ -1,0 +1,7 @@
+{
+  "variants": {
+    "": {
+      "model": "tfinfinity:block/electrode_assembly"
+    }
+  }
+}

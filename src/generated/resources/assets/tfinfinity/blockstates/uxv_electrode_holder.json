@@ -1,0 +1,28 @@
+{
+  "variants": {
+    "facing=down": {
+      "model": "tfinfinity:block/machine/uxv_electrode_holder",
+      "x": 90
+    },
+    "facing=east": {
+      "model": "tfinfinity:block/machine/uxv_electrode_holder",
+      "y": 90
+    },
+    "facing=north": {
+      "model": "tfinfinity:block/machine/uxv_electrode_holder"
+    },
+    "facing=south": {
+      "model": "tfinfinity:block/machine/uxv_electrode_holder",
+      "y": 180
+    },
+    "facing=up": {
+      "gtceu:z": 180,
+      "model": "tfinfinity:block/machine/uxv_electrode_holder",
+      "x": 270
+    },
+    "facing=west": {
+      "model": "tfinfinity:block/machine/uxv_electrode_holder",
+      "y": 270
+    }
+  }
+}

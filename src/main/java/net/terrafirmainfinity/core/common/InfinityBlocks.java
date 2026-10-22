@@ -54,28 +54,11 @@ public class InfinityBlocks {
             .register();
 
     // Machine Casing Blocks
-    public static final BlockEntry<Block> CASING_STEEL_BRICKS = InfinityRegistrate
-            .block("hp_steam_machine_casing", Block::new)
-            .lang("High Pressure Steam Machine Casing")
-            .initialProperties(() -> Blocks.IRON_BLOCK)
-            .properties(p -> p.isValidSpawn((state, level, pos, ent) -> false))
-            .addLayer(() -> RenderType::solid)
-            .exBlockstate(GTModels.cubeAllModel(InfinityCore.id("block/casings/solid/machine_casing_steel_plated_bricks")))
-            .tag(CustomTags.MINEABLE_WITH_CONFIG_VALID_PICKAXE_WRENCH)
-            .item(BlockItem::new)
-            .build()
-            .register();
+    public static final BlockEntry<Block> CASING_STEEL_BRICKS = createCasingBlock("hp_steam_machine_casing", "High Pressure Steam Machine Casing",
+            InfinityCore.id("block/casings/solid/machine_casing_steel_plated_bricks"));
 
-    public static final BlockEntry<Block> CASING_LEAD_BRICKS = InfinityRegistrate
-            .block("dwarven_machine_casing", Block::new)
-            .initialProperties(() -> Blocks.IRON_BLOCK)
-            .properties(p -> p.isValidSpawn((state, level, pos, ent) -> false))
-            .addLayer(() -> RenderType::solid)
-            .exBlockstate(GTModels.cubeAllModel(InfinityCore.id("block/casings/solid/machine_casing_lead_plated_bricks")))
-            .tag(CustomTags.MINEABLE_WITH_CONFIG_VALID_PICKAXE_WRENCH)
-            .item(BlockItem::new)
-            .build()
-            .register();
+    public static final BlockEntry<Block> CASING_LEAD_BRICKS = createCasingBlock("dwarven_machine_casing",
+            InfinityCore.id("block/casings/solid/machine_casing_lead_plated_bricks"));
 
     public static final BlockEntry<Block> LEAD_BRICKS_HULL = InfinityRegistrate
             .block("lead_brick_casing", Block::new)
@@ -96,27 +79,37 @@ public class InfinityBlocks {
             .build()
             .register();
 
-    public static final BlockEntry<Block> CASING_LEAD_PIPE = InfinityRegistrate
-            .block("lead_pipe_casing", Block::new)
-            .initialProperties(() -> Blocks.IRON_BLOCK)
-            .properties(p -> p.isValidSpawn((state, level, pos, ent) -> false))
-            .addLayer(() -> RenderType::solid)
-            .exBlockstate(GTModels.cubeAllModel(InfinityCore.id("block/casings/pipe/machine_casing_pipe_lead")))
-            .tag(CustomTags.MINEABLE_WITH_CONFIG_VALID_PICKAXE_WRENCH)
-            .item(BlockItem::new)
-            .build()
-            .register();
+    public static final BlockEntry<Block> CASING_LEAD_PIPE = createCasingBlock("lead_pipe_casing",
+            InfinityCore.id("block/casings/pipe/machine_casing_pipe_lead"));
 
-    public static final BlockEntry<Block> CASING_STAINLESS_STEEL_PIPE = InfinityRegistrate
-            .block("stainless_steel_pipe_casing", Block::new)
-            .initialProperties(() -> Blocks.IRON_BLOCK)
-            .properties(p -> p.isValidSpawn((state, level, pos, ent) -> false))
-            .addLayer(() -> RenderType::solid)
-            .exBlockstate(GTModels.cubeAllModel(InfinityCore.id("block/casings/pipe/machine_casing_pipe_stainless_steel")))
-            .tag(CustomTags.MINEABLE_WITH_CONFIG_VALID_PICKAXE_WRENCH)
-            .item(BlockItem::new)
-            .build()
-            .register();
+    public static final BlockEntry<Block> CASING_STAINLESS_STEEL_PIPE = createCasingBlock("stainless_steel_pipe_casing",
+            InfinityCore.id("block/casings/pipe/machine_casing_pipe_stainless_steel"));
+
+    public static final BlockEntry<Block> ELECTRODE_ASSEMBLY = createCasingBlock("electrode_assembly",
+            InfinityCore.id("block/casings/unique/electrode_assembly"));
+
+
+    private static BlockEntry<Block> createCasingBlock(String name, ResourceLocation texture) {
+        return createCasingBlock(name, null, texture);
+    }
+
+    private static BlockEntry<Block> createCasingBlock(String name, String lang, ResourceLocation texture) {
+        var builder = InfinityRegistrate
+                .block(name, Block::new);
+
+        if (lang != null) builder.lang(lang);
+
+        builder
+                .initialProperties(() -> Blocks.IRON_BLOCK)
+                .properties(p -> p.isValidSpawn((state, level, pos, value) -> false))
+                .addLayer(() -> RenderType::cutoutMipped)
+                .exBlockstate(GTModels.cubeAllModel(texture))
+                .tag(CustomTags.MINEABLE_WITH_CONFIG_VALID_PICKAXE_WRENCH)
+                .item(BlockItem::new).build();
+
+        return builder.register();
+    }
+
 
     // Laterites
     public static final BlockEntry<LateriteBlock> BAUXITE_SOIL = createLateriteDirtBlock("bauxite", MapColor.TERRACOTTA_PINK);

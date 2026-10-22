@@ -5,8 +5,10 @@ import dev.emi.emi.api.EmiEntrypoint;
 import dev.emi.emi.api.EmiPlugin;
 import dev.emi.emi.api.EmiRegistry;
 import dev.emi.emi.api.recipe.EmiRecipeCategory;
+import dev.emi.emi.api.stack.Comparison;
 import dev.emi.emi.api.stack.EmiStack;
 import net.terrafirmainfinity.core.InfinityCore;
+import net.terrafirmainfinity.core.common.InfinityItems;
 
 import java.util.Arrays;
 
@@ -30,5 +32,7 @@ public class InfinityEmiPlugin implements EmiPlugin {
 
         Arrays.stream(VolcanoFissureDictionary.RECIPES)
                 .forEach(registry::addRecipe);
+
+        registry.setDefaultComparison(InfinityItems.ELECTRODE.asItem(), Comparison.compareComponents());
     }
 }

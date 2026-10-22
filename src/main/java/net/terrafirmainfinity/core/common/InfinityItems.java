@@ -1,6 +1,9 @@
 package net.terrafirmainfinity.core.common;
 
+import com.gregtechceu.gtceu.GTCEu;
 import com.gregtechceu.gtceu.api.item.ComponentItem;
+import com.gregtechceu.gtceu.api.item.component.IMaterialPartItem;
+import com.gregtechceu.gtceu.common.data.models.GTModels;
 import com.gregtechceu.gtceu.common.item.behavior.CoverPlaceBehavior;
 import com.gregtechceu.gtceu.common.item.behavior.TooltipBehavior;
 import com.gregtechceu.gtceu.data.recipe.CustomTags;
@@ -9,6 +12,7 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.world.item.Item;
 import net.terrafirmainfinity.core.InfinityCore;
 import net.terrafirmainfinity.core.common.data.InfinityCovers;
+import net.terrafirmainfinity.core.common.item.behavior.ElectrodeBehavior;
 
 import static com.gregtechceu.gtceu.common.data.GTItems.attach;
 import static net.terrafirmainfinity.core.InfinityCore.InfinityRegistrate;
@@ -57,6 +61,13 @@ public class InfinityItems {
             })))
             .tag(CustomTags.ELECTRIC_PUMPS)
             .register();
+
+    public static ItemEntry<ComponentItem> ELECTRODE = InfinityRegistrate.item("electrode", ComponentItem::new)
+            .lang("%s Electrode")
+            .properties(p -> p.stacksTo(1))
+            .model((ctx, prov) -> GTModels.createTextureModel(ctx, prov, GTCEu.id("item/material_sets/dull/rod")))
+            .color(() -> IMaterialPartItem::getItemStackColor)
+            .onRegister(attach(new ElectrodeBehavior())).register();
 
     public static void init() {}
 }

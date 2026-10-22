@@ -84,6 +84,16 @@ public class InfinityRecipeHandler {
                 .EUt(VA[MV])
                 .duration(200)
                 .save(provider);
+
+        ADVANCED_ARC_FURNACE_RECIPE.recipeBuilder(InfinityCore.id("stainless_steel"))
+                .inputItems(dust, Iron, 6)
+                .inputItems(dust, Chromium, 1)
+                .inputItems(dust, Manganese, 1)
+                .inputItems(dust, Nickel, 1)
+                .outputFluids(StainlessSteel.getFluid(144*9))
+                .EUt(VA[HV])
+                .duration(1100)
+                .save(provider);
     }
 
     public static void landslideRecipes(RecipeOutput provider) {
