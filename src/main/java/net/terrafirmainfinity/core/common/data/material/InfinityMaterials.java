@@ -69,6 +69,7 @@ public class InfinityMaterials {
     public static Material Petalite; // Lithium-Aluminium Silicate
     public static Material Thorianite; // Thorium Oxide
     public static Material Thorite; // Thorium Silicate
+    public static Material Vanadinite; // Lead Chlorovanadate
     public static Material Wolframite; // Tungsten Oxide
     public static Material Zircon; // Zirconium Silicate
 
@@ -84,6 +85,10 @@ public class InfinityMaterials {
     public static Material HydrogenChloride; // HCl
     public static Material HydrogenFluoride; // HF
 
+    // Alloys
+    public static Material Ferrosilicon; // FeSi3
+    public static Material Ferrovanadium; // V3Fe2
+
     // Rock Materials
     public static Material FelsicIgneous; // Granite, Rhyolite
     public static Material IntermediateIgneous; // Diorite, Tuff, Andesite, Dacite
@@ -95,9 +100,10 @@ public class InfinityMaterials {
 
 
     public static void init() {
+        InfinityCompoundMaterials.register();
         InfinityIntegrationMaterials.register();
         InfinityOreMaterials.register();
-        InfinityCompoundMaterials.register();
+        InfinityAlloyMaterials.register();
     }
 
     public static void modifyMaterials() {
@@ -301,6 +307,9 @@ public class InfinityMaterials {
 
         oreProp = Thorite.getProperty(PropertyKey.ORE);
         oreProp.setOreByProducts(Uraninite, Zircon, RareEarth);
+
+        oreProp = Vanadinite.getProperty(PropertyKey.ORE);
+        oreProp.setOreByProducts(Galena, Wulfenite, Vanadium);
 
         oreProp = Wolframite.getProperty(PropertyKey.ORE);
         oreProp.setOreByProducts(Iron, Manganese, Wolframite);

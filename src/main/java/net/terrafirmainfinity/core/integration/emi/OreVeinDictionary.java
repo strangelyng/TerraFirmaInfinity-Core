@@ -461,6 +461,15 @@ public class OreVeinDictionary {
                     null, null, null, null,
                     null),
 
+            new OreVeinInfoRecipe("normal_vanadinite", "minecraft:overworld",
+                    180, 0.25, 10, 70, 20, 10, 0,
+                    false, false, false, 35,
+                    new String[] {"tfc:rock/raw/chalk", "tfc:rock/raw/chert", "tfc:rock/raw/claystone", "tfc:rock/raw/conglomerate", "tfc:rock/raw/dolomite", "tfc:rock/raw/limestone", "tfc:rock/raw/shale", "tfc:raw_sandstone/black", "tfc:raw_sandstone/brown", "tfc:raw_sandstone/green", "tfc:raw_sandstone/pink", "tfc:raw_sandstone/red", "tfc:raw_sandstone/white", "tfc:raw_sandstone/yellow"},
+                    new OreVeinInfoRecipe.WeightedBlock[] {new OreVeinInfoRecipe.WeightedBlock("galena", 60), new OreVeinInfoRecipe.WeightedBlock("vanadinite", 30), new OreVeinInfoRecipe.WeightedBlock("wulfenite", 10)},
+                    null, null,
+                    null, 150, -12, null,
+                    null),
+
             new OreVeinInfoRecipe("normal_zeolite", "minecraft:overworld",
                     180, 0.25, 10, 70, 20, 5, 0,
                     false, false, false, 35,

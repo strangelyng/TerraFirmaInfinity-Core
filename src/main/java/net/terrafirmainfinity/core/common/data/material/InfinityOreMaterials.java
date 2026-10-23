@@ -113,6 +113,14 @@ public class InfinityOreMaterials {
                 .buildAndRegister()
                 .setFormula("(Th,U)SiO4", true);
 
+        Vanadinite = new Material.Builder(InfinityCore.id("vanadinite"))
+                .dust().ore()
+                .color(0xff7242).secondaryColor(0xff2d1a).iconSet(InfinityMaterialIconSet.CUBIC_RUBY)
+                .flags(DISABLE_DECOMPOSITION)
+                .components(Lead, 5, Vanadium, 3, Oxygen, 12, Chlorine, 1)
+                .buildAndRegister()
+                .setFormula("Pb5(VO4)3Cl", true);
+
         Wolframite = new Material.Builder(InfinityCore.id("wolframite"))
                 .dust().ore()
                 .color(0x3A3141).secondaryColor(0x2E2227)
