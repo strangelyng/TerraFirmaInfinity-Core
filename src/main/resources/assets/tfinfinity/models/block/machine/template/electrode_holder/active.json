@@ -1,0 +1,7 @@
+{
+    "parent": "gtceu:block/overlay/2_layer/front_emissive",
+    "textures": {
+        "overlay": "tfinfinity:block/overlay/machine/electrode_holder/overlay_front_active",
+        "overlay_emissive": "tfinfinity:block/overlay/machine/electrode_holder/overlay_front_active_emissive"
+    }
+}

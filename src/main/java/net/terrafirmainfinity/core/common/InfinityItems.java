@@ -65,7 +65,7 @@ public class InfinityItems {
     public static ItemEntry<ComponentItem> ELECTRODE = InfinityRegistrate.item("electrode", ComponentItem::new)
             .lang("%s Electrode")
             .properties(p -> p.stacksTo(1))
-            .model((ctx, prov) -> GTModels.createTextureModel(ctx, prov, GTCEu.id("item/material_sets/dull/rod")))
+            .model((ctx, prov) -> GTModels.createTextureModel(ctx, prov, GTCEu.id("item/material_sets/dull/rod_long")))
             .color(() -> IMaterialPartItem::getItemStackColor)
             .onRegister(attach(new ElectrodeBehavior())).register();
 

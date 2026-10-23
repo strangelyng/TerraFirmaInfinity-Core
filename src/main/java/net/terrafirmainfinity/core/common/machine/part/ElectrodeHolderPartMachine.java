@@ -11,7 +11,6 @@ import brachy.modularui.widgets.slot.SlotGroup;
 import com.gregtechceu.gtceu.api.blockentity.BlockEntityCreationInfo;
 import com.gregtechceu.gtceu.api.capability.recipe.IO;
 import com.gregtechceu.gtceu.api.data.chemical.material.Material;
-import com.gregtechceu.gtceu.api.machine.TickableSubscription;
 import com.gregtechceu.gtceu.api.machine.feature.IMuiMachine;
 import com.gregtechceu.gtceu.api.machine.feature.ITieredMachine;
 import com.gregtechceu.gtceu.api.machine.multiblock.MultiblockControllerMachine;
@@ -31,6 +30,7 @@ import com.gregtechceu.gtceu.utils.GTUtil;
 import com.gregtechceu.gtceu.utils.ISubscription;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.item.ItemStack;
+import net.terrafirmainfinity.core.common.InfinityItems;
 import net.terrafirmainfinity.core.common.item.behavior.ElectrodeBehavior;
 import net.terrafirmainfinity.core.common.ui.InfinityGuiTextures;
 import org.jetbrains.annotations.Nullable;
@@ -40,26 +40,21 @@ public class ElectrodeHolderPartMachine extends TieredPartMachine implements IMu
     public final NotifiableItemStackHandler inventory;
     @SaveField
     @SyncToClient
-    public boolean electrodeActivity;
-    @SaveField
-    @SyncToClient
     @Nullable
     public Material electrodeMaterial = null; // 0 = no electrode
-    @Nullable
-    protected TickableSubscription electrodeActivitySubs;
     @Nullable
     protected ISubscription electrodeInvSubs;
 
     public ElectrodeHolderPartMachine(BlockEntityCreationInfo info, int tier) {
         super(info, tier);
-        this.inventory = attachTrait(new NotifiableItemStackHandler(1, IO.NONE, IO.NONE));
+        this.inventory = attachTrait(new NotifiableItemStackHandler(1, IO.NONE, IO.NONE))
+                .setFilter(itemStack -> itemStack.is(InfinityItems.ELECTRODE));
     }
 
     @Override
     public void onLoad() {
         super.onLoad();
         if (!isRemote()) {
-            updateElectrodeSubscription();
             electrodeInvSubs = this.inventory.addChangedListener(this::onElectrodeInventoryChanged);
         }
     }
@@ -93,37 +88,13 @@ public class ElectrodeHolderPartMachine extends TieredPartMachine implements IMu
     }
 
     public boolean hasElectrode() {
-        return getElectrodeStack() != ItemStack.EMPTY;
-    }
-
-    protected void updateElectrodeSubscription() {
-        if (isMachineWorking()) {
-            electrodeActivitySubs = subscribeServerTick(electrodeActivitySubs, this::updateElectrodeActivity);
-        } else if (electrodeActivitySubs != null) {
-            electrodeActivitySubs.unsubscribe();
-            electrodeActivitySubs = null;
-        }
-    }
-
-    private void updateElectrodeActivity() {
-        if (isMachineWorking()) {
-            return;
-        }
-        if (!hasElectrode()) {
-            setElectrodeActivity(false);
-        }
-        updateElectrodeSubscription();
-    }
-
-    public void setElectrodeActivity(boolean electrodeActivity) {
-        this.electrodeActivity = electrodeActivity;
-        syncDataHolder.markClientSyncFieldDirty("electrodeActivity");
+        return !getElectrodeStack().isEmpty();
     }
 
     @Override
     public boolean onWorking(WorkableMultiblockMachine controller) {
-        if (getElectrodeActivity()) {
-            updateElectrodeSubscription();
+        if (!hasElectrode()) {
+            return false;
         }
         if (getOffsetTimer() % 20 == 0) {
             var numMaintenanceProblems = 0;
@@ -174,7 +145,7 @@ public class ElectrodeHolderPartMachine extends TieredPartMachine implements IMu
     public InteractionResult onUse(ExtendedUseOnContext context) {
         var superResult = super.onUse(context);
         if (superResult != InteractionResult.PASS) return superResult;
-        if (!isRemote() && getElectrodeActivity() && !context.getPlayer().isCreative()) {
+        if (!isRemote() && isMachineWorking() && !context.getPlayer().isCreative()) {
             EnergyStack energyStack = getRecipeInputEUt();
             if (energyStack != null) {
                 float damageAmount = (float) ((GTUtil.getTierByVoltage(energyStack.voltage()) + 1) * energyStack.amperage() * 4);
@@ -192,12 +163,12 @@ public class ElectrodeHolderPartMachine extends TieredPartMachine implements IMu
                 .background(GTGuiTextures.SLOT, InfinityGuiTextures.ELECTRODE_OVERLAY_1)
                 .center();
 
-        var electrodeSync = new BooleanSyncValue(this::getElectrodeActivity);
+        var electrodeSync = new BooleanSyncValue(this::isMachineWorking);
         electrodeSync.setChangeListener(() -> {
             boolean canEdit = !electrodeSync.getBoolValue();
             slot.getSlot().accessibility(canEdit, canEdit);
         });
-        syncManager.syncValue("electrode_activity", electrodeSync);
+        syncManager.syncValue("active", electrodeSync);
         mainWidget.child(slot);
     }
 
@@ -248,9 +219,5 @@ public class ElectrodeHolderPartMachine extends TieredPartMachine implements IMu
             behavior.applyElectrodeDamage(stack, damageAmount);
             setElectrodeStack(stack);
         }
-    }
-
-    public boolean getElectrodeActivity() {
-        return this.electrodeActivity;
     }
 }

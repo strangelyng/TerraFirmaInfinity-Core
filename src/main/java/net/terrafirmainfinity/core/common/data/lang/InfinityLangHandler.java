@@ -75,7 +75,9 @@ public class InfinityLangHandler extends LangHandler {
         addTagPrefixLang(provider, InfinityTagPrefix.oreSandstonePink);
 
         provider.add(  "metaitem.tool.tooltip.electrode.efficiency", "Electrode Efficiency: §9%d%%");
-        provider.add("tfinfinity.machine.electrode_holder.tooltip", "Electrode Holder for Multiblocks");
+        provider.add("tfinfinity.machine.electrode_holder.tooltip.0", "Electrode Holder for Multiblocks");
+        provider.add("tfinfinity.machine.electrode_holder.tooltip.1", "Do not touch while active");
+        provider.add("tfinfinity.recipe_logic.missing_electrode", "Missing Electrode");
 
         addToolClassLang(provider, "Chisel");
         addToolClassLang(provider, "Mace");

@@ -21,6 +21,7 @@ import com.gregtechceu.gtceu.common.machine.storage.QuantumChestMachine;
 import com.gregtechceu.gtceu.common.machine.storage.QuantumTankMachine;
 import com.gregtechceu.gtceu.common.mui.GTGuiTheme;
 import com.gregtechceu.gtceu.common.mui.GTSingleblockMachinePanels;
+import com.gregtechceu.gtceu.data.lang.LangHandler;
 import it.unimi.dsi.fastutil.Pair;
 import net.minecraft.network.chat.Component;
 import net.neoforged.neoforge.fluids.FluidType;
@@ -29,7 +30,7 @@ import net.terrafirmainfinity.core.common.machine.part.ElectrodeHolderPartMachin
 import net.terrafirmainfinity.core.common.machine.part.InfinityPartAbility;
 
 import static com.gregtechceu.gtceu.api.GTValues.*;
-import static com.gregtechceu.gtceu.api.machine.property.GTMachineModelProperties.IS_FORMED;
+import static com.gregtechceu.gtceu.api.machine.property.GTMachineModelProperties.*;
 import static com.gregtechceu.gtceu.common.data.machines.GTMachineUtils.*;
 import static net.terrafirmainfinity.core.InfinityCore.InfinityRegistrate;
 
@@ -120,7 +121,7 @@ public class InfinityMachines {
                     .abilities(InfinityPartAbility.ELECTRODE_HOLDER)
                     .modelProperty(IS_FORMED, false)
                     .overlayTieredHullModel(InfinityCore.id("block/machine/part/electrode_holder"))
-                    .tooltips(Component.translatable("tfinfinity.machine.electrode_holder.tooltip"))
+                    .tooltips(LangHandler.getMultiLang("tfinfinity.machine.electrode_holder.tooltip"))
                     .tooltips(Component.translatable("gtceu.part_sharing.disabled"))
                     .register(),
             GTValues.tiersBetween(LV, GTCEuAPI.isHighTier() ? OpV : UV));
