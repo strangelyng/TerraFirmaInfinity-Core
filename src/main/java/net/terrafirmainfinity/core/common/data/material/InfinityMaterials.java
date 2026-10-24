@@ -98,7 +98,6 @@ public class InfinityMaterials {
     public static Material SiliceousSedimentary; // Chert
     public static Material Metamorphic; // Quartzite, Slate, Phyllite, Schist, Gneiss, Marble
 
-
     public static void init() {
         InfinityCompoundMaterials.register();
         InfinityIntegrationMaterials.register();
@@ -107,17 +106,19 @@ public class InfinityMaterials {
     }
 
     public static void modifyMaterials() {
-        // Add Properties
+        /* Add Properties */
         Hafnium.setProperty(PropertyKey.INGOT, new IngotProperty());
         Zirconium.setProperty(PropertyKey.INGOT, new IngotProperty());
 
         Hafnium.setProperty(PropertyKey.BLAST, new BlastProperty(2506, BlastProperty.GasTier.MID, GTValues.VA[EV], 1500, GTValues.VA[HV], 360));
         Zirconium.setProperty(PropertyKey.BLAST, new BlastProperty(2125, BlastProperty.GasTier.MID, GTValues.VA[EV], 1300, GTValues.VA[HV], 300));
 
-        // Add Ores
-        Andradite.setProperty(PropertyKey.ORE, new OreProperty());
-        Borax.setProperty(PropertyKey.ORE, new OreProperty());
-        Uvarovite.setProperty(PropertyKey.ORE, new OreProperty());
+        // Ore Properties
+        Andradite.setProperty(PropertyKey.ORE, new OreProperty(3, 1));
+        Borax.setProperty(PropertyKey.ORE, new OreProperty(2, 1));
+        Uvarovite.setProperty(PropertyKey.ORE, new OreProperty(3, 1));
+
+        Borax.setProperty(PropertyKey.GEM, new GemProperty());
 
         // Add Flags
         Bismuth.addFlags(InfinityMaterialFlags.GENERATE_DOUBLE_INGOT, MaterialFlags.GENERATE_PLATE, MaterialFlags.GENERATE_ROD);
@@ -207,7 +208,7 @@ public class InfinityMaterials {
                 new MaterialStack(HydrogenChloride, 1)
         ).setFormula("NH4Cl", true);
 
-        // Modify Properties
+        /* Modify Properties */
         IngotProperty ingotProp = WroughtIron.getProperty(PropertyKey.INGOT);
         ingotProp.setMacerateInto(Iron);
         WroughtIron.removeProperty(PropertyKey.FLUID);
@@ -216,6 +217,7 @@ public class InfinityMaterials {
         ingotProp.setMacerateInto(Copper);
         AnnealedCopper.removeProperty(PropertyKey.FLUID);
 
+        // Remove Blast Properties
         BismuthBronze.removeProperty(PropertyKey.BLAST);
         BismuthBronze.removeProperty(PropertyKey.ALLOY_BLAST);
         BlackBronze.removeProperty(PropertyKey.BLAST);
@@ -226,6 +228,7 @@ public class InfinityMaterials {
         SterlingSilver.removeProperty(PropertyKey.BLAST);
         SterlingSilver.removeProperty(PropertyKey.ALLOY_BLAST);
 
+        // Modify Ore Properties
         OreProperty oreProp = Quartzite.getProperty(PropertyKey.ORE);
         oreProp.setOreByProducts(NetherQuartz, Barite); // CertusQuartz to NetherQuartz
 
@@ -262,10 +265,13 @@ public class InfinityMaterials {
         oreProp = Pyrochlore.getProperty(PropertyKey.ORE);
         oreProp.setOreByProducts(Apatite, Calcium, Columbite); // Niobium to Columbite
 
-        oreProp = Andradite.getProperty(PropertyKey.ORE);
+        oreProp = Andradite.getProperty(PropertyKey.ORE); // New Ore Property
         oreProp.setOreByProducts(GarnetYellow, Calcium);
 
-        oreProp = Uvarovite.getProperty(PropertyKey.ORE);
+        oreProp = Borax.getProperty(PropertyKey.ORE); // New Ore Property
+        oreProp.setOreByProducts(Salt, Salt, Trona);
+
+        oreProp = Uvarovite.getProperty(PropertyKey.ORE); // New Ore Property
         oreProp.setOreByProducts(GarnetYellow, Calcium);
 
         // TerraFirmaInfinity Ores Byproducts

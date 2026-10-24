@@ -1,6 +1,8 @@
 {
-  "parent": "minecraft:block/cube_all",
+  "parent": "minecraft:block/cube_bottom_top",
   "textures": {
-    "all": "tfinfinity:block/casings/unique/electrode_assembly"
+    "bottom": "gtceu:block/casings/solid/machine_casing_solid_steel",
+    "side": "tfinfinity:block/casings/unique/electrode_assembly",
+    "top": "gtceu:block/casings/solid/machine_casing_solid_steel"
   }
 }

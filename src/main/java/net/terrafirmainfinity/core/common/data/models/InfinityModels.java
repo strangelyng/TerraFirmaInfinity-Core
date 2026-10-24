@@ -1,5 +1,7 @@
 package net.terrafirmainfinity.core.common.data.models;
 
+import com.gregtechceu.gtceu.GTCEu;
+import com.gregtechceu.gtceu.api.registry.registrate.builder.MachineBuilder;
 import com.tterrag.registrate.providers.DataGenContext;
 import com.tterrag.registrate.providers.RegistrateBlockstateProvider;
 import com.tterrag.registrate.util.nullness.NonNullBiConsumer;
@@ -8,9 +10,14 @@ import net.dries007.tfc.common.blocks.soil.ConnectedGrassBlock;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
+import net.neoforged.neoforge.client.model.generators.BlockModelProvider;
 import net.neoforged.neoforge.client.model.generators.ModelFile;
 import net.neoforged.neoforge.client.model.generators.MultiPartBlockStateBuilder;
 import net.terrafirmainfinity.core.InfinityCore;
+
+import static com.gregtechceu.gtceu.api.machine.property.GTMachineModelProperties.IS_ACTIVE;
+import static com.gregtechceu.gtceu.api.machine.property.GTMachineModelProperties.IS_FORMED;
+import static com.gregtechceu.gtceu.common.data.models.GTMachineModels.tieredHullTextures;
 
 public class InfinityModels {
     public static NonNullBiConsumer<DataGenContext<Block, Block>, RegistrateBlockstateProvider> createDwarvenCasingModel(String material) {
@@ -19,6 +26,33 @@ public class InfinityModels {
                     InfinityCore.id("block/casings/dwarven/%s/side".formatted(material)),
                     InfinityCore.id("block/casings/dwarven/%s/bottom".formatted(material)),
                     InfinityCore.id("block/casings/dwarven/%s/top".formatted(material))));
+        };
+    }
+
+    public static MachineBuilder.ModelInitializer createElectrodeHolderModel() {
+        return (ctx, prov, builder) -> {
+            BlockModelProvider models = prov.models();
+            var unformedModel = models.nested()
+                    .parent(models.getExistingFile(InfinityCore.id("block/machine/template/electrode_holder/block")));
+            tieredHullTextures(unformedModel, builder.getOwner().getTier());
+            var formedModel = models.nested()
+                    .parent(models.getExistingFile(GTCEu.id("block/cube/tinted/bottom_top")));
+            tieredHullTextures(formedModel, builder.getOwner().getTier());
+
+            builder.part(unformedModel)
+                    .condition(IS_FORMED, false)
+                    .end();
+            builder.part(formedModel)
+                    .condition(IS_FORMED, true)
+                    .end();
+            builder.part(InfinityCore.id("block/machine/template/electrode_holder/overlay"))
+                    .condition(IS_FORMED, true)
+                    .end();
+            builder.part(InfinityCore.id("block/machine/template/electrode_holder/active"))
+                    .condition(IS_ACTIVE, true)
+                    .end();
+
+            builder.addReplaceableTextures("bottom", "top", "side");
         };
     }
 

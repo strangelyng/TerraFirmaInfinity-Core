@@ -1,12 +1,16 @@
 package net.terrafirmainfinity.core.common;
 
 import com.eerussianguy.beneath.common.items.BeneathItems;
+import com.gregtechceu.gtceu.GTCEu;
 import com.gregtechceu.gtceu.api.GTValues;
 import com.gregtechceu.gtceu.api.data.tag.TagPrefix;
+import com.gregtechceu.gtceu.api.registry.registrate.provider.GTBlockstateProvider;
 import com.gregtechceu.gtceu.common.data.GTBlocks;
 import com.gregtechceu.gtceu.common.data.models.GTModels;
 import com.gregtechceu.gtceu.data.recipe.CustomTags;
+import com.tterrag.registrate.providers.DataGenContext;
 import com.tterrag.registrate.util.entry.BlockEntry;
+import com.tterrag.registrate.util.nullness.NonNullBiConsumer;
 import net.dries007.tfc.TerraFirmaCraft;
 import net.dries007.tfc.client.TFCSounds;
 import net.dries007.tfc.common.TFCTags;
@@ -86,11 +90,21 @@ public class InfinityBlocks {
             InfinityCore.id("block/casings/pipe/machine_casing_pipe_stainless_steel"));
 
     public static final BlockEntry<Block> ELECTRODE_ASSEMBLY = createCasingBlock("electrode_assembly",
-            InfinityCore.id("block/casings/unique/electrode_assembly"));
+            (ctx, prov) -> {
+                prov.simpleBlock(ctx.getEntry(), prov.models().cubeBottomTop(ctx.getName(),
+                        InfinityCore.id("block/casings/unique/electrode_assembly"),
+                        GTCEu.id("block/casings/solid/machine_casing_solid_steel"),
+                        GTCEu.id("block/casings/solid/machine_casing_solid_steel")
+                ));
+            });
 
 
     private static BlockEntry<Block> createCasingBlock(String name, ResourceLocation texture) {
         return createCasingBlock(name, null, texture);
+    }
+
+    private static BlockEntry<Block> createCasingBlock(String name, NonNullBiConsumer<DataGenContext<Block, ? extends Block>, GTBlockstateProvider> modelProvider) {
+        return createCasingBlock(name, null, modelProvider);
     }
 
     private static BlockEntry<Block> createCasingBlock(String name, String lang, ResourceLocation texture) {
@@ -104,6 +118,23 @@ public class InfinityBlocks {
                 .properties(p -> p.isValidSpawn((state, level, pos, value) -> false))
                 .addLayer(() -> RenderType::cutoutMipped)
                 .exBlockstate(GTModels.cubeAllModel(texture))
+                .tag(CustomTags.MINEABLE_WITH_CONFIG_VALID_PICKAXE_WRENCH)
+                .item(BlockItem::new).build();
+
+        return builder.register();
+    }
+
+    private static BlockEntry<Block> createCasingBlock(String name, String lang, NonNullBiConsumer<DataGenContext<Block, ? extends Block>, GTBlockstateProvider> modelProvider) {
+        var builder = InfinityRegistrate
+                .block(name, Block::new);
+
+        if (lang != null) builder.lang(lang);
+
+        builder
+                .initialProperties(() -> Blocks.IRON_BLOCK)
+                .properties(p -> p.isValidSpawn((state, level, pos, value) -> false))
+                .addLayer(() -> RenderType::cutoutMipped)
+                .exBlockstate(modelProvider)
                 .tag(CustomTags.MINEABLE_WITH_CONFIG_VALID_PICKAXE_WRENCH)
                 .item(BlockItem::new).build();
 
