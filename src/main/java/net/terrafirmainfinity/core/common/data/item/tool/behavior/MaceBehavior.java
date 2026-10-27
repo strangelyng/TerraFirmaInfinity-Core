@@ -146,6 +146,6 @@ public class MaceBehavior implements IToolBehavior<MaceBehavior> {
 
     @Override
     public ToolBehaviorType<MaceBehavior> getType() {
-        return InfinityToolBehaviors.MACE;
+        return InfinityToolBehaviors.MACE.value();
     }
 }

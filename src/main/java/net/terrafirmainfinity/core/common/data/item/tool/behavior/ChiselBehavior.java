@@ -92,6 +92,6 @@ public class ChiselBehavior implements IToolBehavior<ChiselBehavior> {
 
     @Override
     public ToolBehaviorType<ChiselBehavior> getType() {
-        return InfinityToolBehaviors.CHISEL;
+        return InfinityToolBehaviors.CHISEL.value();
     }
 }

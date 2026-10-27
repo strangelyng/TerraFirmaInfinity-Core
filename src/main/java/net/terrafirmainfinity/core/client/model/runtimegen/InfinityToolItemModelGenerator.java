@@ -62,7 +62,7 @@ public class InfinityToolItemModelGenerator {
 
                 if (GTUtil.resourceExists(location))
                     break;
-                toolIconSet = toolIconSet.parentIconset;
+                toolIconSet = toolIconSet.parentIconset.value();
             }
         }
 

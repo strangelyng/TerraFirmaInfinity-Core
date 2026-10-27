@@ -1,5 +1,6 @@
 package net.terrafirmainfinity.core.common.data.tag;
 
+import com.gregtechceu.gtceu.api.data.tag.TagPrefix;
 import com.tterrag.registrate.providers.RegistrateTagsProvider;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
@@ -16,5 +17,9 @@ public class InfinityTagsHandler {
 
     public static void initFluidTags(RegistrateTagsProvider<Fluid> provider) {
         InfinityFluidTags.init(provider);
+    }
+
+    public static void initTagPrefixTags(RegistrateTagsProvider.IntrinsicImpl<TagPrefix> provider) {
+        InfinityTagPrefixTags.init(provider);
     }
 }
