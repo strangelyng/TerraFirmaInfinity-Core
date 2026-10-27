@@ -123,6 +123,7 @@ public class InfinityCore {
 
     @SubscribeEvent
     public void modifyExistingMaterials(PostMaterialEvent event) {
+        InfinityTagPrefix.modifyExistingTagPrefixes();
         InfinityMaterials.modifyMaterials();
     }
 

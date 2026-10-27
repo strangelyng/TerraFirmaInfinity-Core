@@ -25,9 +25,6 @@ public class InfinityCoreGTAddon implements IGTAddon
 
     @Override
     public void addRecipes(RecipeOutput provider) {
-        // TODO: Figure out how to do this now
-        // ItemMaterialData.registerMaterialEntry(() -> TFCItems.KAOLIN_CLAY, ingot, InfinityMaterials.Kaolinite);
-
         InfinityRecipeHandler.testRecipes(provider);
         InfinityRecipeHandler.landslideRecipes(provider);
         InfinityMachineRecipes.init(provider);

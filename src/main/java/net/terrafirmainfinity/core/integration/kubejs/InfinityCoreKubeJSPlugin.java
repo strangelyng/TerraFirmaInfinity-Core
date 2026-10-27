@@ -5,9 +5,11 @@ import dev.latvian.mods.kubejs.plugin.KubeJSPlugin;
 import dev.latvian.mods.kubejs.script.BindingRegistry;
 import net.terrafirmainfinity.core.common.data.*;
 import net.terrafirmainfinity.core.common.data.item.InfinityToolTypes;
+import net.terrafirmainfinity.core.common.data.material.InfinityElements;
 import net.terrafirmainfinity.core.common.data.material.InfinityMaterialFlags;
 import net.terrafirmainfinity.core.common.data.material.InfinityMaterialIconSet;
 import net.terrafirmainfinity.core.common.data.material.InfinityMaterials;
+import net.terrafirmainfinity.core.util.InfinityKJSHelper;
 
 public class InfinityCoreKubeJSPlugin implements KubeJSPlugin {
     @Override
@@ -18,7 +20,7 @@ public class InfinityCoreKubeJSPlugin implements KubeJSPlugin {
     @Override
     public void registerBindings(BindingRegistry bindings) {
         bindings.add("InfinityMaterials", InfinityMaterials.class);
-//        bindings.add("InfinityElements", InfinityElements.class);
+        bindings.add("InfinityElements", InfinityElements.class);
         bindings.add("InfinityMachines", InfinityMachines.class);
         bindings.add("InfinityRecipeTypes", InfinityRecipeTypes.class);
         bindings.add("InfinityPropertyKey", InfinityPropertyKeys.class);
@@ -27,5 +29,6 @@ public class InfinityCoreKubeJSPlugin implements KubeJSPlugin {
         bindings.add("InfinityMaterialIconSet", InfinityMaterialIconSet.class);
         bindings.add("InfinityTagPrefix", InfinityTagPrefix.class);
         bindings.add("InfinityToolType", InfinityToolTypes.class);
+        bindings.add("InfinityHelpers", InfinityKJSHelper.class);
     }
 }

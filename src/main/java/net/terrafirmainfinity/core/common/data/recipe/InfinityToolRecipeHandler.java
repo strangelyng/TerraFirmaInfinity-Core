@@ -48,7 +48,7 @@ public class InfinityToolRecipeHandler {
             final MaterialEntry steelRing = new MaterialEntry(TagPrefix.ring, GTMaterials.Steel);
 
             if (material.hasFlag(InfinityMaterialFlags.GENERATE_DRILL_HEAD)) {
-                toolPrefix = TagPrefix.toolHeadDrill;
+                toolPrefix = TagPrefix.toolHeadDrill.value();
                 VanillaRecipeHelper.addShapedRecipe(provider, String.format("drill_head_%s", material.getName()),
                         ChemicalHelper.get(toolPrefix, material),
                         "XSX", "XSX", "ShS",
@@ -60,7 +60,7 @@ public class InfinityToolRecipeHandler {
             }
 
             if (material.hasFlag(InfinityMaterialFlags.GENERATE_CHAINSAW_HEAD)) {
-                toolPrefix = TagPrefix.toolHeadChainsaw;
+                toolPrefix = TagPrefix.toolHeadChainsaw.value();
                 VanillaRecipeHelper.addShapedRecipe(provider, String.format("chainsaw_head_%s", material.getName()),
                         ChemicalHelper.get(toolPrefix, material),
                         "SRS", "XhX", "SRS",
@@ -73,21 +73,21 @@ public class InfinityToolRecipeHandler {
             }
 
             if (material.hasFlag(InfinityMaterialFlags.GENERATE_WRENCH_HEAD)) {
-                toolPrefix = TagPrefix.toolHeadWrench;
+                toolPrefix = TagPrefix.toolHeadWrench.value();
 
                 addElectricToolRecipe(provider, toolPrefix,
                         new GTToolType[]{InfinityToolTypes.WRENCH_MV, GTToolType.WRENCH_HV, InfinityToolTypes.WRENCH_EV, GTToolType.WRENCH_IV}, material);
             }
 
             if (material.hasFlag(InfinityMaterialFlags.GENERATE_WIRE_CUTTER_HEAD)) {
-                toolPrefix = TagPrefix.toolHeadWireCutter;
+                toolPrefix = TagPrefix.toolHeadWireCutter.value();
 
                 addElectricToolRecipe(provider, toolPrefix,
                         new GTToolType[]{InfinityToolTypes.WIRE_CUTTER_MV, GTToolType.WIRE_CUTTER_HV, InfinityToolTypes.WIRE_CUTTER_EV, GTToolType.WIRE_CUTTER_IV}, material);
             }
 
             if (material.hasFlag(InfinityMaterialFlags.GENERATE_BUZZSAW_BLADE)) {
-                toolPrefix = TagPrefix.toolHeadBuzzSaw;
+                toolPrefix = TagPrefix.toolHeadBuzzSaw.value();
 
                 addElectricToolRecipe(provider, toolPrefix,
                         new GTToolType[]{InfinityToolTypes.BUZZSAW_MV, InfinityToolTypes.BUZZSAW_HV, InfinityToolTypes.BUZZSAW_EV, InfinityToolTypes.BUZZSAW_IV}, material);
@@ -107,7 +107,7 @@ public class InfinityToolRecipeHandler {
             }
 
             if (material.hasFlag(InfinityMaterialFlags.GENERATE_SCREWDRIVER_HEAD)) {
-                toolPrefix = TagPrefix.toolHeadScrewdriver;
+                toolPrefix = TagPrefix.toolHeadScrewdriver.value();
 
                 addElectricToolRecipe(provider, toolPrefix,
                         new GTToolType[]{InfinityToolTypes.SCREWDRIVER_MV, GTToolType.SCREWDRIVER_HV, InfinityToolTypes.SCREWDRIVER_EV, GTToolType.SCREWDRIVER_IV}, material);

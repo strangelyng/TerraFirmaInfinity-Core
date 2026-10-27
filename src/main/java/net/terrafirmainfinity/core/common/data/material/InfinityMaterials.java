@@ -11,10 +11,11 @@ import com.gregtechceu.gtceu.api.GTValues;
 import com.gregtechceu.gtceu.api.data.chemical.material.Material;
 import com.gregtechceu.gtceu.api.data.chemical.material.info.MaterialFlags;
 import com.gregtechceu.gtceu.api.data.chemical.material.properties.*;
-import com.gregtechceu.gtceu.api.data.chemical.material.stack.MaterialStack;
+import com.gregtechceu.gtceu.api.data.chemical.material.stack.DeferredMaterialStack;
 import com.gregtechceu.gtceu.api.fluids.FluidBuilder;
 import com.gregtechceu.gtceu.api.fluids.store.FluidStorageKey;
 import com.gregtechceu.gtceu.api.fluids.store.FluidStorageKeys;
+import com.gregtechceu.gtceu.api.registry.registrate.entry.MaterialRegistryEntry;
 import com.gregtechceu.gtceu.common.data.GTFluids;
 import com.rekindled.embers.RegistryManager;
 import com.sammy.malum.registry.common.block.MalumBlocks;
@@ -31,6 +32,7 @@ import net.terrafirmainfinity.core.common.data.InfinityPropertyKeys;
 import net.terrafirmainfinity.core.common.data.material.property.ElectrodeProperty;
 
 import java.util.HashMap;
+import java.util.List;
 
 import static com.gregtechceu.gtceu.api.GTValues.*;
 import static com.gregtechceu.gtceu.api.data.tag.TagPrefix.*;
@@ -39,64 +41,64 @@ import static net.terrafirmainfinity.core.common.data.InfinityTagPrefix.*;
 
 public class InfinityMaterials {
     // Integration Materials
-    public static Material Dawnstone; // Embers
-    public static Material Ember; // Embers
+    public static MaterialRegistryEntry Dawnstone; // Embers
+    public static MaterialRegistryEntry Ember; // Embers
 
-    public static Material Pewter; // Eidolon Repraised
+    public static MaterialRegistryEntry Pewter; // Eidolon Repraised
 
-    public static Material Fluix; // Applied Energistics 2
+    public static MaterialRegistryEntry Fluix; // Applied Energistics 2
 
-    public static Material HallowedGold; // Malum
-    public static Material MalignantPewter; // Malum
-    public static Material SoulstainedSteel; // Malum
+    public static MaterialRegistryEntry HallowedGold; // Malum
+    public static MaterialRegistryEntry MalignantPewter; // Malum
+    public static MaterialRegistryEntry SoulstainedSteel; // Malum
 
-    public static Material Kaolinite; // TFC
-    public static Material PigIron; // TFC
-    public static Material WeakSteel; // TFC
-    public static Material WeakBlueSteel; // TFC
-    public static Material WeakRedSteel; // TFC
+    public static MaterialRegistryEntry Kaolinite; // TFC
+    public static MaterialRegistryEntry PigIron; // TFC
+    public static MaterialRegistryEntry WeakSteel; // TFC
+    public static MaterialRegistryEntry WeakBlueSteel; // TFC
+    public static MaterialRegistryEntry WeakRedSteel; // TFC
 
     // Ore Materials
-    public static Material Bismuthinite; // TFC
-    public static Material Cryolite; // TFC
+    public static MaterialRegistryEntry Bismuthinite; // TFC
+    public static MaterialRegistryEntry Cryolite; // TFC
 
-    public static Material Acanthite; // Silver Sulfide
-    public static Material Arsenopyrite; // Iron Arsenic Sulfide
-    public static Material Columbite; // Niobium Oxide
-    public static Material Fluorite; // Calcium Fluoride
-    public static Material Hafnon; // Hafnium Silicate
-    public static Material Millerite; // Nickel Sulfide
-    public static Material Petalite; // Lithium-Aluminium Silicate
-    public static Material Thorianite; // Thorium Oxide
-    public static Material Thorite; // Thorium Silicate
-    public static Material Vanadinite; // Lead Chlorovanadate
-    public static Material Wolframite; // Tungsten Oxide
-    public static Material Zircon; // Zirconium Silicate
+    public static MaterialRegistryEntry Acanthite; // Silver Sulfide
+    public static MaterialRegistryEntry Arsenopyrite; // Iron Arsenic Sulfide
+    public static MaterialRegistryEntry Columbite; // Niobium Oxide
+    public static MaterialRegistryEntry Fluorite; // Calcium Fluoride
+    public static MaterialRegistryEntry Hafnon; // Hafnium Silicate
+    public static MaterialRegistryEntry Millerite; // Nickel Sulfide
+    public static MaterialRegistryEntry Petalite; // Lithium-Aluminium Silicate
+    public static MaterialRegistryEntry Thorianite; // Thorium Oxide
+    public static MaterialRegistryEntry Thorite; // Thorium Silicate
+    public static MaterialRegistryEntry Vanadinite; // Lead Chlorovanadate
+    public static MaterialRegistryEntry Wolframite; // Tungsten Oxide
+    public static MaterialRegistryEntry Zircon; // Zirconium Silicate
 
-    public static Material Sperrylite; // Platinum Arsenide
+    public static MaterialRegistryEntry Sperrylite; // Platinum Arsenide
 
-    public static Material Lignite;
-    public static Material Anthracite;
+    public static MaterialRegistryEntry Lignite;
+    public static MaterialRegistryEntry Anthracite;
 
     // Compounds
-    public static Material Alumina; // Al2O3
-    public static Material Beryllia; // BeO
-    public static Material ChromiumOxide; // Cr2O3
-    public static Material HydrogenChloride; // HCl
-    public static Material HydrogenFluoride; // HF
+    public static MaterialRegistryEntry Alumina; // Al2O3
+    public static MaterialRegistryEntry Beryllia; // BeO
+    public static MaterialRegistryEntry ChromiumOxide; // Cr2O3
+    public static MaterialRegistryEntry HydrogenChloride; // HCl
+    public static MaterialRegistryEntry HydrogenFluoride; // HF
 
     // Alloys
-    public static Material Ferrosilicon; // FeSi3
-    public static Material Ferrovanadium; // V3Fe2
+    public static MaterialRegistryEntry Ferrosilicon; // FeSi3
+    public static MaterialRegistryEntry Ferrovanadium; // V3Fe2
 
     // Rock Materials
-    public static Material FelsicIgneous; // Granite, Rhyolite
-    public static Material IntermediateIgneous; // Diorite, Tuff, Andesite, Dacite
-    public static Material MaficIgneous; // Gabbro, Basalt
-    public static Material ClasticSedimentary; // Shale, Claystone, Conglomerate
-    public static Material CarbonateSedimentary; // Limestone, Dolomite, Chalk
-    public static Material SiliceousSedimentary; // Chert
-    public static Material Metamorphic; // Quartzite, Slate, Phyllite, Schist, Gneiss, Marble
+    public static MaterialRegistryEntry FelsicIgneous; // Granite, Rhyolite
+    public static MaterialRegistryEntry IntermediateIgneous; // Diorite, Tuff, Andesite, Dacite
+    public static MaterialRegistryEntry MaficIgneous; // Gabbro, Basalt
+    public static MaterialRegistryEntry ClasticSedimentary; // Shale, Claystone, Conglomerate
+    public static MaterialRegistryEntry CarbonateSedimentary; // Limestone, Dolomite, Chalk
+    public static MaterialRegistryEntry SiliceousSedimentary; // Chert
+    public static MaterialRegistryEntry Metamorphic; // Quartzite, Slate, Phyllite, Schist, Gneiss, Marble
 
     public static void init() {
         InfinityCompoundMaterials.register();
@@ -121,101 +123,110 @@ public class InfinityMaterials {
         Borax.setProperty(PropertyKey.GEM, new GemProperty());
 
         // Add Flags
-        Bismuth.addFlags(InfinityMaterialFlags.GENERATE_DOUBLE_INGOT, MaterialFlags.GENERATE_PLATE, MaterialFlags.GENERATE_ROD);
-        BismuthBronze.addFlags(InfinityMaterialFlags.GENERATE_DOUBLE_INGOT);
-        BlackBronze.addFlags(InfinityMaterialFlags.GENERATE_DOUBLE_INGOT);
-        Bronze.addFlags(InfinityMaterialFlags.GENERATE_DOUBLE_INGOT);
-        Brass.addFlags(InfinityMaterialFlags.GENERATE_DOUBLE_INGOT);
-        Copper.addFlags(InfinityMaterialFlags.GENERATE_DOUBLE_INGOT);
-        Gold.addFlags(InfinityMaterialFlags.GENERATE_DOUBLE_INGOT);
-        Nickel.addFlags(InfinityMaterialFlags.GENERATE_DOUBLE_INGOT, MaterialFlags.GENERATE_ROD);
-        RoseGold.addFlags(InfinityMaterialFlags.GENERATE_DOUBLE_INGOT);
-        Silver.addFlags(InfinityMaterialFlags.GENERATE_DOUBLE_INGOT);
-        Tin.addFlags(InfinityMaterialFlags.GENERATE_DOUBLE_INGOT);
-        Zinc.addFlags(InfinityMaterialFlags.GENERATE_DOUBLE_INGOT);
-        SterlingSilver.addFlags(InfinityMaterialFlags.GENERATE_DOUBLE_INGOT);
-        WroughtIron.addFlags(InfinityMaterialFlags.GENERATE_DOUBLE_INGOT);
-        Iron.addFlags(InfinityMaterialFlags.GENERATE_DOUBLE_INGOT);
-        Steel.addFlags(InfinityMaterialFlags.GENERATE_DOUBLE_INGOT);
-        BlackSteel.addFlags(InfinityMaterialFlags.GENERATE_DOUBLE_INGOT, MaterialFlags.GENERATE_BOLT_SCREW);
-        BlueSteel.addFlags(InfinityMaterialFlags.GENERATE_DOUBLE_INGOT);
-        RedSteel.addFlags(InfinityMaterialFlags.GENERATE_DOUBLE_INGOT);
+        Bismuth.value().addFlags(InfinityMaterialFlags.GENERATE_DOUBLE_INGOT, MaterialFlags.GENERATE_PLATE, MaterialFlags.GENERATE_ROD);
+        BismuthBronze.value().addFlags(InfinityMaterialFlags.GENERATE_DOUBLE_INGOT);
+        BlackBronze.value().addFlags(InfinityMaterialFlags.GENERATE_DOUBLE_INGOT);
+        Bronze.value().addFlags(InfinityMaterialFlags.GENERATE_DOUBLE_INGOT);
+        Brass.value().addFlags(InfinityMaterialFlags.GENERATE_DOUBLE_INGOT);
+        Copper.value().addFlags(InfinityMaterialFlags.GENERATE_DOUBLE_INGOT);
+        Gold.value().addFlags(InfinityMaterialFlags.GENERATE_DOUBLE_INGOT);
+        Nickel.value().addFlags(InfinityMaterialFlags.GENERATE_DOUBLE_INGOT, MaterialFlags.GENERATE_ROD);
+        RoseGold.value().addFlags(InfinityMaterialFlags.GENERATE_DOUBLE_INGOT);
+        Silver.value().addFlags(InfinityMaterialFlags.GENERATE_DOUBLE_INGOT);
+        Tin.value().addFlags(InfinityMaterialFlags.GENERATE_DOUBLE_INGOT);
+        Zinc.value().addFlags(InfinityMaterialFlags.GENERATE_DOUBLE_INGOT);
+        SterlingSilver.value().addFlags(InfinityMaterialFlags.GENERATE_DOUBLE_INGOT);
+        WroughtIron.value().addFlags(InfinityMaterialFlags.GENERATE_DOUBLE_INGOT);
+        Iron.value().addFlags(InfinityMaterialFlags.GENERATE_DOUBLE_INGOT);
+        Steel.value().addFlags(InfinityMaterialFlags.GENERATE_DOUBLE_INGOT);
+        BlackSteel.value().addFlags(InfinityMaterialFlags.GENERATE_DOUBLE_INGOT, MaterialFlags.GENERATE_BOLT_SCREW);
+        BlueSteel.value().addFlags(InfinityMaterialFlags.GENERATE_DOUBLE_INGOT);
+        RedSteel.value().addFlags(InfinityMaterialFlags.GENERATE_DOUBLE_INGOT);
 
-        Carbon.addFlags(MaterialFlags.GENERATE_ROD, MaterialFlags.GENERATE_LONG_ROD);
-        Graphite.addFlags(MaterialFlags.GENERATE_ROD, MaterialFlags.GENERATE_LONG_ROD);
+        Carbon.value().addFlags(MaterialFlags.GENERATE_ROD, MaterialFlags.GENERATE_LONG_ROD);
+        Graphite.value().addFlags(MaterialFlags.GENERATE_ROD, MaterialFlags.GENERATE_LONG_ROD);
 
         Carbon.setProperty(InfinityPropertyKeys.ELECTRODE, new ElectrodeProperty(100, 256));
         Graphite.setProperty(InfinityPropertyKeys.ELECTRODE, new ElectrodeProperty(120, 512));
 
-        Lead.addFlags(MaterialFlags.GENERATE_FRAME);
+        Lead.value().addFlags(MaterialFlags.GENERATE_FRAME);
 
-        // Modify Components
-        Alunite.setComponents(
-                new MaterialStack(Potassium, 1),
-                new MaterialStack(Aluminium, 3),
-                new MaterialStack(Sulfur, 2),
-                new MaterialStack(Hydrogen, 6),
-                new MaterialStack(Oxygen, 14)
-        ).setFormula("KAl3S2H6O14", true);
+        // Modify Components (deferred-material-registration)
+        Alunite.getMaterialInfo().setComponents(List.of(
+                new DeferredMaterialStack(Potassium, 1),
+                new DeferredMaterialStack(Aluminium, 3),
+                new DeferredMaterialStack(Sulfur, 2),
+                new DeferredMaterialStack(Hydrogen, 6),
+                new DeferredMaterialStack(Oxygen, 14))
+        );
+        Alunite.get().setFormula("KAl3S2H6O14", true);
 
-        Sodalite.setComponents(
-                new MaterialStack(Sodium, 4),
-                new MaterialStack(Aluminium, 3),
-                new MaterialStack(Silicon, 3),
-                new MaterialStack(Oxygen, 12),
-                new MaterialStack(Chlorine, 1)
-        ).setFormula("Na4(Al3Si3O12)Cl", true);
+        Sodalite.getMaterialInfo().setComponents(List.of(
+                new DeferredMaterialStack(Sodium, 4),
+                new DeferredMaterialStack(Aluminium, 3),
+                new DeferredMaterialStack(Silicon, 3),
+                new DeferredMaterialStack(Oxygen, 12),
+                new DeferredMaterialStack(Chlorine, 1))
+        );
+        Sodalite.get().setFormula("Na4(Al3Si3O12)Cl", true);
 
-        Lazurite.setComponents(
-                new MaterialStack(Sodium, 3),
-                new MaterialStack(Calcium, 1),
-                new MaterialStack(Aluminium, 3),
-                new MaterialStack(Silicon, 3),
-                new MaterialStack(Oxygen, 12),
-                new MaterialStack(Sulfur, 1)
-        ).setFormula("(Na3Ca)Al3Si3O12S", true);
+        Lazurite.getMaterialInfo().setComponents(List.of(
+                new DeferredMaterialStack(Sodium, 3),
+                new DeferredMaterialStack(Calcium, 1),
+                new DeferredMaterialStack(Aluminium, 3),
+                new DeferredMaterialStack(Silicon, 3),
+                new DeferredMaterialStack(Oxygen, 12),
+                new DeferredMaterialStack(Sulfur, 1))
+        );
+        Lazurite.get().setFormula("(Na3Ca)Al3Si3O12S", true);
 
-        Lepidolite.setComponents(
-                new MaterialStack(Potassium, 1),
-                new MaterialStack(Lithium, 2),
-                new MaterialStack(Aluminium, 1),
-                new MaterialStack(Silicon, 4),
-                new MaterialStack(Oxygen, 10),
-                new MaterialStack(Fluorine, 2)
-        ).setFormula("KLi2Al(Si4O10)F2", true);
+        Lepidolite.getMaterialInfo().setComponents(List.of(
+                new DeferredMaterialStack(Potassium, 1),
+                new DeferredMaterialStack(Lithium, 2),
+                new DeferredMaterialStack(Aluminium, 1),
+                new DeferredMaterialStack(Silicon, 4),
+                new DeferredMaterialStack(Oxygen, 10),
+                new DeferredMaterialStack(Fluorine, 2))
+        );
+        Lepidolite.get().setFormula("KLi2Al(Si4O10)F2", true);
 
-        Ruby.setComponents(
-                new MaterialStack(Alumina, 1),
-                new MaterialStack(ChromiumOxide, 1)
-        ).setFormula("(Al2O3)(Cr2O3)", true);
+        Ruby.getMaterialInfo().setComponents(List.of(
+                new DeferredMaterialStack(Alumina, 1),
+                new DeferredMaterialStack(ChromiumOxide, 1))
+        );
+        Ruby.get().setFormula("(Al2O3)(Cr2O3)", true);
 
-        Sapphire.setComponents(
-                new MaterialStack(Alumina, 1)
-        ).setFormula("(Al2O3)", true);
+        Sapphire.getMaterialInfo().setComponents(List.of(
+                new DeferredMaterialStack(Alumina, 1))
+        );
+        Sapphire.get().setFormula("(Al2O3)", true);
 
-        GreenSapphire.setComponents(
-                new MaterialStack(Alumina, 1)
-        ).setFormula("(Al2O3)", true);
+        GreenSapphire.getMaterialInfo().setComponents(List.of(
+                new DeferredMaterialStack(Alumina, 1))
+        );
+        GreenSapphire.get().setFormula("(Al2O3)", true);
 
-        AllylChloride.setComponents(
-                new MaterialStack(Carbon, 2),
-                new MaterialStack(Methane, 1),
-                new MaterialStack(HydrogenChloride, 1)
-        ).setFormula("C3H5Cl", true);
+        AllylChloride.getMaterialInfo().setComponents(List.of(
+                new DeferredMaterialStack(Carbon, 2),
+                new DeferredMaterialStack(Methane, 1),
+                new DeferredMaterialStack(HydrogenChloride, 1))
+        );
+        AllylChloride.get().setFormula("C3H5Cl", true);
 
-        AmmoniumChloride.setComponents(
-                new MaterialStack(Ammonia, 1),
-                new MaterialStack(HydrogenChloride, 1)
-        ).setFormula("NH4Cl", true);
+        AmmoniumChloride.getMaterialInfo().setComponents(List.of(
+                new DeferredMaterialStack(Ammonia, 1),
+                new DeferredMaterialStack(HydrogenChloride, 1))
+        );
+        AmmoniumChloride.get().setFormula("NH4Cl", true);
 
         /* Modify Properties */
         IngotProperty ingotProp = WroughtIron.getProperty(PropertyKey.INGOT);
         ingotProp.setMacerateInto(Iron);
-        WroughtIron.removeProperty(PropertyKey.FLUID);
+//        WroughtIron.removeProperty(PropertyKey.FLUID); // TODO: Handle on KJS side
 
         ingotProp = AnnealedCopper.getProperty(PropertyKey.INGOT);
         ingotProp.setMacerateInto(Copper);
-        AnnealedCopper.removeProperty(PropertyKey.FLUID);
+//        AnnealedCopper.removeProperty(PropertyKey.FLUID); // TODO: Handle on KJS side
 
         // Remove Blast Properties
         BismuthBronze.removeProperty(PropertyKey.BLAST);
@@ -274,55 +285,6 @@ public class InfinityMaterials {
         oreProp = Uvarovite.getProperty(PropertyKey.ORE); // New Ore Property
         oreProp.setOreByProducts(GarnetYellow, Calcium);
 
-        // TerraFirmaInfinity Ores Byproducts
-        oreProp = Ember.getProperty(PropertyKey.ORE);
-        oreProp.setWashedIn(Mercury);
-        oreProp.setOreByProducts(Sulfur, Sulfur, Ember, Gold);
-
-        oreProp = Acanthite.getProperty(PropertyKey.ORE);
-        oreProp.setOreByProducts(Sulfur, Galena, Silver);
-
-        oreProp = Arsenopyrite.getProperty(PropertyKey.ORE);
-        oreProp.setOreByProducts(Sulfur, Pyrite, Arsenic);
-
-        oreProp = Cryolite.getProperty(PropertyKey.ORE);
-        oreProp.setOreByProducts(Cryolite, Sodium, Pyrite);
-
-        oreProp = Columbite.getProperty(PropertyKey.ORE);
-        oreProp.setOreByProducts(Manganese, Tantalite, Thorite);
-
-        oreProp = Fluorite.getProperty(PropertyKey.ORE);
-        oreProp.setOreByProducts(Fluorite, Calcium, Apatite);
-
-        oreProp = Hafnon.getProperty(PropertyKey.ORE);
-        oreProp.setOreByProducts(Zircon, Uraninite, RareEarth);
-
-        oreProp = Millerite.getProperty(PropertyKey.ORE);
-        oreProp.setOreByProducts(Pentlandite, Nickel, Sulfur);
-
-        oreProp = Petalite.getProperty(PropertyKey.ORE);
-        oreProp.setOreByProducts(Silicon, Petalite, Spodumene);
-
-        oreProp = Sperrylite.getProperty(PropertyKey.ORE);
-        oreProp.setOreByProducts(Nickel, Nickel, Pyrite, Platinum);
-        oreProp.setWashedIn(Mercury);
-
-        oreProp = Thorianite.getProperty(PropertyKey.ORE);
-        oreProp.setOreByProducts(Thorianite, Neodymium, RareEarth);
-        oreProp.setSeparatedInto(Neodymium);
-
-        oreProp = Thorite.getProperty(PropertyKey.ORE);
-        oreProp.setOreByProducts(Uraninite, Zircon, RareEarth);
-
-        oreProp = Vanadinite.getProperty(PropertyKey.ORE);
-        oreProp.setOreByProducts(Galena, Wulfenite, Vanadium);
-
-        oreProp = Wolframite.getProperty(PropertyKey.ORE);
-        oreProp.setOreByProducts(Iron, Manganese, Wolframite);
-
-        oreProp = Zircon.getProperty(PropertyKey.ORE);
-        oreProp.setOreByProducts(Zircon, Hafnon, Thorite);
-
         // Adjust Fluid Temperature of Steels
         Steel.removeProperty(PropertyKey.FLUID);
         BlackSteel.removeProperty(PropertyKey.FLUID);
@@ -374,29 +336,27 @@ public class InfinityMaterials {
         // Coal is not a conventional ore
         Coal.removeProperty(PropertyKey.ORE);
 
-        CassiteriteSand.addFlags(InfinityMaterialFlags.GENERATE_SAND_ORES);
-        GlauconiteSand.addFlags(InfinityMaterialFlags.GENERATE_SAND_ORES);
-        Oilsands.addFlags(InfinityMaterialFlags.GENERATE_SAND_ORES);
-        GraniticMineralSand.addFlags(InfinityMaterialFlags.GENERATE_SAND_ORES);
-        GarnetSand.addFlags(InfinityMaterialFlags.GENERATE_SAND_ORES);
-        BasalticMineralSand.addFlags(InfinityMaterialFlags.GENERATE_SAND_ORES);
-
-        // Modify Hazards
-        HazardProperty.HazardTrigger.INHALATION.affectedTagPrefixes().add(powder);
+        CassiteriteSand.value().addFlags(InfinityMaterialFlags.GENERATE_SAND_ORES);
+        GlauconiteSand.value().addFlags(InfinityMaterialFlags.GENERATE_SAND_ORES);
+        Oilsands.value().addFlags(InfinityMaterialFlags.GENERATE_SAND_ORES);
+        GraniticMineralSand.value().addFlags(InfinityMaterialFlags.GENERATE_SAND_ORES);
+        GarnetSand.value().addFlags(InfinityMaterialFlags.GENERATE_SAND_ORES);
+        BasalticMineralSand.value().addFlags(InfinityMaterialFlags.GENERATE_SAND_ORES);
 
         /// Remove Ignored ///
 
         // Vanilla Materials
-        block.removeIgnored(Iron);
-        rawOre.removeIgnored(Iron);
-        nugget.removeIgnored(Iron);
-        ingot.removeIgnored(Iron);
+        block.value().removeIgnored(Iron.value());
+        rawOre.value().removeIgnored(Iron.value());
+        nugget.value().removeIgnored(Iron.value());
+        ingot.value().removeIgnored(Iron.value());
 
-        rawOre.removeIgnored(Copper);
+        rawOre.value().removeIgnored(Copper.value());
 
-        rawOre.removeIgnored(Gold);
+        rawOre.value().removeIgnored(Gold.value());
 
         /// SET IGNORED ///
+        ingot.setIgnored(Kaolinite, () -> TFCItems.KAOLIN_CLAY);
 
         // Create Materials
         ingot.setIgnored(Brass, () -> AllItems.BRASS_INGOT);
@@ -461,7 +421,7 @@ public class InfinityMaterials {
         gemFlawless.setIgnored(Anthracite);
         gemExquisite.setIgnored(Anthracite);
 
-        ingot.removeIgnored(Iron);
+        ingot.value().removeIgnored(Iron.value());
         ingot.setIgnored(Iron, // Iron to Cast Iron
                 () -> TFCItems.METAL_ITEMS.get(Metal.CAST_IRON).get(Metal.ItemType.INGOT));
 
@@ -484,7 +444,7 @@ public class InfinityMaterials {
                 () -> TFCItems.METAL_ITEMS.get(Metal.RED_STEEL).get(Metal.ItemType.INGOT));
 
         // TFC Tool Materials
-        var tfcMetals = new HashMap<Material, Metal>();
+        var tfcMetals = new HashMap<MaterialRegistryEntry, Metal>();
         tfcMetals.put(Copper, Metal.COPPER);
         tfcMetals.put(BismuthBronze, Metal.BISMUTH_BRONZE);
         tfcMetals.put(Bronze, Metal.BRONZE);
@@ -542,7 +502,7 @@ public class InfinityMaterials {
             stairsPlated.setIgnored(material, () -> metalBlocks.get(Metal.BlockType.BLOCK_STAIRS));
         });
 
-        var oxidizableMetals = new HashMap<Material, Metal>();
+        var oxidizableMetals = new HashMap<MaterialRegistryEntry, Metal>();
         oxidizableMetals.put(Bronze, Metal.BRONZE);
         oxidizableMetals.put(Copper, Metal.COPPER);
         oxidizableMetals.put(Steel, Metal.STEEL);
@@ -580,7 +540,7 @@ public class InfinityMaterials {
         bell.setIgnored(Gold, () -> Blocks.BELL);
 
         // TFC Graded Ores
-        var tfcGradedOres = new HashMap<Material, Ore>();
+        var tfcGradedOres = new HashMap<MaterialRegistryEntry, Ore>();
         tfcGradedOres.put(Bismuthinite, Ore.BISMUTHINITE);
         tfcGradedOres.put(Cassiterite, Ore.CASSITERITE);
         tfcGradedOres.put(Garnierite, Ore.GARNIERITE);
@@ -608,7 +568,7 @@ public class InfinityMaterials {
         });
 
         // TFC Ungraded Ores
-        var tfcOres = new HashMap<Material, Ore>();
+        var tfcOres = new HashMap<MaterialRegistryEntry, Ore>();
         tfcOres.put(Amethyst, Ore.AMETHYST);
         tfcOres.put(Borax, Ore.BORAX);
         tfcOres.put(Cinnabar, Ore.CINNABAR);
@@ -661,7 +621,7 @@ public class InfinityMaterials {
         plate.setIgnored(Dawnstone, RegistryManager.DAWNSTONE_PLATE);
         nugget.setIgnored(Dawnstone, RegistryManager.DAWNSTONE_NUGGET);
         block.setIgnored(Dawnstone, RegistryManager.DAWNSTONE_BLOCK);
-        GTFluids.handleNonMaterialFluids(Dawnstone, RegistryManager.MOLTEN_DAWNSTONE.FLUID::get);
+        GTFluids.handleNonMaterialFluids(Dawnstone.value(), RegistryManager.MOLTEN_DAWNSTONE.FLUID::get);
 
         gem.setIgnored(Ember, RegistryManager.EMBER_CRYSTAL);
         dust.setIgnored(Ember, RegistryManager.EMBER_GRIT);
@@ -692,13 +652,13 @@ public class InfinityMaterials {
         mat.setProperty(PropertyKey.FLUID, fluidProp);
     }
 
-    public static void addFluidToExisting(FluidStorageKey key, int temp, Material mat) {
+    public static void addFluidToExisting(FluidStorageKey key, int temp, MaterialRegistryEntry mat) {
         FluidProperty fluidProp = new FluidProperty();
         fluidProp.getStorage().enqueueRegistration(key, new FluidBuilder().temperature(temp));
         mat.setProperty(PropertyKey.FLUID, fluidProp);
     }
 
-    public static void addFluidToExisting(FluidStorageKey key, int temp, Material mat, String translationKey) {
+    public static void addFluidToExisting(FluidStorageKey key, int temp, MaterialRegistryEntry mat, String translationKey) {
         FluidProperty fluidProp = new FluidProperty();
         fluidProp.getStorage().enqueueRegistration(key, new FluidBuilder().temperature(temp).translation(translationKey));
         mat.setProperty(PropertyKey.FLUID, fluidProp);

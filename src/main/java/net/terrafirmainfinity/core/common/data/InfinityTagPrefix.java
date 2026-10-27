@@ -1,17 +1,17 @@
 package net.terrafirmainfinity.core.common.data;
 
-import com.gregtechceu.gtceu.GTCEu;
 import com.gregtechceu.gtceu.api.GTValues;
-import com.gregtechceu.gtceu.api.block.OreBlock;
 import com.gregtechceu.gtceu.api.data.chemical.material.Material;
 import com.gregtechceu.gtceu.api.data.chemical.material.info.MaterialIconType;
 import com.gregtechceu.gtceu.api.data.chemical.material.properties.PropertyKey;
 import com.gregtechceu.gtceu.api.data.tag.TagPrefix;
+import com.gregtechceu.gtceu.api.data.tag.TagType;
 import com.gregtechceu.gtceu.api.item.tool.GTToolType;
+import com.gregtechceu.gtceu.api.registry.registrate.entry.TagPrefixEntry;
 import com.gregtechceu.gtceu.common.data.GTMaterials;
-import net.dries007.tfc.TerraFirmaCraft;
 import net.dries007.tfc.common.blocks.rock.Rock;
 import net.dries007.tfc.common.blocks.soil.SandBlockType;
+import net.dries007.tfc.util.Helpers;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.BlockTags;
@@ -22,21 +22,23 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.terrafirmainfinity.core.common.data.item.InfinityToolTypes;
 import net.terrafirmainfinity.core.common.data.material.InfinityMaterialFlags;
 
+import java.util.List;
 import java.util.Locale;
 import java.util.function.Predicate;
 import java.util.function.Supplier;
 
 import static com.gregtechceu.gtceu.api.data.tag.TagPrefix.Conditions.*;
+import static net.terrafirmainfinity.core.InfinityCore.InfinityRegistrate;
 
 public class InfinityTagPrefix {
     public static final Predicate<Material> hasElectrodeProperty = mat -> mat.hasProperty(InfinityPropertyKeys.ELECTRODE);
 
     /** TFC Items */
-    public static final TagPrefix ingotDouble = new TagPrefix(GTCEu.id("ingot_double"))
+    public static final TagPrefixEntry ingotDouble = InfinityRegistrate.tagPrefix("ingot_double")
             .idPattern("%s_double_ingot")
             .defaultTagPath("double_ingots/%s")
             .unformattedTagPath("double_ingots")
-            .langValue("%s Double Ingot")
+            .lang("%s Double Ingot")
             .materialAmount(GTValues.M*2)
             .materialIconType(MaterialIconType.ingotDouble)
             .unificationEnabled(true)
@@ -44,397 +46,526 @@ public class InfinityTagPrefix {
             .generateItem(true)
             .generationCondition(hasIngotProperty.and(
                     mat -> mat.hasFlag(InfinityMaterialFlags.GENERATE_DOUBLE_INGOT)
-            ));
+            ))
+            .register();
 
-    public static final TagPrefix powder = new TagPrefix(GTCEu.id("powder"))
+    public static final TagPrefixEntry powder = InfinityRegistrate.tagPrefix("powder")
             .idPattern("%s_powder")
             .defaultTagPath("powders/%s")
             .unformattedTagPath("powders")
-            .langValue("%s Powder")
+            .lang("%s Powder")
             .materialAmount(GTValues.M / 4)
             .materialIconType(InfinityMaterialIconType.powder)
             .unificationEnabled(true)
             .generateItem(true)
-            .generationCondition(hasOreProperty);
+            .generationCondition(hasOreProperty)
+            .register();
 
-    public static final TagPrefix oreSmall = new TagPrefix(GTCEu.id("small_ore"))
+    public static final TagPrefixEntry oreSmall = InfinityRegistrate.tagPrefix("small_ore")
             .materialAmount(GTValues.M / 9)
-            .unificationEnabled(true);
+            .unificationEnabled(true)
+            .register();
 
-    public static final TagPrefix poorRawOre = new TagPrefix(GTCEu.id("poor_raw_ore"))
+    public static final TagPrefixEntry poorRawOre = InfinityRegistrate.tagPrefix("poor_raw_ore")
             .idPattern("poor_raw_%s")
             .defaultTagPath("poor_raw_materials/%s")
             .unformattedTagPath("poor_raw_materials")
-            .langValue("Poor Raw %s")
+            .lang("Poor Raw %s")
             .materialIconType(InfinityMaterialIconType.poorRawOre)
             .unificationEnabled(true)
             .generateItem(true)
-            .generationCondition(hasOreProperty);
+            .generationCondition(hasOreProperty)
+            .register();
 
-    public static final TagPrefix richRawOre = new TagPrefix(GTCEu.id("rich_raw_ore"))
+    public static final TagPrefixEntry richRawOre = InfinityRegistrate.tagPrefix("rich_raw_ore")
             .idPattern("rich_raw_%s")
             .defaultTagPath("rich_raw_materials/%s")
             .unformattedTagPath("rich_raw_materials")
-            .langValue("Rich Raw %s")
+            .lang("Rich Raw %s")
             .materialIconType(InfinityMaterialIconType.richRawOre)
             .unificationEnabled(true)
             .generateItem(true)
-            .generationCondition(hasOreProperty);
+            .generationCondition(hasOreProperty)
+            .register();
 
     /** TFC Tool Heads */
-    public static final TagPrefix toolHeadPickaxe = new TagPrefix(GTCEu.id("pickaxe_head"))
-            .langValue("%s Pickaxe Head")
+    public static final TagPrefixEntry toolHeadPickaxe = InfinityRegistrate.tagPrefix("pickaxe_head")
+            .lang("%s Pickaxe Head")
             .materialAmount(GTValues.M)
             .materialIconType(MaterialIconType.toolHeadPickaxe)
             .unificationEnabled(true)
             .enableRecycling()
             .generateItem(true)
             .generationCondition(hasToolProperty.and(
-                    mat -> mat.getProperty(PropertyKey.TOOL).hasType(GTToolType.PICKAXE)));
+                    mat -> mat.getProperty(PropertyKey.TOOL).hasType(GTToolType.PICKAXE)))
+            .register();
 
     // TODO: Propick
 
-    public static final TagPrefix toolHeadAxe = new TagPrefix(GTCEu.id("axe_head"))
-            .langValue("%s Axe Head")
+    public static final TagPrefixEntry toolHeadAxe = InfinityRegistrate.tagPrefix("axe_head")
+            .lang("%s Axe Head")
             .materialAmount(GTValues.M)
             .materialIconType(MaterialIconType.toolHeadAxe)
             .unificationEnabled(true)
             .enableRecycling()
             .generateItem(true)
             .generationCondition(hasToolProperty.and(
-                    mat -> mat.getProperty(PropertyKey.TOOL).hasType(GTToolType.AXE)));
+                    mat -> mat.getProperty(PropertyKey.TOOL).hasType(GTToolType.AXE)))
+            .register();
 
-    public static final TagPrefix toolHeadShovel = new TagPrefix(GTCEu.id("shovel_head"))
-            .langValue("%s Shovel Head")
+    public static final TagPrefixEntry toolHeadShovel = InfinityRegistrate.tagPrefix("shovel_head")
+            .lang("%s Shovel Head")
             .materialAmount(GTValues.M)
             .materialIconType(MaterialIconType.toolHeadShovel)
             .unificationEnabled(true)
             .enableRecycling()
             .generateItem(true)
             .generationCondition(hasToolProperty.and(
-                    mat -> mat.getProperty(PropertyKey.TOOL).hasType(GTToolType.SHOVEL)));
+                    mat -> mat.getProperty(PropertyKey.TOOL).hasType(GTToolType.SHOVEL)))
+            .register();
 
-    public static final TagPrefix toolHeadHoe = new TagPrefix(GTCEu.id("hoe_head"))
-            .langValue("%s Hoe Head")
+    public static final TagPrefixEntry toolHeadHoe = InfinityRegistrate.tagPrefix("hoe_head")
+            .lang("%s Hoe Head")
             .materialAmount(GTValues.M)
             .materialIconType(MaterialIconType.toolHeadHoe)
             .unificationEnabled(true)
             .enableRecycling()
             .generateItem(true)
             .generationCondition(hasToolProperty.and(
-                    mat -> mat.getProperty(PropertyKey.TOOL).hasType(GTToolType.HOE)));
+                    mat -> mat.getProperty(PropertyKey.TOOL).hasType(GTToolType.HOE)))
+            .register();
 
-    public static final TagPrefix toolHeadChisel = new TagPrefix(GTCEu.id("chisel_head"))
-            .langValue("%s Chisel Head")
+    public static final TagPrefixEntry toolHeadChisel = InfinityRegistrate.tagPrefix("chisel_head")
+            .lang("%s Chisel Head")
             .materialAmount(GTValues.M)
             .materialIconType(InfinityMaterialIconType.toolHeadChisel)
             .unificationEnabled(true)
             .enableRecycling()
             .generateItem(true)
             .generationCondition(hasToolProperty.and(
-                    mat -> mat.getProperty(PropertyKey.TOOL).hasType(InfinityToolTypes.CHISEL)));
+                    mat -> mat.getProperty(PropertyKey.TOOL).hasType(InfinityToolTypes.CHISEL)))
+            .register();
 
-    public static final TagPrefix toolHeadHammer = new TagPrefix(GTCEu.id("hammer_head"))
-            .langValue("%s Hammer Head")
+    public static final TagPrefixEntry toolHeadHammer = InfinityRegistrate.tagPrefix("hammer_head")
+            .lang("%s Hammer Head")
             .materialAmount(GTValues.M)
             .materialIconType(MaterialIconType.toolHeadHammer)
             .unificationEnabled(true)
             .enableRecycling()
             .generateItem(true)
             .generationCondition(hasToolProperty.and(
-                    mat -> mat.getProperty(PropertyKey.TOOL).hasType(GTToolType.HARD_HAMMER)));
+                    mat -> mat.getProperty(PropertyKey.TOOL).hasType(GTToolType.HARD_HAMMER)))
+            .register();
 
-    public static final TagPrefix toolHeadSaw = new TagPrefix(GTCEu.id("saw_blade"))
-            .langValue("%s Saw Blade")
+    public static final TagPrefixEntry toolHeadSaw = InfinityRegistrate.tagPrefix("saw_blade")
+            .lang("%s Saw Blade")
             .materialAmount(GTValues.M)
             .materialIconType(MaterialIconType.toolHeadSaw)
             .unificationEnabled(true)
             .enableRecycling()
             .generateItem(true)
             .generationCondition(hasNoCraftingToolProperty.and(
-                    mat -> mat.getProperty(PropertyKey.TOOL).hasType(GTToolType.SAW)));
+                    mat -> mat.getProperty(PropertyKey.TOOL).hasType(GTToolType.SAW)))
+            .register();
 
-    public static final TagPrefix toolHeadKnife = new TagPrefix(GTCEu.id("knife_blade"))
-            .langValue("%s Knife Blade")
+    public static final TagPrefixEntry toolHeadKnife = InfinityRegistrate.tagPrefix("knife_blade")
+            .lang("%s Knife Blade")
             .materialAmount(GTValues.M)
             .materialIconType(InfinityMaterialIconType.toolHeadKnife)
             .unificationEnabled(true)
             .enableRecycling()
             .generateItem(true)
             .generationCondition(hasToolProperty.and(
-                    mat -> mat.getProperty(PropertyKey.TOOL).hasType(GTToolType.KNIFE)));
+                    mat -> mat.getProperty(PropertyKey.TOOL).hasType(GTToolType.KNIFE)))
+            .register();
 
-    public static final TagPrefix toolHeadScythe = new TagPrefix(GTCEu.id("scythe_blade"))
-            .langValue("%s Scythe Blade")
+    public static final TagPrefixEntry toolHeadScythe = InfinityRegistrate.tagPrefix("scythe_blade")
+            .lang("%s Scythe Blade")
             .materialAmount(GTValues.M*2)
             .materialIconType(MaterialIconType.toolHeadScythe)
             .unificationEnabled(true)
             .enableRecycling()
             .generateItem(true)
             .generationCondition(hasToolProperty.and(
-                    mat -> mat.getProperty(PropertyKey.TOOL).hasType(GTToolType.SCYTHE)));
+                    mat -> mat.getProperty(PropertyKey.TOOL).hasType(GTToolType.SCYTHE)))
+            .register();
 
     // TODO: Javelin
 
-    public static final TagPrefix toolHeadSword = new TagPrefix(GTCEu.id("sword_blade"))
-            .langValue("%s Sword Blade")
+    public static final TagPrefixEntry toolHeadSword = InfinityRegistrate.tagPrefix("sword_blade")
+            .lang("%s Sword Blade")
             .materialAmount(GTValues.M*2)
             .materialIconType(MaterialIconType.toolHeadSword)
             .unificationEnabled(true)
             .enableRecycling()
             .generateItem(true)
             .generationCondition(hasToolProperty.and(
-                    mat -> mat.getProperty(PropertyKey.TOOL).hasType(GTToolType.SWORD)));
+                    mat -> mat.getProperty(PropertyKey.TOOL).hasType(GTToolType.SWORD)))
+            .register();
 
-    public static final TagPrefix toolHeadMace = new TagPrefix(GTCEu.id("mace_head"))
-            .langValue("%s Mace Head")
+    public static final TagPrefixEntry toolHeadMace = InfinityRegistrate.tagPrefix("mace_head")
+            .lang("%s Mace Head")
             .materialAmount(GTValues.M*2)
             .materialIconType(InfinityMaterialIconType.toolHeadMace)
             .unificationEnabled(true)
             .enableRecycling()
             .generateItem(true)
             .generationCondition(hasToolProperty.and(
-                    mat -> mat.getProperty(PropertyKey.TOOL).hasType(InfinityToolTypes.MACE)));
+                    mat -> mat.getProperty(PropertyKey.TOOL).hasType(InfinityToolTypes.MACE)))
+            .register();
 
     // TODO: Fish Hook
 
     /** Missing GT Tool Heads */
-    public static final TagPrefix toolHeadFile = new TagPrefix(GTCEu.id("file_head"))
-            .langValue("%s File Head")
+    public static final TagPrefixEntry toolHeadFile = InfinityRegistrate.tagPrefix("file_head")
+            .lang("%s File Head")
             .materialAmount(GTValues.M)
             .materialIconType(MaterialIconType.toolHeadFile)
             .unificationEnabled(true)
             .enableRecycling()
             .generateItem(true)
             .generationCondition(hasNoCraftingToolProperty.and(
-                    mat -> mat.getProperty(PropertyKey.TOOL).hasType(GTToolType.FILE)));
+                    mat -> mat.getProperty(PropertyKey.TOOL).hasType(GTToolType.FILE)))
+            .register();
 
-    public static final TagPrefix toolHeadMiningHammer = new TagPrefix(GTCEu.id("mining_hammer_head"))
-            .langValue("%s Mining Hammer Head")
+    public static final TagPrefixEntry toolHeadMiningHammer = InfinityRegistrate.tagPrefix("mining_hammer_head")
+            .lang("%s Mining Hammer Head")
             .materialAmount(GTValues.M*2)
             .materialIconType(InfinityMaterialIconType.toolHeadMiningHammer)
             .unificationEnabled(true)
             .enableRecycling()
             .generateItem(true)
             .generationCondition(hasToolProperty.and(
-                    mat -> mat.getProperty(PropertyKey.TOOL).hasType(GTToolType.MINING_HAMMER)));
+                    mat -> mat.getProperty(PropertyKey.TOOL).hasType(GTToolType.MINING_HAMMER)))
+            .register();
 
-    public static final TagPrefix toolHeadSpade = new TagPrefix(GTCEu.id("spade_head"))
-            .langValue("%s Spade Head")
+    public static final TagPrefixEntry toolHeadSpade = InfinityRegistrate.tagPrefix("spade_head")
+            .lang("%s Spade Head")
             .materialAmount(GTValues.M*2)
             .materialIconType(InfinityMaterialIconType.toolHeadSpade)
             .unificationEnabled(true)
             .enableRecycling()
             .generateItem(true)
             .generationCondition(hasToolProperty.and(
-                    mat -> mat.getProperty(PropertyKey.TOOL).hasType(GTToolType.SPADE)));
+                    mat -> mat.getProperty(PropertyKey.TOOL).hasType(GTToolType.SPADE)))
+            .register();
 
-    public static final TagPrefix toolHeadButcheryKnife = new TagPrefix(GTCEu.id("butchery_knife_blade"))
-            .langValue("%s Butchery Knife Blade")
+    public static final TagPrefixEntry toolHeadButcheryKnife = InfinityRegistrate.tagPrefix("butchery_knife_blade")
+            .lang("%s Butchery Knife Blade")
             .materialAmount(GTValues.M)
             .materialIconType(InfinityMaterialIconType.toolHeadButcheryKnife)
             .unificationEnabled(true)
             .enableRecycling()
             .generateItem(true)
             .generationCondition(hasToolProperty.and(
-                    mat -> mat.getProperty(PropertyKey.TOOL).hasType(GTToolType.BUTCHERY_KNIFE)));
+                    mat -> mat.getProperty(PropertyKey.TOOL).hasType(GTToolType.BUTCHERY_KNIFE)))
+            .register();
 
     // Additional TFC Items
 
-    public static final TagPrefix anvil = new TagPrefix(GTCEu.id("anvil"))
+    public static final TagPrefixEntry anvil = InfinityRegistrate.tagPrefix("anvil")
             .materialAmount(GTValues.M * 14)
-            .unificationEnabled(true);
+            .unificationEnabled(true)
+            .register();
 
-    public static final TagPrefix bars = new TagPrefix(GTCEu.id("bars"))
+    public static final TagPrefixEntry bars = InfinityRegistrate.tagPrefix("bars")
             .materialAmount(GTValues.M / 4)
-            .unificationEnabled(true);
+            .unificationEnabled(true)
+            .register();
 
-    public static final TagPrefix bell = new TagPrefix(GTCEu.id("bell"))
+    public static final TagPrefixEntry bell = InfinityRegistrate.tagPrefix("bell")
             .materialAmount(GTValues.M)
-            .unificationEnabled(true);
+            .unificationEnabled(true)
+            .register();
 
-    public static final TagPrefix chain = new TagPrefix(GTCEu.id("chain"))
+    public static final TagPrefixEntry chain = InfinityRegistrate.tagPrefix("chain")
             .defaultTagPath("chains/%s")
             .unformattedTagPath("chains")
             .materialAmount(GTValues.M / 16)
-            .unificationEnabled(true);
+            .unificationEnabled(true)
+            .register();
 
-    public static final TagPrefix lamp = new TagPrefix(GTCEu.id("lamp"))
+    public static final TagPrefixEntry lamp = InfinityRegistrate.tagPrefix("lamp")
             .materialAmount(GTValues.M)
-            .unificationEnabled(true);
+            .unificationEnabled(true)
+            .register();
 
-    public static final TagPrefix lampUnfinished = new TagPrefix(GTCEu.id("lamp_unfinished"))
+    public static final TagPrefixEntry lampUnfinished = InfinityRegistrate.tagPrefix("lamp_unfinished")
             .materialAmount(GTValues.M)
-            .unificationEnabled(true);
+            .unificationEnabled(true)
+            .register();
 
-    public static final TagPrefix trapdoor = new TagPrefix(GTCEu.id("trapdoor"))
+    public static final TagPrefixEntry trapdoor = InfinityRegistrate.tagPrefix("trapdoor")
             .materialAmount(GTValues.M)
-            .unificationEnabled(true);
+            .unificationEnabled(true)
+            .register();
 
-    public static final TagPrefix grate = new TagPrefix(GTCEu.id("grate"))
+    public static final TagPrefixEntry grate = InfinityRegistrate.tagPrefix("grate")
             .materialAmount(GTValues.M)
-            .unificationEnabled(true);
+            .unificationEnabled(true)
+            .register();
 
-    public static final TagPrefix grateExposed = new TagPrefix(GTCEu.id("exposed_grate"))
+    public static final TagPrefixEntry grateExposed = InfinityRegistrate.tagPrefix("exposed_grate")
             .materialAmount(GTValues.M)
-            .unificationEnabled(true);
+            .unificationEnabled(true)
+            .register();
 
-    public static final TagPrefix grateWeathered = new TagPrefix(GTCEu.id("weathered_grate"))
+    public static final TagPrefixEntry grateWeathered = InfinityRegistrate.tagPrefix("weathered_grate")
             .materialAmount(GTValues.M)
-            .unificationEnabled(true);
+            .unificationEnabled(true)
+            .register();
 
-    public static final TagPrefix grateOxidized = new TagPrefix(GTCEu.id("oxidized_grate"))
+    public static final TagPrefixEntry grateOxidized = InfinityRegistrate.tagPrefix("oxidized_grate")
             .materialAmount(GTValues.M)
-            .unificationEnabled(true);
+            .unificationEnabled(true)
+            .register();
 
-    public static final TagPrefix blockPlated = new TagPrefix(GTCEu.id("plated_block"))
+    public static final TagPrefixEntry blockPlated = InfinityRegistrate.tagPrefix("plated_block")
             .materialAmount(GTValues.M)
-            .unificationEnabled(true);
+            .unificationEnabled(true)
+            .register();
 
-    public static final TagPrefix blockPlatedExposed = new TagPrefix(GTCEu.id("exposed_plated_block"))
+    public static final TagPrefixEntry blockPlatedExposed = InfinityRegistrate.tagPrefix("exposed_plated_block")
             .materialAmount(GTValues.M)
-            .unificationEnabled(true);
+            .unificationEnabled(true)
+            .register();
 
-    public static final TagPrefix blockPlatedWeathered = new TagPrefix(GTCEu.id("weathered_plated_block"))
+    public static final TagPrefixEntry blockPlatedWeathered = InfinityRegistrate.tagPrefix("weathered_plated_block")
             .materialAmount(GTValues.M)
-            .unificationEnabled(true);
+            .unificationEnabled(true)
+            .register();
 
-    public static final TagPrefix blockPlatedOxidized = new TagPrefix(GTCEu.id("oxidized_plated_block"))
+    public static final TagPrefixEntry blockPlatedOxidized = InfinityRegistrate.tagPrefix("oxidized_plated_block")
             .materialAmount(GTValues.M)
-            .unificationEnabled(true);
+            .unificationEnabled(true)
+            .register();
 
-    public static final TagPrefix slabPlated = new TagPrefix(GTCEu.id("plated_slab"))
+    public static final TagPrefixEntry slabPlated = InfinityRegistrate.tagPrefix("plated_slab")
             .materialAmount(GTValues.M / 2)
-            .unificationEnabled(true);
+            .unificationEnabled(true)
+            .register();
 
-    public static final TagPrefix slabPlatedExposed = new TagPrefix(GTCEu.id("exposed_plated_slab"))
+    public static final TagPrefixEntry slabPlatedExposed = InfinityRegistrate.tagPrefix("exposed_plated_slab")
             .materialAmount(GTValues.M / 2)
-            .unificationEnabled(true);
+            .unificationEnabled(true)
+            .register();
 
-    public static final TagPrefix slabPlatedWeathered = new TagPrefix(GTCEu.id("weathered_plated_slab"))
+    public static final TagPrefixEntry slabPlatedWeathered = InfinityRegistrate.tagPrefix("weathered_plated_slab")
             .materialAmount(GTValues.M / 2)
-            .unificationEnabled(true);
+            .unificationEnabled(true)
+            .register();
 
-    public static final TagPrefix slabPlatedOxidized = new TagPrefix(GTCEu.id("oxidized_plated_slab"))
+    public static final TagPrefixEntry slabPlatedOxidized = InfinityRegistrate.tagPrefix("oxidized_plated_slab")
             .materialAmount(GTValues.M / 2)
-            .unificationEnabled(true);
+            .unificationEnabled(true)
+            .register();
 
-    public static final TagPrefix stairsPlated = new TagPrefix(GTCEu.id("plated_stairs"))
+    public static final TagPrefixEntry stairsPlated = InfinityRegistrate.tagPrefix("plated_stairs")
             .materialAmount((GTValues.M * 3) / 4)
-            .unificationEnabled(true);
+            .unificationEnabled(true)
+            .register();
 
-    public static final TagPrefix stairsPlatedExposed = new TagPrefix(GTCEu.id("exposed_plated_stairs"))
+    public static final TagPrefixEntry stairsPlatedExposed = InfinityRegistrate.tagPrefix("exposed_plated_stairs")
             .materialAmount((GTValues.M * 3) / 4)
-            .unificationEnabled(true);
+            .unificationEnabled(true)
+            .register();
 
-    public static final TagPrefix stairsPlatedWeathered = new TagPrefix(GTCEu.id("weathered_plated_stairs"))
+    public static final TagPrefixEntry stairsPlatedWeathered = InfinityRegistrate.tagPrefix("weathered_plated_stairs")
             .materialAmount((GTValues.M * 3) / 4)
-            .unificationEnabled(true);
+            .unificationEnabled(true)
+            .register();
 
-    public static final TagPrefix stairsPlatedOxidized = new TagPrefix(GTCEu.id("oxidized_plated_stairs"))
+    public static final TagPrefixEntry stairsPlatedOxidized = InfinityRegistrate.tagPrefix("oxidized_plated_stairs")
             .materialAmount((GTValues.M * 3) / 4)
-            .unificationEnabled(true);
+            .unificationEnabled(true)
+            .register();
 
     /** Embers Items */
-    public static final TagPrefix aspectus = new TagPrefix(GTCEu.id("aspectus"))
+    public static final TagPrefixEntry aspectus = InfinityRegistrate.tagPrefix("aspectus")
             .materialAmount(GTValues.M)
-            .unificationEnabled(true);
+            .unificationEnabled(true)
+            .register();
 
     public static void modifyExistingTagPrefixes() {
-        TagPrefix.toolHeadBuzzSaw.materialAmount(GTValues.M*2);
-        TagPrefix.toolHeadScrewdriver.materialAmount(GTValues.M);
-        TagPrefix.toolHeadWrench.materialAmount(GTValues.M*2);
-        TagPrefix.toolHeadWireCutter.materialAmount(GTValues.M*2);
+        TagPrefix.toolHeadBuzzSaw.value().materialAmount(GTValues.M*2);
+        TagPrefix.toolHeadScrewdriver.value().materialAmount(GTValues.M);
+        TagPrefix.toolHeadWrench.value().materialAmount(GTValues.M*2);
+        TagPrefix.toolHeadWireCutter.value().materialAmount(GTValues.M*2);
 
-        TagPrefix.toolHeadWrench.secondaryMaterials().clear();
-        TagPrefix.toolHeadWireCutter.secondaryMaterials().clear();
+        TagPrefix.toolHeadWrench.value().secondaryMaterials().clear();
+        TagPrefix.toolHeadWireCutter.value().secondaryMaterials().clear();
 
-        TagPrefix.toolHeadBuzzSaw.generationCondition(TagPrefix.toolHeadBuzzSaw.generationCondition().or(mat -> mat.hasFlag(InfinityMaterialFlags.GENERATE_BUZZSAW_BLADE)));
-        TagPrefix.toolHeadChainsaw.generationCondition(TagPrefix.toolHeadChainsaw.generationCondition().or(mat -> mat.hasFlag(InfinityMaterialFlags.GENERATE_CHAINSAW_HEAD)));
-        TagPrefix.toolHeadDrill.generationCondition(TagPrefix.toolHeadDrill.generationCondition().or(mat -> mat.hasFlag(InfinityMaterialFlags.GENERATE_DRILL_HEAD)));
-        TagPrefix.toolHeadScrewdriver.generationCondition(TagPrefix.toolHeadScrewdriver.generationCondition().or(mat -> mat.hasFlag(InfinityMaterialFlags.GENERATE_SCREWDRIVER_HEAD)));
-        TagPrefix.toolHeadWrench.generationCondition(TagPrefix.toolHeadWrench.generationCondition().or(mat -> mat.hasFlag(InfinityMaterialFlags.GENERATE_WRENCH_HEAD)));
-        TagPrefix.toolHeadWireCutter.generationCondition(TagPrefix.toolHeadWireCutter.generationCondition().or(mat -> mat.hasFlag(InfinityMaterialFlags.GENERATE_WIRE_CUTTER_HEAD)));
+        TagPrefix.toolHeadBuzzSaw.value().generationCondition(TagPrefix.toolHeadBuzzSaw.value().generationCondition().or(mat -> mat.hasFlag(InfinityMaterialFlags.GENERATE_BUZZSAW_BLADE)));
+        TagPrefix.toolHeadChainsaw.value().generationCondition(TagPrefix.toolHeadChainsaw.value().generationCondition().or(mat -> mat.hasFlag(InfinityMaterialFlags.GENERATE_CHAINSAW_HEAD)));
+        TagPrefix.toolHeadDrill.value().generationCondition(TagPrefix.toolHeadDrill.value().generationCondition().or(mat -> mat.hasFlag(InfinityMaterialFlags.GENERATE_DRILL_HEAD)));
+        TagPrefix.toolHeadScrewdriver.value().generationCondition(TagPrefix.toolHeadScrewdriver.value().generationCondition().or(mat -> mat.hasFlag(InfinityMaterialFlags.GENERATE_SCREWDRIVER_HEAD)));
+        TagPrefix.toolHeadWrench.value().generationCondition(TagPrefix.toolHeadWrench.value().generationCondition().or(mat -> mat.hasFlag(InfinityMaterialFlags.GENERATE_WRENCH_HEAD)));
+        TagPrefix.toolHeadWireCutter.value().generationCondition(TagPrefix.toolHeadWireCutter.value().generationCondition().or(mat -> mat.hasFlag(InfinityMaterialFlags.GENERATE_WIRE_CUTTER_HEAD)));
 
-        TagPrefix.turbineBlade.defaultTagPath("turbine_blades/%s").unformattedTagPath("turbine_blades");
-        TagPrefix.pipeTinyFluid.defaultTagPath("tiny_fluid_pipes/%s").unformattedTagPath("tiny_fluid_pipes");
-        TagPrefix.pipeSmallFluid.defaultTagPath("small_fluid_pipes/%s").unformattedTagPath("small_fluid_pipes");
-        TagPrefix.pipeNormalFluid.defaultTagPath("normal_fluid_pipes/%s").unformattedTagPath("normal_fluid_pipes");
-        TagPrefix.pipeLargeFluid.defaultTagPath("large_fluid_pipes/%s").unformattedTagPath("large_fluid_pipes");
-        TagPrefix.pipeHugeFluid.defaultTagPath("huge_fluid_pipes/%s").unformattedTagPath("huge_fluid_pipes");
-        TagPrefix.pipeQuadrupleFluid.defaultTagPath("quadruple_fluid_pipes/%s").unformattedTagPath("quadruple_fluid_pipes");
-        TagPrefix.pipeNonupleFluid.defaultTagPath("nonuple_fluid_pipes/%s").unformattedTagPath("nonuple_fluid_pipes");
+        // Add Tags to existing tag prefixes
+        // This is bad and uses internal API
+        // TODO: Find alternative
+        TagPrefix.turbineBlade.value().setTags(
+                List.of(
+                        TagType.withDefaultFormatter("turbine_blades/%s", false),
+                        TagType.withNoFormatter("turbine_blades", false)));
+        TagPrefix.pipeTinyFluid.value().setTags(
+                List.of(
+                        TagType.withDefaultFormatter("tiny_fluid_pipes/%s", false),
+                        TagType.withNoFormatter("tiny_fluid_pipes", false)));
+        TagPrefix.pipeSmallFluid.value().setTags(
+                List.of(
+                        TagType.withDefaultFormatter("small_fluid_pipes/%s", false),
+                        TagType.withNoFormatter("small_fluid_pipes", false)));
+        TagPrefix.pipeNormalFluid.value().setTags(
+                List.of(
+                        TagType.withDefaultFormatter("normal_fluid_pipes/%s", false),
+                        TagType.withNoFormatter("normal_fluid_pipes", false)));
+        TagPrefix.pipeLargeFluid.value().setTags(
+                List.of(
+                        TagType.withDefaultFormatter("large_fluid_pipes/%s", false),
+                        TagType.withNoFormatter("large_fluid_pipes", false)));
+        TagPrefix.pipeHugeFluid.value().setTags(
+                List.of(
+                        TagType.withDefaultFormatter("huge_fluid_pipes/%s", false),
+                        TagType.withNoFormatter("huge_fluid_pipes", false)));
+        TagPrefix.pipeQuadrupleFluid.value().setTags(
+                List.of(
+                        TagType.withDefaultFormatter("quadruple_fluid_pipes/%s", false),
+                        TagType.withNoFormatter("quadruple_fluid_pipes", false)));
+        TagPrefix.pipeNonupleFluid.value().setTags(
+                List.of(
+                        TagType.withDefaultFormatter("nonuple_fluid_pipes/%s", false),
+                        TagType.withNoFormatter("nonuple_fluid_pipes", false)));
 
-        TagPrefix.turbineBlade.defaultTagPath("turbine_blades/%s").unformattedTagPath("turbine_blades");
-        TagPrefix.pipeSmallItem.defaultTagPath("small_item_pipes/%s").unformattedTagPath("small_item_pipes");
-        TagPrefix.pipeNormalItem.defaultTagPath("normal_item_pipes/%s").unformattedTagPath("normal_item_pipes");
-        TagPrefix.pipeLargeItem.defaultTagPath("large_item_pipes/%s").unformattedTagPath("large_item_pipes");
-        TagPrefix.pipeHugeItem.defaultTagPath("huge_item_pipes/%s").unformattedTagPath("huge_item_pipes");
-        TagPrefix.pipeSmallRestrictive.defaultTagPath("small_restrictive_pipes/%s").unformattedTagPath("small_restrictive_pipes");
-        TagPrefix.pipeNormalRestrictive.defaultTagPath("normal_restrictive_pipes/%s").unformattedTagPath("normal_restrictive_pipes");
-        TagPrefix.pipeLargeRestrictive.defaultTagPath("large_restrictive_pipes/%s").unformattedTagPath("large_restrictive_pipes");
-        TagPrefix.pipeHugeRestrictive.defaultTagPath("huge_restrictive_pipes/%s").unformattedTagPath("huge_restrictive_pipes");
+        TagPrefix.turbineBlade.value().setTags(
+                List.of(
+                        TagType.withDefaultFormatter("turbine_blades/%s", false),
+                        TagType.withNoFormatter("turbine_blades", false)));
+        TagPrefix.pipeSmallItem.value().setTags(
+                List.of(
+                        TagType.withDefaultFormatter("small_item_pipes/%s", false),
+                        TagType.withNoFormatter("small_item_pipes", false)));
+        TagPrefix.pipeNormalItem.value().setTags(
+                List.of(
+                        TagType.withDefaultFormatter("normal_item_pipes/%s", false),
+                        TagType.withNoFormatter("normal_item_pipes", false)));
+        TagPrefix.pipeLargeItem.value().setTags(
+                List.of(
+                        TagType.withDefaultFormatter("large_item_pipes/%s", false),
+                        TagType.withNoFormatter("large_item_pipes", false)));
+        TagPrefix.pipeHugeItem.value().setTags(
+                List.of(
+                        TagType.withDefaultFormatter("huge_item_pipes/%s", false),
+                        TagType.withNoFormatter("huge_item_pipes", false)));
+        TagPrefix.pipeSmallRestrictive.value().setTags(
+                List.of(
+                        TagType.withDefaultFormatter("small_restrictive_pipes/%s", false),
+                        TagType.withNoFormatter("small_restrictive_pipes", false)));
+        TagPrefix.pipeNormalRestrictive.value().setTags(
+                List.of(
+                        TagType.withDefaultFormatter("normal_restrictive_pipes/%s", false),
+                        TagType.withNoFormatter("normal_restrictive_pipes", false)));
+        TagPrefix.pipeLargeRestrictive.value().setTags(
+                List.of(
+                        TagType.withDefaultFormatter("large_restrictive_pipes/%s", false),
+                        TagType.withNoFormatter("large_restrictive_pipes", false)));
+        TagPrefix.pipeHugeRestrictive.value().setTags(
+                List.of(
+                        TagType.withDefaultFormatter("huge_restrictive_pipes/%s", false),
+                        TagType.withNoFormatter("huge_restrictive_pipes", false)));
 
-        TagPrefix.wireGtSingle.defaultTagPath("single_wires/%s").unformattedTagPath("single_wires");
-        TagPrefix.wireGtDouble.defaultTagPath("double_wires/%s").unformattedTagPath("double_wires");
-        TagPrefix.wireGtQuadruple.defaultTagPath("quadruple_wires/%s").unformattedTagPath("quadruple_wires");
-        TagPrefix.wireGtOctal.defaultTagPath("octal_wires/%s").unformattedTagPath("octal_wires");
-        TagPrefix.wireGtHex.defaultTagPath("hex_wires/%s").unformattedTagPath("hex_wires");
+        TagPrefix.wireGtSingle.value().setTags(
+                List.of(
+                        TagType.withDefaultFormatter("single_wires/%s", false),
+                        TagType.withNoFormatter("single_wires", false)));
+        TagPrefix.wireGtDouble.value().setTags(
+                List.of(
+                        TagType.withDefaultFormatter("double_wires/%s", false),
+                        TagType.withNoFormatter("double_wires", false)));
+        TagPrefix.wireGtQuadruple.value().setTags(
+                List.of(
+                        TagType.withDefaultFormatter("quadruple_wires/%s", false),
+                        TagType.withNoFormatter("quadruple_wires", false)));
+        TagPrefix.wireGtOctal.value().setTags(
+                List.of(
+                        TagType.withDefaultFormatter("octal_wires/%s", false),
+                        TagType.withNoFormatter("octal_wires", false)));
+        TagPrefix.wireGtHex.value().setTags(
+                List.of(
+                        TagType.withDefaultFormatter("hex_wires/%s", false),
+                        TagType.withNoFormatter("hex_wires", false)));
 
-        TagPrefix.cableGtSingle.defaultTagPath("single_cables/%s").unformattedTagPath("single_cables");
-        TagPrefix.cableGtDouble.defaultTagPath("double_cables/%s").unformattedTagPath("double_cables");
-        TagPrefix.cableGtQuadruple.defaultTagPath("quadruple_cables/%s").unformattedTagPath("quadruple_cables");
-        TagPrefix.cableGtOctal.defaultTagPath("octal_cables/%s").unformattedTagPath("octal_cables");
-        TagPrefix.cableGtHex.defaultTagPath("hex_cables/%s").unformattedTagPath("hex_cables");
+        TagPrefix.cableGtSingle.value().setTags(
+                List.of(
+                        TagType.withDefaultFormatter("single_cables/%s", false),
+                        TagType.withNoFormatter("single_cables", false)));
+        TagPrefix.cableGtDouble.value().setTags(
+                List.of(
+                        TagType.withDefaultFormatter("double_cables/%s", false),
+                        TagType.withNoFormatter("double_cables", false)));
+        TagPrefix.cableGtQuadruple.value().setTags(
+                List.of(
+                        TagType.withDefaultFormatter("quadruple_cables/%s", false),
+                        TagType.withNoFormatter("quadruple_cables", false)));
+        TagPrefix.cableGtOctal.value().setTags(
+                List.of(
+                        TagType.withDefaultFormatter("octal_cables/%s", false),
+                        TagType.withNoFormatter("octal_cables", false)));
+        TagPrefix.cableGtHex.value().setTags(
+                List.of(
+                        TagType.withDefaultFormatter("hex_cables/%s", false),
+                        TagType.withNoFormatter("hex_cables", false)));
+
+        modifyExistingOres();
     }
 
     // TFC Stone Types
-    public static TagPrefix oreGabbro;
-    public static TagPrefix oreShale;
-    public static TagPrefix oreClaystone;
-    public static TagPrefix oreLimestone;
-    public static TagPrefix oreConglomerate;
-    public static TagPrefix oreDolomite;
-    public static TagPrefix oreChert;
-    public static TagPrefix oreChalk;
-    public static TagPrefix oreRhyolite;
-    public static TagPrefix oreDacite;
-    public static TagPrefix oreQuartzite;
-    public static TagPrefix oreSlate;
-    public static TagPrefix orePhyllite;
-    public static TagPrefix oreSchist;
-    public static TagPrefix oreGneiss;
+    public static TagPrefixEntry oreGabbro;
+    public static TagPrefixEntry oreShale;
+    public static TagPrefixEntry oreClaystone;
+    public static TagPrefixEntry oreLimestone;
+    public static TagPrefixEntry oreConglomerate;
+    public static TagPrefixEntry oreDolomite;
+    public static TagPrefixEntry oreChert;
+    public static TagPrefixEntry oreChalk;
+    public static TagPrefixEntry oreRhyolite;
+    public static TagPrefixEntry oreDacite;
+    public static TagPrefixEntry oreQuartzite;
+    public static TagPrefixEntry oreSlate;
+    public static TagPrefixEntry orePhyllite;
+    public static TagPrefixEntry oreSchist;
+    public static TagPrefixEntry oreGneiss;
 
     // TFC Sand Types
-    public static TagPrefix oreSandBrown;
-    public static TagPrefix oreSandWhite;
-    public static TagPrefix oreSandBlack;
-    public static TagPrefix oreSandRed;
-    public static TagPrefix oreSandYellow;
-    public static TagPrefix oreSandGreen;
-    public static TagPrefix oreSandPink;
+    public static TagPrefixEntry oreSandBrown;
+    public static TagPrefixEntry oreSandWhite;
+    public static TagPrefixEntry oreSandBlack;
+    public static TagPrefixEntry oreSandRed;
+    public static TagPrefixEntry oreSandYellow;
+    public static TagPrefixEntry oreSandGreen;
+    public static TagPrefixEntry oreSandPink;
 
-    public static TagPrefix oreSandstoneBrown;
-    public static TagPrefix oreSandstoneWhite;
-    public static TagPrefix oreSandstoneBlack;
-    public static TagPrefix oreSandstoneRed;
-    public static TagPrefix oreSandstoneYellow;
-    public static TagPrefix oreSandstoneGreen;
-    public static TagPrefix oreSandstonePink;
+    public static TagPrefixEntry oreSandstoneBrown;
+    public static TagPrefixEntry oreSandstoneWhite;
+    public static TagPrefixEntry oreSandstoneBlack;
+    public static TagPrefixEntry oreSandstoneRed;
+    public static TagPrefixEntry oreSandstoneYellow;
+    public static TagPrefixEntry oreSandstoneGreen;
+    public static TagPrefixEntry oreSandstonePink;
 
     public static void modifyExistingOres() {
         // Remove Unwanted Ore TagPrefixes
-        TagPrefix.ORES.remove(TagPrefix.ore); // Vanilla Stone
-        TagPrefix.ORES.remove(TagPrefix.oreRedGranite);
-        TagPrefix.ORES.remove(TagPrefix.oreDeepslate);
-        TagPrefix.ORES.remove(TagPrefix.oreSand);
-        TagPrefix.ORES.remove(TagPrefix.oreRedSand);
-        TagPrefix.ORES.remove(TagPrefix.oreGravel);
-        TagPrefix.ORES.remove(TagPrefix.oreNetherrack);
-        TagPrefix.ORES.remove(TagPrefix.oreBlackstone);
-        TagPrefix.ORES.remove(TagPrefix.oreEndstone);
+        TagPrefix.ORES.remove(TagPrefix.ore.value()); // Vanilla Stone
+        TagPrefix.ORES.remove(TagPrefix.oreRedGranite.value());
+        TagPrefix.ORES.remove(TagPrefix.oreDeepslate.value());
+        TagPrefix.ORES.remove(TagPrefix.oreSand.value());
+        TagPrefix.ORES.remove(TagPrefix.oreRedSand.value());
+        TagPrefix.ORES.remove(TagPrefix.oreGravel.value());
+        TagPrefix.ORES.remove(TagPrefix.oreNetherrack.value());
+        TagPrefix.ORES.remove(TagPrefix.oreBlackstone.value());
+        TagPrefix.ORES.remove(TagPrefix.oreEndstone.value());
 
-        // Convert existing ores to TFC Rocks
         convertOreToTFCRock(TagPrefix.oreGranite, Rock.GRANITE);
         convertOreToTFCRock(TagPrefix.oreDiorite, Rock.DIORITE);
         convertOreToTFCRock(TagPrefix.oreAndesite, Rock.ANDESITE);
@@ -478,8 +609,6 @@ public class InfinityTagPrefix {
     }
 
     public static void init() {
-        modifyExistingTagPrefixes();
-        modifyExistingOres();
         createTFCOres();
     }
 
@@ -488,50 +617,44 @@ public class InfinityTagPrefix {
     }
 
     private static ResourceLocation getTFCRawRock(Rock rock) {
-        return ResourceLocation.fromNamespaceAndPath(TerraFirmaCraft.MOD_ID, "rock/raw/" + rock.getSerializedName());
+        return Helpers.identifier("rock/raw/" + rock.getSerializedName());
     }
 
-    private static TagPrefix createTFCOreTagPrefix(Rock rock) {
+    private static TagPrefixEntry createTFCOreTagPrefix(Rock rock) {
         String name = rock.getSerializedName();
 
         String formattedName = name.substring(0, 1).toUpperCase() + name.substring(1);
 
         ResourceLocation resLoc = getTFCRawRock(rock);
 
-        return new TagPrefix(name)
-                .langValue(formattedName + " %s Ore")
-                .registerOre(blockStateSupplier(resLoc), () -> GTMaterials.Stone,
+        return InfinityRegistrate.oreTagPrefix(name, BlockTags.MINEABLE_WITH_PICKAXE)
+                .lang(formattedName + " %s Ore")
+                .registerOre(blockStateSupplier(resLoc), GTMaterials.Stone,
                         BlockBehaviour.Properties.of()
                                 .mapColor(rock.color())
                                 .requiresCorrectToolForDrops()
                                 .strength(rock.category().hardness(6.5f), 10F),
                         ResourceLocation.fromNamespaceAndPath(resLoc.getNamespace(), "block/" + resLoc.getPath()),
                         false, false, true)
-                .defaultTagPath("ores/%s")
-                .prefixOnlyTagPath("ores_in_ground/%s")
-                .unformattedTagPath("ores")
-                .materialIconType(MaterialIconType.ore)
-                .miningToolTag(BlockTags.MINEABLE_WITH_PICKAXE)
-                .unificationEnabled(true)
-                .blockConstructor(OreBlock::new)
-                .generationCondition(hasOreProperty.and(mat -> !mat.hasFlag(InfinityMaterialFlags.GENERATE_SAND_ORES)));
+                .generationCondition(hasOreProperty.and(mat -> !mat.hasFlag(InfinityMaterialFlags.GENERATE_SAND_ORES)))
+                .register();
     }
 
     private static ResourceLocation getTFCSand(SandBlockType sand) {
-        return ResourceLocation.fromNamespaceAndPath(TerraFirmaCraft.MOD_ID, "sand/" + sand.name().toLowerCase(Locale.ROOT));
+        return Helpers.identifier("sand/" + sand.name().toLowerCase(Locale.ROOT));
     }
 
     // TODO: Stop these from generating if material does not have the GENERATE_SAND_ORES material flag
-    private static TagPrefix createTFCSandOreTagPrefix(SandBlockType sand) {
+    private static TagPrefixEntry createTFCSandOreTagPrefix(SandBlockType sand) {
         String name = sand.name().toLowerCase(Locale.ROOT);
 
         String formattedName = name.substring(0, 1).toUpperCase() + name.substring(1);
 
         ResourceLocation resLoc = getTFCSand(sand);
 
-        return new TagPrefix(name)
-                .langValue(formattedName + " %s Ore")
-                .registerOre(blockStateSupplier(resLoc), () -> GTMaterials.QuartzSand,
+        return InfinityRegistrate.oreTagPrefix(name, BlockTags.MINEABLE_WITH_SHOVEL)
+                .lang(formattedName + " %s Ore")
+                .registerOre(blockStateSupplier(resLoc), GTMaterials.QuartzSand,
                         BlockBehaviour.Properties.ofFullCopy(Blocks.SAND)
                                 .mapColor(sand.getMaterialColor())
                                 .requiresCorrectToolForDrops()
@@ -539,57 +662,49 @@ public class InfinityTagPrefix {
                                 .sound(SoundType.SAND),
                         ResourceLocation.fromNamespaceAndPath(resLoc.getNamespace(), "block/" + resLoc.getPath()),
                         false, true, false)
-                .defaultTagPath("ores/%s")
-                .prefixOnlyTagPath("ores_in_ground/%s")
-                .unformattedTagPath("ores")
-                .materialIconType(MaterialIconType.ore)
-                .miningToolTag(BlockTags.MINEABLE_WITH_SHOVEL)
-                .unificationEnabled(true)
-                .blockConstructor(OreBlock::new)
-                .generationCondition(mat -> mat.hasFlag(InfinityMaterialFlags.GENERATE_SAND_ORES)); // This doesn't do anything atm
+                .generationCondition(mat -> mat.hasFlag(InfinityMaterialFlags.GENERATE_SAND_ORES))
+                .register(); // This doesn't do anything atm
     }
 
     private static ResourceLocation getTFCSandstone(SandBlockType sand) {
-        return ResourceLocation.fromNamespaceAndPath(TerraFirmaCraft.MOD_ID, "raw_sandstone/" + sand.name().toLowerCase(Locale.ROOT));
+        return Helpers.identifier("raw_sandstone/" + sand.name().toLowerCase(Locale.ROOT));
     }
 
-    private static TagPrefix createTFCSandstoneOreTagPrefix(SandBlockType sand) {
+    private static TagPrefixEntry createTFCSandstoneOreTagPrefix(SandBlockType sand) {
         String name = sand.name().toLowerCase(Locale.ROOT);
 
         String formattedName = name.substring(0, 1).toUpperCase() + name.substring(1);
 
         ResourceLocation resLoc = getTFCSandstone(sand);
 
-        return new TagPrefix(name + "_sandstone")
-                .langValue(formattedName + " Sandstone %s Ore")
-                .registerOre(blockStateSupplier(resLoc), () -> GTMaterials.Stone,
+        return InfinityRegistrate.oreTagPrefix(name + "_sandstone", BlockTags.MINEABLE_WITH_PICKAXE)
+                .lang(formattedName + " Sandstone %s Ore")
+                .registerOre(blockStateSupplier(resLoc), GTMaterials.Stone,
                         BlockBehaviour.Properties.of()
                                 .mapColor(sand.getMaterialColor())
                                 .requiresCorrectToolForDrops()
                                 .strength(0.8F),
                         ResourceLocation.fromNamespaceAndPath(resLoc.getNamespace(), "block/" + resLoc.getPath()),
                         false, false, false)
-                .defaultTagPath("ores/%s")
-                .prefixOnlyTagPath("ores_in_ground/%s")
-                .unformattedTagPath("ores")
-                .materialIconType(MaterialIconType.ore)
-                .miningToolTag(BlockTags.MINEABLE_WITH_PICKAXE)
-                .unificationEnabled(true)
-                .blockConstructor(OreBlock::new)
-                .generationCondition(mat -> mat.hasFlag(InfinityMaterialFlags.GENERATE_SAND_ORES)); // This doesn't do anything atm
+                .generationCondition(mat -> mat.hasFlag(InfinityMaterialFlags.GENERATE_SAND_ORES))
+                .register(); // This doesn't do anything atm
     }
 
-    private static void convertOreToTFCRock(TagPrefix original, Rock rock) {
+    private static void convertOreToTFCRock(TagPrefixEntry tagPrefixEntry, Rock rock) {
+        TagPrefix.ORES.remove(tagPrefixEntry.value());
+
         ResourceLocation resLoc = getTFCRawRock(rock);
 
-        original.registerOre(blockStateSupplier(resLoc), () -> GTMaterials.Stone,
-                BlockBehaviour.Properties.of()
+        TagPrefix.OreType tfcOreType = new TagPrefix.OreType(
+                blockStateSupplier(resLoc),
+                GTMaterials.Stone,
+                () -> BlockBehaviour.Properties.of()
                         .mapColor(rock.color())
                         .requiresCorrectToolForDrops()
                         .strength(rock.category().hardness(6.5f), 10F),
                 ResourceLocation.fromNamespaceAndPath(resLoc.getNamespace(), "block/" + resLoc.getPath()),
                 false, false, false);
 
-        original.generationCondition(original.generationCondition().and(mat -> !mat.hasFlag(InfinityMaterialFlags.GENERATE_SAND_ORES)));
+        TagPrefix.ORES.put(tagPrefixEntry.value(), tfcOreType);
     }
 }
