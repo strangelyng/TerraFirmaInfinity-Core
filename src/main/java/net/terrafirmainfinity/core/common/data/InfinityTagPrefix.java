@@ -7,6 +7,7 @@ import com.gregtechceu.gtceu.api.data.chemical.material.properties.PropertyKey;
 import com.gregtechceu.gtceu.api.data.tag.TagPrefix;
 import com.gregtechceu.gtceu.api.data.tag.TagType;
 import com.gregtechceu.gtceu.api.item.tool.GTToolType;
+import com.gregtechceu.gtceu.api.registry.registrate.entry.MaterialRegistryEntry;
 import com.gregtechceu.gtceu.api.registry.registrate.entry.TagPrefixEntry;
 import com.gregtechceu.gtceu.common.data.GTMaterials;
 import net.dries007.tfc.common.blocks.rock.Rock;
@@ -29,6 +30,7 @@ import java.util.function.Supplier;
 
 import static com.gregtechceu.gtceu.api.data.tag.TagPrefix.Conditions.*;
 import static net.terrafirmainfinity.core.InfinityCore.InfinityRegistrate;
+import static net.terrafirmainfinity.core.common.data.material.InfinityMaterials.*;
 
 public class InfinityTagPrefix {
     public static final Predicate<Material> hasElectrodeProperty = mat -> mat.hasProperty(InfinityPropertyKeys.ELECTRODE);
@@ -566,30 +568,30 @@ public class InfinityTagPrefix {
         TagPrefix.ORES.remove(TagPrefix.oreBlackstone.value());
         TagPrefix.ORES.remove(TagPrefix.oreEndstone.value());
 
-        convertOreToTFCRock(TagPrefix.oreGranite, Rock.GRANITE);
-        convertOreToTFCRock(TagPrefix.oreDiorite, Rock.DIORITE);
-        convertOreToTFCRock(TagPrefix.oreAndesite, Rock.ANDESITE);
-        convertOreToTFCRock(TagPrefix.oreMarble, Rock.MARBLE);
-        convertOreToTFCRock(TagPrefix.oreTuff, Rock.TUFF);
-        convertOreToTFCRock(TagPrefix.oreBasalt, Rock.BASALT);
+        convertOreToTFCRock(TagPrefix.oreGranite, Rock.GRANITE, FelsicIgneous);
+        convertOreToTFCRock(TagPrefix.oreDiorite, Rock.DIORITE, IntermediateIgneous);
+        convertOreToTFCRock(TagPrefix.oreAndesite, Rock.ANDESITE, IntermediateIgneous);
+        convertOreToTFCRock(TagPrefix.oreMarble, Rock.MARBLE, Metamorphic);
+        convertOreToTFCRock(TagPrefix.oreTuff, Rock.TUFF, GTMaterials.Tuff);
+        convertOreToTFCRock(TagPrefix.oreBasalt, Rock.BASALT, MaficIgneous);
     }
 
     public static void createTFCOres() {
-        oreGabbro = createTFCOreTagPrefix(Rock.GABBRO);
-        oreShale = createTFCOreTagPrefix(Rock.SHALE);
-        oreClaystone = createTFCOreTagPrefix(Rock.CLAYSTONE);
-        oreLimestone = createTFCOreTagPrefix(Rock.LIMESTONE);
-        oreConglomerate = createTFCOreTagPrefix(Rock.CONGLOMERATE);
-        oreDolomite = createTFCOreTagPrefix(Rock.DOLOMITE);
-        oreChert = createTFCOreTagPrefix(Rock.CHERT);
-        oreChalk = createTFCOreTagPrefix(Rock.CHALK);
-        oreRhyolite = createTFCOreTagPrefix(Rock.RHYOLITE);
-        oreDacite = createTFCOreTagPrefix(Rock.DACITE);
-        oreQuartzite = createTFCOreTagPrefix(Rock.QUARTZITE);
-        oreSlate = createTFCOreTagPrefix(Rock.SLATE);
-        orePhyllite = createTFCOreTagPrefix(Rock.PHYLLITE);
-        oreSchist = createTFCOreTagPrefix(Rock.SCHIST);
-        oreGneiss = createTFCOreTagPrefix(Rock.GNEISS);
+        oreGabbro = createTFCOreTagPrefix(Rock.GABBRO, MaficIgneous);
+        oreShale = createTFCOreTagPrefix(Rock.SHALE, ClasticSedimentary);
+        oreClaystone = createTFCOreTagPrefix(Rock.CLAYSTONE, ClasticSedimentary);
+        oreLimestone = createTFCOreTagPrefix(Rock.LIMESTONE, CarbonateSedimentary);
+        oreConglomerate = createTFCOreTagPrefix(Rock.CONGLOMERATE, ClasticSedimentary);
+        oreDolomite = createTFCOreTagPrefix(Rock.DOLOMITE, CarbonateSedimentary);
+        oreChert = createTFCOreTagPrefix(Rock.CHERT, SiliceousSedimentary);
+        oreChalk = createTFCOreTagPrefix(Rock.CHALK, CarbonateSedimentary);
+        oreRhyolite = createTFCOreTagPrefix(Rock.RHYOLITE, FelsicIgneous);
+        oreDacite = createTFCOreTagPrefix(Rock.DACITE, IntermediateIgneous);
+        oreQuartzite = createTFCOreTagPrefix(Rock.QUARTZITE, Metamorphic);
+        oreSlate = createTFCOreTagPrefix(Rock.SLATE, Metamorphic);
+        orePhyllite = createTFCOreTagPrefix(Rock.PHYLLITE, Metamorphic);
+        oreSchist = createTFCOreTagPrefix(Rock.SCHIST, Metamorphic);
+        oreGneiss = createTFCOreTagPrefix(Rock.GNEISS, Metamorphic);
 
         oreSandBrown = createTFCSandOreTagPrefix(SandBlockType.BROWN);
         oreSandBlack = createTFCSandOreTagPrefix(SandBlockType.BLACK);
@@ -620,7 +622,7 @@ public class InfinityTagPrefix {
         return Helpers.identifier("rock/raw/" + rock.getSerializedName());
     }
 
-    private static TagPrefixEntry createTFCOreTagPrefix(Rock rock) {
+    private static TagPrefixEntry createTFCOreTagPrefix(Rock rock, MaterialRegistryEntry material) {
         String name = rock.getSerializedName();
 
         String formattedName = name.substring(0, 1).toUpperCase() + name.substring(1);
@@ -629,7 +631,7 @@ public class InfinityTagPrefix {
 
         return InfinityRegistrate.oreTagPrefix(name, BlockTags.MINEABLE_WITH_PICKAXE)
                 .lang(formattedName + " %s Ore")
-                .registerOre(blockStateSupplier(resLoc), GTMaterials.Stone,
+                .registerOre(blockStateSupplier(resLoc), material,
                         BlockBehaviour.Properties.of()
                                 .mapColor(rock.color())
                                 .requiresCorrectToolForDrops()
@@ -690,14 +692,14 @@ public class InfinityTagPrefix {
                 .register(); // This doesn't do anything atm
     }
 
-    private static void convertOreToTFCRock(TagPrefixEntry tagPrefixEntry, Rock rock) {
+    private static void convertOreToTFCRock(TagPrefixEntry tagPrefixEntry, Rock rock, MaterialRegistryEntry material) {
         TagPrefix.ORES.remove(tagPrefixEntry.value());
 
         ResourceLocation resLoc = getTFCRawRock(rock);
 
         TagPrefix.OreType tfcOreType = new TagPrefix.OreType(
                 blockStateSupplier(resLoc),
-                GTMaterials.Stone,
+                material,
                 () -> BlockBehaviour.Properties.of()
                         .mapColor(rock.color())
                         .requiresCorrectToolForDrops()

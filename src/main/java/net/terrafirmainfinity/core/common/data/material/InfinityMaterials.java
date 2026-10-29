@@ -93,12 +93,13 @@ public class InfinityMaterials {
 
     // Rock Materials
     public static MaterialRegistryEntry FelsicIgneous; // Granite, Rhyolite
-    public static MaterialRegistryEntry IntermediateIgneous; // Diorite, Tuff, Andesite, Dacite
+    public static MaterialRegistryEntry IntermediateIgneous; // Diorite, Andesite, Dacite
     public static MaterialRegistryEntry MaficIgneous; // Gabbro, Basalt
+    public static MaterialRegistryEntry UltramaficIgneous; // Blackstone (Pyroxenite)
     public static MaterialRegistryEntry ClasticSedimentary; // Shale, Claystone, Conglomerate
     public static MaterialRegistryEntry CarbonateSedimentary; // Limestone, Dolomite, Chalk
     public static MaterialRegistryEntry SiliceousSedimentary; // Chert
-    public static MaterialRegistryEntry Metamorphic; // Quartzite, Slate, Phyllite, Schist, Gneiss, Marble
+    public static MaterialRegistryEntry Metamorphic; // Quartzite, Slate, Phyllite, Schist, Gneiss, Marble, Deepslate (Migmatite)
 
     public static void init() {
         InfinityCompoundMaterials.register();

@@ -10,6 +10,48 @@ import static net.terrafirmainfinity.core.common.data.material.InfinityMaterials
 
 public class InfinityOreMaterials {
     public static void register() {
+        // Rock Materials
+        FelsicIgneous = InfinityRegistrate.material("felsic_igneous", builder -> builder
+                .dust()
+                .color(0x8c827e).iconSet(MaterialIconSet.ROUGH)
+                .components(RedGranite, 1));
+
+        IntermediateIgneous = InfinityRegistrate.material("intermediate_igneous", builder -> builder
+                .dust()
+                .color(0x6a6c6e).iconSet(MaterialIconSet.ROUGH)
+                .components(Andesite, 1));
+
+        MaficIgneous = InfinityRegistrate.material("mafic_igneous", builder -> builder
+                .dust()
+                .color(0x414647).iconSet(MaterialIconSet.ROUGH)
+                .components(Basalt, 1));
+
+        UltramaficIgneous = InfinityRegistrate.material("ultramafic_igneous", builder -> builder
+                .dust()
+                .color(0x312C36).iconSet(MaterialIconSet.ROUGH)
+                .components(Blackstone, 1));
+
+        ClasticSedimentary = InfinityRegistrate.material("clastic_sedimentary", builder -> builder
+                .dust()
+                .color(0x8b7e66).iconSet(MaterialIconSet.ROUGH)
+                .components(Quartzite, 1, PotassiumFeldspar, 1));
+
+        CarbonateSedimentary = InfinityRegistrate.material("carbonate_sedimentary", builder -> builder
+                .dust()
+                .color(0xb4a991).iconSet(MaterialIconSet.ROUGH)
+                .components(Quartzite, 1, Calcite, 1));
+
+        SiliceousSedimentary = InfinityRegistrate.material("siliceous_sedimentary", builder -> builder
+                .dust()
+                .color(0x825148).iconSet(MaterialIconSet.ROUGH)
+                .components(Quartzite, 1));
+
+        Metamorphic = InfinityRegistrate.material("metamorphic", builder -> builder
+                .dust()
+                .color(0xa39a90).iconSet(MaterialIconSet.ROUGH)
+                .components(Marble, 1, Deepslate, 1));
+
+        // Ore Materials
         Acanthite = InfinityRegistrate.material("acanthite", builder -> builder
                 .dust().ore()
                 .color(0x6B7484).secondaryColor(0x1E234B)
