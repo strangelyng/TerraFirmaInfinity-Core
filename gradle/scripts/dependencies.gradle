@@ -58,4 +58,13 @@ dependencies {
 
     // Embers Re-Ignited
     implementation("maven.modrinth:embers-re-ignited:1.21.1-${embers_version}")
+
+    // Architectury
+    implementation("dev.architectury:architectury-neoforge:${architectury_version}")
+
+    // FTB
+    implementation("dev.ftb.mods:ftb-library-neoforge:${ftblibrary_version}")
+    implementation("dev.ftb.mods:ftb-teams-neoforge:${ftbteams_version}")
+    compileOnly("dev.ftb.mods:ftb-quests-neoforge:${ftbquests_version}")
+    runtimeOnly("dev.ftb.mods:ftb-quests-neoforge:${ftbquests_version}")
 }

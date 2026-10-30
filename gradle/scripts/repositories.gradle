@@ -75,4 +75,16 @@ repositories {
         name 'Sleeping Town'
         url 'https://repo.sleeping.town/'
     }
+    maven { // Architectury
+        url 'https://maven.shedaniel.me'
+        content {
+            includeGroup("dev.architectury")
+        }
+    }
+    maven { // FTB
+        url 'https://maven.ftb.dev/releases'
+        content {
+            includeGroup("dev.ftb.mods")
+        }
+    }
 }
