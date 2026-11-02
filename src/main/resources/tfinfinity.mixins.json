@@ -5,7 +5,8 @@
   "mixins": [
     "gtceu.GTMachineUtilsMixin",
     "gtceu.GTToolItemMixin",
-    "gtceu.OreRecipeHandlerMixin"
+    "gtceu.OreRecipeHandlerMixin",
+    "gtceu.RecyclingRecipesMixin"
   ],
   "client": [
   ],

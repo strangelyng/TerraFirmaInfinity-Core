@@ -80,12 +80,21 @@ public class InfinityMaterials {
     public static MaterialRegistryEntry Lignite;
     public static MaterialRegistryEntry Anthracite;
 
+    // Element Materials
+    public static MaterialRegistryEntry Unknown;
+
     // Compounds
     public static MaterialRegistryEntry Alumina; // Al2O3
     public static MaterialRegistryEntry Beryllia; // BeO
+    public static MaterialRegistryEntry BismuthTrioxide; // Bi2O3
     public static MaterialRegistryEntry ChromiumOxide; // Cr2O3
     public static MaterialRegistryEntry HydrogenChloride; // HCl
     public static MaterialRegistryEntry HydrogenFluoride; // HF
+
+    // Organic Materials
+    public static MaterialRegistryEntry Bakelite;
+    public static MaterialRegistryEntry PhenolicResin;
+    public static MaterialRegistryEntry Syngas;
 
     // Alloys
     public static MaterialRegistryEntry Ferrosilicon; // FeSi3
@@ -102,6 +111,7 @@ public class InfinityMaterials {
     public static MaterialRegistryEntry Metamorphic; // Quartzite, Slate, Phyllite, Schist, Gneiss, Marble, Deepslate (Migmatite)
 
     public static void init() {
+        InfinityElementMaterials.register();
         InfinityCompoundMaterials.register();
         InfinityIntegrationMaterials.register();
         InfinityOreMaterials.register();
@@ -277,14 +287,31 @@ public class InfinityMaterials {
         oreProp = Pyrochlore.getProperty(PropertyKey.ORE);
         oreProp.setOreByProducts(Apatite, Calcium, Columbite); // Niobium to Columbite
 
-        oreProp = Andradite.getProperty(PropertyKey.ORE); // New Ore Property
+        // Additional Replacements (Aluminium + Lithium Dust)
+        Almandine.getProperty(PropertyKey.ORE).setOreByProducts(GarnetRed, Almandine);
+        Emerald.getProperty(PropertyKey.ORE).setOreByProducts(Emerald);
+        GreenSapphire.getProperty(PropertyKey.ORE).setOreByProducts(GreenSapphire, Sapphire);
+        Sapphire.getProperty(PropertyKey.ORE).setOreByProducts(Sapphire, GreenSapphire);
+        Spodumene.getProperty(PropertyKey.ORE).setOreByProducts(Silicon, Spodumene);
+        GlauconiteSand.getProperty(PropertyKey.ORE).setOreByProducts(Sodium, GlauconiteSand, Iron);
+        Mica.getProperty(PropertyKey.ORE).setOreByProducts(Potassium, Mica);
+        Kyanite.getProperty(PropertyKey.ORE).setOreByProducts(Talc, Kyanite, Silicon);
+        Pollucite.getProperty(PropertyKey.ORE).setOreByProducts(Pollucite, Silicon, Potassium);
+        Bentonite.getProperty(PropertyKey.ORE).setOreByProducts(Bentonite, Calcium, Magnesium);
+        FullersEarth.getProperty(PropertyKey.ORE).setOreByProducts(FullersEarth, Silicon, Magnesium);
+        Zeolite.getProperty(PropertyKey.ORE).setOreByProducts(Calcium, Silicon, Zeolite);
+        Lepidolite.getProperty(PropertyKey.ORE).setOreByProducts(Potassium, Pollucite);
+
+        // Add Byproducts to New Ores
+        oreProp = Andradite.getProperty(PropertyKey.ORE);
         oreProp.setOreByProducts(GarnetYellow, Calcium);
 
-        oreProp = Borax.getProperty(PropertyKey.ORE); // New Ore Property
+        oreProp = Borax.getProperty(PropertyKey.ORE);
         oreProp.setOreByProducts(Salt, Salt, Trona);
 
-        oreProp = Uvarovite.getProperty(PropertyKey.ORE); // New Ore Property
+        oreProp = Uvarovite.getProperty(PropertyKey.ORE);
         oreProp.setOreByProducts(GarnetYellow, Calcium);
+
 
         // Adjust Fluid Temperature of Steels
         Steel.removeProperty(PropertyKey.FLUID);
