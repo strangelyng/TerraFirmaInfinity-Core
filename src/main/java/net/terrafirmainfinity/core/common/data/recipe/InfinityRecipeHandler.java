@@ -1,5 +1,6 @@
 package net.terrafirmainfinity.core.common.data.recipe;
 
+import com.gregtechceu.gtceu.api.fluids.store.FluidStorageKeys;
 import com.gregtechceu.gtceu.common.data.GTRecipeTypes;
 import net.dries007.tfc.common.recipes.LandslideRecipe;
 import net.dries007.tfc.common.recipes.ingredients.BlockIngredient;
@@ -13,6 +14,7 @@ import static net.terrafirmainfinity.core.common.data.InfinityRecipeTypes.*;
 import static com.gregtechceu.gtceu.api.data.tag.TagPrefix.*;
 import static com.gregtechceu.gtceu.common.data.GTMaterials.*;
 import static com.gregtechceu.gtceu.api.GTValues.*;
+import static net.terrafirmainfinity.core.common.data.material.InfinityMaterials.*;
 
 public class InfinityRecipeHandler {
     public static void testRecipes(RecipeOutput provider) {
@@ -74,16 +76,16 @@ public class InfinityRecipeHandler {
                 .duration(400)
                 .save(provider);
 
-        FLASH_SMELTING_RECIPE.recipeBuilder(InfinityCore.id("purified_chalcopyrite"))
-                .inputItems(crushedPurified, Chalcopyrite)
-                .inputItems(InfinityTagPrefix.powder, CalciumCarbonate) // Flux (use tag?)
-                .inputFluids(Oxygen.getFluid(200))
-                .outputFluids(Copper.getFluid(144)) // Copper Matte
-                .outputFluids(Lava.getFluid(100)) // Slag
-                .outputFluids(SulfurDioxide.getFluid(100)) // Off-Gas
-                .EUt(VA[MV])
-                .duration(200)
-                .save(provider);
+//        FLASH_SMELTING_RECIPE.recipeBuilder(InfinityCore.id("purified_chalcopyrite"))
+//                .inputItems(crushedPurified, Chalcopyrite)
+//                .inputItems(InfinityTagPrefix.powder, CalciumCarbonate) // Flux (use tag?)
+//                .inputFluids(Oxygen.getFluid(200))
+//                .outputFluids(Copper.getFluid(144)) // Copper Matte
+//                .outputFluids(Lava.getFluid(100)) // Slag
+//                .outputFluids(SulfurDioxide.getFluid(100)) // Off-Gas
+//                .EUt(VA[MV])
+//                .duration(200)
+//                .save(provider);
 
         ADVANCED_ARC_FURNACE_RECIPE.recipeBuilder(InfinityCore.id("stainless_steel"))
                 .inputItems(dust, Iron, 6)
@@ -93,6 +95,15 @@ public class InfinityRecipeHandler {
                 .outputFluids(StainlessSteel.getFluid(144*9))
                 .EUt(VA[HV])
                 .duration(1100)
+                .save(provider);
+
+        FLUIDIZED_BR_RECIPE.recipeBuilder(InfinityCore.id("coal_gasification"))
+                .inputItems(dust, Coal, 16)
+                .inputFluids(Steam.getFluid(4000))
+                .outputItems(dust, Coke, 12)
+                .outputFluids(Syngas.getFluid(8000))
+                .EUt(96)
+                .duration(320)
                 .save(provider);
     }
 

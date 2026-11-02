@@ -9,5 +9,6 @@ public class InfinityMulti {
         SpiralSeparator.init();
         MetallurgicalConverter.init();
         FlashFurnace.init();
+        FluidizedBedReactor.init();
     }
 }

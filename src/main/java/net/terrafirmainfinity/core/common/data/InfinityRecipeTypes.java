@@ -72,11 +72,15 @@ public class InfinityRecipeTypes {
             .setData(ProviderType.LANG, (ctx, prov) -> {
                 prov.add("recipe_category." + MOD_ID + "." + ctx.getName(), "Advanced Electrolysis");
             })
-            .setMaxIOSize(4, 3, 3, 4)
+            .setMaxIOSize(4, 3, 4, 4)
             .prepareBuilder(recipeBuilder -> recipeBuilder.EUt(GTValues.VA[GTValues.LV]))
             .UI(builder -> builder.setProgressBar(GTGuiTextures.PROGRESS_EXTRACT)
                     .setRecipeViewerLayoutGridBuilder(ItemRecipeCapability.CAP, IO.IN, (layout) -> {
                         int slots = layout.getRecipeType().getMaxInputs(ItemRecipeCapability.CAP);
+                        return GTMuiWidgets.createGrid(slots, (int) Mth.sqrt(slots), false, 's');
+                    })
+                    .setRecipeViewerLayoutGridBuilder(FluidRecipeCapability.CAP, IO.IN, (layout) -> {
+                        int slots = layout.getRecipeType().getMaxInputs(FluidRecipeCapability.CAP);
                         return GTMuiWidgets.createGrid(slots, (int) Mth.sqrt(slots), false, 's');
                     })
                     .setItemSlotsOverlay(IO.IN, 0, 1, InfinityGuiTextures.ELECTRODE_OVERLAY_1)
@@ -131,6 +135,18 @@ public class InfinityRecipeTypes {
                     .setFluidSlotsOverlay(IO.IN, 0, 2, GTGuiTextures.FURNACE_OVERLAY_2)
                     .setProgressBar(GTGuiTextures.PROGRESS_ARROW))
             .setSound(GTSoundEntries.ARC)
+            .setEUIO(IO.IN)
+            .register();
+
+    public static final GTRecipeTypeEntry FLUIDIZED_BR_RECIPE = InfinityRegistrate.recipeType("fluidized_br", MULTIBLOCK)
+            .setData(ProviderType.LANG, (ctx, prov) -> {
+                prov.add("recipe_category." + MOD_ID + "." + ctx.getName(), "Fluidized Bed Reactor");
+            })
+            .setMaxIOSize(3, 2, 2, 3)
+            .prepareBuilder(recipeBuilder -> recipeBuilder.EUt(GTValues.VA[GTValues.MV]))
+            .UI(builder -> builder
+                    .setItemSlotsOverlay(IO.OUT, 0, 1, GTGuiTextures.DUST_OVERLAY))
+            .setSound(GTSoundEntries.CHEMICAL)
             .setEUIO(IO.IN)
             .register();
 
