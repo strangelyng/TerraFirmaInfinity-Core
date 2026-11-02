@@ -1,7 +1,9 @@
 package net.terrafirmainfinity.core.common.data.material;
 
 import com.gregtechceu.gtceu.api.data.chemical.material.info.MaterialIconSet;
+import com.gregtechceu.gtceu.api.data.chemical.material.properties.HazardProperty;
 import com.gregtechceu.gtceu.api.fluids.FluidBuilder;
+import com.gregtechceu.gtceu.common.data.GTMedicalConditions;
 
 import static com.gregtechceu.gtceu.api.data.chemical.material.info.MaterialFlags.*;
 import static com.gregtechceu.gtceu.common.data.GTMaterials.*;
@@ -58,6 +60,14 @@ public class InfinityOreMaterials {
                 .components(Silver, 2, Sulfur, 1)
                 .oreSmeltInto(Silver)
                 .oreByproducts(Sulfur, Galena, Silver));
+
+        Amosite = InfinityRegistrate.material("amosite", builder -> builder
+                .dust()
+                .ore(3, 1)
+                .oreByproducts(Asbestos, Silicon)
+                .color(0xE6E6E6).secondaryColor(0x836533)
+                .hazard(HazardProperty.HazardTrigger.INHALATION, GTMedicalConditions.ASBESTOSIS)
+                .components(Iron, 7, Silicon, 8, Hydrogen, 2, Oxygen, 24));
 
         Anthracite = InfinityRegistrate.material("anthracite", builder -> builder
                 .gem()

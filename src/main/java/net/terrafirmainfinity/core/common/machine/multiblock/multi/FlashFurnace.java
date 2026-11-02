@@ -30,7 +30,7 @@ public class FlashFurnace {
     public static final MachineEntry<MultiblockMachineDefinition> FLASH_FURNACE = InfinityRegistrate
             .multiblock("flash_furnace", FlashFurnaceMachine::new)
             .rotationState(RotationState.NON_Y_AXIS)
-            .recipeType(InfinityRecipeTypes.FLASH_SMELTING_RECIPE)
+            .recipeType(InfinityRecipeTypes.FLASH_SMELTING_RECIPES)
             .appearanceBlock(GTBlocks.CASING_INVAR_HEATPROOF)
             .pattern(definition -> {
                 MultiPredicate casingPredicate = blocks(GTBlocks.CASING_INVAR_HEATPROOF.get());

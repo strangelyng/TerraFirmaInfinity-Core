@@ -19,7 +19,7 @@ public class ElectrolyticCell {
     public static final MachineEntry<MultiblockMachineDefinition> ELECTROLYTIC_CELL = InfinityRegistrate
             .multiblock("electrolytic_cell", WorkableElectricMultiblockMachine::new)
             .rotationState(RotationState.ALL)
-            .recipeType(InfinityRecipeTypes.ELECTROLYTIC_CELL_RECIPE)
+            .recipeType(InfinityRecipeTypes.ELECTROLYTIC_CELL_RECIPES)
             .recipeModifiers(GTRecipeModifiers.OC_PERFECT_SUBTICK, GTRecipeModifiers.BATCH_MODE)
             .appearanceBlock(GTBlocks.CASING_STEEL_SOLID)
             .pattern(definition -> MultiblockPatternBuilder.start(RelativeDirection.FRONT, RelativeDirection.UP, RelativeDirection.RIGHT)

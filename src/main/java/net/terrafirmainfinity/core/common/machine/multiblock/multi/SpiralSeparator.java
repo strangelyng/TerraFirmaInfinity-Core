@@ -28,7 +28,7 @@ public class SpiralSeparator {
     public static final MachineEntry<MultiblockMachineDefinition> SPIRAL_SEPARATOR = InfinityRegistrate
             .multiblock("spiral_separator", BasicWorkableMachine::new)
             .rotationState(RotationState.NON_Y_AXIS)
-            .recipeType(InfinityRecipeTypes.SPIRAL_SEPARATOR_RECIPE)
+            .recipeType(InfinityRecipeTypes.SPIRAL_SEPARATOR_RECIPES)
             .addOutputLimit(ItemRecipeCapability.CAP, 3)
             .addOutputLimit(FluidRecipeCapability.CAP, 2)
             .recipeModifiers(SpiralSeparator::recipeModifier)

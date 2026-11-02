@@ -2,6 +2,7 @@ package net.terrafirmainfinity.core.common.data.lang;
 
 import com.gregtechceu.gtceu.GTCEu;
 import com.gregtechceu.gtceu.data.lang.LangHandler;
+import com.gregtechceu.gtceu.data.lang.MachineLang;
 import com.tterrag.registrate.providers.RegistrateLangProvider;
 import net.terrafirmainfinity.core.InfinityCore;
 import net.terrafirmainfinity.core.integration.emi.HotSpringsDictionary;
@@ -52,7 +53,15 @@ public class InfinityLangHandler extends LangHandler {
         provider.add("tfinfinity.tooltip.ore_prospector_mode_block", "per-block");
 
         // Machines & Recipe Types
-        provider.add("tfinfinity.machine.roaster.tooltip", "§7Sulfide roast, anyone?");
+        MachineLang.standardTooltips(provider, "tfinfinity.machine", "roaster",
+                "Gas Collector via Ore Processing",
+                "Gas Collector via Ore Processing",
+                "Sulfide roast, anyone?");
+
+        MachineLang.standardTooltips(provider, "tfinfinity.machine", "loom",
+                "Weaving Cloth from Threads",
+                "Weaving Cloth from Threads",
+                "Something something... String Theory?");
 
         provider.add("fluid.gtceu.salt", "Molten Salt");
 

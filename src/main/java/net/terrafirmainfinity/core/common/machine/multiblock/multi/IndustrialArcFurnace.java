@@ -21,7 +21,7 @@ public class IndustrialArcFurnace {
     public static final MachineEntry<MultiblockMachineDefinition> INDUSTRIAL_ARC_FURNACE = InfinityRegistrate
             .multiblock("industrial_arc_furnace", ElectrodeMachine::new)
             .rotationState(RotationState.NON_Y_AXIS)
-            .recipeType(InfinityRecipeTypes.ADVANCED_ARC_FURNACE_RECIPE)
+            .recipeType(InfinityRecipeTypes.ADVANCED_ARC_FURNACE_RECIPES)
             .recipeModifiers(GTRecipeModifiers.OC_NON_PERFECT, GTRecipeModifiers.BATCH_MODE)
             .appearanceBlock(GTBlocks.CASING_STEEL_SOLID)
             .pattern(definition -> MultiblockPatternBuilder.start(RelativeDirection.FRONT, RelativeDirection.UP, RelativeDirection.RIGHT)

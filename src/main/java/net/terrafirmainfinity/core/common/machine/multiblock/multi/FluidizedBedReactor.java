@@ -20,7 +20,7 @@ public class FluidizedBedReactor {
     public static final MachineEntry<MultiblockMachineDefinition> FLUIDIZED_BED_REACTOR = InfinityRegistrate
             .multiblock("fluidized_bed_reactor", WorkableElectricMultiblockMachine::new)
             .rotationState(RotationState.NON_Y_AXIS)
-            .recipeType(InfinityRecipeTypes.FLUIDIZED_BR_RECIPE)
+            .recipeType(InfinityRecipeTypes.FLUIDIZED_BR_RECIPES)
             .recipeModifiers(GTRecipeModifiers.OC_NON_PERFECT, GTRecipeModifiers.BATCH_MODE)
             .appearanceBlock(GTBlocks.CASING_STAINLESS_CLEAN)
             .pattern(definition -> MultiblockPatternBuilder.start(RelativeDirection.FRONT, RelativeDirection.UP, RelativeDirection.RIGHT)

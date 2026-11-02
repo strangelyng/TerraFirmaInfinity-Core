@@ -366,7 +366,7 @@ public class OreVeinDictionary {
                     160, 0.3, 10, 70, 20, 0, 0,
                     false, false, false, 35,
                     new String[] {"tfc:rock/raw/andesite", "tfc:rock/raw/basalt", "tfc:rock/raw/dacite", "tfc:rock/raw/rhyolite", "tfc:rock/raw/tuff", "tfc:rock/raw/diorite", "tfc:rock/raw/gabbro", "tfc:rock/raw/granite"},
-                    new OreVeinInfoRecipe.WeightedBlock[] {new OreVeinInfoRecipe.WeightedBlock("asbestos", 100)},
+                    new OreVeinInfoRecipe.WeightedBlock[] {new OreVeinInfoRecipe.WeightedBlock("asbestos", 80), new OreVeinInfoRecipe.WeightedBlock("amosite", 20)},
                     "volcanic", new String[] {"tfc:active_shield_volcano", "tfc:ancient_shield_volcano", "tfc:dormant_shield_volcano", "tfc:extinct_shield_volcano", "tfc:glacially_carved_volcanic_mountains", "tfc:glacially_carved_volcanic_oceanic_mountains", "tfc:glaciated_shield_volcano", "tfc:glaciated_volcanic_mountains", "tfc:glaciated_volcanic_oceanic_mountains", "tfc:ice_sheet_shield_volcano", "tfc:ice_sheet_volcanic_mountains", "tfc:ice_sheet_volcanic_oceanic_mountains", "tfc:oceanic_volcanic_arc", "tfc:old_shield_volcano_shore", "tfc:shield_volcano_shore", "tfc:sunken_shield_volcano", "tfc:volcanic_island", "tfc:volcanic_mountain_islands", "tfc:volcanic_mountain_lake", "tfc:volcanic_mountains", "tfc:volcanic_oceanic_mountain_lake", "tfc:volcanic_oceanic_mountains"},
                     null, null, null, null,
                     null),

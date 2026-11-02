@@ -1,0 +1,28 @@
+{
+  "variants": {
+    "facing=down": {
+      "model": "tfinfinity:block/machine/lp_steam_loom",
+      "x": 90
+    },
+    "facing=east": {
+      "model": "tfinfinity:block/machine/lp_steam_loom",
+      "y": 90
+    },
+    "facing=north": {
+      "model": "tfinfinity:block/machine/lp_steam_loom"
+    },
+    "facing=south": {
+      "model": "tfinfinity:block/machine/lp_steam_loom",
+      "y": 180
+    },
+    "facing=up": {
+      "gtceu:z": 180,
+      "model": "tfinfinity:block/machine/lp_steam_loom",
+      "x": 270
+    },
+    "facing=west": {
+      "model": "tfinfinity:block/machine/lp_steam_loom",
+      "y": 270
+    }
+  }
+}

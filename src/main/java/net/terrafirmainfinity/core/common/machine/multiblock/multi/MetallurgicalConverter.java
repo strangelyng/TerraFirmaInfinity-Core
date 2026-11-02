@@ -26,7 +26,7 @@ public class MetallurgicalConverter {
     public static final MachineEntry<MultiblockMachineDefinition> METALLURGICAL_CONVERTER = InfinityRegistrate
             .multiblock("metallurgical_converter", WorkableElectricMultiblockMachine::new)
             .rotationState(RotationState.NON_Y_AXIS)
-            .recipeType(InfinityRecipeTypes.METALLURGICAL_CONVERTER_RECIPE)
+            .recipeType(InfinityRecipeTypes.METALLURGICAL_CONVERTER_RECIPES)
             .recipeModifiers(GTRecipeModifiers.OC_NON_PERFECT, MetallurgicalConverter::recipeModifier)
             .appearanceBlock(GTBlocks.CASING_STEEL_SOLID)
             .pattern(definition -> MultiblockPatternBuilder.start(RelativeDirection.FRONT, RelativeDirection.UP, RelativeDirection.RIGHT)

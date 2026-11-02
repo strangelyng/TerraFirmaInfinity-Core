@@ -57,7 +57,7 @@ public class InfinityCompoundMaterials {
                 .liquid(new FluidBuilder().temperature(293))
                 .color(0xc7622b)
                 .flags(GENERATE_FOIL, DISABLE_DECOMPOSITION)
-                .components(Phenol, 1, Formaldehyde, 1));;
+                .components(Phenol, 1, Formaldehyde, 1));
 
         PhenolicResin = InfinityRegistrate.material("phenolic_resin", builder -> builder
                 .liquid(new FluidBuilder().temperature(293))

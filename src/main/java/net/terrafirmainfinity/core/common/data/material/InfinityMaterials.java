@@ -64,6 +64,7 @@ public class InfinityMaterials {
 
     public static MaterialRegistryEntry Acanthite; // Silver Sulfide
     public static MaterialRegistryEntry Arsenopyrite; // Iron Arsenic Sulfide
+    public static MaterialRegistryEntry Amosite; // Amphibole Asbestos
     public static MaterialRegistryEntry Columbite; // Niobium Oxide
     public static MaterialRegistryEntry Fluorite; // Calcium Fluoride
     public static MaterialRegistryEntry Hafnon; // Hafnium Silicate
@@ -286,6 +287,9 @@ public class InfinityMaterials {
 
         oreProp = Pyrochlore.getProperty(PropertyKey.ORE);
         oreProp.setOreByProducts(Apatite, Calcium, Columbite); // Niobium to Columbite
+
+        // Amosite Byproduct for Asbestos
+        Asbestos.getProperty(PropertyKey.ORE).setOreByProducts(Amosite, Silicon, Magnesium);
 
         // Additional Replacements (Aluminium + Lithium Dust)
         Almandine.getProperty(PropertyKey.ORE).setOreByProducts(GarnetRed, Almandine);

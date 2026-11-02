@@ -4,14 +4,12 @@ import brachy.modularui.utils.FormattingUtil;
 import com.gregtechceu.gtceu.GTCEu;
 import com.gregtechceu.gtceu.api.GTCEuAPI;
 import com.gregtechceu.gtceu.api.GTValues;
-import com.gregtechceu.gtceu.api.capability.recipe.FluidRecipeCapability;
-import com.gregtechceu.gtceu.api.capability.recipe.ItemRecipeCapability;
 import com.gregtechceu.gtceu.api.data.RotationState;
 import com.gregtechceu.gtceu.api.machine.MachineDefinition;
-import com.gregtechceu.gtceu.api.machine.SimpleTieredMachine;
 import com.gregtechceu.gtceu.api.machine.property.GTMachineModelProperties;
 import com.gregtechceu.gtceu.api.machine.steam.SimpleSteamMachine;
 import com.gregtechceu.gtceu.api.multiblock.util.RelativeDirection;
+import com.gregtechceu.gtceu.api.recipe.GTRecipeType;
 import com.gregtechceu.gtceu.api.registry.registrate.entry.MachineEntry;
 import com.gregtechceu.gtceu.client.renderer.machine.DynamicRenderHelper;
 import com.gregtechceu.gtceu.common.data.GTMaterials;
@@ -28,6 +26,8 @@ import net.neoforged.neoforge.fluids.FluidType;
 import net.terrafirmainfinity.core.InfinityCore;
 import net.terrafirmainfinity.core.common.machine.part.ElectrodeHolderPartMachine;
 import net.terrafirmainfinity.core.common.machine.part.InfinityPartAbility;
+
+import java.util.function.Supplier;
 
 import static com.gregtechceu.gtceu.api.GTValues.*;
 import static com.gregtechceu.gtceu.api.machine.property.GTMachineModelProperties.*;
@@ -84,32 +84,15 @@ public class InfinityMachines {
     }
 
     // Custom Machines
-    public static final Pair<MachineEntry<MachineDefinition>, MachineEntry<MachineDefinition>> STEAM_ROASTER = registerSteamMachines(InfinityRegistrate, "steam_roaster",
-            SimpleSteamMachine::new, (pressure, builder) -> builder
-                    .rotationState(RotationState.NON_Y_AXIS)
-                    .recipeType(InfinityRecipeTypes.ROASTER_RECIPE)
-                    .ui(GTSingleblockMachinePanels.GENERAL_MACHINE)
-                    .themeId(i -> i > 0 ? GTGuiTheme.STEEL.getId() : GTGuiTheme.BRONZE.getId())
-                    .recipeModifier(SimpleSteamMachine::recipeModifier)
-                    .addOutputLimit(ItemRecipeCapability.CAP, 1)
-                    .addOutputLimit(FluidRecipeCapability.CAP, 0)
-                    .modelProperty(GTMachineModelProperties.VENT_DIRECTION, RelativeDirection.BACK)
-                    .workableSteamHullModel(pressure, InfinityCore.id("block/machines/roaster"))
-                    .tooltipBuilder((stack, list) -> list.add(Component.translatable("tfinfinity.machine.roaster.tooltip")))
-                    .register());
+    public static final Pair<MachineEntry<MachineDefinition>, MachineEntry<MachineDefinition>> STEAM_LOOM = registerSimpleSteamMachines("loom", InfinityRecipeTypes.LOOM_RECIPES);
 
-    public static final MachineEntry<MachineDefinition>[] ROASTER = registerTieredMachines(InfinityRegistrate, "roaster",
-            SimpleTieredMachine::new, (tier, builder) -> builder
-                    .langValue("%s Roaster %s".formatted(VLVH[tier], VLVT[tier]))
-                    .rotationState(RotationState.NON_Y_AXIS)
-                    .recipeType(InfinityRecipeTypes.ROASTER_RECIPE)
-                    .ui(GTSingleblockMachinePanels.GENERAL_MACHINE)
-                    .workableTieredHullModel(InfinityCore.id("block/machines/roaster"))
-                    .tooltipBuilder((stack, list) -> list.add(Component.translatable("tfinfinity.machine.roaster.tooltip")))
-                    .tooltips(workableTiered(tier, GTValues.V[tier], GTValues.V[tier] * 64, InfinityRecipeTypes.ROASTER_RECIPE,
-                            defaultTankSizeFunction.applyAsInt(tier), true))
-                    .register(),
-            ELECTRIC_TIERS);
+    public static final Pair<MachineEntry<MachineDefinition>, MachineEntry<MachineDefinition>> STEAM_ROASTER = registerSimpleSteamMachines("roaster", InfinityRecipeTypes.ROASTER_RECIPES);
+
+    public static final MachineEntry<MachineDefinition>[] ROASTER = new SimpleMachineBuilder(InfinityRegistrate, "roaster",
+            InfinityRecipeTypes.ROASTER_RECIPES).tankScalingFunction(hvCappedTankSizeFunction).register();
+
+    public static final MachineEntry<MachineDefinition>[] LOOM = new SimpleMachineBuilder(InfinityRegistrate, "loom",
+            InfinityRecipeTypes.LOOM_RECIPES).register();
 
     // Machine Parts
     public static final MachineEntry<MachineDefinition>[] ELECTRODE_HOLDER = registerTieredMachines(InfinityRegistrate,
@@ -125,6 +108,11 @@ public class InfinityMachines {
                     .tooltips(Component.translatable("gtceu.part_sharing.disabled"))
                     .register(),
             GTValues.tiersBetween(LV, GTCEuAPI.isHighTier() ? OpV : UV));
+
+    // Helper Methods
+    private static Pair<MachineEntry<MachineDefinition>, MachineEntry<MachineDefinition>> registerSimpleSteamMachines(String name, Supplier<GTRecipeType> recipeType) {
+        return registerSteamMachines(InfinityRegistrate, "steam_" + name, SimpleSteamMachine::new, (pressure, builder) -> builder.rotationState(RotationState.ALL).recipeType(recipeType).recipeModifier(SimpleSteamMachine::recipeModifier).themeId(i -> i > 0 ? GTGuiTheme.STEEL.getId() : GTGuiTheme.BRONZE.getId()).ui(GTSingleblockMachinePanels.GENERAL_MACHINE).modelProperty(GTMachineModelProperties.VENT_DIRECTION, RelativeDirection.BACK).workableSteamHullModel(pressure, InfinityCore.id("block/machines/" + name)).register());
+    }
 
     public static void init() {}
 }

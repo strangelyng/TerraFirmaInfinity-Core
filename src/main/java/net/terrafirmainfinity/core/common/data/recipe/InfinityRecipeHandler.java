@@ -1,13 +1,13 @@
 package net.terrafirmainfinity.core.common.data.recipe;
 
-import com.gregtechceu.gtceu.api.fluids.store.FluidStorageKeys;
 import com.gregtechceu.gtceu.common.data.GTRecipeTypes;
+import net.dries007.tfc.common.items.TFCItems;
 import net.dries007.tfc.common.recipes.LandslideRecipe;
 import net.dries007.tfc.common.recipes.ingredients.BlockIngredient;
 import net.minecraft.data.recipes.RecipeOutput;
+import net.minecraft.world.level.block.Blocks;
 import net.terrafirmainfinity.core.InfinityCore;
 import net.terrafirmainfinity.core.common.InfinityBlocks;
-import net.terrafirmainfinity.core.common.data.InfinityTagPrefix;
 import net.terrafirmainfinity.core.common.data.material.InfinityMaterials;
 
 import static net.terrafirmainfinity.core.common.data.InfinityRecipeTypes.*;
@@ -18,7 +18,7 @@ import static net.terrafirmainfinity.core.common.data.material.InfinityMaterials
 
 public class InfinityRecipeHandler {
     public static void testRecipes(RecipeOutput provider) {
-        ROASTER_RECIPE.recipeBuilder(InfinityCore.id("purified_chalcopyrite"))
+        ROASTER_RECIPES.recipeBuilder(InfinityCore.id("purified_chalcopyrite"))
                 .inputItems(crushedPurified, Chalcopyrite, 4)
                 .inputItems(dust, SiliconDioxide, 3)
                 .inputFluids(Oxygen.getFluid(3000))
@@ -27,6 +27,13 @@ public class InfinityRecipeHandler {
                 .outputFluids(SulfurDioxide.getFluid(2000))
                 .EUt(VA[LV])
                 .duration(200)
+                .save(provider);
+
+        LOOM_RECIPES.recipeBuilder(InfinityCore.id("white_wool"))
+                .inputItems(TFCItems.WOOL_CLOTH::get, 4)
+                .outputItems(Blocks.WHITE_WOOL, 8)
+                .duration(25*4)
+                .EUt(VA[ULV])
                 .save(provider);
 
         GTRecipeTypes.ELECTROLYZER_RECIPES.recipeBuilder(InfinityCore.id("water_electrolysis"))
@@ -50,7 +57,7 @@ public class InfinityRecipeHandler {
 //                .duration(400)
 //                .save(provider);
 
-        SPIRAL_SEPARATOR_RECIPE.recipeBuilder(InfinityCore.id("crushed_hematite_ore"))
+        SPIRAL_SEPARATOR_RECIPES.recipeBuilder(InfinityCore.id("crushed_hematite_ore"))
                 .inputItems(crushed, Hematite)
                 .inputFluids(Water.getFluid(100))
                 .outputItems(crushedPurified, Hematite)
@@ -60,7 +67,7 @@ public class InfinityRecipeHandler {
                 .duration(200)
                 .save(provider);
 
-        METALLURGICAL_CONVERTER_RECIPE.recipeBuilder(InfinityCore.id("pig_iron_to_steel_air"))
+        METALLURGICAL_CONVERTER_RECIPES.recipeBuilder(InfinityCore.id("pig_iron_to_steel_air"))
                 .inputItems(ingot, InfinityMaterials.PigIron)
                 .inputFluids(Air.getFluid(200))
                 .outputItems(ingot, Steel)
@@ -68,7 +75,7 @@ public class InfinityRecipeHandler {
                 .duration(600)
                 .save(provider);
 
-        METALLURGICAL_CONVERTER_RECIPE.recipeBuilder(InfinityCore.id("pig_iron_to_steel"))
+        METALLURGICAL_CONVERTER_RECIPES.recipeBuilder(InfinityCore.id("pig_iron_to_steel"))
                 .inputItems(ingot, InfinityMaterials.PigIron)
                 .inputFluids(Oxygen.getFluid(200))
                 .outputItems(ingot, Steel)
@@ -87,7 +94,7 @@ public class InfinityRecipeHandler {
 //                .duration(200)
 //                .save(provider);
 
-        ADVANCED_ARC_FURNACE_RECIPE.recipeBuilder(InfinityCore.id("stainless_steel"))
+        ADVANCED_ARC_FURNACE_RECIPES.recipeBuilder(InfinityCore.id("stainless_steel"))
                 .inputItems(dust, Iron, 6)
                 .inputItems(dust, Chromium, 1)
                 .inputItems(dust, Manganese, 1)
@@ -97,7 +104,7 @@ public class InfinityRecipeHandler {
                 .duration(1100)
                 .save(provider);
 
-        FLUIDIZED_BR_RECIPE.recipeBuilder(InfinityCore.id("coal_gasification"))
+        FLUIDIZED_BR_RECIPES.recipeBuilder(InfinityCore.id("coal_gasification"))
                 .inputItems(dust, Coal, 16)
                 .inputFluids(Steam.getFluid(4000))
                 .outputItems(dust, Coke, 12)
