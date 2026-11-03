@@ -161,6 +161,7 @@ public class InfinityMaterials {
         Carbon.setProperty(InfinityPropertyKeys.ELECTRODE, new ElectrodeProperty(100, 256));
         Graphite.setProperty(InfinityPropertyKeys.ELECTRODE, new ElectrodeProperty(120, 512));
 
+        Cadmium.value().addFlags(MaterialFlags.GENERATE_PLATE);
         Lead.value().addFlags(MaterialFlags.GENERATE_FRAME);
 
         // Modify Components (deferred-material-registration)

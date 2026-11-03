@@ -1,0 +1,56 @@
+{
+  "parent": "minecraft:item/generated",
+  "overrides": [
+    {
+      "model": "tfinfinity:item/lv_nickel_iron_battery/0",
+      "predicate": {
+        "gtceu:battery": 0.0
+      }
+    },
+    {
+      "model": "tfinfinity:item/lv_nickel_iron_battery/1",
+      "predicate": {
+        "gtceu:battery": 0.01
+      }
+    },
+    {
+      "model": "tfinfinity:item/lv_nickel_iron_battery/2",
+      "predicate": {
+        "gtceu:battery": 0.02
+      }
+    },
+    {
+      "model": "tfinfinity:item/lv_nickel_iron_battery/3",
+      "predicate": {
+        "gtceu:battery": 0.03
+      }
+    },
+    {
+      "model": "tfinfinity:item/lv_nickel_iron_battery/4",
+      "predicate": {
+        "gtceu:battery": 0.04
+      }
+    },
+    {
+      "model": "tfinfinity:item/lv_nickel_iron_battery/5",
+      "predicate": {
+        "gtceu:battery": 0.05
+      }
+    },
+    {
+      "model": "tfinfinity:item/lv_nickel_iron_battery/6",
+      "predicate": {
+        "gtceu:battery": 0.06
+      }
+    },
+    {
+      "model": "tfinfinity:item/lv_nickel_iron_battery/7",
+      "predicate": {
+        "gtceu:battery": 0.07
+      }
+    }
+  ],
+  "textures": {
+    "layer0": "tfinfinity:item/lv_nickel_iron_battery/1"
+  }
+}

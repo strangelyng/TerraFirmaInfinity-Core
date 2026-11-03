@@ -210,6 +210,8 @@ public class InfinityRecipeTypes {
     public static void configure() {
         setMaxIOSize(ARC_FURNACE_RECIPES.get(), 4, 9, 1, 1);
 
+        setMaxIOSize(CANNER_RECIPES.get(), 3, 2, 1, 1);
+
         setMaxIOSize(ELECTROLYZER_RECIPES.get(), 4, 3, 1, 3);
     }
 }

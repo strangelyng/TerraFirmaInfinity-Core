@@ -1,0 +1,7 @@
+{
+  "values": [
+    "tfinfinity:lv_lead_acid_battery",
+    "tfinfinity:lv_nickel_iron_battery",
+    "tfinfinity:lv_nickel_cadmium_battery"
+  ]
+}

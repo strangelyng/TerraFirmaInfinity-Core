@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:item/generated",
+  "textures": {
+    "layer0": "tfinfinity:item/lv_nickel_iron_battery/2"
+  }
+}

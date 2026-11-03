@@ -1,7 +1,9 @@
 package net.terrafirmainfinity.core.common;
 
 import com.gregtechceu.gtceu.GTCEu;
+import com.gregtechceu.gtceu.api.GTValues;
 import com.gregtechceu.gtceu.api.item.ComponentItem;
+import com.gregtechceu.gtceu.api.item.component.ElectricStats;
 import com.gregtechceu.gtceu.api.item.component.IMaterialPartItem;
 import com.gregtechceu.gtceu.common.data.models.GTModels;
 import com.gregtechceu.gtceu.common.item.behavior.CoverPlaceBehavior;
@@ -15,6 +17,8 @@ import net.terrafirmainfinity.core.common.data.InfinityCovers;
 import net.terrafirmainfinity.core.common.item.behavior.ElectrodeBehavior;
 
 import static com.gregtechceu.gtceu.common.data.GTItems.attach;
+import static com.gregtechceu.gtceu.common.data.GTItems.modelPredicate;
+import static com.gregtechceu.gtceu.common.data.models.GTModels.overrideModel;
 import static net.terrafirmainfinity.core.InfinityCore.InfinityRegistrate;
 
 public class InfinityItems {
@@ -22,12 +26,14 @@ public class InfinityItems {
         InfinityRegistrate.creativeModeTab(() -> InfinityCore.INFINITY_CREATIVE_TAB);
     }
 
+    // Covers
     public static ItemEntry<ComponentItem> COVER_AIR_VENT = InfinityRegistrate
             .item("air_vent_cover", ComponentItem::new)
             .lang("Air Vent Cover")
             .onRegister(attach(new CoverPlaceBehavior(InfinityCovers.AIR_VENT)))
             .register();
 
+    // Components
     public static ItemEntry<Item> STEAM_MOTOR = InfinityRegistrate.item("steam_motor", Item::new)
             .lang("Steam Motor")
             .tag(CustomTags.ELECTRIC_MOTORS)
@@ -38,6 +44,7 @@ public class InfinityItems {
             .tag(CustomTags.ELECTRIC_PISTONS)
             .register();
 
+    // Covers
     public static ItemEntry<ComponentItem> STEAM_CONVEYOR = InfinityRegistrate
             .item("steam_conveyor", ComponentItem::new)
             .lang("Steam Conveyor")
@@ -62,6 +69,32 @@ public class InfinityItems {
             .tag(CustomTags.ELECTRIC_PUMPS)
             .register();
 
+    // Batteries
+    public static ItemEntry<ComponentItem> BATTERY_LV_LEAD_ACID = InfinityRegistrate
+            .item("lv_lead_acid_battery", ComponentItem::new)
+            .lang("Small Lead-Acid Battery")
+            .model(overrideModel(GTCEu.id("battery"), 8))
+            .onRegister(modelPredicate(GTCEu.id("battery"), ElectricStats::getStoredPredicate))
+            .onRegister(attach(ElectricStats.createRechargeableBattery(80000, GTValues.LV)))
+            .tag(CustomTags.LV_BATTERIES).register();
+
+    public static ItemEntry<ComponentItem> BATTERY_LV_NICKEL_IRON = InfinityRegistrate
+            .item("lv_nickel_iron_battery", ComponentItem::new)
+            .lang("Small Nickel-Iron Battery")
+            .model(overrideModel(GTCEu.id("battery"), 8))
+            .onRegister(modelPredicate(GTCEu.id("battery"), ElectricStats::getStoredPredicate))
+            .onRegister(attach(ElectricStats.createRechargeableBattery(100000, GTValues.LV)))
+            .tag(CustomTags.LV_BATTERIES).register();
+
+    public static ItemEntry<ComponentItem> BATTERY_LV_NICKEL_CADMIUM = InfinityRegistrate
+            .item("lv_nickel_cadmium_battery", ComponentItem::new)
+            .lang("Small Nickel-Cadmium Battery")
+            .model(overrideModel(GTCEu.id("battery"), 8))
+            .onRegister(modelPredicate(GTCEu.id("battery"), ElectricStats::getStoredPredicate))
+            .onRegister(attach(ElectricStats.createRechargeableBattery(120000, GTValues.LV)))
+            .tag(CustomTags.LV_BATTERIES).register();
+
+    // Items
     public static ItemEntry<ComponentItem> ELECTRODE = InfinityRegistrate.item("electrode", ComponentItem::new)
             .lang("%s Electrode")
             .properties(p -> p.stacksTo(1))
