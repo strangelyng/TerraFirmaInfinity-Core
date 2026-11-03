@@ -41,7 +41,7 @@ import net.neoforged.fml.event.lifecycle.FMLCommonSetupEvent;
 
 @Mod(InfinityCore.MOD_ID)
 public class InfinityCore {
-    private static boolean didRunRegistration = false;
+//    private static boolean didRunRegistration = false;
 
     public static final String MOD_ID = "tfinfinity";
     public static final Logger LOGGER = LogUtils.getLogger();
@@ -90,14 +90,14 @@ public class InfinityCore {
 
     /**
      * GT Registration order: (elements -> material icon sets -> material icon types -> materials -> tag prefixes
-     * -> sound entries -> blocks, fluids -> recipe capabilitiess, conditions, types -> tools, data components,
+     * -> sound entries -> blocks, fluids -> recipe capabilities, conditions, types -> tools, data components,
      * -> items -> machines -> ingredient types).
      * See {@link com.gregtechceu.gtceu.common.CommonProxy}
      */
     @SubscribeEvent
     public void onRegisterEvent(RegisterEvent event) {
-        if (didRunRegistration) return;
-        didRunRegistration = true;
+//        if (didRunRegistration) return;
+//        didRunRegistration = true;
 
         InfinityElements.init();
         InfinityMaterialIconSet.init();

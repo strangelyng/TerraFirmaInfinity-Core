@@ -22,12 +22,12 @@ import com.gregtechceu.gtceu.common.mui.GTSingleblockMachinePanels;
 import com.gregtechceu.gtceu.data.lang.LangHandler;
 import it.unimi.dsi.fastutil.Pair;
 import net.minecraft.network.chat.Component;
+import net.minecraft.world.item.crafting.RecipeType;
 import net.neoforged.neoforge.fluids.FluidType;
+import net.neoforged.neoforge.registries.DeferredHolder;
 import net.terrafirmainfinity.core.InfinityCore;
 import net.terrafirmainfinity.core.common.machine.part.ElectrodeHolderPartMachine;
 import net.terrafirmainfinity.core.common.machine.part.InfinityPartAbility;
-
-import java.util.function.Supplier;
 
 import static com.gregtechceu.gtceu.api.GTValues.*;
 import static com.gregtechceu.gtceu.api.machine.property.GTMachineModelProperties.*;
@@ -110,7 +110,7 @@ public class InfinityMachines {
             GTValues.tiersBetween(LV, GTCEuAPI.isHighTier() ? OpV : UV));
 
     // Helper Methods
-    private static Pair<MachineEntry<MachineDefinition>, MachineEntry<MachineDefinition>> registerSimpleSteamMachines(String name, Supplier<GTRecipeType> recipeType) {
+    private static Pair<MachineEntry<MachineDefinition>, MachineEntry<MachineDefinition>> registerSimpleSteamMachines(String name, DeferredHolder<RecipeType<?>, GTRecipeType> recipeType) {
         return registerSteamMachines(InfinityRegistrate, "steam_" + name, SimpleSteamMachine::new, (pressure, builder) -> builder.rotationState(RotationState.ALL).recipeType(recipeType).recipeModifier(SimpleSteamMachine::recipeModifier).themeId(i -> i > 0 ? GTGuiTheme.STEEL.getId() : GTGuiTheme.BRONZE.getId()).ui(GTSingleblockMachinePanels.GENERAL_MACHINE).modelProperty(GTMachineModelProperties.VENT_DIRECTION, RelativeDirection.BACK).workableSteamHullModel(pressure, InfinityCore.id("block/machines/" + name)).register());
     }
 

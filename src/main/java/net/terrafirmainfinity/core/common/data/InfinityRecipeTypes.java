@@ -74,9 +74,7 @@ public class InfinityRecipeTypes {
             .register();
 
     public static final GTRecipeTypeEntry ELECTROLYTIC_CELL_RECIPES = InfinityRegistrate.recipeType("electrolytic_cell", ELECTRIC)
-            .setData(ProviderType.LANG, (ctx, prov) -> {
-                prov.add("recipe_category." + MOD_ID + "." + ctx.getName(), "Advanced Electrolysis");
-            })
+            .setData(ProviderType.LANG, (ctx, prov) -> prov.add("recipe_type." + MOD_ID + "." + ctx.getName(), "Advanced Electrolysis"))
             .setMaxIOSize(4, 3, 4, 4)
             .prepareBuilder(recipeBuilder -> recipeBuilder.EUt(GTValues.VA[GTValues.LV]))
             .UI(builder -> builder.setProgressBar(GTGuiTextures.PROGRESS_EXTRACT)
@@ -98,9 +96,7 @@ public class InfinityRecipeTypes {
             .register();
 
     public static final GTRecipeTypeEntry SPIRAL_SEPARATOR_RECIPES = InfinityRegistrate.recipeType("spiral_separator", MULTIBLOCK)
-            .setData(ProviderType.LANG, (ctx, prov) -> {
-                prov.add("recipe_category." + MOD_ID + "." + ctx.getName(), "Spiral Separation");
-            })
+            .setData(ProviderType.LANG, (ctx, prov) -> prov.add("recipe_type." + MOD_ID + "." + ctx.getName(), "Spiral Separation"))
             .setMaxIOSize(1, 6, 1, 3)
             .UI(builder -> builder.setProgressBar(GTGuiTextures.PROGRESS_ARROW))
             .setSound(GTSoundEntries.BATH)
@@ -108,9 +104,7 @@ public class InfinityRecipeTypes {
             .register();
 
     public static final GTRecipeTypeEntry METALLURGICAL_CONVERTER_RECIPES = InfinityRegistrate.recipeType("metallurgical_converter", MULTIBLOCK)
-            .setData(ProviderType.LANG, (ctx, prov) -> {
-                prov.add("recipe_category." + MOD_ID + "." + ctx.getName(), "Metallurgical Conversion");
-            })
+            .setData(ProviderType.LANG, (ctx, prov) -> prov.add("recipe_type." + MOD_ID + "." + ctx.getName(), "Metallurgical Conversion"))
             .setMaxIOSize(3, 2, 3, 2)
             .prepareBuilder(recipeBuilder -> recipeBuilder.EUt(GTValues.VA[GTValues.LV]))
             .UI(builder -> builder.setProgressBar(GTGuiTextures.PROGRESS_ARROW))
@@ -119,9 +113,7 @@ public class InfinityRecipeTypes {
             .register();
 
     public static final GTRecipeTypeEntry FLASH_SMELTING_RECIPES = InfinityRegistrate.recipeType("flash_furnace", MULTIBLOCK)
-            .setData(ProviderType.LANG, (ctx, prov) -> {
-                prov.add("recipe_category." + MOD_ID + "." + ctx.getName(), "Flash Smelting");
-            })
+            .setData(ProviderType.LANG, (ctx, prov) -> prov.add("recipe_type." + MOD_ID + "." + ctx.getName(), "Flash Smelting"))
             .setMaxIOSize(2, 0, 2, 3)
             .prepareBuilder(recipeBuilder -> recipeBuilder.EUt(GTValues.VA[GTValues.MV]))
             .UI(builder -> builder.setProgressBar(GTGuiTextures.PROGRESS_ARROW_MULTIPLE))
@@ -130,9 +122,7 @@ public class InfinityRecipeTypes {
             .register();
 
     public static final GTRecipeTypeEntry ADVANCED_ARC_FURNACE_RECIPES = InfinityRegistrate.recipeType("advanced_arc_furnace", MULTIBLOCK)
-            .setData(ProviderType.LANG, (ctx, prov) -> {
-                prov.add("recipe_category." + MOD_ID + "." + ctx.getName(), "Advanced Arc Smelting");
-            })
+            .setData(ProviderType.LANG, (ctx, prov) -> prov.add("recipe_type." + MOD_ID + "." + ctx.getName(), "Advanced Arc Smelting"))
             .setMaxIOSize(9, 0, 3, 3)
             .prepareBuilder(recipeBuilder -> recipeBuilder.EUt(GTValues.VA[GTValues.LV]))
             .UI(builder -> builder
@@ -144,9 +134,7 @@ public class InfinityRecipeTypes {
             .register();
 
     public static final GTRecipeTypeEntry FLUIDIZED_BR_RECIPES = InfinityRegistrate.recipeType("fluidized_br", MULTIBLOCK)
-            .setData(ProviderType.LANG, (ctx, prov) -> {
-                prov.add("recipe_category." + MOD_ID + "." + ctx.getName(), "Fluidized Bed Reactor");
-            })
+            .setData(ProviderType.LANG, (ctx, prov) -> prov.add("recipe_type." + MOD_ID + "." + ctx.getName(), "Fluidized Bed Reactor"))
             .setMaxIOSize(3, 2, 2, 3)
             .prepareBuilder(recipeBuilder -> recipeBuilder.EUt(GTValues.VA[GTValues.MV]))
             .UI(builder -> builder
