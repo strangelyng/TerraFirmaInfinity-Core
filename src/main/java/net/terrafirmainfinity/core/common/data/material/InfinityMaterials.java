@@ -24,15 +24,20 @@ import com.simibubi.create.AllBlocks;
 import com.simibubi.create.AllItems;
 import net.dries007.tfc.common.blocks.TFCBlocks;
 import net.dries007.tfc.common.blocks.rock.Ore;
+import net.dries007.tfc.common.fluids.TFCFluids;
 import net.dries007.tfc.common.items.Powder;
 import net.dries007.tfc.common.items.TFCItems;
 import net.dries007.tfc.util.Metal;
+import net.minecraft.world.item.DyeColor;
 import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.material.Fluid;
 import net.terrafirmainfinity.core.common.data.InfinityPropertyKeys;
 import net.terrafirmainfinity.core.common.data.material.property.ElectrodeProperty;
 
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
+import java.util.function.Supplier;
 
 import static com.gregtechceu.gtceu.api.GTValues.*;
 import static com.gregtechceu.gtceu.api.data.tag.TagPrefix.*;
@@ -161,7 +166,6 @@ public class InfinityMaterials {
         Carbon.setProperty(InfinityPropertyKeys.ELECTRODE, new ElectrodeProperty(100, 256));
         Graphite.setProperty(InfinityPropertyKeys.ELECTRODE, new ElectrodeProperty(120, 512));
 
-        Cadmium.value().addFlags(MaterialFlags.GENERATE_PLATE);
         Lead.value().addFlags(MaterialFlags.GENERATE_FRAME);
 
         // Modify Components (deferred-material-registration)
@@ -423,18 +427,24 @@ public class InfinityMaterials {
         block.setIgnored(Kaolinite, () -> TFCBlocks.RED_KAOLIN_CLAY);
         block.setIgnored(Kaolinite, () -> TFCBlocks.PINK_KAOLIN_CLAY);
         block.setIgnored(Kaolinite, () -> TFCBlocks.WHITE_KAOLIN_CLAY);
-        powder.setIgnored(Kaolinite, () -> TFCItems.POWDERS.get(Powder.KAOLINITE));
+        dustSmall.setIgnored(Kaolinite, () -> TFCItems.POWDERS.get(Powder.KAOLINITE));
 
         block.modifyMaterialAmount(Kaolinite, 4);
 
-        powder.setIgnored(CalciumCarbonate, () -> TFCItems.POWDERS.get(Powder.FLUX));
-        powder.setIgnored(Quicklime, () -> TFCItems.POWDERS.get(Powder.LIME));
-        powder.setIgnored(SodaAsh, () -> TFCItems.POWDERS.get(Powder.SODA_ASH));
-        powder.setIgnored(PotassiumCarbonate, () -> TFCItems.POWDERS.get(Powder.WOOD_ASH));
+        dustSmall.setIgnored(CalciumCarbonate, () -> TFCItems.POWDERS.get(Powder.FLUX));
+        dustSmall.setIgnored(Quicklime, () -> TFCItems.POWDERS.get(Powder.LIME));
+        dustSmall.setIgnored(SodaAsh, () -> TFCItems.POWDERS.get(Powder.SODA_ASH));
+        dustSmall.setIgnored(PotassiumCarbonate, () -> TFCItems.POWDERS.get(Powder.WOOD_ASH));
 
-        powder.setIgnored(Charcoal, () -> TFCItems.POWDERS.get(Powder.CHARCOAL));
-        powder.setIgnored(Coke, () -> TFCItems.POWDERS.get(Powder.COKE));
-        powder.setIgnored(Salt, () -> TFCItems.POWDERS.get(Powder.SALT));
+        Arrays.stream(DyeColor.values()).forEach(dyeColor -> {
+            MaterialRegistryEntry dyeMaterial = DYE_MATERIALS.get(dyeColor);
+            Supplier<Fluid> dyeFluid = () -> TFCFluids.COLORED_FLUIDS.get(dyeColor).getSource().getSource();
+            GTFluids.handleNonMaterialFluids(dyeMaterial.value(), dyeFluid);
+        });
+
+        dustSmall.setIgnored(Charcoal, () -> TFCItems.POWDERS.get(Powder.CHARCOAL));
+        dustSmall.setIgnored(Coke, () -> TFCItems.POWDERS.get(Powder.COKE));
+        dustSmall.setIgnored(Salt, () -> TFCItems.POWDERS.get(Powder.SALT));
 
         gemChipped.setIgnored(Lignite);
         gemFlawed.setIgnored(Lignite);
@@ -596,7 +606,7 @@ public class InfinityMaterials {
             richRawOre.setIgnored(material, () -> oreItems.get(Ore.Grade.RICH));
 
             if (ore.hasPowder()) {
-                powder.setIgnored(material, () -> TFCItems.ORE_POWDERS.get(ore));
+                dustSmall.setIgnored(material, () -> TFCItems.ORE_POWDERS.get(ore));
             }
         });
 
@@ -625,7 +635,7 @@ public class InfinityMaterials {
             rawOre.setIgnored(material, () -> TFCItems.ORES.get(ore));
 
             if (ore.hasPowder()) {
-                powder.setIgnored(material, () -> TFCItems.ORE_POWDERS.get(ore));
+                dustSmall.setIgnored(material, () -> TFCItems.ORE_POWDERS.get(ore));
             }
         });
 
@@ -642,7 +652,6 @@ public class InfinityMaterials {
         blockPlated.setIgnored(StainlessSteel, () -> FLBlocks.METALS.get(FLMetal.STAINLESS_STEEL).get(Metal.BlockType.BLOCK));
         slabPlated.setIgnored(StainlessSteel, () -> FLBlocks.METALS.get(FLMetal.STAINLESS_STEEL).get(Metal.BlockType.BLOCK_SLAB));
         stairsPlated.setIgnored(StainlessSteel, () -> FLBlocks.METALS.get(FLMetal.STAINLESS_STEEL).get(Metal.BlockType.BLOCK_STAIRS));
-
 
         // Eidolon Materials
         ingot.setIgnored(Pewter, Registry.PEWTER_INGOT);

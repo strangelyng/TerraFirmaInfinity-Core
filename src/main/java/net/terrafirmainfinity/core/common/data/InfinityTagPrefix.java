@@ -51,18 +51,6 @@ public class InfinityTagPrefix {
             ))
             .register();
 
-    public static final TagPrefixEntry powder = InfinityRegistrate.tagPrefix("powder")
-            .idPattern("%s_powder")
-            .defaultTagPath("powders/%s")
-            .unformattedTagPath("powders")
-            .lang("%s Powder")
-            .materialAmount(GTValues.M / 4)
-            .materialIconType(InfinityMaterialIconType.powder)
-            .unificationEnabled(true)
-            .generateItem(true)
-            .generationCondition(hasOreProperty)
-            .register();
-
     public static final TagPrefixEntry oreSmall = InfinityRegistrate.tagPrefix("small_ore")
             .materialAmount(GTValues.M / 9)
             .unificationEnabled(true)

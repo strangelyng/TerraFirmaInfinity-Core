@@ -7,7 +7,7 @@ import net.terrafirmainfinity.core.common.data.InfinityTagPrefix;
 
 public class InfinityTagPrefixTags {
     public static void init(RegistrateTagsProvider.IntrinsicImpl<TagPrefix> provider) {
-        provider.addTag(CustomTags.INHALATION_TRIGGER_PREFIXES)
-                .add(InfinityTagPrefix.powder.getKey());
+//        provider.addTag(CustomTags.INHALATION_TRIGGER_PREFIXES)
+//                .add(InfinityTagPrefix.powder.getKey());
     }
 }
