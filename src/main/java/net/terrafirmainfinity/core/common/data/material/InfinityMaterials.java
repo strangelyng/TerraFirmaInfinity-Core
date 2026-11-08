@@ -207,6 +207,13 @@ public class InfinityMaterials {
         );
         Lepidolite.get().setFormula("KLi2Al(Si4O10)F2", true);
 
+        Potash.getMaterialInfo().setComponents(List.of(
+                new DeferredMaterialStack(Potassium, 2),
+                new DeferredMaterialStack(Carbon, 1),
+                new DeferredMaterialStack(Oxygen, 3))
+        );
+        Potash.get().setFormula("K2CO3", true);
+
         Ruby.getMaterialInfo().setComponents(List.of(
                 new DeferredMaterialStack(Alumina, 1),
                 new DeferredMaterialStack(ChromiumOxide, 1))
@@ -434,7 +441,7 @@ public class InfinityMaterials {
         dustSmall.setIgnored(CalciumCarbonate, () -> TFCItems.POWDERS.get(Powder.FLUX));
         dustSmall.setIgnored(Quicklime, () -> TFCItems.POWDERS.get(Powder.LIME));
         dustSmall.setIgnored(SodaAsh, () -> TFCItems.POWDERS.get(Powder.SODA_ASH));
-        dustSmall.setIgnored(PotassiumCarbonate, () -> TFCItems.POWDERS.get(Powder.WOOD_ASH));
+        dustSmall.setIgnored(Potash, () -> TFCItems.POWDERS.get(Powder.WOOD_ASH));
 
         Arrays.stream(DyeColor.values()).forEach(dyeColor -> {
             MaterialRegistryEntry dyeMaterial = DYE_MATERIALS.get(dyeColor);
