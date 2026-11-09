@@ -71,7 +71,7 @@ public class InfinityOreMaterials {
 
         Anthracite = InfinityRegistrate.material("anthracite", builder -> builder
                 .gem()
-                .color(0x241d29).iconSet(MaterialIconSet.METALLIC)
+                .color(0x38313d).secondaryColor(0x241d29).iconSet(MaterialIconSet.LIGNITE)
                 .flags(FLAMMABLE, DISABLE_MATERIAL_RECIPES)
                 .components(Carbon, 1));
 
@@ -120,7 +120,7 @@ public class InfinityOreMaterials {
 
         Lignite = InfinityRegistrate.material("lignite", builder -> builder
                 .gem()
-                .color(0x2d2725).iconSet(MaterialIconSet.DULL)
+                .color(0x4a4440).secondaryColor(0x2d2725).iconSet(MaterialIconSet.LIGNITE)
                 .flags(FLAMMABLE, DISABLE_MATERIAL_RECIPES)
                 .components(Carbon, 1));
 

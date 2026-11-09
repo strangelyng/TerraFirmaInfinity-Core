@@ -29,6 +29,7 @@ import net.dries007.tfc.common.items.Powder;
 import net.dries007.tfc.common.items.TFCItems;
 import net.dries007.tfc.util.Metal;
 import net.minecraft.world.item.DyeColor;
+import net.minecraft.world.level.ItemLike;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.material.Fluid;
 import net.terrafirmainfinity.core.common.data.InfinityPropertyKeys;
@@ -168,7 +169,7 @@ public class InfinityMaterials {
 
         Lead.value().addFlags(MaterialFlags.GENERATE_FRAME);
 
-        // Modify Components (deferred-material-registration)
+        // Modify Components
         Alunite.getMaterialInfo().setComponents(List.of(
                 new DeferredMaterialStack(Potassium, 1),
                 new DeferredMaterialStack(Aluminium, 3),
@@ -177,6 +178,15 @@ public class InfinityMaterials {
                 new DeferredMaterialStack(Oxygen, 14))
         );
         Alunite.get().setFormula("KAl3S2H6O14", true);
+
+        // Hydroxyapatite / Calcium Phosphate
+        Bone.getMaterialInfo().setComponents(List.of(
+                new DeferredMaterialStack(Calcium, 5),
+                new DeferredMaterialStack(Phosphorus, 3),
+                new DeferredMaterialStack(Oxygen, 13),
+                new DeferredMaterialStack(Hydrogen, 1))
+        );
+        Bone.get().setFormula("Ca5(PO4)3(OH)", true);
 
         Sodalite.getMaterialInfo().setComponents(List.of(
                 new DeferredMaterialStack(Sodium, 4),
@@ -453,23 +463,11 @@ public class InfinityMaterials {
         dustSmall.setIgnored(Coke, () -> TFCItems.POWDERS.get(Powder.COKE));
         dustSmall.setIgnored(Salt, () -> TFCItems.POWDERS.get(Powder.SALT));
 
-        gemChipped.setIgnored(Lignite);
-        gemFlawed.setIgnored(Lignite);
-        gem.setIgnored(Lignite, () -> TFCItems.ORES.get(Ore.LIGNITE));
-        gemFlawless.setIgnored(Lignite);
-        gemExquisite.setIgnored(Lignite);
-
-        gemChipped.setIgnored(Coal);
-        gemFlawed.setIgnored(Coal);
-        gem.setIgnored(Coal, () -> TFCItems.ORES.get(Ore.BITUMINOUS_COAL));
-        gemFlawless.setIgnored(Coal);
-        gemExquisite.setIgnored(Coal);
-
-        gemChipped.setIgnored(Anthracite);
-        gemFlawed.setIgnored(Anthracite);
-        gem.setIgnored(Anthracite, () -> BeneathItems.CURSECOAL);
-        gemFlawless.setIgnored(Anthracite);
-        gemExquisite.setIgnored(Anthracite);
+        excludeAllGems(Lignite, () -> TFCItems.ORES.get(Ore.LIGNITE));
+        excludeAllGems(Coal, () -> TFCItems.ORES.get(Ore.BITUMINOUS_COAL));
+        excludeAllGemsButNormal(Coke);
+        excludeAllGems(Anthracite, () -> BeneathItems.CURSECOAL);
+        excludeAllGems(Glass);
 
         ingot.value().removeIgnored(Iron.value());
         ingot.setIgnored(Iron, // Iron to Cast Iron
@@ -660,6 +658,8 @@ public class InfinityMaterials {
         slabPlated.setIgnored(StainlessSteel, () -> FLBlocks.METALS.get(FLMetal.STAINLESS_STEEL).get(Metal.BlockType.BLOCK_SLAB));
         stairsPlated.setIgnored(StainlessSteel, () -> FLBlocks.METALS.get(FLMetal.STAINLESS_STEEL).get(Metal.BlockType.BLOCK_STAIRS));
 
+        gem.setIgnored(Wax, () -> FLItems.BEESWAX);
+
         // Eidolon Materials
         ingot.setIgnored(Pewter, Registry.PEWTER_INGOT);
         nugget.setIgnored(Pewter, Registry.PEWTER_NUGGET);
@@ -695,21 +695,38 @@ public class InfinityMaterials {
         dust.setIgnored(EnderPearl, () -> AEItems.ENDER_DUST);
     }
 
-    public static void addFluidToExisting(FluidStorageKey key, Material mat) {
+    private static void addFluidToExisting(FluidStorageKey key, Material mat) {
         FluidProperty fluidProp = new FluidProperty();
         fluidProp.getStorage().enqueueRegistration(key, new FluidBuilder());
         mat.setProperty(PropertyKey.FLUID, fluidProp);
     }
 
-    public static void addFluidToExisting(FluidStorageKey key, int temp, MaterialRegistryEntry mat) {
+    private static void addFluidToExisting(FluidStorageKey key, int temp, MaterialRegistryEntry mat) {
         FluidProperty fluidProp = new FluidProperty();
         fluidProp.getStorage().enqueueRegistration(key, new FluidBuilder().temperature(temp));
         mat.setProperty(PropertyKey.FLUID, fluidProp);
     }
 
-    public static void addFluidToExisting(FluidStorageKey key, int temp, MaterialRegistryEntry mat, String translationKey) {
+    private static void addFluidToExisting(FluidStorageKey key, int temp, MaterialRegistryEntry mat, String translationKey) {
         FluidProperty fluidProp = new FluidProperty();
         fluidProp.getStorage().enqueueRegistration(key, new FluidBuilder().temperature(temp).translation(translationKey));
         mat.setProperty(PropertyKey.FLUID, fluidProp);
+    }
+
+    private static void excludeAllGemsButNormal(MaterialRegistryEntry material) {
+        gemChipped.setIgnored(material);
+        gemFlawed.setIgnored(material);
+        gemFlawless.setIgnored(material);
+        gemExquisite.setIgnored(material);
+    }
+
+    private static void excludeAllGems(MaterialRegistryEntry material, Supplier<? extends ItemLike> item) {
+        gem.setIgnored(material, item);
+        excludeAllGemsButNormal(material);
+    }
+
+    private static void excludeAllGems(MaterialRegistryEntry material) {
+        gem.setIgnored(material);
+        excludeAllGemsButNormal(material);
     }
 }
