@@ -40,11 +40,11 @@ public class ElectrodeMachine extends WorkableElectricMultiblockMachine {
             return (ElectrodeMachine) super.getMachine();
         }
 
-        // Check that electrode is still present removed before re-running a cached recipe
+        // Check that electrode is still present before re-running a cached recipe
         @Override
         protected ActionResult checkRecipe(GTRecipe recipe) {
             if (!getMachine().hasElectrodeHolder()) {
-                return ActionResult.fail(Component.translatable("tfinfinity.recipe_logic.missing_electrode"), null, IO.NONE); // Add appropriate component message
+                return ActionResult.fail(Component.translatable("tfinfinity.recipe_logic.missing_electrode"), null, IO.NONE);
             }
             return super.checkRecipe(recipe);
         }

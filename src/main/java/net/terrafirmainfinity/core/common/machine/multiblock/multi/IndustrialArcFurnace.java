@@ -35,7 +35,7 @@ public class IndustrialArcFurnace {
                             .and(autoAbilities(definition.getRecipeTypes()))
                             .and(autoAbilities(true, false, false)))
                     .where('F', blocks(GTBlocks.FIREBOX_STEEL.get()))
-                    .where('E', blocks(InfinityBlocks.ELECTRODE_ASSEMBLY.get())) // TODO: Placeholder
+                    .where('E', blocks(InfinityBlocks.ELECTRODE_ASSEMBLY.get()))
                     .where('X', abilities(InfinityPartAbility.ELECTRODE_HOLDER))
                     .where('M', abilities(PartAbility.MUFFLER))
                     .where('#', MultiPredicate.air())

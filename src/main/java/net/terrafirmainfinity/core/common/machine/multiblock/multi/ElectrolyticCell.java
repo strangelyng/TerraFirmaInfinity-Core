@@ -20,7 +20,7 @@ public class ElectrolyticCell {
             .multiblock("electrolytic_cell", WorkableElectricMultiblockMachine::new)
             .rotationState(RotationState.ALL)
             .recipeType(InfinityRecipeTypes.ELECTROLYTIC_CELL_RECIPES)
-            .recipeModifiers(GTRecipeModifiers.OC_PERFECT_SUBTICK, GTRecipeModifiers.BATCH_MODE)
+            .recipeModifiers(GTRecipeModifiers.OC_NON_PERFECT, GTRecipeModifiers.BATCH_MODE)
             .appearanceBlock(GTBlocks.CASING_STEEL_SOLID)
             .pattern(definition -> MultiblockPatternBuilder.start(RelativeDirection.FRONT, RelativeDirection.UP, RelativeDirection.RIGHT)
                     .slice("CCCCC", "CCCCC", "CCCCC")
