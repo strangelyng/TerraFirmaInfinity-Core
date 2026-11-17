@@ -41,6 +41,7 @@ public class RotaryKiln {
                 MultiPredicate casingPredicate = blocks(InfinityBlocks.CASING_STEEL_BRICKS.get());
                 MultiPredicate maintenance = autoAbilities(true, false, false).setExactLimit(1);
                 MultiPredicate energyPredicate = abilities(PartAbility.INPUT_ENERGY).setMaxGlobalLimited(2);
+                MultiPredicate fuelPredicate = abilities(InfinityPartAbility.FUEL_HATCH).setMaxGlobalLimited(1).xor(abilities(InfinityPartAbility.FUEL_BUS)).setMaxGlobalLimited(1);
                 return MultiblockPatternBuilder.start(RelativeDirection.FRONT, RelativeDirection.UP, RelativeDirection.RIGHT)
                         .slice("F F", "OOO", "OOO", "OOO")
                         .slice("   ", "CCC", "C#C", "CCC")
@@ -58,13 +59,13 @@ public class RotaryKiln {
                         .where('I', casingPredicate
                                 .and(abilities(PartAbility.IMPORT_ITEMS).setMaxGlobalLimited(2))
                                 .and(abilities(PartAbility.IMPORT_FLUIDS).setMaxGlobalLimited(2))
-                                .and(abilities(InfinityPartAbility.FUEL_HATCH).setMaxGlobalLimited(1))
+                                .and(fuelPredicate)
                                 .and(maintenance)
                                 .and(energyPredicate))
                         .where('O', casingPredicate
                                 .and(abilities(PartAbility.EXPORT_ITEMS).setMaxGlobalLimited(2))
                                 .and(abilities(PartAbility.EXPORT_FLUIDS).setMaxGlobalLimited(2))
-                                .and(abilities(InfinityPartAbility.FUEL_HATCH).setMaxGlobalLimited(1))
+                                .and(fuelPredicate)
                                 .and(maintenance)
                                 .and(energyPredicate))
                         .where('C', blocks(GTBlocks.STEEL_HULL.get()))

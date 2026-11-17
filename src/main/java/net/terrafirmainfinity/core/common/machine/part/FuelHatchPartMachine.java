@@ -14,10 +14,7 @@ import com.gregtechceu.gtceu.api.blockentity.BlockEntityCreationInfo;
 import com.gregtechceu.gtceu.api.capability.recipe.FluidRecipeCapability;
 import com.gregtechceu.gtceu.api.capability.recipe.IO;
 import com.gregtechceu.gtceu.api.machine.TickableSubscription;
-import com.gregtechceu.gtceu.api.machine.feature.IMuiMachine;
 import com.gregtechceu.gtceu.api.machine.mui.MachineUIPanel;
-import com.gregtechceu.gtceu.api.machine.multiblock.MultiblockControllerMachine;
-import com.gregtechceu.gtceu.api.machine.multiblock.part.TieredIOPartMachine;
 import com.gregtechceu.gtceu.api.machine.trait.notifiable.NotifiableFluidTank;
 import com.gregtechceu.gtceu.api.recipe.GTRecipe;
 import com.gregtechceu.gtceu.api.recipe.content.Content;
@@ -36,7 +33,7 @@ import java.util.Collections;
 
 import static com.gregtechceu.gtceu.common.data.GTRecipeTypes.GAS_TURBINE_FUELS;
 
-public class FuelHatchPartMachine extends TieredIOPartMachine implements IMuiMachine {
+public class FuelHatchPartMachine extends FuelPartMachine {
     public static final int INITIAL_TANK_CAPACITY = 8 * FluidType.BUCKET_VOLUME;
 
     @SaveField
@@ -56,17 +53,8 @@ public class FuelHatchPartMachine extends TieredIOPartMachine implements IMuiMac
     @SaveField
     protected Fluid cachedFuelFluid;
 
-    @SaveField
-    protected int cachedFuelDuration;
-
-    @SaveField
-    protected int cachedFuelConsumption;
-
-    @SaveField
-    protected boolean readyForRecipe;
-
-    public FuelHatchPartMachine(BlockEntityCreationInfo info, int tier, IO io, int initalCapacity) {
-        super(info, tier, io);
+    public FuelHatchPartMachine(BlockEntityCreationInfo info, int tier, int initalCapacity) {
+        super(info, tier);
         this.tank = attachTrait(createTank(initalCapacity));
         this.cachedFuelDuration = 0;
         this.readyForRecipe = false;
@@ -91,11 +79,6 @@ public class FuelHatchPartMachine extends TieredIOPartMachine implements IMuiMac
             tankSubs.unsubscribe();
             tankSubs = null;
         }
-    }
-
-    @Override
-    public boolean canShared(MultiblockControllerMachine controller, String substructureName) {
-        return false;
     }
 
     protected void updateTankSubscription() {
@@ -164,6 +147,7 @@ public class FuelHatchPartMachine extends TieredIOPartMachine implements IMuiMac
         }
     }
 
+    @Override
     public boolean consumeFuel(int fuelConsumption, boolean simulate) {
         if (!isWorkingEnabled()) return false;
         if (getFuelFluidStack().getAmount() < fuelConsumption) return false;
@@ -200,20 +184,8 @@ public class FuelHatchPartMachine extends TieredIOPartMachine implements IMuiMac
                         .child(new TextWidget<>(Text.dynamic(this::getFluidNameText)).horizontalCenter())
                         .child(new TextWidget<>(Text.dynamic(this::getFluidAmountText)).horizontalCenter())
                         .child(Flow.row().childPadding(2).coverChildren()
-                                .child(new FluidSlot().name("regularFluid").syncHandler(new FluidSlotSyncHandler(tank.getStorages()[0]).canFillSlot(io.support(IO.IN)))))
+                                .child(new FluidSlot().name("fuelFluid").syncHandler(new FluidSlotSyncHandler(tank.getStorages()[0]).canFillSlot(io.support(IO.IN)))))
         );
-    }
-
-    public boolean isReadyForRecipe() {
-        return readyForRecipe;
-    }
-
-    public int getCachedFuelConsumption() {
-        return cachedFuelConsumption;
-    }
-
-    public int getCachedFuelDuration() {
-        return cachedFuelDuration;
     }
 
     public @Nullable Fluid getCachedFuelFluid() {

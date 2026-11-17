@@ -21,6 +21,7 @@ public class InfinityLangHandler extends LangHandler {
         provider.add("tfinfinity.machine.electrode_holder.tooltip.0", "Electrode Holder for Multiblocks");
         provider.add("tfinfinity.machine.electrode_holder.tooltip.1", "Do not touch while active");
         provider.add("tfinfinity.machine.fuel_hatch.tooltip", "Liquid Fuel Input for Multiblocks");
+        provider.add("tfinfinity.machine.fuel_bus.tooltip", "Solid Fuel Input for Multiblocks");
         provider.add("tfinfinity.recipe_logic.missing_electrode", "Missing Electrode");
 
         addToolClassLang(provider, "Chisel");

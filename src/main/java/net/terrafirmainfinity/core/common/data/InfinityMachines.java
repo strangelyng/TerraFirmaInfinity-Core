@@ -29,6 +29,7 @@ import net.neoforged.neoforge.fluids.FluidType;
 import net.neoforged.neoforge.registries.DeferredHolder;
 import net.terrafirmainfinity.core.InfinityCore;
 import net.terrafirmainfinity.core.common.machine.part.ElectrodeHolderPartMachine;
+import net.terrafirmainfinity.core.common.machine.part.FuelBusPartMachine;
 import net.terrafirmainfinity.core.common.machine.part.FuelHatchPartMachine;
 import net.terrafirmainfinity.core.common.machine.part.InfinityPartAbility;
 
@@ -112,10 +113,24 @@ public class InfinityMachines {
                     .register(),
             GTValues.tiersBetween(LV, GTCEuAPI.isHighTier() ? OpV : UV));
 
+    public static final MachineEntry<MachineDefinition>[] FUEL_BUS = registerTieredMachines(InfinityRegistrate,
+            "fuel_bus",
+            (holder, tier) -> new FuelBusPartMachine(holder, tier),
+            (tier, builder) -> builder
+                .langValue("%s Fuel Bus".formatted(VNF[tier]))
+                .rotationState(RotationState.ALL)
+                .abilities(InfinityPartAbility.FUEL_BUS)
+                .modelProperty(IS_FORMED, false)
+                .overlayTieredHullModel(GTCEu.id("block/machine/part/item_passthrough_hatch"))
+                .tooltips(Component.translatable("tfinfinity.machine.fuel_bus.tooltip"))
+                .tooltips(Component.translatable("gtceu.universal.tooltip.item_storage_capacity", 1))
+                .register(),
+            GTValues.tiersBetween(ULV, GTCEuAPI.isHighTier() ? OpV : UV));
+
     // TODO: Update Texture
     public static final MachineEntry<MachineDefinition>[] FUEL_HATCH = registerTieredMachines(InfinityRegistrate,
             "fuel_hatch",
-            (holder, tier) -> new FuelHatchPartMachine(holder, tier, IO.IN, FuelHatchPartMachine.INITIAL_TANK_CAPACITY),
+            (holder, tier) -> new FuelHatchPartMachine(holder, tier, FuelHatchPartMachine.INITIAL_TANK_CAPACITY),
             (tier, builder) -> builder
                     .langValue("%s Fuel Hatch".formatted(VNF[tier]))
                     .rotationState(RotationState.ALL)

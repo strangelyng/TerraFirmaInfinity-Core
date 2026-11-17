@@ -8,16 +8,20 @@ import com.gregtechceu.gtceu.api.recipe.GTRecipe;
 import com.gregtechceu.gtceu.api.sync_system.annotations.SaveField;
 import com.gregtechceu.gtceu.utils.GTUtil;
 import net.minecraft.network.chat.Component;
+import net.minecraft.world.item.Item;
 import net.minecraft.world.level.material.Fluid;
+import net.terrafirmainfinity.core.common.machine.part.FuelBusPartMachine;
 import net.terrafirmainfinity.core.common.machine.part.FuelHatchPartMachine;
+import net.terrafirmainfinity.core.common.machine.part.FuelPartMachine;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 // TODO: Unify behaviors for both item and liquid fuel buses/hatches
 public class WorkableFueledElectricMultiblockMachine extends WorkableElectricMultiblockMachine {
     @SaveField
-    protected FuelHatchPartMachine fuelHatch;
+    protected FuelPartMachine fuelInput;
 
+    @SaveField private Item fuelItem;
     @SaveField private Fluid fuelFluid;
     @SaveField private int fuelDuration;
     @SaveField private int fuelConsumption;
@@ -29,25 +33,25 @@ public class WorkableFueledElectricMultiblockMachine extends WorkableElectricMul
     @Override
     public void invalidateStructure() {
         super.invalidateStructure();
-        this.fuelHatch = null;
+        this.fuelInput = null;
     }
 
     @Override
     public void formStructure(@NotNull String substructureName) {
         super.formStructure(substructureName);
-        this.fuelHatch = getFuelPart();
+        this.fuelInput = getFuelInput();
     }
 
     @Override
     public void onPartUnload() {
         super.onPartUnload();
-        this.fuelHatch = null;
+        this.fuelInput = null;
     }
 
-    private @Nullable FuelHatchPartMachine getFuelPart() {
+    private @Nullable FuelPartMachine getFuelInput() {
         for (MultiblockPartMachine part : getParts()) {
-            if (part instanceof FuelHatchPartMachine fuelHatch) {
-                return fuelHatch;
+            if (part instanceof FuelPartMachine fuelPart) {
+                return fuelPart;
             }
         }
         return null;
@@ -61,7 +65,7 @@ public class WorkableFueledElectricMultiblockMachine extends WorkableElectricMul
         if (recipe == null) {
             return false;
         }
-        if (fuelHatch.isReadyForRecipe()) {
+        if (fuelInput.isReadyForRecipe()) {
             refreshFuelData(recipe);
             return true;
         } else {
@@ -74,15 +78,23 @@ public class WorkableFueledElectricMultiblockMachine extends WorkableElectricMul
     public boolean onWorking() {
         GTRecipe recipe = recipeLogic.getLastUnrolledRecipe();
         assert recipe != null;
-        if (fuelFluid != fuelHatch.getCachedFuelFluid()) {
-            refreshFuelData(recipe);
-        }
 
-        if (!fuelHatch.isReadyForRecipe() || !fuelHatch.consumeFuel(fuelConsumption, true)) {
+        if (!fuelInput.isReadyForRecipe() || !fuelInput.consumeFuel(fuelConsumption, true)) {
             recipeLogic.setWaiting(Component.translatable("gtceu.recipe_logic.insufficient_fuel"));
         } else {
             if (getOffsetTimer() % fuelDuration == 0) {
-                fuelHatch.consumeFuel(fuelConsumption, false);
+
+                if (fuelInput instanceof FuelHatchPartMachine fuelHatch) {
+                    if (fuelFluid != fuelHatch.getCachedFuelFluid()) {
+                        refreshFuelData(recipe);
+                    }
+                } else if (fuelInput instanceof FuelBusPartMachine fuelBus) {
+                    if (fuelItem != fuelBus.getCachedFuelItem()) {
+                        refreshFuelData(recipe);
+                    }
+                }
+
+                fuelInput.consumeFuel(fuelConsumption, false);
             }
         }
         return super.onWorking();
@@ -93,8 +105,18 @@ public class WorkableFueledElectricMultiblockMachine extends WorkableElectricMul
 
         double multiplier = tier > 0 ? tier : 0.5;
 
-        fuelFluid = fuelHatch.getFuelFluidStack().getFluid();
-        fuelDuration = (int) ((double) fuelHatch.getCachedFuelDuration() / multiplier);
-        fuelConsumption = (int) ((double) fuelHatch.getCachedFuelConsumption() * multiplier);
+        // Fluid Fuels
+        if (fuelInput instanceof FuelHatchPartMachine fuelHatch) {
+            fuelFluid = fuelHatch.getFuelFluidStack().getFluid();
+            fuelDuration = (int) ((double) fuelHatch.getCachedFuelDuration() / multiplier);
+            fuelConsumption = (int) ((double) fuelHatch.getCachedFuelConsumption() * multiplier);
+        }
+
+        // Item Fuels
+        if (fuelInput instanceof FuelBusPartMachine fuelBus) {
+            fuelItem = fuelBus.getFuelItemStack().getItem();
+            fuelDuration = (int) ((double) fuelBus.getCachedFuelDuration() / multiplier);
+            fuelConsumption = (int) ((double) fuelBus.getCachedFuelConsumption() * multiplier); // TODO: Do I want this
+        }
     }
 }
