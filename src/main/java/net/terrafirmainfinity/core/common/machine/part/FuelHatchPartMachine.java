@@ -33,6 +33,7 @@ import java.util.Collections;
 
 import static com.gregtechceu.gtceu.common.data.GTRecipeTypes.GAS_TURBINE_FUELS;
 
+// TODO: implement auto IO
 public class FuelHatchPartMachine extends FuelPartMachine {
     public static final int INITIAL_TANK_CAPACITY = 8 * FluidType.BUCKET_VOLUME;
 

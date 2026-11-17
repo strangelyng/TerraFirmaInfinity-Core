@@ -20,6 +20,7 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.ItemLike;
 import org.jetbrains.annotations.Nullable;
 
+// TODO: implement auto IO
 public class FuelBusPartMachine extends FuelPartMachine implements IMuiMachine {
     @SaveField
     public final NotifiableItemStackHandler inventory;
