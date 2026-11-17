@@ -36,10 +36,6 @@ import java.util.Collections;
 
 import static com.gregtechceu.gtceu.common.data.GTRecipeTypes.GAS_TURBINE_FUELS;
 
-/**
- * TODO: FIX
- * Stops working on reload
- */
 public class FuelHatchPartMachine extends TieredIOPartMachine implements IMuiMachine {
     public static final int INITIAL_TANK_CAPACITY = 8 * FluidType.BUCKET_VOLUME;
 
@@ -47,37 +43,33 @@ public class FuelHatchPartMachine extends TieredIOPartMachine implements IMuiMac
     public final NotifiableFluidTank tank;
 
     @Nullable
-    protected TickableSubscription consumeFuelSubs;
+    protected TickableSubscription fuelRecipeSubs;
 
     @Nullable
     protected ISubscription tankSubs;
 
     @Nullable
     @SaveField
-    protected GTRecipe cachedRecipe;
+    protected GTRecipe cachedFuelRecipe;
 
     @Nullable
     @SaveField
-    protected Fluid cachedFluid;
+    protected Fluid cachedFuelFluid;
 
     @SaveField
-    protected int cachedRecipeDuration; // Default Value is 5
+    protected int cachedFuelDuration;
 
     @SaveField
-    protected int cachedFluidConsumption;
+    protected int cachedFuelConsumption;
 
     @SaveField
-    protected long lastConsumedTick;
-
-    @SaveField
-    protected boolean isActive;
+    protected boolean readyForRecipe;
 
     public FuelHatchPartMachine(BlockEntityCreationInfo info, int tier, IO io, int initalCapacity) {
         super(info, tier, io);
         this.tank = attachTrait(createTank(initalCapacity));
-        this.lastConsumedTick = 0L;
-        this.cachedRecipeDuration = 5;
-        this.isActive = false;
+        this.cachedFuelDuration = 0;
+        this.readyForRecipe = false;
     }
 
     protected NotifiableFluidTank createTank(int initialCapacity) {
@@ -88,7 +80,6 @@ public class FuelHatchPartMachine extends TieredIOPartMachine implements IMuiMac
     @Override
     public void onLoad() {
         super.onLoad();
-        scheduleForNextServerTick(this::refreshLastConsumedTick);
         scheduleForNextServerTick(this::updateTankSubscription);
         tankSubs = tank.addChangedListener(this::updateTankSubscription);
     }
@@ -102,12 +93,6 @@ public class FuelHatchPartMachine extends TieredIOPartMachine implements IMuiMac
         }
     }
 
-    protected void refreshLastConsumedTick() {
-        if (lastConsumedTick > getOffsetTimer()) {
-            lastConsumedTick = 0L;
-        }
-    }
-
     @Override
     public boolean canShared(MultiblockControllerMachine controller, String substructureName) {
         return false;
@@ -115,70 +100,47 @@ public class FuelHatchPartMachine extends TieredIOPartMachine implements IMuiMac
 
     protected void updateTankSubscription() {
         if (isFormed() && isWorkingEnabled() && !tank.isEmpty()) {
-            consumeFuelSubs = subscribeServerTick(consumeFuelSubs, this::consumeFuel);
-        } else if (consumeFuelSubs != null) {
-            consumeFuelSubs.unsubscribe();
-            consumeFuelSubs = null;
-            isActive = false;
+            fuelRecipeSubs = subscribeServerTick(fuelRecipeSubs, this::findAndCacheRecipe);
+        } else if (fuelRecipeSubs != null) {
+            fuelRecipeSubs.unsubscribe();
+            fuelRecipeSubs = null;
+            readyForRecipe = false;
         }
     }
 
-    protected void consumeFuel() {
-        if (getOffsetTimer() % cachedRecipeDuration == 0) {
+    protected void findAndCacheRecipe() {
+        if (getOffsetTimer() % 5 == 0) {
             if (isFormed() && isWorkingEnabled()) {
-                cachedRecipe = getRecipe();
-                if (cachedRecipe != null) {
-                    FluidStack fuelStack = tank.getFluidInTank(0);
-                    if (fuelStack.getAmount() > 0 && cachedRecipeDuration > 0 && addFuel(cachedRecipeDuration, true)) {
-                        fuelStack.setAmount(fuelStack.getAmount() - cachedFluidConsumption);
-                        addFuel(cachedRecipeDuration, false);
-                    } else {
-                        isActive = false;
-                    }
-                } else {
-                    isActive = false;
-                }
+                cachedFuelRecipe = getRecipe();
+                updateFuelStatus(cachedFuelRecipe);
             }
             updateTankSubscription();
         }
     }
 
-    protected boolean addFuel(int fuelValue, boolean simulate) {
-        if (fuelValue < 0 || nextRecipeTime() < cachedRecipeDuration) return false;
-        if (simulate) return true;
-        lastConsumedTick = getOffsetTimer();
-        isActive = true;
-        tank.notifyListeners();
-        return true;
-    }
-
-    protected long nextRecipeTime() {
-        return getOffsetTimer() - lastConsumedTick;
-    }
-
     @Nullable
     private GTRecipe getRecipe() {
-        FluidStack fuelStack = tank.getFluidInTank(0);
+        FluidStack fuelStack = getFuelFluidStack();
 
-        if (cachedFluid != null && fuelStack.getFluid() == cachedFluid) {
-            return cachedRecipe;
+        if (cachedFuelFluid != null && fuelStack.getFluid() == cachedFuelFluid) {
+            return cachedFuelRecipe;
         }
 
         if (!fuelStack.isEmpty()) {
             FluidStack copy = fuelStack.copyWithAmount(Integer.MAX_VALUE);
 
-            cachedFluid = copy.getFluid();
+            cachedFuelFluid = copy.getFluid();
 
             // TODO: Add Unique Recipe Category
             GTRecipe recipe = GAS_TURBINE_FUELS.get().db().find(Collections.singletonMap(FluidRecipeCapability.CAP, Collections.singletonList(copy)), r -> true);
 
             if (recipe != null) {
-                cachedRecipeDuration = recipe.duration;
+                cachedFuelDuration = recipe.duration;
 
                 Content recipeInputs = recipe.inputs.get(FluidRecipeCapability.CAP).getFirst();
                 SizedFluidIngredient input = FluidRecipeCapability.CAP.of(recipeInputs.content());
 
-                cachedFluidConsumption = input.amount();
+                cachedFuelConsumption = input.amount();
 
                 return recipe;
             }
@@ -188,10 +150,33 @@ public class FuelHatchPartMachine extends TieredIOPartMachine implements IMuiMac
         return null;
     }
 
+    public FluidStack getFuelFluidStack() {
+        return tank.getFluidInTank(0);
+    }
+
+    public void updateFuelStatus(@Nullable GTRecipe fuelRecipe) {
+        if (fuelRecipe != null && cachedFuelDuration > 0 && getFuelFluidStack().getAmount() > cachedFuelConsumption) {
+            readyForRecipe = true;
+            tank.notifyListeners();
+        } else {
+            readyForRecipe = false;
+            tank.notifyListeners();
+        }
+    }
+
+    public boolean consumeFuel(int fuelConsumption, boolean simulate) {
+        if (!isWorkingEnabled()) return false;
+        if (getFuelFluidStack().getAmount() < fuelConsumption) return false;
+        if (simulate) return true;
+        getFuelFluidStack().setAmount(getFuelFluidStack().getAmount() - fuelConsumption);
+        tank.notifyListeners();
+        return true;
+    }
+
     private void resetCachedRecipeData() {
-        cachedFluid = null;
-        cachedFluidConsumption = 0;
-        cachedRecipeDuration = 5;
+        cachedFuelFluid = null;
+        cachedFuelConsumption = 0;
+        cachedFuelDuration = 5;
     }
 
     @Override
@@ -219,7 +204,15 @@ public class FuelHatchPartMachine extends TieredIOPartMachine implements IMuiMac
         );
     }
 
-    public boolean isActive() {
-        return isActive;
+    public boolean isReadyForRecipe() {
+        return readyForRecipe;
+    }
+
+    public int getCachedFuelConsumption() {
+        return cachedFuelConsumption;
+    }
+
+    public int getCachedFuelDuration() {
+        return cachedFuelDuration;
     }
 }

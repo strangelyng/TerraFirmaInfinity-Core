@@ -6,6 +6,7 @@ import com.gregtechceu.gtceu.api.machine.multiblock.part.MultiblockPartMachine;
 import com.gregtechceu.gtceu.api.machine.trait.recipe.RecipeLogic;
 import com.gregtechceu.gtceu.api.recipe.GTRecipe;
 import com.gregtechceu.gtceu.api.sync_system.annotations.SaveField;
+import com.gregtechceu.gtceu.utils.GTUtil;
 import net.minecraft.network.chat.Component;
 import net.terrafirmainfinity.core.common.machine.part.FuelHatchPartMachine;
 import org.jetbrains.annotations.NotNull;
@@ -14,6 +15,9 @@ import org.jetbrains.annotations.Nullable;
 public class WorkableFueledElectricMultiblockMachine extends WorkableElectricMultiblockMachine {
     @SaveField
     protected FuelHatchPartMachine fuelHatch;
+
+    @SaveField private int fuelDuration;
+    @SaveField private int fuelConsumption;
 
     public WorkableFueledElectricMultiblockMachine(BlockEntityCreationInfo info) {
         super(info);
@@ -54,7 +58,13 @@ public class WorkableFueledElectricMultiblockMachine extends WorkableElectricMul
         if (recipe == null) {
             return false;
         }
-        if (fuelHatch.isActive()) {
+        if (fuelHatch.isReadyForRecipe()) {
+            int tier = GTUtil.getTierByVoltage(recipe.getInputEUt().voltage());
+
+            double multiplier = tier > 0 ? tier : 0.5;
+
+            fuelDuration = (int) ((double) fuelHatch.getCachedFuelDuration() / multiplier);
+            fuelConsumption = (int) ((double) fuelHatch.getCachedFuelConsumption() * multiplier);
             return true;
         } else {
             RecipeLogic.putFailureReason(this, recipe, Component.translatable("gtceu.recipe_logic.insufficient_fuel"));
@@ -64,8 +74,12 @@ public class WorkableFueledElectricMultiblockMachine extends WorkableElectricMul
 
     @Override
     public boolean onWorking() {
-        if (!fuelHatch.isActive()) {
+        if (!fuelHatch.isReadyForRecipe() || !fuelHatch.consumeFuel(fuelConsumption, true)) {
             recipeLogic.setWaiting(Component.translatable("gtceu.recipe_logic.insufficient_fuel"));
+        } else {
+            if (getOffsetTimer() % fuelDuration == 0) {
+                fuelHatch.consumeFuel(fuelConsumption, false);
+            }
         }
         return super.onWorking();
     }
