@@ -1,9 +1,9 @@
 package net.terrafirmainfinity.core.common.data;
 
-import brachy.modularui.utils.FormattingUtil;
 import com.gregtechceu.gtceu.GTCEu;
 import com.gregtechceu.gtceu.api.GTCEuAPI;
 import com.gregtechceu.gtceu.api.GTValues;
+import com.gregtechceu.gtceu.api.capability.recipe.IO;
 import com.gregtechceu.gtceu.api.data.RotationState;
 import com.gregtechceu.gtceu.api.machine.MachineDefinition;
 import com.gregtechceu.gtceu.api.machine.property.GTMachineModelProperties;
@@ -15,11 +15,13 @@ import com.gregtechceu.gtceu.client.renderer.machine.DynamicRenderHelper;
 import com.gregtechceu.gtceu.common.data.GTMaterials;
 import com.gregtechceu.gtceu.common.data.machines.GTMachineUtils;
 import com.gregtechceu.gtceu.common.data.models.GTMachineModels;
+import com.gregtechceu.gtceu.common.machine.multiblock.part.FluidHatchPartMachine;
 import com.gregtechceu.gtceu.common.machine.storage.QuantumChestMachine;
 import com.gregtechceu.gtceu.common.machine.storage.QuantumTankMachine;
 import com.gregtechceu.gtceu.common.mui.GTGuiTheme;
 import com.gregtechceu.gtceu.common.mui.GTSingleblockMachinePanels;
 import com.gregtechceu.gtceu.data.lang.LangHandler;
+import com.gregtechceu.gtceu.utils.FormattingUtil;
 import it.unimi.dsi.fastutil.Pair;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.item.crafting.RecipeType;
@@ -27,6 +29,7 @@ import net.neoforged.neoforge.fluids.FluidType;
 import net.neoforged.neoforge.registries.DeferredHolder;
 import net.terrafirmainfinity.core.InfinityCore;
 import net.terrafirmainfinity.core.common.machine.part.ElectrodeHolderPartMachine;
+import net.terrafirmainfinity.core.common.machine.part.FuelHatchPartMachine;
 import net.terrafirmainfinity.core.common.machine.part.InfinityPartAbility;
 
 import static com.gregtechceu.gtceu.api.GTValues.*;
@@ -108,6 +111,21 @@ public class InfinityMachines {
                     .tooltips(Component.translatable("gtceu.part_sharing.disabled"))
                     .register(),
             GTValues.tiersBetween(LV, GTCEuAPI.isHighTier() ? OpV : UV));
+
+    // TODO: Update Texture
+    public static final MachineEntry<MachineDefinition>[] FUEL_HATCH = registerTieredMachines(InfinityRegistrate,
+            "fuel_hatch",
+            (holder, tier) -> new FuelHatchPartMachine(holder, tier, IO.IN, FuelHatchPartMachine.INITIAL_TANK_CAPACITY),
+            (tier, builder) -> builder
+                    .langValue("%s Fuel Hatch".formatted(VNF[tier]))
+                    .rotationState(RotationState.ALL)
+                    .abilities(InfinityPartAbility.FUEL_HATCH)
+                    .modelProperty(IS_FORMED, false)
+                    .overlayTieredHullModel(GTCEu.id("block/machine/part/fluid_passthrough_hatch"))
+                    .tooltips(Component.translatable("tfinfinity.machine.fuel_hatch.tooltip"))
+                    .tooltips(Component.translatable("gtceu.universal.tooltip.fluid_storage_capacity", FormattingUtil.formatNumbers(FluidHatchPartMachine.getTankCapacity(FuelHatchPartMachine.INITIAL_TANK_CAPACITY, tier))))
+                    .register(),
+            GTValues.tiersBetween(ULV, GTCEuAPI.isHighTier() ? OpV : UV));
 
     // Helper Methods
     private static Pair<MachineEntry<MachineDefinition>, MachineEntry<MachineDefinition>> registerSimpleSteamMachines(String name, DeferredHolder<RecipeType<?>, GTRecipeType> recipeType) {

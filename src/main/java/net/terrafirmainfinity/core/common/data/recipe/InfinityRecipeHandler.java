@@ -1,6 +1,9 @@
 package net.terrafirmainfinity.core.common.data.recipe;
 
+import com.gregtechceu.gtceu.common.data.GTMaterials;
 import com.gregtechceu.gtceu.common.data.GTRecipeTypes;
+import com.gregtechceu.gtceu.data.recipe.builder.GTRecipeBuilder;
+import com.gregtechceu.gtceu.utils.GTUtil;
 import net.dries007.tfc.common.items.TFCItems;
 import net.dries007.tfc.common.recipes.LandslideRecipe;
 import net.dries007.tfc.common.recipes.ingredients.BlockIngredient;
@@ -83,16 +86,16 @@ public class InfinityRecipeHandler {
                 .duration(400)
                 .save(provider);
 
-//        FLASH_SMELTING_RECIPE.recipeBuilder(InfinityCore.id("purified_chalcopyrite"))
-//                .inputItems(crushedPurified, Chalcopyrite)
-//                .inputItems(InfinityTagPrefix.powder, CalciumCarbonate) // Flux (use tag?)
-//                .inputFluids(Oxygen.getFluid(200))
-//                .outputFluids(Copper.getFluid(144)) // Copper Matte
-//                .outputFluids(Lava.getFluid(100)) // Slag
-//                .outputFluids(SulfurDioxide.getFluid(100)) // Off-Gas
-//                .EUt(VA[MV])
-//                .duration(200)
-//                .save(provider);
+        FLASH_SMELTING_RECIPES.recipeBuilder(InfinityCore.id("purified_chalcopyrite"))
+                .inputItems(crushedPurified, Chalcopyrite)
+                .inputItems(dust, Calcite) // Flux (use tag?)
+                .inputFluids(Oxygen.getFluid(200))
+                .outputFluids(Copper.getFluid(144)) // Copper Matte
+                .outputFluids(Lava.getFluid(100)) // Slag
+                .outputFluids(SulfurDioxide.getFluid(100)) // Off-Gas
+                .EUt(VA[MV])
+                .duration(200)
+                .save(provider);
 
         ADVANCED_ARC_FURNACE_RECIPES.recipeBuilder(InfinityCore.id("stainless_steel"))
                 .inputItems(dust, Iron, 6)
@@ -111,6 +114,47 @@ public class InfinityRecipeHandler {
                 .outputFluids(Syngas.getFluid(8000))
                 .EUt(96)
                 .duration(320)
+                .save(provider);
+
+        ROTARY_KILN_RECIPES.recipeBuilder(InfinityCore.id("calcine_quicklime"))
+                .inputItems(dust, Calcite, 5)
+                .outputItems(dust, Quicklime, 2)
+                .EUt(VHA[LV])
+                .duration(20*10)
+                .save(provider);
+
+//        buildRotaryKilnGasRecipes(
+//                ROTARY_KILN_RECIPES.recipeBuilder(InfinityCore.id("calcine_quicklime"))
+//                        .inputItems(dust, Calcite, 5)
+//                        .outputItems(dust, Quicklime, 2)
+//                        .EUt(VHA[LV])
+//                        .duration(20*10),
+//                provider
+//        );
+    }
+
+    public static void buildRotaryKilnGasRecipes(GTRecipeBuilder builder, RecipeOutput provider) {
+        int voltageBonus = Math.max(0, GTUtil.getTierByVoltage(builder.EUt().voltage()) * 5);
+
+        builder.copy(builder.id.withSuffix("_coal_gas"))
+                .perTick(false)
+                .circuitMeta(1)
+                .perTick(true)
+                .chancedInput(GTMaterials.CoalGas.getFluid(Math.min(20, voltageBonus + 20)), 1000)
+                .save(provider);
+
+        builder.copy(builder.id.withSuffix("_natural_gas"))
+                .perTick(false)
+                .circuitMeta(2)
+                .perTick(true)
+                .chancedInput(GTMaterials.NaturalGas.getFluid(Math.min(10, voltageBonus + 10)), 1000)
+                .save(provider);
+
+        builder.copy(builder.id.withSuffix("_lpg"))
+                .perTick(false)
+                .circuitMeta(3)
+                .perTick(true)
+                .chancedInput(GTMaterials.LPG.getFluid(Math.min(5, voltageBonus + 5)), 1000)
                 .save(provider);
     }
 

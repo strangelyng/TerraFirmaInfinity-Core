@@ -10,5 +10,6 @@ public class InfinityMulti {
         MetallurgicalConverter.init();
         FlashFurnace.init();
         FluidizedBedReactor.init();
+        RotaryKiln.init();
     }
 }

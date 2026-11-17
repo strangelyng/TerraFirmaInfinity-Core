@@ -4,9 +4,12 @@ import com.gregtechceu.gtceu.api.GTValues;
 import com.gregtechceu.gtceu.api.capability.recipe.FluidRecipeCapability;
 import com.gregtechceu.gtceu.api.capability.recipe.IO;
 import com.gregtechceu.gtceu.api.capability.recipe.ItemRecipeCapability;
+import com.gregtechceu.gtceu.api.machine.feature.ITieredMachine;
 import com.gregtechceu.gtceu.api.machine.steam.SimpleSteamMachine;
 import com.gregtechceu.gtceu.api.recipe.GTRecipeType;
+import com.gregtechceu.gtceu.api.recipe.gui.GTRecipeTypeUILayout;
 import com.gregtechceu.gtceu.api.registry.registrate.entry.GTRecipeTypeEntry;
+import com.gregtechceu.gtceu.common.data.GTRecipeTypes;
 import com.gregtechceu.gtceu.common.data.GTSoundEntries;
 import com.gregtechceu.gtceu.common.mui.GTGuiTextures;
 import com.gregtechceu.gtceu.common.mui.GTMuiWidgets;
@@ -20,7 +23,7 @@ import static net.terrafirmainfinity.core.InfinityCore.MOD_ID;
 
 public class InfinityRecipeTypes {
     public static final GTRecipeTypeEntry ROASTER_RECIPES = InfinityRegistrate.recipeType("roaster", ELECTRIC)
-            .setMaxIOSize(3, 2, 2, 3)
+            .setMaxIOSize(3, 2, 1, 2)
             .UI(builder -> builder.setProgressBar(GTGuiTextures.PROGRESS_ARROW)
                     .setMachineLayoutGridBuilder(ItemRecipeCapability.CAP, IO.IN, ((machine, layout) -> {
                         int slots = layout.getRecipeType().getMaxInputs(ItemRecipeCapability.CAP);
@@ -61,6 +64,13 @@ public class InfinityRecipeTypes {
                     .setItemSlotOverlay(IO.IN, 0, GTGuiTextures.FURNACE_OVERLAY_1)
                     .setFluidSlotOverlay(IO.OUT, 0, GTGuiTextures.VIAL_OVERLAY_2))
             .setIconSupplier(() -> InfinityMachines.ROASTER[GTValues.LV].asStack())
+            .setSound(GTSoundEntries.FURNACE)
+            .setEUIO(IO.IN)
+            .register();
+
+    public static final GTRecipeTypeEntry ROTARY_KILN_RECIPES = InfinityRegistrate.recipeType("rotary_kiln", MULTIBLOCK)
+            .setMaxIOSize(3, 2, 1, 2)
+            .UI(builder -> builder.setProgressBar(GTGuiTextures.PROGRESS_ARROW))
             .setSound(GTSoundEntries.FURNACE)
             .setEUIO(IO.IN)
             .register();
@@ -151,7 +161,7 @@ public class InfinityRecipeTypes {
     }
 
     public static void init() {
-    /*
+        /*
         // TODO: Arc Furnace Overhaul
         var type = GTRecipeTypes.ARC_FURNACE_RECIPES.get();
         var builder = new GTRecipeTypeUILayout.Builder(type);
@@ -192,7 +202,7 @@ public class InfinityRecipeTypes {
                 .setItemSlotsOverlay(IO.IN, 2, 3, GTGuiTextures.CANISTER_OVERLAY)
                 .setFluidSlotOverlay(IO.IN, 0, GTGuiTextures.LIGHTNING_OVERLAY_2);
         GTRecipeTypes.ELECTROLYZER_RECIPES.setUiLayout(builder.build());
-    */
+        */
     }
 
     public static void configure() {

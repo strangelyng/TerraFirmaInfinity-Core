@@ -31,7 +31,7 @@ public class SpiralSeparator {
             .recipeType(InfinityRecipeTypes.SPIRAL_SEPARATOR_RECIPES)
             .addOutputLimit(ItemRecipeCapability.CAP, 3)
             .addOutputLimit(FluidRecipeCapability.CAP, 2)
-            .recipeModifiers(SpiralSeparator::recipeModifier)
+            .recipeModifiers(SpiralSeparator::parallelProcessing)
             .appearanceBlock(GTBlocks.CASING_STEEL_SOLID)
             .pattern(definition -> MultiblockPatternBuilder.start(RelativeDirection.FRONT, RelativeDirection.UP, RelativeDirection.RIGHT)
                     .slice("CCC", "GFG", "GFG", "GFG", "G#G", "XXX")
@@ -51,10 +51,10 @@ public class SpiralSeparator {
                     GTCEu.id("block/machines/ore_washer"))
             .register();
 
-    public static ModifierFunction recipeModifier(MetaMachine machine, GTRecipe recipe) {
+    private static ModifierFunction parallelProcessing(MetaMachine machine, GTRecipe recipe) {
         int parallelAmount = ParallelLogic.getParallelAmountWithoutEU(machine, recipe, 8);
 
-        double parallelDuration = Math.min(1.0, ((float) parallelAmount) * 0.5);
+        double parallelDuration = Math.max(1.0, ((float) parallelAmount) * 0.5);
 
         return ModifierFunction.builder().inputModifier(ContentModifier.multiplier(parallelAmount)).outputModifier(ContentModifier.multiplier(parallelAmount)).durationMultiplier(parallelDuration).parallels(parallelAmount).build();
     }
