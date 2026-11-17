@@ -122,40 +122,6 @@ public class InfinityRecipeHandler {
                 .EUt(VHA[LV])
                 .duration(20*10)
                 .save(provider);
-
-//        buildRotaryKilnGasRecipes(
-//                ROTARY_KILN_RECIPES.recipeBuilder(InfinityCore.id("calcine_quicklime"))
-//                        .inputItems(dust, Calcite, 5)
-//                        .outputItems(dust, Quicklime, 2)
-//                        .EUt(VHA[LV])
-//                        .duration(20*10),
-//                provider
-//        );
-    }
-
-    public static void buildRotaryKilnGasRecipes(GTRecipeBuilder builder, RecipeOutput provider) {
-        int voltageBonus = Math.max(0, GTUtil.getTierByVoltage(builder.EUt().voltage()) * 5);
-
-        builder.copy(builder.id.withSuffix("_coal_gas"))
-                .perTick(false)
-                .circuitMeta(1)
-                .perTick(true)
-                .chancedInput(GTMaterials.CoalGas.getFluid(Math.min(20, voltageBonus + 20)), 1000)
-                .save(provider);
-
-        builder.copy(builder.id.withSuffix("_natural_gas"))
-                .perTick(false)
-                .circuitMeta(2)
-                .perTick(true)
-                .chancedInput(GTMaterials.NaturalGas.getFluid(Math.min(10, voltageBonus + 10)), 1000)
-                .save(provider);
-
-        builder.copy(builder.id.withSuffix("_lpg"))
-                .perTick(false)
-                .circuitMeta(3)
-                .perTick(true)
-                .chancedInput(GTMaterials.LPG.getFluid(Math.min(5, voltageBonus + 5)), 1000)
-                .save(provider);
     }
 
     public static void landslideRecipes(RecipeOutput provider) {

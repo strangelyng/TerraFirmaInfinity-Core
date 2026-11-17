@@ -215,4 +215,8 @@ public class FuelHatchPartMachine extends TieredIOPartMachine implements IMuiMac
     public int getCachedFuelDuration() {
         return cachedFuelDuration;
     }
+
+    public @Nullable Fluid getCachedFuelFluid() {
+        return cachedFuelFluid;
+    }
 }

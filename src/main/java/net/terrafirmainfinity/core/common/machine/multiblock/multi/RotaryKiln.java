@@ -4,7 +4,6 @@ import com.gregtechceu.gtceu.api.data.RotationState;
 import com.gregtechceu.gtceu.api.machine.MetaMachine;
 import com.gregtechceu.gtceu.api.machine.MultiblockMachineDefinition;
 import com.gregtechceu.gtceu.api.machine.multiblock.PartAbility;
-import com.gregtechceu.gtceu.api.machine.multiblock.WorkableElectricMultiblockMachine;
 import com.gregtechceu.gtceu.api.multiblock.MultiPredicate;
 import com.gregtechceu.gtceu.api.multiblock.pattern.MultiblockPatternBuilder;
 import com.gregtechceu.gtceu.api.multiblock.util.RelativeDirection;
@@ -15,6 +14,7 @@ import com.gregtechceu.gtceu.api.recipe.modifier.ParallelLogic;
 import com.gregtechceu.gtceu.api.registry.registrate.entry.MachineEntry;
 import com.gregtechceu.gtceu.common.data.GTBlocks;
 import com.gregtechceu.gtceu.common.data.GTMaterials;
+import com.gregtechceu.gtceu.common.data.GTRecipeModifiers;
 import net.terrafirmainfinity.core.InfinityCore;
 import net.terrafirmainfinity.core.common.InfinityBlocks;
 import net.terrafirmainfinity.core.common.data.InfinityRecipeTypes;
@@ -35,7 +35,7 @@ public class RotaryKiln {
             .multiblock("rotary_kiln", WorkableFueledElectricMultiblockMachine::new)
             .rotationState(RotationState.NON_Y_AXIS)
             .recipeType(InfinityRecipeTypes.ROTARY_KILN_RECIPES)
-            .recipeModifiers(RotaryKiln::parallelProcessing)
+            .recipeModifiers(GTRecipeModifiers.OC_NON_PERFECT, RotaryKiln::parallelProcessing)
             .appearanceBlock(InfinityBlocks.CASING_STEEL_BRICKS)
             .pattern(definition -> {
                 MultiPredicate casingPredicate = blocks(InfinityBlocks.CASING_STEEL_BRICKS.get());
