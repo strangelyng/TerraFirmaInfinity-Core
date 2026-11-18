@@ -65,6 +65,8 @@ public class InfinityRecipeTypes {
                     .setFluidSlotOverlay(IO.OUT, 0, GTGuiTextures.VIAL_OVERLAY_2))
             .setIconSupplier(() -> InfinityMachines.ROASTER[GTValues.LV].asStack())
             .setSound(GTSoundEntries.FURNACE)
+            .onRecipeBuild((recipeBuilder, provider) -> InfinityRecipeTypes.ROTARY_KILN_RECIPES.copyFrom(recipeBuilder)
+                    .save(provider))
             .setEUIO(IO.IN)
             .register();
 

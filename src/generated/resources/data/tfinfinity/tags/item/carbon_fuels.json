@@ -5,11 +5,27 @@
       "required": false
     },
     {
+      "id": "#c:small_dusts/charcoal",
+      "required": false
+    },
+    {
+      "id": "#c:tiny_dusts/charcoal",
+      "required": false
+    },
+    {
       "id": "#c:gems/charcoal",
       "required": false
     },
     {
       "id": "#c:dusts/coal",
+      "required": false
+    },
+    {
+      "id": "#c:small_dusts/coal",
+      "required": false
+    },
+    {
+      "id": "#c:tiny_dusts/coal",
       "required": false
     },
     {
@@ -26,6 +42,14 @@
     },
     {
       "id": "#c:dusts/anthracite",
+      "required": false
+    },
+    {
+      "id": "#c:small_dusts/anthracite",
+      "required": false
+    },
+    {
+      "id": "#c:tiny_dusts/anthracite",
       "required": false
     },
     {

@@ -116,11 +116,14 @@ public class InfinityRecipeHandler {
                 .duration(320)
                 .save(provider);
 
-        ROTARY_KILN_RECIPES.recipeBuilder(InfinityCore.id("calcine_quicklime"))
-                .inputItems(dust, Calcite, 5)
-                .outputItems(dust, Quicklime, 2)
-                .EUt(VHA[LV])
-                .duration(20*10)
+        ROTARY_KILN_RECIPES.recipeBuilder(InfinityCore.id("muller_kuhne_process"))
+                .inputItems(dust, Gypsum, 24) // Should Include Clay Mineral
+                .inputItems(dust, Carbon, 2)
+                .outputItems(dust, Quicklime, 8) // Should Be Cement Clinker
+                .outputFluids(SulfurDioxide.getFluid(4000))
+                .outputFluids(CarbonDioxide.getFluid(2000))
+                .EUt(VA[LV])
+                .duration(20*40)
                 .save(provider);
     }
 

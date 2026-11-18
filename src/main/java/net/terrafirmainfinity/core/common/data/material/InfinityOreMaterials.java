@@ -119,7 +119,7 @@ public class InfinityOreMaterials {
                 .oreByproducts(Zircon, Uraninite, RareEarth));
 
         Lignite = InfinityRegistrate.material("lignite", builder -> builder
-                .gem(1, 1600)
+                .gem(1, 1200)
                 .color(0x4a4440).secondaryColor(0x2d2725).iconSet(MaterialIconSet.LIGNITE)
                 .flags(FLAMMABLE, NO_SMELTING, NO_SMASHING, MORTAR_GRINDABLE, DISABLE_DECOMPOSITION)
                 .components(Carbon, 1));
