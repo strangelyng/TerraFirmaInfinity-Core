@@ -1,0 +1,36 @@
+{
+  "values": [
+    {
+      "id": "#c:dusts/charcoal",
+      "required": false
+    },
+    {
+      "id": "#c:gems/charcoal",
+      "required": false
+    },
+    {
+      "id": "#c:dusts/coal",
+      "required": false
+    },
+    {
+      "id": "#c:gems/coal",
+      "required": false
+    },
+    {
+      "id": "#c:dusts/coke",
+      "required": false
+    },
+    {
+      "id": "#c:gems/coke",
+      "required": false
+    },
+    {
+      "id": "#c:dusts/anthracite",
+      "required": false
+    },
+    {
+      "id": "#c:gems/anthracite",
+      "required": false
+    }
+  ]
+}

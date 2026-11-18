@@ -18,6 +18,7 @@ import com.gregtechceu.gtceu.utils.ISubscription;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.ItemLike;
+import net.terrafirmainfinity.core.common.data.tag.InfinityItemTags;
 import org.jetbrains.annotations.Nullable;
 
 // TODO: implement auto IO
@@ -38,10 +39,16 @@ public class FuelBusPartMachine extends FuelPartMachine implements IMuiMachine {
     // TODO: Add Larger Inventory Sizes
     public FuelBusPartMachine(BlockEntityCreationInfo info, int tier) {
         super(info, tier);
-        this.inventory = attachTrait(new NotifiableItemStackHandler(1, IO.IN));
+        this.inventory = attachTrait(createInventory(1));
         this.cachedFuelDuration = 0;
         this.cachedFuelConsumption = 1;
         this.readyForRecipe = false;
+    }
+
+    private static NotifiableItemStackHandler createInventory(int slots) {
+        NotifiableItemStackHandler itemHandler = new NotifiableItemStackHandler(slots, IO.IN);
+        itemHandler.setFilter(stack -> stack.is(InfinityItemTags.CARBON_FUELS));
+        return itemHandler;
     }
 
     @Override
