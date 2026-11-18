@@ -24,6 +24,9 @@ public class InfinityLangHandler extends LangHandler {
         provider.add("tfinfinity.machine.fuel_bus.tooltip", "Solid Fuel Input for Multiblocks");
         provider.add("tfinfinity.recipe_logic.missing_electrode", "Missing Electrode");
 
+        provider.add("tfinfinity.machine.rotary_kiln.tooltip.0", "Bulk Roaster");
+        provider.add("tfinfinity.machine.rotary_kiln.tooltip.1", "Consumes Solid or Liquid Fuels in a Fuel Bus or Hatch");
+
         provider.add("tfinfinity.multiblock.burn_time", "Burn Time Remaining: %d");
         provider.add("tfinfinity.multiblock.fuel_rate.hatch", "Consuming %dmb/%dt");
         provider.add("tfinfinity.multiblock.fuel_rate.bus", "Consuming %dx fuel every %d ticks");

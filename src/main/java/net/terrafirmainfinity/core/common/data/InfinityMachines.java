@@ -123,7 +123,8 @@ public class InfinityMachines {
                 .modelProperty(IS_FORMED, false)
                 .overlayTieredHullModel(GTCEu.id("block/machine/part/item_passthrough_hatch"))
                 .tooltips(Component.translatable("tfinfinity.machine.fuel_bus.tooltip"))
-                .tooltips(Component.translatable("gtceu.universal.tooltip.item_storage_capacity", 1))
+                .tooltips(Component.translatable("gtceu.universal.tooltip.item_storage_capacity", tier))
+                .tooltips(Component.translatable("gtceu.part_sharing.disabled"))
                 .register(),
             GTValues.tiersBetween(ULV, GTCEuAPI.isHighTier() ? OpV : UV));
 
@@ -139,6 +140,7 @@ public class InfinityMachines {
                     .overlayTieredHullModel(GTCEu.id("block/machine/part/fluid_passthrough_hatch"))
                     .tooltips(Component.translatable("tfinfinity.machine.fuel_hatch.tooltip"))
                     .tooltips(Component.translatable("gtceu.universal.tooltip.fluid_storage_capacity", FormattingUtil.formatNumbers(FluidHatchPartMachine.getTankCapacity(FuelHatchPartMachine.INITIAL_TANK_CAPACITY, tier))))
+                    .tooltips(Component.translatable("gtceu.part_sharing.disabled"))
                     .register(),
             GTValues.tiersBetween(ULV, GTCEuAPI.isHighTier() ? OpV : UV));
 

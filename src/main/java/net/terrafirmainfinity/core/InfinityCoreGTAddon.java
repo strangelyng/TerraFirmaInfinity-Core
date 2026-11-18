@@ -11,6 +11,7 @@ import net.minecraft.resources.ResourceLocation;
 import net.terrafirmainfinity.core.common.data.recipe.InfinityRecipeHandler;
 import net.terrafirmainfinity.core.common.data.recipe.InfinityToolRecipeHandler;
 import net.terrafirmainfinity.core.common.data.recipe.misc.InfinityEnergyTransferRecipes;
+import net.terrafirmainfinity.core.common.data.recipe.misc.InfinityFuelRecipes;
 import net.terrafirmainfinity.core.common.data.recipe.misc.InfinityMachineRecipes;
 
 import java.util.function.Consumer;
@@ -30,6 +31,7 @@ public class InfinityCoreGTAddon implements IGTAddon
         InfinityRecipeHandler.landslideRecipes(provider);
         InfinityMachineRecipes.init(provider);
         InfinityEnergyTransferRecipes.init(provider);
+        InfinityFuelRecipes.init(provider);
 
         for (Material material : GTRegistries.MATERIALS) {
             if (material.hasFlag(MaterialFlags.DISABLE_MATERIAL_RECIPES)) {

@@ -28,7 +28,6 @@ import org.jetbrains.annotations.Nullable;
 import java.util.ArrayList;
 import java.util.List;
 
-// TODO: Fix burnTime reset on reload
 public class WorkableFueledElectricMultiblockMachine extends WorkableElectricMultiblockMachine {
     @Nullable
     @SaveField

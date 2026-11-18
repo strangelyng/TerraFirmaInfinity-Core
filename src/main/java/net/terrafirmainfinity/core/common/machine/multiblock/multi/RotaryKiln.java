@@ -15,6 +15,7 @@ import com.gregtechceu.gtceu.api.registry.registrate.entry.MachineEntry;
 import com.gregtechceu.gtceu.common.data.GTBlocks;
 import com.gregtechceu.gtceu.common.data.GTMaterials;
 import com.gregtechceu.gtceu.common.data.GTRecipeModifiers;
+import net.minecraft.network.chat.Component;
 import net.terrafirmainfinity.core.InfinityCore;
 import net.terrafirmainfinity.core.common.InfinityBlocks;
 import net.terrafirmainfinity.core.common.data.InfinityRecipeTypes;
@@ -24,12 +25,6 @@ import net.terrafirmainfinity.core.common.machine.part.InfinityPartAbility;
 import static com.gregtechceu.gtceu.api.multiblock.Predicates.*;
 import static net.terrafirmainfinity.core.InfinityCore.InfinityRegistrate;
 
-/**
- * TODO: FuelInputHatch/FuelInputBus machine part for different types
- * Coal-fueled: Coal/Anthracite
- * Oil-fueled: Crude Oil/Diesel/etc.
- * Gas-fueled: Coal Gas/LPG/Natural Gas
- */
 public class RotaryKiln {
     public static final MachineEntry<MultiblockMachineDefinition> ROTARY_KILN = InfinityRegistrate
             .multiblock("rotary_kiln", WorkableFueledElectricMultiblockMachine::new)
@@ -76,6 +71,8 @@ public class RotaryKiln {
             })
             .workableCasingModel(InfinityCore.id("block/casings/solid/machine_casing_steel_plated_bricks"),
                     InfinityCore.id("block/machines/roaster"))
+            .tooltips(Component.translatable("tfinfinity.machine.rotary_kiln.tooltip.0"),
+                    Component.translatable("tfinfinity.machine.rotary_kiln.tooltip.1"))
             .register();
 
     private static ModifierFunction parallelProcessing(MetaMachine machine, GTRecipe recipe) {

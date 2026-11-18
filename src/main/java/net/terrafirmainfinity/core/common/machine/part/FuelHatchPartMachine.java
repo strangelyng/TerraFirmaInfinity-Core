@@ -31,7 +31,7 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.Collections;
 
-import static com.gregtechceu.gtceu.common.data.GTRecipeTypes.GAS_TURBINE_FUELS;
+import static net.terrafirmainfinity.core.common.data.InfinityRecipeTypes.LIQUID_FUEL_RECIPES;
 
 // TODO: implement auto IO
 public class FuelHatchPartMachine extends FuelPartMachine {
@@ -115,8 +115,7 @@ public class FuelHatchPartMachine extends FuelPartMachine {
 
             cachedFuelFluid = copy.getFluid();
 
-            // TODO: Add Unique Recipe Category
-            GTRecipe recipe = GAS_TURBINE_FUELS.get().db().find(Collections.singletonMap(FluidRecipeCapability.CAP, Collections.singletonList(copy)), r -> true);
+            GTRecipe recipe = LIQUID_FUEL_RECIPES.get().db().find(Collections.singletonMap(FluidRecipeCapability.CAP, Collections.singletonList(copy)), r -> true);
 
             if (recipe != null) {
                 cachedFuelDuration = recipe.duration;

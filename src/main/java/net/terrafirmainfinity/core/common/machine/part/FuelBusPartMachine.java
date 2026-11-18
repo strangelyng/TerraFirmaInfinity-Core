@@ -97,7 +97,7 @@ public class FuelBusPartMachine extends FuelPartMachine implements IMuiMachine {
         if (!fuelStack.isEmpty()) {
             Item fuelItem = fuelStack.getItem();
 
-            return GTUtil.getItemBurnTime(fuelItem);
+            return (GTUtil.getItemBurnTime(fuelItem) / 4);
         }
 
         resetCachedRecipeData();

@@ -153,6 +153,14 @@ public class InfinityRecipeTypes {
             .setEUIO(IO.IN)
             .register();
 
+    public static final GTRecipeTypeEntry LIQUID_FUEL_RECIPES = InfinityRegistrate.recipeType("liquid_fuel", MULTIBLOCK)
+            .setData(ProviderType.LANG, (ctx, prov) -> prov.add("recipe_type." + MOD_ID + "." + ctx.getName(), "Liquid Hatch Fuels"))
+            .setMaxIOSize(0, 0, 1, 0)
+            .UI(builder -> builder.setProgressBar(GTGuiTextures.PROGRESS_BOILER_FUEL_STEEL))
+            .setSound(GTSoundEntries.FURNACE)
+            .setIconSupplier(() -> InfinityMachines.FUEL_HATCH[GTValues.LV].asStack())
+            .register();
+
     private static void setMaxIOSize(GTRecipeType type, int itemInputs, int itemOutputs, int fluidInputs, int fluidOutputs) {
         type.maxInputs.put(ItemRecipeCapability.CAP, itemInputs);
         type.maxOutputs.put(ItemRecipeCapability.CAP, itemOutputs);

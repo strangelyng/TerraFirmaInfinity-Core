@@ -70,9 +70,9 @@ public class InfinityOreMaterials {
                 .components(Iron, 7, Silicon, 8, Hydrogen, 2, Oxygen, 24));
 
         Anthracite = InfinityRegistrate.material("anthracite", builder -> builder
-                .gem()
+                .gem(2, 3200)
                 .color(0x38313d).secondaryColor(0x241d29).iconSet(MaterialIconSet.LIGNITE)
-                .flags(FLAMMABLE, DISABLE_MATERIAL_RECIPES)
+                .flags(FLAMMABLE, NO_SMELTING, NO_SMASHING, MORTAR_GRINDABLE)
                 .components(Carbon, 1));
 
         Arsenopyrite = InfinityRegistrate.material("arsenopyrite", builder -> builder
@@ -119,9 +119,9 @@ public class InfinityOreMaterials {
                 .oreByproducts(Zircon, Uraninite, RareEarth));
 
         Lignite = InfinityRegistrate.material("lignite", builder -> builder
-                .gem()
+                .gem(1, 1600)
                 .color(0x4a4440).secondaryColor(0x2d2725).iconSet(MaterialIconSet.LIGNITE)
-                .flags(FLAMMABLE, DISABLE_MATERIAL_RECIPES)
+                .flags(FLAMMABLE, NO_SMELTING, NO_SMASHING, MORTAR_GRINDABLE, DISABLE_DECOMPOSITION)
                 .components(Carbon, 1));
 
         Millerite = InfinityRegistrate.material("millerite", builder -> builder
