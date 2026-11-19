@@ -1,117 +1,37 @@
 package net.terrafirmainfinity.core.common.machine.multiblock;
 
-import brachy.modularui.api.drawable.Text;
 import brachy.modularui.api.widget.IWidget;
 import brachy.modularui.value.sync.BooleanSyncValue;
 import brachy.modularui.value.sync.IntSyncValue;
 import brachy.modularui.value.sync.PanelSyncManager;
-import brachy.modularui.widgets.TextWidget;
-import com.gregtechceu.gtceu.api.GTValues;
 import com.gregtechceu.gtceu.api.blockentity.BlockEntityCreationInfo;
-import com.gregtechceu.gtceu.api.machine.TickableSubscription;
 import com.gregtechceu.gtceu.api.machine.multiblock.WorkableElectricMultiblockMachine;
 import com.gregtechceu.gtceu.api.machine.multiblock.part.MultiblockPartMachine;
-import com.gregtechceu.gtceu.api.machine.trait.recipe.RecipeLogic;
-import com.gregtechceu.gtceu.api.recipe.GTRecipe;
 import com.gregtechceu.gtceu.api.sync_system.annotations.SaveField;
-import com.gregtechceu.gtceu.utils.FormattingUtil;
-import net.minecraft.ChatFormatting;
-import net.minecraft.network.chat.Component;
-import net.minecraft.world.item.Item;
-import net.minecraft.world.level.material.Fluid;
-import net.terrafirmainfinity.core.common.machine.part.FuelHatchPartMachine;
+import net.terrafirmainfinity.core.common.machine.multiblock.multi.IFueledMultiblock;
 import net.terrafirmainfinity.core.common.machine.part.FuelPartMachine;
-import org.jetbrains.annotations.NotNull;
+import net.terrafirmainfinity.core.common.machine.trait.FuelTrait;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class WorkableFueledElectricMultiblockMachine extends WorkableElectricMultiblockMachine {
-    @Nullable
+public class WorkableFueledElectricMultiblockMachine extends WorkableElectricMultiblockMachine implements IFueledMultiblock {
     @SaveField
-    protected FuelPartMachine<?> fuelInput;
-
-    protected TickableSubscription burnTimeSubs;
-
-    @Nullable
-    @SaveField
-    private Item fuelItem;
-
-    @Nullable
-    @SaveField
-    private Fluid fuelFluid;
-
-    @SaveField
-    private int fuelDuration = 0;
-
-    @SaveField
-    private int fuelConsumption = 0;
-
-    @SaveField
-    private int burnTime = 0;
-
-    @SaveField private boolean liquidFueled = false;
+    protected FuelTrait fuelTrait;
 
     public WorkableFueledElectricMultiblockMachine(BlockEntityCreationInfo info) {
         super(info);
-    }
-
-    @Override
-    public void invalidateStructure() {
-        super.invalidateStructure();
-        this.fuelInput = null;
-        this.burnTime = 0;
-    }
-
-    @Override
-    public void formStructure(@NotNull String substructureName) {
-        super.formStructure(substructureName);
-        this.fuelInput = getFuelInput();
-        liquidFueled = this.fuelInput instanceof FuelHatchPartMachine;
-    }
-
-    @Override
-    public void onLoad() {
-        super.onLoad();
-        scheduleForNextServerTick(this::updateBurnTimeSubscription);
-    }
-
-    @Override
-    public void onUnload() {
-        super.onUnload();
-        if (burnTimeSubs != null) {
-            burnTimeSubs.unsubscribe();
-            burnTimeSubs = null;
-        }
+        this.fuelTrait = attachTrait(new FuelTrait());
     }
 
     @Override
     public void onPartUnload() {
         super.onPartUnload();
-        this.fuelInput = null;
+        fuelTrait.resetBasicInfo();
     }
 
-    protected void updateBurnTimeSubscription() {
-        if (burnTime > 0) {
-            burnTimeSubs = subscribeServerTick(burnTimeSubs, this::updateBurnTime);
-        } else if (burnTimeSubs != null) {
-            burnTimeSubs.unsubscribe();
-            burnTimeSubs = null;
-        }
-    }
-
-    protected void updateBurnTime() {
-        burnTime--;
-        updateBurnTimeSubscription();
-    }
-
-    protected void addBurnTime(int fuelDuration) {
-        burnTime += fuelDuration;
-        updateBurnTimeSubscription();
-    }
-
-    private @Nullable FuelPartMachine<?> getFuelInput() {
+    public @Nullable FuelPartMachine<?> getFuelInput() {
         for (MultiblockPartMachine part : getParts()) {
             if (part instanceof FuelPartMachine<?> fuelPart) {
                 return fuelPart;
@@ -121,151 +41,19 @@ public class WorkableFueledElectricMultiblockMachine extends WorkableElectricMul
     }
 
     @Override
-    public boolean beforeWorking(@Nullable GTRecipe recipe) {
-        assert fuelInput != null : "Fuel Input must not be Null";
-
-        if (!super.beforeWorking(recipe)) {
-            return false;
-        }
-        if (recipe == null) {
-            return false;
-        }
-        if (burnTime > 0) {
-            return true;
-        } else if (fuelInput.isReadyForRecipe()) {
-            refreshFuelData();
-
-            if (fuelInput.consumeFuel(fuelConsumption, true)) {
-                addBurnTime(fuelDuration);
-                fuelInput.consumeFuel(fuelConsumption, false);
-                return true;
-            }  else {
-                RecipeLogic.putFailureReason(this, recipe, Component.translatable("gtceu.recipe_logic.insufficient_fuel"));
-                return false;
-            }
-        }
-        return false;
-    }
-
-    @Override
-    public boolean onWorking() {
-        assert fuelInput != null : "Fuel Input must not be Null";
-
-        GTRecipe recipe = recipeLogic.getLastUnrolledRecipe();
-        assert recipe != null;
-
-        boolean value = super.onWorking();
-
-        if (burnTime <= 0) {
-            if (!fuelInput.isReadyForRecipe()) {
-                recipeLogic.setWaiting(Component.translatable("gtceu.recipe_logic.insufficient_fuel"));
-            } else {
-                if (liquidFueled) {
-                    if (fuelFluid != fuelInput.getCachedFuel()) {
-                        refreshFuelData();
-                    }
-                } else if (fuelItem != fuelInput.getCachedFuel()) {
-                    refreshFuelData();
-                }
-                if (fuelDuration < 1 || !fuelInput.consumeFuel(fuelConsumption, true)) {
-                    recipeLogic.setWaiting(Component.translatable("gtceu.recipe_logic.insufficient_fuel"));
-                    return value;
-                }
-                addBurnTime(fuelDuration);
-                fuelInput.consumeFuel(fuelConsumption, false);
-            }
-        }
-        return value;
-    }
-
-    // Handles fuel consumption at energy tiers greater than LV
-    public void refreshFuelData() {
-        assert fuelInput != null : "Fuel Input must not be Null";
-
-        int fuelTier = Math.max(0, getTier() - 1);
-
-        double multiplier = ((double) GTValues.V[fuelTier]) / 8.0d;
-
-        if (liquidFueled) {
-            fuelFluid = (Fluid) fuelInput.getFuel();
-            fuelDuration = fuelInput.getCachedFuelDuration();
-            fuelConsumption = (int) (fuelInput.getCachedFuelConsumption() * multiplier);
-        } else {
-            fuelItem = (Item) fuelInput.getFuel();
-
-            double newDuration = fuelInput.getCachedFuelDuration() / multiplier;
-            fuelDuration = newDuration < 1 ? 0 : (int) newDuration;
-            fuelConsumption = fuelInput.getCachedFuelConsumption();
-        }
-    }
-
-    public int getBurnTime() {
-        return burnTime;
-    }
-
-    public int getFuelDuration() {
-        return fuelDuration;
-    }
-
-    public int getFuelConsumption() {
-        return fuelConsumption;
-    }
-
-    public boolean isLiquidFueled() {
-        return liquidFueled;
-    }
-
-    @Override
     public List<IWidget> getWidgetsForDisplay(PanelSyncManager syncManager) {
-        BooleanSyncValue liquidFueled = new BooleanSyncValue(this::isLiquidFueled);
+        BooleanSyncValue liquidFueled = new BooleanSyncValue(fuelTrait::isLiquidFueled);
         syncManager.syncValue("liquidFueled", liquidFueled);
-        IntSyncValue burnTime = new IntSyncValue(this::getBurnTime);
+        IntSyncValue burnTime = new IntSyncValue(fuelTrait::getBurnTime);
         syncManager.syncValue("burnTime", burnTime);
-        IntSyncValue fuelDuration = new IntSyncValue(this::getFuelDuration);
+        IntSyncValue fuelDuration = new IntSyncValue(fuelTrait::getFuelDuration);
         syncManager.syncValue("fuelDuration", fuelDuration);
-        IntSyncValue fuelConsumption = new IntSyncValue(this::getFuelConsumption);
+        IntSyncValue fuelConsumption = new IntSyncValue(fuelTrait::getFuelConsumption);
         syncManager.syncValue("fuelConsumption", fuelConsumption);
         List<IWidget> widgets = new ArrayList<>();
-        widgets.add(addBurnTimeLine(this, syncManager));
-        widgets.add(addFuelRateLine(this, syncManager));
+        widgets.add(FuelTrait.addBurnTimeLine(fuelTrait, syncManager));
+        widgets.add(FuelTrait.addFuelRateLine(fuelTrait, syncManager));
         widgets.addAll(super.getWidgetsForDisplay(syncManager));
         return widgets;
-    }
-
-    private static TextWidget<?> addBurnTimeLine(WorkableFueledElectricMultiblockMachine fueledMachine,
-                                                PanelSyncManager syncManager) {
-        BooleanSyncValue liquidFueled = syncManager.getOrCreateSyncHandler("liquidFueled", BooleanSyncValue.class,
-                () -> new BooleanSyncValue(fueledMachine::isLiquidFueled));
-        IntSyncValue burnTime = syncManager.getOrCreateSyncHandler("burnTime", IntSyncValue.class,
-                () -> new IntSyncValue(fueledMachine::getBurnTime));
-        return Text.dynamic(() -> {
-                    Component time = Component.literal(FormattingUtil.formatTime(burnTime.getIntValue()))
-                            .withStyle(ChatFormatting.YELLOW);
-                    return Component.translatable("tfinfinity.multiblock.burn_time", time)
-                            .withStyle(ChatFormatting.GRAY);
-                }).asWidget()
-                .setEnabledIf(widget -> !liquidFueled.getBoolValue());
-    }
-
-    private static TextWidget<?> addFuelRateLine(WorkableFueledElectricMultiblockMachine fueledMachine,
-                                                PanelSyncManager syncManager) {
-        BooleanSyncValue liquidFueled = syncManager.getOrCreateSyncHandler("liquidFueled", BooleanSyncValue.class,
-                () -> new BooleanSyncValue(fueledMachine::isLiquidFueled));
-        IntSyncValue fuelDuration = syncManager.getOrCreateSyncHandler("fuelDuration", IntSyncValue.class,
-                () -> new IntSyncValue(fueledMachine::getFuelDuration));
-        IntSyncValue fuelConsumption = syncManager.getOrCreateSyncHandler("fuelConsumption", IntSyncValue.class,
-                () -> new IntSyncValue(fueledMachine::getFuelConsumption));
-        return Text.dynamic(() -> {
-                    Component amount = Component.literal(FormattingUtil.formatNumbers(fuelConsumption.getIntValue()))
-                            .withStyle(ChatFormatting.WHITE);
-                    Component rate = Component.literal(FormattingUtil.formatNumbers(fuelDuration.getIntValue()))
-                            .withStyle(ChatFormatting.WHITE);
-
-                    String type = liquidFueled.getBoolValue() ? "hatch" : "bus";
-
-                    return Component.translatable("tfinfinity.multiblock.fuel_rate." + type, amount, rate)
-                            .withStyle(ChatFormatting.GRAY);
-                }).asWidget()
-                .setEnabledIf(widget -> (fuelConsumption.getIntValue() > 0 && fuelDuration.getIntValue() > 0));
     }
 }

@@ -12,6 +12,7 @@ import com.gregtechceu.gtceu.api.blockentity.BlockEntityCreationInfo;
 import com.gregtechceu.gtceu.api.capability.recipe.IO;
 import com.gregtechceu.gtceu.api.machine.TickableSubscription;
 import com.gregtechceu.gtceu.api.machine.feature.IMuiMachine;
+import com.gregtechceu.gtceu.api.machine.multiblock.MultiblockControllerMachine;
 import com.gregtechceu.gtceu.api.machine.trait.notifiable.NotifiableItemStackHandler;
 import com.gregtechceu.gtceu.api.sync_system.annotations.SaveField;
 import com.gregtechceu.gtceu.utils.GTTransferUtils;
@@ -75,6 +76,12 @@ public class FuelBusPartMachine extends FuelPartMachine<Item> implements IMuiMac
             inventorySubs.unsubscribe();
             inventorySubs = null;
         }
+    }
+
+    @Override
+    public void addedToController(MultiblockControllerMachine controller, String substructureName) {
+        super.addedToController(controller, substructureName);
+        updateInventorySubscription();
     }
 
     @Override
@@ -164,7 +171,7 @@ public class FuelBusPartMachine extends FuelPartMachine<Item> implements IMuiMac
     }
 
     public boolean updateFuelStatus(ItemStack fuelStack) {
-        readyForRecipe = cachedFuelDuration > 0 && fuelStack.getCount() > 0;
+        readyForRecipe = cachedFuelDuration > 0 && fuelStack.getCount() >= cachedFuelConsumption;
         inventory.notifyListeners();
         return readyForRecipe;
     }

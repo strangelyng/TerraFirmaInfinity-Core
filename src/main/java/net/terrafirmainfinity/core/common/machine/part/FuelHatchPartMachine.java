@@ -15,6 +15,7 @@ import com.gregtechceu.gtceu.api.capability.recipe.FluidRecipeCapability;
 import com.gregtechceu.gtceu.api.capability.recipe.IO;
 import com.gregtechceu.gtceu.api.machine.TickableSubscription;
 import com.gregtechceu.gtceu.api.machine.mui.MachineUIPanel;
+import com.gregtechceu.gtceu.api.machine.multiblock.MultiblockControllerMachine;
 import com.gregtechceu.gtceu.api.machine.trait.notifiable.NotifiableFluidTank;
 import com.gregtechceu.gtceu.api.recipe.GTRecipe;
 import com.gregtechceu.gtceu.api.recipe.content.Content;
@@ -86,6 +87,12 @@ public class FuelHatchPartMachine extends FuelPartMachine<Fluid> {
             tankSubs.unsubscribe();
             tankSubs = null;
         }
+    }
+
+    @Override
+    public void addedToController(MultiblockControllerMachine controller, String substructureName) {
+        super.addedToController(controller, substructureName);
+        updateTankSubscription();
     }
 
     @Override
@@ -177,7 +184,7 @@ public class FuelHatchPartMachine extends FuelPartMachine<Fluid> {
     }
 
     public void updateFuelStatus(@Nullable GTRecipe fuelRecipe) {
-        if (fuelRecipe != null && cachedFuelDuration > 0 && getFuelFluidStack().getAmount() > cachedFuelConsumption) {
+        if (fuelRecipe != null && cachedFuelDuration > 0 && getFuelFluidStack().getAmount() >= cachedFuelConsumption) {
             readyForRecipe = true;
             tank.notifyListeners();
         } else {
