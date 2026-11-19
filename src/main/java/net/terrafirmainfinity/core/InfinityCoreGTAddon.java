@@ -8,6 +8,7 @@ import com.gregtechceu.gtceu.api.registry.GTRegistries;
 import com.gregtechceu.gtceu.api.registry.registrate.GTRegistrate;
 import net.minecraft.data.recipes.RecipeOutput;
 import net.minecraft.resources.ResourceLocation;
+import net.terrafirmainfinity.core.common.data.InfinityMaps;
 import net.terrafirmainfinity.core.common.data.recipe.InfinityRecipeHandler;
 import net.terrafirmainfinity.core.common.data.recipe.InfinityToolRecipeHandler;
 import net.terrafirmainfinity.core.common.data.recipe.misc.InfinityEnergyTransferRecipes;
@@ -32,6 +33,8 @@ public class InfinityCoreGTAddon implements IGTAddon
         InfinityMachineRecipes.init(provider);
         InfinityEnergyTransferRecipes.init(provider);
         InfinityFuelRecipes.init(provider);
+
+        InfinityMaps.init();
 
         for (Material material : GTRegistries.MATERIALS) {
             if (material.hasFlag(MaterialFlags.DISABLE_MATERIAL_RECIPES)) {
