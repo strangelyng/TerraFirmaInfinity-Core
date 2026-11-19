@@ -25,7 +25,7 @@ import net.minecraft.world.level.block.Block;
 import net.terrafirmainfinity.core.common.data.tag.InfinityItemTags;
 import org.jetbrains.annotations.Nullable;
 
-public class FuelBusPartMachine extends FuelPartMachine implements IMuiMachine {
+public class FuelBusPartMachine extends FuelPartMachine<Item> implements IMuiMachine {
     @SaveField
     public final NotifiableItemStackHandler inventory;
 
@@ -205,7 +205,13 @@ public class FuelBusPartMachine extends FuelPartMachine implements IMuiMachine {
         return this.inventory;
     }
 
-    public @Nullable Item getCachedFuelItem() {
+    @Override
+    public @Nullable Item getCachedFuel() {
         return cachedFuelItem;
+    }
+
+    @Override
+    public Item getFuel() {
+        return getFuelItemStack().getItem();
     }
 }

@@ -28,8 +28,8 @@ public class InfinityLangHandler extends LangHandler {
         provider.add("tfinfinity.machine.rotary_kiln.tooltip.1", "Consumes Solid or Liquid Fuels in a Fuel Bus or Hatch");
 
         provider.add("tfinfinity.multiblock.burn_time", "Burn Time Remaining: %d");
-        provider.add("tfinfinity.multiblock.fuel_rate.hatch", "Consuming %dmb/%dt");
-        provider.add("tfinfinity.multiblock.fuel_rate.bus", "Consuming %dx fuel every %d ticks");
+        provider.add("tfinfinity.multiblock.fuel_rate.hatch", "Consumes %dmb/%dt");
+        provider.add("tfinfinity.multiblock.fuel_rate.bus", "Consumes %dx fuel every %d ticks");
 
         addToolClassLang(provider, "Chisel");
         addToolClassLang(provider, "Mace");

@@ -6,8 +6,9 @@ import com.gregtechceu.gtceu.api.machine.feature.IMuiMachine;
 import com.gregtechceu.gtceu.api.machine.multiblock.MultiblockControllerMachine;
 import com.gregtechceu.gtceu.api.machine.multiblock.part.TieredIOPartMachine;
 import com.gregtechceu.gtceu.api.sync_system.annotations.SaveField;
+import org.jetbrains.annotations.Nullable;
 
-public abstract class FuelPartMachine extends TieredIOPartMachine implements IMuiMachine {
+public abstract class FuelPartMachine<T> extends TieredIOPartMachine implements IMuiMachine {
     @SaveField
     protected int cachedFuelDuration;
 
@@ -39,4 +40,8 @@ public abstract class FuelPartMachine extends TieredIOPartMachine implements IMu
     public int getCachedFuelDuration() {
         return cachedFuelDuration;
     }
+
+    public abstract @Nullable T getCachedFuel();
+
+    public abstract T getFuel();
 }

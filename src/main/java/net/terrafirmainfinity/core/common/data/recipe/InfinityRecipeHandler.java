@@ -1,9 +1,6 @@
 package net.terrafirmainfinity.core.common.data.recipe;
 
-import com.gregtechceu.gtceu.common.data.GTMaterials;
 import com.gregtechceu.gtceu.common.data.GTRecipeTypes;
-import com.gregtechceu.gtceu.data.recipe.builder.GTRecipeBuilder;
-import com.gregtechceu.gtceu.utils.GTUtil;
 import net.dries007.tfc.common.items.TFCItems;
 import net.dries007.tfc.common.recipes.LandslideRecipe;
 import net.dries007.tfc.common.recipes.ingredients.BlockIngredient;

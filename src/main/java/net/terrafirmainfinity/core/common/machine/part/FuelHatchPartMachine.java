@@ -37,7 +37,7 @@ import java.util.Collections;
 
 import static net.terrafirmainfinity.core.common.data.InfinityRecipeTypes.LIQUID_FUEL_RECIPES;
 
-public class FuelHatchPartMachine extends FuelPartMachine {
+public class FuelHatchPartMachine extends FuelPartMachine<Fluid> {
     public static final int INITIAL_TANK_CAPACITY = 8 * FluidType.BUCKET_VOLUME;
 
     @SaveField
@@ -227,7 +227,13 @@ public class FuelHatchPartMachine extends FuelPartMachine {
         );
     }
 
-    public @Nullable Fluid getCachedFuelFluid() {
+    @Override
+    public @Nullable Fluid getCachedFuel() {
         return cachedFuelFluid;
+    }
+
+    @Override
+    public Fluid getFuel() {
+        return getFuelFluidStack().getFluid();
     }
 }
