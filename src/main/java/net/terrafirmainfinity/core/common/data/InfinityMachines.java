@@ -3,7 +3,6 @@ package net.terrafirmainfinity.core.common.data;
 import com.gregtechceu.gtceu.GTCEu;
 import com.gregtechceu.gtceu.api.GTCEuAPI;
 import com.gregtechceu.gtceu.api.GTValues;
-import com.gregtechceu.gtceu.api.capability.recipe.IO;
 import com.gregtechceu.gtceu.api.data.RotationState;
 import com.gregtechceu.gtceu.api.machine.MachineDefinition;
 import com.gregtechceu.gtceu.api.machine.property.GTMachineModelProperties;
@@ -115,7 +114,7 @@ public class InfinityMachines {
 
     public static final MachineEntry<MachineDefinition>[] FUEL_BUS = registerTieredMachines(InfinityRegistrate,
             "fuel_bus",
-            (holder, tier) -> new FuelBusPartMachine(holder, tier),
+            FuelBusPartMachine::new,
             (tier, builder) -> builder
                 .langValue("%s Fuel Bus".formatted(VNF[tier]))
                 .rotationState(RotationState.ALL)
@@ -123,7 +122,8 @@ public class InfinityMachines {
                 .modelProperty(IS_FORMED, false)
                 .overlayTieredHullModel(GTCEu.id("block/machine/part/item_passthrough_hatch"))
                 .tooltips(Component.translatable("tfinfinity.machine.fuel_bus.tooltip"))
-                .tooltips(Component.translatable("gtceu.universal.tooltip.item_storage_capacity", tier))
+                .tooltips(Component.translatable("gtceu.universal.tooltip.item_storage_capacity",
+                        (1 + Math.min(9, tier)) * (1 + Math.min(9, tier))))
                 .tooltips(Component.translatable("gtceu.part_sharing.disabled"))
                 .register(),
             GTValues.tiersBetween(ULV, GTCEuAPI.isHighTier() ? OpV : UV));
@@ -131,7 +131,7 @@ public class InfinityMachines {
     // TODO: Update Texture
     public static final MachineEntry<MachineDefinition>[] FUEL_HATCH = registerTieredMachines(InfinityRegistrate,
             "fuel_hatch",
-            (holder, tier) -> new FuelHatchPartMachine(holder, tier, FuelHatchPartMachine.INITIAL_TANK_CAPACITY),
+            FuelHatchPartMachine::new,
             (tier, builder) -> builder
                     .langValue("%s Fuel Hatch".formatted(VNF[tier]))
                     .rotationState(RotationState.ALL)

@@ -55,6 +55,8 @@ public class InfinityItemTags {
                 .addOptionalTag(TagUtil.createItemTag("tiny_dusts/coal"))
                 .addOptionalTag(TagUtil.createItemTag("gems/coal"))
                 .addOptionalTag(TagUtil.createItemTag("dusts/coke"))
+                .addOptionalTag(TagUtil.createItemTag("small_dusts/coke"))
+                .addOptionalTag(TagUtil.createItemTag("tiny_dusts/coke"))
                 .addOptionalTag(TagUtil.createItemTag("gems/coke"))
                 .addOptionalTag(TagUtil.createItemTag("dusts/anthracite"))
                 .addOptionalTag(TagUtil.createItemTag("small_dusts/anthracite"))

@@ -21,8 +21,12 @@ import com.gregtechceu.gtceu.api.recipe.content.Content;
 import com.gregtechceu.gtceu.api.sync_system.annotations.SaveField;
 import com.gregtechceu.gtceu.common.machine.multiblock.part.FluidHatchPartMachine;
 import com.gregtechceu.gtceu.utils.FormattingUtil;
+import com.gregtechceu.gtceu.utils.GTTransferUtils;
 import com.gregtechceu.gtceu.utils.ISubscription;
+import net.minecraft.core.BlockPos;
+import net.minecraft.core.Direction;
 import net.minecraft.network.chat.Component;
+import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.material.Fluid;
 import net.neoforged.neoforge.fluids.FluidStack;
 import net.neoforged.neoforge.fluids.FluidType;
@@ -33,12 +37,14 @@ import java.util.Collections;
 
 import static net.terrafirmainfinity.core.common.data.InfinityRecipeTypes.LIQUID_FUEL_RECIPES;
 
-// TODO: implement auto IO
 public class FuelHatchPartMachine extends FuelPartMachine {
     public static final int INITIAL_TANK_CAPACITY = 8 * FluidType.BUCKET_VOLUME;
 
     @SaveField
     public final NotifiableFluidTank tank;
+
+    @Nullable
+    protected TickableSubscription autoIOSubs;
 
     @Nullable
     protected TickableSubscription fuelRecipeSubs;
@@ -54,9 +60,9 @@ public class FuelHatchPartMachine extends FuelPartMachine {
     @SaveField
     protected Fluid cachedFuelFluid;
 
-    public FuelHatchPartMachine(BlockEntityCreationInfo info, int tier, int initalCapacity) {
+    public FuelHatchPartMachine(BlockEntityCreationInfo info, int tier) {
         super(info, tier);
-        this.tank = attachTrait(createTank(initalCapacity));
+        this.tank = attachTrait(createTank(INITIAL_TANK_CAPACITY));
         this.cachedFuelDuration = 0;
         this.readyForRecipe = false;
     }
@@ -82,13 +88,46 @@ public class FuelHatchPartMachine extends FuelPartMachine {
         }
     }
 
+    @Override
+    public void onNeighborChanged(Block neighborBlock, BlockPos neighborPos, boolean isMoving) {
+        super.onNeighborChanged(neighborBlock, neighborPos, isMoving);
+        updateTankSubscription();
+    }
+
+    @Override
+    public void onRotated(Direction oldFacing, Direction newFacing) {
+        super.onRotated(oldFacing, newFacing);
+        updateTankSubscription(newFacing);
+    }
+
     protected void updateTankSubscription() {
+        updateTankSubscription(getFrontFacing());
+    }
+
+    protected void updateTankSubscription(Direction newFacing) {
+        if (isWorkingEnabled() && io.support(IO.IN) && GTTransferUtils.hasAdjacentFluidHandler(getLevel(), getBlockPos(), newFacing)) {
+            autoIOSubs = subscribeServerTick(autoIOSubs, this::autoIO);
+        } else if (autoIOSubs != null) {
+            autoIOSubs.unsubscribe();
+            autoIOSubs = null;
+        }
         if (isFormed() && isWorkingEnabled() && !tank.isEmpty()) {
             fuelRecipeSubs = subscribeServerTick(fuelRecipeSubs, this::findAndCacheRecipe);
         } else if (fuelRecipeSubs != null) {
             fuelRecipeSubs.unsubscribe();
             fuelRecipeSubs = null;
             readyForRecipe = false;
+        }
+    }
+
+    protected void autoIO() {
+        if (getOffsetTimer() % 5 == 0) {
+            if (isWorkingEnabled()) {
+                if (io == IO.IN) {
+                    tank.importFromNearby(getFrontFacing());
+                }
+            }
+            updateTankSubscription();
         }
     }
 

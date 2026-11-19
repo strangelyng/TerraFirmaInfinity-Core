@@ -37,6 +37,14 @@
       "required": false
     },
     {
+      "id": "#c:small_dusts/coke",
+      "required": false
+    },
+    {
+      "id": "#c:tiny_dusts/coke",
+      "required": false
+    },
+    {
       "id": "#c:gems/coke",
       "required": false
     },
