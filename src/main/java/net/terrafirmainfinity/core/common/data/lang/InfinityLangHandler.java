@@ -27,6 +27,9 @@ public class InfinityLangHandler extends LangHandler {
         provider.add("tfinfinity.machine.rotary_kiln.tooltip.0", "Bulk Roaster");
         provider.add("tfinfinity.machine.rotary_kiln.tooltip.1", "Consumes Solid or Liquid Fuels in a Fuel Bus or Hatch");
 
+        provider.add("tfinfinity.machine.electric_rotary_kiln.tooltip.0", "Electrical Bulk Roaster");
+        provider.add("tfinfinity.machine.electric_rotary_kiln.tooltip.1", "§6Cupronickel §7coils are §f25%%§7 slower. Every coil after §bKanthal§7 increases speed by §f50%%§7.");
+
         provider.add("tfinfinity.multiblock.burn_time", "Burn Time Remaining: %d");
         provider.add("tfinfinity.multiblock.fuel_rate.hatch", "Consumes %dmb/%dt");
         provider.add("tfinfinity.multiblock.fuel_rate.bus", "Consumes %dx fuel every %d ticks");

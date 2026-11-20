@@ -4,15 +4,14 @@ import com.gregtechceu.gtceu.api.GTValues;
 import com.gregtechceu.gtceu.api.capability.recipe.FluidRecipeCapability;
 import com.gregtechceu.gtceu.api.capability.recipe.IO;
 import com.gregtechceu.gtceu.api.capability.recipe.ItemRecipeCapability;
-import com.gregtechceu.gtceu.api.machine.feature.ITieredMachine;
 import com.gregtechceu.gtceu.api.machine.steam.SimpleSteamMachine;
 import com.gregtechceu.gtceu.api.recipe.GTRecipeType;
-import com.gregtechceu.gtceu.api.recipe.gui.GTRecipeTypeUILayout;
 import com.gregtechceu.gtceu.api.registry.registrate.entry.GTRecipeTypeEntry;
-import com.gregtechceu.gtceu.common.data.GTRecipeTypes;
 import com.gregtechceu.gtceu.common.data.GTSoundEntries;
 import com.gregtechceu.gtceu.common.mui.GTGuiTextures;
 import com.gregtechceu.gtceu.common.mui.GTMuiWidgets;
+import com.gregtechceu.gtceu.common.recipe.gui.GTRecipeUIModifiers;
+import com.gregtechceu.gtceu.data.recipe.builder.GTRecipeBuilder;
 import com.tterrag.registrate.providers.ProviderType;
 import net.minecraft.util.Mth;
 import net.terrafirmainfinity.core.common.ui.InfinityGuiTextures;
@@ -65,14 +64,43 @@ public class InfinityRecipeTypes {
                     .setFluidSlotOverlay(IO.OUT, 0, GTGuiTextures.VIAL_OVERLAY_2))
             .setIconSupplier(() -> InfinityMachines.ROASTER[GTValues.LV].asStack())
             .setSound(GTSoundEntries.FURNACE)
-            .onRecipeBuild((recipeBuilder, provider) -> InfinityRecipeTypes.ROTARY_KILN_RECIPES.copyFrom(recipeBuilder)
-                    .save(provider))
+            .onRecipeBuild((recipeBuilder, provider) -> {
+                if (recipeBuilder.data.getBoolean("disable_rotary_kiln")) return;
+
+                GTRecipeBuilder builder = InfinityRecipeTypes.ROTARY_KILN_RECIPES.copyFrom(recipeBuilder);
+                long baseEU = builder.EUt().getTotalEU();
+                builder.EUt(baseEU / 2);
+                builder.save(provider);
+
+                GTRecipeBuilder copy = InfinityRecipeTypes.ELECTRIC_ROTARY_KILN_RECIPES.copyFrom(builder);
+                baseEU = copy.EUt().getTotalEU();
+                copy.EUt(baseEU * 4);
+                copy.blastFurnaceTemp(1700);
+                copy.save(provider);
+            })
             .setEUIO(IO.IN)
             .register();
 
     public static final GTRecipeTypeEntry ROTARY_KILN_RECIPES = InfinityRegistrate.recipeType("rotary_kiln", MULTIBLOCK)
             .setMaxIOSize(3, 2, 1, 2)
             .UI(builder -> builder.setProgressBar(GTGuiTextures.PROGRESS_ARROW))
+            .setSound(GTSoundEntries.FURNACE)
+            .onRecipeBuild((recipeBuilder, provider) -> {
+                if (recipeBuilder.data.getBoolean("disable_electric_rotary_kiln")) return;
+
+                GTRecipeBuilder builder = InfinityRecipeTypes.ELECTRIC_ROTARY_KILN_RECIPES.copyFrom(recipeBuilder);
+                long baseEU = builder.EUt().getTotalEU();
+                builder.EUt(baseEU * 4);
+                builder.blastFurnaceTemp(1700);
+                builder.save(provider);
+            })
+            .setEUIO(IO.IN)
+            .register();
+
+    public static final GTRecipeTypeEntry ELECTRIC_ROTARY_KILN_RECIPES = InfinityRegistrate.recipeType("electric_rotary_kiln", MULTIBLOCK)
+            .setMaxIOSize(3, 2, 1, 2)
+            .UI(builder -> builder.setProgressBar(GTGuiTextures.PROGRESS_ARROW)
+                    .addRecipeUIModifier(GTRecipeUIModifiers.TEMP_COIL_INFO))
             .setSound(GTSoundEntries.FURNACE)
             .setEUIO(IO.IN)
             .register();

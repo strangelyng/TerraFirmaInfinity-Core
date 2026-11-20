@@ -11,5 +11,6 @@ public class InfinityMulti {
         FlashFurnace.init();
         FluidizedBedReactor.init();
         RotaryKiln.init();
+        ElectricRotaryKiln.init();
     }
 }
