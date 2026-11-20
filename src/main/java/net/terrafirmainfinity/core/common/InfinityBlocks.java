@@ -2,9 +2,12 @@ package net.terrafirmainfinity.core.common;
 
 import com.eerussianguy.beneath.common.items.BeneathItems;
 import com.gregtechceu.gtceu.GTCEu;
+import com.gregtechceu.gtceu.api.GTCEuAPI;
 import com.gregtechceu.gtceu.api.GTValues;
+import com.gregtechceu.gtceu.api.block.ICoilType;
 import com.gregtechceu.gtceu.api.data.tag.TagPrefix;
 import com.gregtechceu.gtceu.api.registry.registrate.provider.GTBlockstateProvider;
+import com.gregtechceu.gtceu.common.block.CoilBlock;
 import com.gregtechceu.gtceu.common.data.GTBlocks;
 import com.gregtechceu.gtceu.common.data.models.GTModels;
 import com.gregtechceu.gtceu.data.recipe.CustomTags;
@@ -139,6 +142,20 @@ public class InfinityBlocks {
                 .item(BlockItem::new).build();
 
         return builder.register();
+    }
+
+    private static BlockEntry<CoilBlock> createCoilBlock(ICoilType coilType) {
+        BlockEntry<CoilBlock> coilBlock = InfinityRegistrate
+                .block("%s_coil_block".formatted(coilType.getName()), p -> new CoilBlock(p, coilType))
+                .initialProperties(() -> Blocks.IRON_BLOCK)
+                .addLayer(() -> RenderType::cutoutMipped)
+                .blockstate(GTModels.createCoilModel(coilType))
+                .tag(CustomTags.MINEABLE_WITH_CONFIG_VALID_PICKAXE_WRENCH)
+                .item(BlockItem::new)
+                .build()
+                .register();
+        GTCEuAPI.HEATING_COILS.put(coilType, coilBlock);
+        return coilBlock;
     }
 
 

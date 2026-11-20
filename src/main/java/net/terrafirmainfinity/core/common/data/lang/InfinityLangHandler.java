@@ -1,10 +1,8 @@
 package net.terrafirmainfinity.core.common.data.lang;
 
-import com.gregtechceu.gtceu.GTCEu;
 import com.gregtechceu.gtceu.data.lang.LangHandler;
 import com.gregtechceu.gtceu.data.lang.MachineLang;
 import com.tterrag.registrate.providers.RegistrateLangProvider;
-import net.terrafirmainfinity.core.InfinityCore;
 import net.terrafirmainfinity.core.integration.emi.HotSpringsDictionary;
 import net.terrafirmainfinity.core.integration.emi.OreVeinDictionary;
 import net.terrafirmainfinity.core.integration.emi.OreVeinInfoRecipe;
@@ -163,15 +161,5 @@ public class InfinityLangHandler extends LangHandler {
 
     public static void addToolClassLang(RegistrateLangProvider provider, String toolClass) {
         provider.add("gtceu.tool.class." + toolClass.toLowerCase(Locale.ROOT).replace(' ', '_'), toolClass);
-    }
-
-    public static void replaceMaterialLang(RegistrateLangProvider provider, String id, String name) {
-        replace(provider, "material." + InfinityCore.MOD_ID + "." + id, name);
-    }
-
-    public static void addGTMaterialLang(RegistrateLangProvider provider, String id) {
-        String formattedName = RegistrateLangProvider.toEnglishName(id);
-
-        provider.add("material." + GTCEu.MOD_ID + "." + id, formattedName);
     }
 }

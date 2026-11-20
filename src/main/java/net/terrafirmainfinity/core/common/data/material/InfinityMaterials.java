@@ -8,7 +8,6 @@ import com.eerussianguy.firmalife.common.blocks.FLBlocks;
 import com.eerussianguy.firmalife.common.items.FLItems;
 import com.eerussianguy.firmalife.common.util.FLMetal;
 import com.gregtechceu.gtceu.api.GTValues;
-import com.gregtechceu.gtceu.api.data.chemical.material.Material;
 import com.gregtechceu.gtceu.api.data.chemical.material.info.MaterialFlags;
 import com.gregtechceu.gtceu.api.data.chemical.material.properties.*;
 import com.gregtechceu.gtceu.api.data.chemical.material.stack.DeferredMaterialStack;
@@ -106,6 +105,8 @@ public class InfinityMaterials {
     // Alloys
     public static MaterialRegistryEntry Ferrosilicon; // FeSi3
     public static MaterialRegistryEntry Ferrovanadium; // V3Fe2
+    public static MaterialRegistryEntry SiliconCarbide; // SiC
+    public static MaterialRegistryEntry WReAlloy; // W4Re
 
     // Rock Materials
     public static MaterialRegistryEntry FelsicIgneous; // Granite, Rhyolite
@@ -128,10 +129,16 @@ public class InfinityMaterials {
     public static void modifyMaterials() {
         /* Add Properties */
         Hafnium.setProperty(PropertyKey.INGOT, new IngotProperty());
+        Rhenium.setProperty(PropertyKey.INGOT, new IngotProperty());
         Zirconium.setProperty(PropertyKey.INGOT, new IngotProperty());
 
-        Hafnium.setProperty(PropertyKey.BLAST, new BlastProperty(2506, BlastProperty.GasTier.MID, GTValues.VA[EV], 1500, GTValues.VA[HV], 360));
-        Zirconium.setProperty(PropertyKey.BLAST, new BlastProperty(2125, BlastProperty.GasTier.MID, GTValues.VA[EV], 1300, GTValues.VA[HV], 300));
+        Hafnium.setProperty(PropertyKey.BLAST, new BlastProperty(2506, BlastProperty.GasTier.MID, GTValues.VA[HV], 1500, GTValues.VA[MV], 200));
+        Rhenium.setProperty(PropertyKey.BLAST, new BlastProperty(3460, BlastProperty.GasTier.MID, GTValues.VA[EV], 1600, GTValues.VA[HV], 300));
+        Zirconium.setProperty(PropertyKey.BLAST, new BlastProperty(2125, BlastProperty.GasTier.MID, GTValues.VA[HV], 1300, GTValues.VA[MV], 200));
+
+        addFluidToExisting(FluidStorageKeys.LIQUID, Hafnium);
+        addFluidToExisting(FluidStorageKeys.LIQUID, Rhenium);
+        addFluidToExisting(FluidStorageKeys.LIQUID, Zirconium);
 
         // Ore Properties
         Andradite.setProperty(PropertyKey.ORE, new OreProperty(3, 1));
@@ -695,7 +702,7 @@ public class InfinityMaterials {
         dust.setIgnored(EnderPearl, () -> AEItems.ENDER_DUST);
     }
 
-    private static void addFluidToExisting(FluidStorageKey key, Material mat) {
+    private static void addFluidToExisting(FluidStorageKey key, MaterialRegistryEntry mat) {
         FluidProperty fluidProp = new FluidProperty();
         fluidProp.getStorage().enqueueRegistration(key, new FluidBuilder());
         mat.setProperty(PropertyKey.FLUID, fluidProp);
